@@ -1,0 +1,54 @@
+@import 'themeVariables.scss';
+
+@mixin spinner ($track: #777, $bar: #fff) {
+    &:after {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -10px;
+        border-radius: 50%;
+        border: 2px solid $track;
+        border-top-color: $bar;
+
+        :global {
+            animation: spin .6s linear infinite;
+        }
+    }
+}
+
+.primary-button {
+    @include base-btn;
+    font-family: $primary-font;
+    border: 1px solid $light-gray;
+    border-radius: 6px;
+    height: 46px;
+    font-size: 18px;
+    padding: 0 20px;
+    transition: all 300ms linear;
+    color: #333;
+
+    &:hover {
+        border-color: darken($primary-color, 10);
+        background: $primary-color;
+        color: darken($primary-color, 30);
+    }
+    
+    &.loading {
+        color: darken($primary-color, 15);
+        background: darken($primary-color, 10);
+        border-color: darken($primary-color, 10);
+
+        @include spinner(lighten($primary-color, 20), #fff);
+    }
+
+    &.disabled, :disabled {
+        background: #f9f9f9;
+        color: lighten(#333333, 30);
+        border-color: lighten($light-gray, 10);
+    }
+}

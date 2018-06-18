@@ -1,0 +1,16 @@
+.checkbox-field {
+  @include checkbox-field;
+}
+
+.field-container {
+  display: inline-block;
+}
+
+.field-label {
+  @include field-label;
+  margin-bottom: 0;
+}
+
+.checkbox-container {
+  @include checkbox-container;
+}

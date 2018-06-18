@@ -1,0 +1,12 @@
+:global {
+  .use-storybook-theme {
+    html & {
+      // background: cyan;
+    }
+
+    h1 {
+      font-weight: 300;
+      font-size: 36px;
+    }
+  }
+}

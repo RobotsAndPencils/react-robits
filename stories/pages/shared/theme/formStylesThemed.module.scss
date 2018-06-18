@@ -1,0 +1,142 @@
+@import 'themeVariables.scss';
+
+.field-label {
+    @include field-label;
+    transition: all 200ms linear;
+}
+
+@mixin themed-input-field {
+    @include input-field;
+    appearance: none;
+    font-family: $primary-font;
+    border: 1px solid $light-gray;
+    border-radius: 3px;
+    height: 45px;
+    font-size: 16px;
+    padding: 0 15px;
+    transition: all 200ms linear;
+    color: #333;
+    background: $white;
+
+    &:focus {
+        border-color: $primary-color;
+    }
+
+    &:disabled {
+        background-color: #f9f9f9;
+        color: lighten(#333333, 30);
+        border-color: lighten($light-gray, 10);
+    }
+}
+
+.field-hint {
+    @include field-hint;
+    color: $light-gray;
+}
+
+.disabled {
+    @include disabled-field;
+}
+
+.text-field {
+    @include themed-input-field;
+}
+
+.select-field {
+    @include themed-input-field;
+    background-repeat: no-repeat;
+    background-position: right 25px center;
+    background-color: $white;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iOHB4IiBoZWlnaHQ9IjVweCIgdmlld0JveD0iMCAwIDggNSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDMuMSAoMzkwMTIpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkNvbWJpbmVkIFNoYXBlPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IkNISUxELS0tT25ib2FyZGluZyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9InJlZ2lzdHJhdGlvbi1yZWdpc3RyYXRpb24iIHRyYW5zZm9ybT0idHJhbnNsYXRlKC04NzIuMDAwMDAwLCAtNTM4LjAwMDAwMCkiIGZpbGw9IiNEQkRCREIiPgogICAgICAgICAgICA8ZyBpZD0iR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYzNy4wMDAwMDAsIDQ5Ni4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yMzguNjEyNSw0Ni45MjUgQzIzOC43MjUsNDYuOTc1IDIzOC44NSw0NyAyMzksNDcgQzIzOS4zLDQ3IDIzOS41LDQ2LjkgMjM5LjcsNDYuNyBMMjQyLjcsNDMuNyBDMjQzLjEsNDMuMyAyNDMuMSw0Mi43IDI0Mi43LDQyLjMgQzI0Mi4zLDQxLjkgMjQxLjcsNDEuOSAyNDEuMyw0Mi4zIEwyMzksNDQuNiBMMjM2LjcsNDIuMyBDMjM2LjMsNDEuOSAyMzUuNyw0MS45IDIzNS4zLDQyLjMgQzIzNC45LDQyLjcgMjM0LjksNDMuMyAyMzUuMyw0My43IEwyMzguMyw0Ni43IEMyMzguNCw0Ni44IDIzOC41LDQ2Ljg3NSAyMzguNjEyNSw0Ni45MjUgWiIgaWQ9IkNvbWJpbmVkLVNoYXBlIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==);
+}
+
+.checkbox-field {
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 2px;
+    border: 1px solid $light-gray;
+    margin: 2px 12px 0 0;
+
+    &:focus {
+        outline: none !important;
+        border-color: $primary-color;
+    }
+
+    &:checked {
+        outline: none;
+        border-color: $primary-color;
+        background: $primary-color;
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: 9px;
+            width: 10px;
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI5cHgiIHZpZXdCb3g9IjAgMCAxMCA5IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MiAoMzY3ODEpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkFydGJvYXJkPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IkFydGJvYXJkIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHBvbHlnb24gaWQ9IkNoZWNrZWQiIHBvaW50cz0iOC4zMzMyNSAwIDEwIDEuODQ5NTYxOTUgMy42Mjc1IDkgMy41Mjk1IDguOTE3MjA5MDEgMCA0Ljk0MTgzMzU0IDEuNjY2NzUgMy4wOTE5ODk5OSAzLjYyNzUgNS4zMDA1OTQ0OSI+PC9wb2x5Z29uPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+");
+            top: 5px;
+            left: 4px;
+        }
+    }
+}
+  
+.checkbox-container {
+    @include checkbox-container;
+    margin-top: 10px;
+    margin-bottom: 21px;
+
+    .field-label {
+        margin: 5px 0;
+    }
+
+    a {
+        color: $primary-color;
+    }
+
+    .field-container {
+        display: inline-block;
+    }
+}
+
+// Radio Buttons
+.radio-field {
+    @include radio-field;
+    margin: 0 10px 5px 0;
+  
+    input {
+        appearance: none;
+        margin: 0 12px 0 0;
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
+        background: transparent;
+        box-shadow: 0 0 0 1px $light-gray;
+
+        &:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 1px $primary-color;
+        }
+    }
+  
+    &.selected input, input:checked {
+      background: $primary-color;
+      border: 6px solid $white;
+    }
+}
+
+.radioGroup-container {
+    .field-container {
+        @include radioGroup-field-container;
+    }
+}
+
+.textarea-field {
+    @include themed-input-field;
+    width: 100%;
+    min-height: 70px;
+    padding: 10px;
+    outline: none;
+    resize: none;
+}

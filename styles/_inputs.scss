@@ -1,0 +1,153 @@
+/* ---------------SHARED INPUT MIXINS------------------*/
+
+@mixin field-label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+@mixin disabled-field {
+  cursor: not-allowed;
+
+  * {
+    cursor: not-allowed;
+  }
+
+  label {
+    color: #C0C0C0;
+  }
+
+  input {
+    opacity: 0.5;
+  }
+}
+
+@mixin field-hint {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+@mixin input-field {
+  box-sizing: border-box;
+  width: 100%;
+
+  &:focus {
+    outline:none;
+  }
+
+  &.readonly {
+    cursor: not-allowed;
+  }
+
+  &.invalid {
+    border-color: red;
+  }
+
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+  }
+
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: #C0C0C0;
+  }
+
+  &:-ms-input-placeholder { /* IE */
+    color: #C0C0C0;
+  }
+
+  &:-ms-input-placeholder { /* IE Edge */
+    color: #C0C0C0;
+  }
+  
+}
+
+/* ---------------SPECIFIC INPUTS----------------*/
+
+// Text Inputs
+@mixin text-field {
+  @include input-field;
+}
+
+// Select Input
+@mixin select-field {
+  @include input-field;
+
+  > option[hidden] {
+    color: gray;
+  }
+
+  &.initialized {
+    color: gray
+  }
+}
+
+// Text Areas
+@mixin text-area {
+  @include input-field;
+  padding-top: 10px;
+  resize: none;
+}
+
+// Checkboxes
+@mixin checkbox-field {
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:checked {
+    outline: none;
+  }
+
+  &.invalid {
+    box-shadow: 0 0 0 1px #ce4e5a;
+  }
+}
+
+@mixin checkbox-container {
+  display: flex;
+}
+
+// Radio Buttons
+@mixin radio-field {
+  display: flex;
+  align-items: center;
+
+  input {
+    border: none;
+    outline: none;
+    flex-shrink: 0;
+
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+
+@mixin radioGroup-field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  &.side-by-side {
+    flex-direction: row;
+  }
+}
+
+// Textarea
+
+@mixin textarea-field {
+  @include input-field;
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  outline: none;
+  resize: none;
+}

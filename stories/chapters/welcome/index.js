@@ -1,0 +1,13 @@
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { boolean } from '@storybook/addon-knobs'
+
+// pages
+import Welcome from '../../pages/welcome/welcome'
+
+storiesOf('Robits Storybook', module)
+  .add('Welcome', () => {
+    const useStorybookTheme = boolean('Use Storybook Theme', window.useStorybookTheme)
+
+    return <Welcome />
+  })

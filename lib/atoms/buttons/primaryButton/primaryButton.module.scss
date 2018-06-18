@@ -1,0 +1,7 @@
+.primary-button {
+	@include base-btn;
+
+	&.loading {
+		position: relative;
+	}
+}
