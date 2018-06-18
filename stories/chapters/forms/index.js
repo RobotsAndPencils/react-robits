@@ -20,7 +20,7 @@ import RadioGroup from '../../../lib/atoms/form/radioGroup/RadioGroup'
 import TextArea from '../../../lib/atoms/form/textArea/TextArea'
 import MaskedInputField from '../../../lib/atoms/form/maskedInputField/MaskedInputField'
 import SliderField from '../../../lib/atoms/form/sliderField/SliderField'
-// import FileField from '../../../lib/atoms/form/fileField/FileField'
+import FileField from '../../../lib/atoms/form/fileField/FileField'
 
 // import styles from '../../pages/forms/sampleFormStory.module.scss'
 
@@ -214,6 +214,27 @@ storiesOf('Forms/Input Types', module)
     )
   )
 
+storiesOf('Forms/Input Types', module)
+  .add('File Field',
+    withInfo('Basic usage of component:')(
+      withNotes('')(
+        () => {
+          return (
+            <StorybookPageLayout title='File Field'>
+              <GenericFormContainer onSubmit={submitForm}>
+                <div className='row'>
+                  <div className='col-sm-6'>
+                    <Field type='file' name='file_upload' component={FileField} label='File Upload Label' theme={window.useStorybookTheme ? formStylesThemed : null} />
+                  </div>
+                </div>
+              </GenericFormContainer>
+            </StorybookPageLayout>
+          )
+        }
+      )
+    )
+  )
+
 // storiesOf('Forms/Samples', module)
 //   .add('Basic Validation',
 //     withInfo('Basic usage:')(
@@ -267,28 +288,6 @@ storiesOf('Forms/Input Types', module)
 //             </StorybookPageLayout>
 //           )
 //         }, styles, {allowMultiple: true})
-//       )
-//     )
-//   )
-
-
-// storiesOf('Forms/Input Types', module)
-//   .add('File Field',
-//     withInfo('Basic usage of component:')(
-//       withNotes('')(
-//         () => {
-//           return (
-//             <StorybookPageLayout title='File Field'>
-//               <GenericFormContainer onSubmit={submitForm}>
-//                 <div className='row'>
-//                   <div className='col-sm-6'>
-//                     <Field type='file' name='file_upload' component={FileField} label='Upload Your File' tooltipContent={passwordTooltipContent} />
-//                   </div>
-//                 </div>
-//               </GenericFormContainer>
-//             </StorybookPageLayout>
-//           )
-//         }
 //       )
 //     )
 //   )

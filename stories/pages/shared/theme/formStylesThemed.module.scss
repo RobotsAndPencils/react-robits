@@ -173,4 +173,38 @@
       }
     
     }
-  }
+}
+
+.file-field {
+    @include file-field;
+    
+    label {
+        margin-top: 10px;
+        @include base-btn;
+        appearance: none;
+        font-family: $primary-font;
+        border: 1px solid $light-gray;
+        border-radius: 6px;
+        height: 46px;
+        font-size: 18px;
+        padding: 0 20px;
+        transition: all 300ms linear;
+        color: #333;
+
+        &:hover {
+            border-color: darken($primary-color, 10);
+            background: $primary-color;
+            color: darken($primary-color, 30);
+        }
+
+        &.disabled, :disabled {
+            background: #f9f9f9;
+            color: lighten(#333333, 30);
+            border-color: lighten($light-gray, 10);
+        }
+    }
+}
+  
+.uploaded-file {
+    @include uploaded-file;
+}

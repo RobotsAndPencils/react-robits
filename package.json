@@ -28,9 +28,6 @@
   },
   "homepage": "https://github.com/RobotsAndPencils/react-robits#readme",
   "dependencies": {
-    "bootstrap-css": "^3.3.7",
-    "bootstrap-loader": "^2.2.0",
-    "bootstrap-sass": "^3.3.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "google-map-react": "^0.24.0",
     "lodash": "^4.17.4",
@@ -39,7 +36,6 @@
     "moment-timezone": "0.5.13",
     "prop-types": "^15.6.1",
     "react": "15.6.1",
-    "react-bootstrap": "^0.31.0",
     "react-bootstrap-slider": "2.0.1",
     "react-bootstrap-typeahead": "^1.4.2",
     "react-datepicker": "0.56.0",

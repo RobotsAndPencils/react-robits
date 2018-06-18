@@ -196,3 +196,30 @@
   
   }
 }
+
+// File Field
+
+@mixin file-field {
+  display: inline-block;
+
+	label {
+		@include base-btn;
+		padding: 2px 8px 3px;
+    font-size: 12px;
+    line-height: 12px;
+		font-weight: 400;
+		appearance: button;
+	}
+
+	input {
+		display: none;
+	}
+}
+
+@mixin uploaded-file {
+  display: block;
+	font-style: italic;
+	font-size: 12px;
+	margin-top: 5px;
+	color: gray;
+}

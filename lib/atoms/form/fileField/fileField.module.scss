@@ -1,51 +1,19 @@
-.field-label-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.tooltip-icon-container svg {
-  margin: 0 0 -2px 6px;
-}
-
 .field-label {
   @include field-label;
 }
 
 .file-field {
-	display: inline-block;
-
-	label {
-		@include secondary-button;
-		font-style: normal;
-		display: inline-flex;
-
-		&.invalid-file {
-			border-color: $alert;
-		}
-
-		svg {
-			margin: 0 10px -2px 0;
-		    width: 16px;
-		}
-	}
-	input {
-		display: none;
-	}
+	@include file-field;
 }
 
 .uploaded-file {
-	display: block;
-	font-style: italic;
-	font-size: 12px;
-	margin-top: 5px;
-	color: $medium-gray;
+	@include uploaded-file;
 }
 
-.validation {
-  @include input-field-validation;
+.field-error {
+  // @include field-error;
+}
 
-  svg {
-  	margin: 0 6px -3px 0
-  }
+.disabled {
+  @include disabled-field;
 }
