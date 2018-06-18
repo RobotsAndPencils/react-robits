@@ -19,7 +19,7 @@ import Checkbox from '../../../lib/atoms/form/checkbox/Checkbox'
 import RadioGroup from '../../../lib/atoms/form/radioGroup/RadioGroup'
 import TextArea from '../../../lib/atoms/form/textArea/TextArea'
 import MaskedInputField from '../../../lib/atoms/form/maskedInputField/MaskedInputField'
-// import SliderField from '../../../lib/atoms/form/sliderField/SliderField'
+import SliderField from '../../../lib/atoms/form/sliderField/SliderField'
 // import FileField from '../../../lib/atoms/form/fileField/FileField'
 
 // import styles from '../../pages/forms/sampleFormStory.module.scss'
@@ -193,26 +193,26 @@ storiesOf('Forms/Input Types', module)
     )
   )
 
-// storiesOf('Forms/Input Types', module)
-//   .add('Slider Field',
-//     withInfo('Basic usage of component:')(
-//       withNotes('')(
-//         () => {
-//           return (
-//             <StorybookPageLayout title='Slider Input'>
-//               <GenericFormContainer onSubmit={submitForm}>
-//                 <div className='row'>
-//                   <div className='col-sm-6'>
-//                     <Field name='slider_input' id='0' component={SliderField} label='Slider Label' minLabel='minimum' maxLabel='maximum' theme={window.useStorybookTheme ? formStylesThemed : null} />
-//                   </div>
-//                 </div>
-//               </GenericFormContainer>
-//             </StorybookPageLayout>
-//           )
-//         }
-//       )
-//     )
-//   )
+storiesOf('Forms/Input Types', module)
+  .add('Slider Field',
+    withInfo('Basic usage of component:')(
+      withNotes('')(
+        () => {
+          return (
+            <StorybookPageLayout title='Slider Input'>
+              <GenericFormContainer onSubmit={submitForm}>
+                <div className='row'>
+                  <div className='col-sm-6'>
+                    <Field name='slider_input' id='0' component={SliderField} label='Slider Label' minLabel='minimum' maxLabel='maximum' theme={window.useStorybookTheme ? formStylesThemed : null} />
+                  </div>
+                </div>
+              </GenericFormContainer>
+            </StorybookPageLayout>
+          )
+        }
+      )
+    )
+  )
 
 // storiesOf('Forms/Samples', module)
 //   .add('Basic Validation',

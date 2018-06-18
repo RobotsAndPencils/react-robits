@@ -2,7 +2,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var path = require('path')
 
-let scssLoaders = [
+let styleLoaders = (modularize = true) => [
   {
     loader: 'style-loader'
   },
@@ -12,7 +12,7 @@ let scssLoaders = [
   {
     loader: 'css-loader',
     options: {
-      modules: true, // Enables CSS Modules spec
+      modules: modularize, // Enables CSS Modules spec
       importLoaders: 3, // Tells CSS Loader how many loaders need to run for all @imported css files
       localIdentName: '[name]__[local]', // Provides the format for the CSS Modules output.
       sourceMap: true
@@ -71,12 +71,8 @@ module.exports = {
       // },
       // Apply loader
       {
-        test: /^((?!\.module).)*scss$/,
-        use: scssLoaders
-      },
-      {
-        test: /\.module.scss$/,
-        use: scssLoaders.concat([
+        test: /.scss$/,
+        use: styleLoaders().concat([
           {
             loader: 'sass-resources-loader',
             options: {
@@ -84,7 +80,13 @@ module.exports = {
               resources: './styles/**/*.scss'
             }
           }
-        ])
+        ]),
+        exclude: /node_modules/
+      },
+      {
+        test: /.scss$/,
+        use: styleLoaders(false),
+        include: /node_modules/
       }
     ]
   }
