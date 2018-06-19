@@ -4,6 +4,7 @@ import styles from './storybookPageLayout.module.scss'
 import { boolean } from '@storybook/addon-knobs'
 
 const StorybookPageLayout = ({children, title, fullbleed}) => {
+  // keep. it triggers a knob listener
   const useStorybookTheme = boolean('Use Storybook Theme', window.useStorybookTheme)
 
   return (

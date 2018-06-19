@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import storybookTheme from './storybookTheme.module.scss'
+import storybookTheme from './storybookTheme.module.scss' // keep. it renders global / page level styling
 
 // this wraps the entire storybook to listen for and provide theming on the whole
 

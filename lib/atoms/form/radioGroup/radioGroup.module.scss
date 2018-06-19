@@ -20,3 +20,7 @@
 .disabled {
   @include disabled-field;
 }
+
+.readonly {
+  @include readonly-radiogroup;
+}

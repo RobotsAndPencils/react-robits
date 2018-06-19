@@ -9,3 +9,7 @@
 .field-hint {
   @include field-hint;
 }
+
+.readonly {
+  @include readonly-selectfield;
+}

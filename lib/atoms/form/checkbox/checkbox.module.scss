@@ -14,3 +14,11 @@
 .checkbox-container {
   @include checkbox-container;
 }
+
+.disabled {
+  @include disabled-field;
+}
+
+.readonly {
+  @include readonly-checkbox;
+}

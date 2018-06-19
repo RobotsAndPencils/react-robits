@@ -4,7 +4,14 @@ import { storiesOf } from '@storybook/react'
 import colors from '../../../styles/_0colors.scss'
 import ValidationFormContainer from '../../pages/forms/validationFormContainer'
 import GenericFormContainer from '../../pages/forms/genericFormContainer'
-import formStylesThemed from '../../pages/shared/theme/formStylesThemed.module.scss'
+
+// theming
+import themedForm from '../../pages/shared/theme/themedForm.module.scss'
+import themedCheckbox from '../../pages/shared/theme/themedCheckbox.module.scss'
+import themedRadioGroup from '../../pages/shared/theme/themedRadioGroup.module.scss'
+import themedSlider from '../../pages/shared/theme/themedSlider.module.scss'
+import themedFileField from '../../pages/shared/theme/themedFileField.module.scss'
+import themedSelect from '../../pages/shared/theme/themedSelect.module.scss'
 
 // addons
 import { action } from '@storybook/addon-actions'
@@ -21,8 +28,6 @@ import TextArea from '../../../lib/atoms/form/textArea/TextArea'
 import MaskedInputField from '../../../lib/atoms/form/maskedInputField/MaskedInputField'
 import SliderField from '../../../lib/atoms/form/sliderField/SliderField'
 import FileField from '../../../lib/atoms/form/fileField/FileField'
-
-// import styles from '../../pages/forms/sampleFormStory.module.scss'
 
 // pages
 import StorybookPageLayout from '../../pages/shared/storybookPageLayout'
@@ -45,7 +50,7 @@ storiesOf('Forms/Input Types', module)
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field theme={window.useStorybookTheme ? formStylesThemed : null} name='text_input' hintContent={hint} readonly={readonly} disabled={disabled} component={InputField} placeholder='Enter text ...' label='Basic Field' />
+                    <Field theme={window.useStorybookTheme ? themedForm : null} name='text_input' hintContent={hint} readonly={readonly} disabled={disabled} component={InputField} placeholder='Enter text ...' label='Basic Field' />
                   </div>
                 </div>
               </GenericFormContainer>
@@ -62,6 +67,7 @@ storiesOf('Forms/Input Types', module)
       withNotes('')(
         () => {
           let disabled = boolean('Disabled', false)
+          let readonly = boolean('Read-only', false)
           let hint = text('Hint text', '')
 
           return (
@@ -69,7 +75,14 @@ storiesOf('Forms/Input Types', module)
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field theme={window.useStorybookTheme ? formStylesThemed : null} name='select_input' hintContent={hint} disabled={disabled} component={SelectField} label='Select Field'>
+                    <Field
+                      theme={window.useStorybookTheme ? themedSelect : null}
+                      name='select_input'
+                      hintContent={hint}
+                      disabled={disabled}
+                      component={SelectField}
+                      readonly={readonly}
+                      label='Select Field'>
                       <option hidden>Select ...</option>
                       <option value='one'>One</option>
                       <option value='two'>Two</option>
@@ -90,23 +103,26 @@ storiesOf('Forms/Input Types', module)
     withInfo('Basic usage of component:')(
       withNotes('')(
         () => {
+          let disabled = boolean('Disabled', false)
+          let readonly = boolean('Read-only', false)
+
           return (
             <StorybookPageLayout title='Checkboxes'>
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field name='checkbox_input' component={Checkbox} theme={window.useStorybookTheme ? formStylesThemed : null}>
+                    <Field name='checkbox_input' component={Checkbox} theme={window.useStorybookTheme ? themedCheckbox : null} disabled={disabled} readonly={readonly}>
                       Basic Checkbox Label
                     </Field>
 
                     <section>
                       <h3>Static examples</h3>
                       <div style={{maxWidth: '300px'}}>
-                        <Field name='checkbox_input_long' component={Checkbox} theme={window.useStorybookTheme ? formStylesThemed : null}>
+                        <Field name='checkbox_input_long' component={Checkbox} theme={window.useStorybookTheme ? themedCheckbox : null}>
                           A Checkbox Label with a really long name that has to wrap to a second line
                         </Field>
                       </div>
-                      <Field name='checkbox_input_withLink' component={Checkbox} clickableLabel={false} theme={window.useStorybookTheme ? formStylesThemed : null}>
+                      <Field name='checkbox_input_withLink' component={Checkbox} clickableLabel={false} theme={window.useStorybookTheme ? themedCheckbox : null}>
                         Checkbox Label with&nbsp;
                         <a href='#'>
                           Link Tag
@@ -128,6 +144,8 @@ storiesOf('Forms/Input Types', module)
     withInfo('Basic usage of component:')(
       withNotes('')(
         () => {
+          let disabled = boolean('Disabled', false)
+          let readonly = boolean('Read-only', false)
           const defaultItems = ['Item one longer', 'Item two', 'Item three']
           const buttons = array('Radio Button Items', defaultItems, ',')
           let isStacked = boolean('isStacked', true)
@@ -136,7 +154,15 @@ storiesOf('Forms/Input Types', module)
               <GenericFormContainer onSubmit={submitForm}>
                 <div>
                   <div style={{marginBottom: '35px'}}>
-                    <Field component={RadioGroup} theme={window.useStorybookTheme ? formStylesThemed : null} label='Radio Group Label' isStacked={isStacked} name='radio_input' buttons={buttons} />
+                    <Field
+                      component={RadioGroup}
+                      theme={window.useStorybookTheme ? themedRadioGroup : null}
+                      label='Radio Group Label'
+                      isStacked={isStacked}
+                      name='radio_input'
+                      disabled={disabled}
+                      readonly={readonly}
+                      buttons={buttons} />
                   </div>
                 </div>
               </GenericFormContainer>
@@ -161,7 +187,7 @@ storiesOf('Forms/Input Types', module)
               <GenericFormContainer onSubmit={submitForm}>
                 <div>
                   <div style={{marginBottom: '35px'}}>
-                    <Field name='textarea_input' component={TextArea} readonly={readonly} disabled={disabled} hintContent={hint} theme={window.useStorybookTheme ? formStylesThemed : null} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' />
+                    <Field name='textarea_input' component={TextArea} readonly={readonly} disabled={disabled} hintContent={hint} theme={window.useStorybookTheme ? themedForm : null} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' />
                   </div>
                 </div>
               </GenericFormContainer>
@@ -177,12 +203,24 @@ storiesOf('Forms/Input Types', module)
     withInfo('Basic usage of component:')(
       withNotes('')(
         () => {
+          let readonly = boolean('Read-only', false)
+          let disabled = boolean('Disabled', false)
+
           return (
             <StorybookPageLayout title='Masked Input Field'>
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field name='masked_input' type='text' component={MaskedInputField} mask={text('Mask', '11/11/1111')} placeholder={text('Placeholder', 'MM / DD / YYYY')} label='Masked Input' theme={window.useStorybookTheme ? formStylesThemed : null} />
+                    <Field
+                      name='masked_input'
+                      type='text'
+                      disabled={disabled}
+                      readonly={readonly}
+                      component={MaskedInputField}
+                      mask={text('Mask', '11/11/1111')}
+                      placeholder={text('Placeholder', 'MM / DD / YYYY')}
+                      label='Masked Input'
+                      theme={window.useStorybookTheme ? themedForm : null} />
                   </div>
                 </div>
               </GenericFormContainer>
@@ -198,12 +236,24 @@ storiesOf('Forms/Input Types', module)
     withInfo('Basic usage of component:')(
       withNotes('')(
         () => {
+          let readonly = boolean('Read-only', false)
+          let disabled = boolean('Disabled', false)
+
           return (
             <StorybookPageLayout title='Slider Input'>
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field name='slider_input' id='0' component={SliderField} label='Slider Label' minLabel='minimum' maxLabel='maximum' theme={window.useStorybookTheme ? formStylesThemed : null} />
+                    <Field
+                      name='slider_input'
+                      id='0'
+                      component={SliderField}
+                      label='Slider Label'
+                      minLabel='minimum'
+                      maxLabel='maximum'
+                      readonly={readonly}
+                      disabled={disabled}
+                      theme={window.useStorybookTheme ? themedSlider : null} />
                   </div>
                 </div>
               </GenericFormContainer>
@@ -219,12 +269,14 @@ storiesOf('Forms/Input Types', module)
     withInfo('Basic usage of component:')(
       withNotes('')(
         () => {
+          let disabled = boolean('Disabled', false)
+
           return (
             <StorybookPageLayout title='File Field'>
               <GenericFormContainer onSubmit={submitForm}>
                 <div className='row'>
                   <div className='col-sm-6'>
-                    <Field type='file' name='file_upload' component={FileField} label='File Upload Label' theme={window.useStorybookTheme ? formStylesThemed : null} />
+                    <Field type='file' disabled={disabled} name='file_upload' component={FileField} label='File Upload Label' theme={window.useStorybookTheme ? themedFileField : null} />
                   </div>
                 </div>
               </GenericFormContainer>
