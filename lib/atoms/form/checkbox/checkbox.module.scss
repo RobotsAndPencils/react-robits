@@ -11,6 +11,10 @@
   margin-bottom: 0;
 }
 
+.field-error {
+  @include field-error;
+}
+
 .checkbox-container {
   @include checkbox-container;
 }

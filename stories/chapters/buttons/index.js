@@ -15,7 +15,7 @@ import StorybookPageLayout from '../../pages/shared/storybookPageLayout'
 
 // story assets
 import styles from '../../pages/buttons/primaryButtonStory.module.scss'
-import primaryButtonTheme from '../../pages/shared/theme/primaryButtonThemed.module.scss'
+import themedPrimaryButton from '../../pages/shared/theme/themedPrimaryButton.module.scss'
 
 storiesOf('Buttons', module)
   .add('Primary Button',
@@ -28,7 +28,7 @@ storiesOf('Buttons', module)
             <StorybookPageLayout title='Primary Action Button'>
               <div className={styles['configurable-btn']}>
                 <PrimaryButton
-                  theme={window.useStorybookTheme ? primaryButtonTheme : null}
+                  theme={window.useStorybookTheme ? themedPrimaryButton : null}
                   isLoading={boolean('isLoading', false)}
                   disabled={boolean('disabled', false)}
                   onClick={() => { action('Clicked')('testing') }}>

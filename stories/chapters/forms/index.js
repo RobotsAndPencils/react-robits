@@ -12,6 +12,7 @@ import themedRadioGroup from '../../pages/shared/theme/themedRadioGroup.module.s
 import themedSlider from '../../pages/shared/theme/themedSlider.module.scss'
 import themedFileField from '../../pages/shared/theme/themedFileField.module.scss'
 import themedSelect from '../../pages/shared/theme/themedSelect.module.scss'
+import themedPrimaryButton from '../../pages/shared/theme/themedPrimaryButton.module.scss'
 
 // addons
 import { action } from '@storybook/addon-actions'
@@ -28,6 +29,7 @@ import TextArea from '../../../lib/atoms/form/textArea/TextArea'
 import MaskedInputField from '../../../lib/atoms/form/maskedInputField/MaskedInputField'
 import SliderField from '../../../lib/atoms/form/sliderField/SliderField'
 import FileField from '../../../lib/atoms/form/fileField/FileField'
+import PrimaryButton from '../../../lib/atoms/buttons/primaryButton/PrimaryButton'
 
 // pages
 import StorybookPageLayout from '../../pages/shared/storybookPageLayout'
@@ -287,59 +289,63 @@ storiesOf('Forms/Input Types', module)
     )
   )
 
-// storiesOf('Forms/Samples', module)
-//   .add('Basic Validation',
-//     withInfo('Basic usage:')(
-//       withNotes('')(
-//         CSSModules(() => {
-//           return (
-//             <StorybookPageLayout title='Basic Validation Example'>
-//               <ValidationFormContainer onSubmit={submitForm}>
-//                 <div>
-//                   <div className='row'>
-//                     <div className='col-sm-12'>
-//                       <p className='paragraph-small'>* All fields are required</p>
-//                     </div>
-//                   </div>
-//                   <div className='row'>
-//                     <div className='col-sm-6'>
-//                       <Field name='text_input' type='text' component={InputField} placeholder='Placeholder...' label='Normal Input' />
-//                       <Field name='places_input' component={PlacesField} apiKey='AIzaSyC8xSDayoUhnpeyr1WAYHWaT8cKBuxXM2E' placeholder='Enter text ...' label='Places Field' />
-//                       <Field name='hint_input' type='text' component={InputField} placeholder='Placeholder...' hintContent='1 letter, 1 number, 8 characters' label='Normal Input with a hint' />
-//                       <Field name='masked_input' type='text' component={MaskedInputField} mask='11/11/1111' placeholder='MM / DD / YYYY' label='Masked Input' />
-//                       <Field name='password_input' type='password' tooltipContent={passwordTooltipContent} component={InputField} placeholder='Password' label='With Tooltip' />
-//                       <Field name='select_input' label='Select Input' component={SelectField}>
-//                         <option hidden>Select ...</option>
-//                         <option value='one'>One</option>
-//                         <option value='two'>Two</option>
-//                         <option value='three'>Three</option>
-//                       </Field>
-//                       <Field name='type_ahead' component={TypeAheadField} data={diagnoses} placeholder='Start typing...' label='Helpful Field' />
-//                       <Field name='area_input' component={TextArea} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' />
-//                       <Field name='date_input' component={DateInputField} showMonthDropdown showYearDropdown dropdownMode='select' placeholder='Date...' label='Date Input' />
-//                       <Field name='checkbox_input' component={Checkbox}>
-//                         Basic Checkbox Label
-//                       </Field>
-//                       <Field component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 0}, {text: 'Item two', value: 1}, {text: 'Item three', value: 2}]} />
-//                       <div style={{margin: '0 0 20px 0'}}>
-//                         <Field type='file' name='file_upload' component={FileField} label='Upload Your File' />
-//                       </div>
-//                       <Field name='drop_zone' component={DropZone} placeholder={dropZonePlaceholder} context={dropZoneContext} label='Upload Your File' />
-//                       <div style={{marginTop: '20px'}}>
-//                         <PrimaryButton
-//                           type='submit'
-//                           isLoading={false}
-//                           disabled={false}>
-//                           Submit
-//                         </PrimaryButton>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </ValidationFormContainer>
-//             </StorybookPageLayout>
-//           )
-//         }, styles, {allowMultiple: true})
-//       )
-//     )
-//   )
+const required = value => (value ? undefined : 'Required')
+const requiredDirty = (value, allValues, props) => {
+  return (value ? undefined : 'Required')
+}
+
+storiesOf('Forms/Samples', module)
+  .add('Basic Validation',
+    withInfo('Basic usage:')(
+      withNotes('')(
+        () => {
+          return (
+            <StorybookPageLayout title='Basic Validation Example'>
+              <ValidationFormContainer onSubmit={submitForm}>
+                <div>
+                  <div className='row'>
+                    <div className='col-sm-12'>
+                      <p className='paragraph-small'>* All fields are required</p>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-sm-6'>
+                      <Field validate={required} name='text_input' type='text' component={InputField} placeholder='Placeholder...' label='Normal Input' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field validate={required} name='masked_input' type='text' component={MaskedInputField} mask='11/11/1111' placeholder='MM / DD / YYYY' label='Masked Input' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field validate={required} name='select_input' label='Select Input' component={SelectField} theme={window.useStorybookTheme ? themedSelect : null}>
+                        <option hidden>Select ...</option>
+                        <option value='one'>One</option>
+                        <option value='two'>Two</option>
+                        <option value='three'>Three</option>
+                      </Field>
+                      <Field validate={required} name='textarea_input' component={TextArea} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field validate={required} name='checkbox_input' component={Checkbox} theme={window.useStorybookTheme ? themedCheckbox : null}>
+                        Basic Checkbox Label
+                      </Field>
+                      <Field validate={requiredDirty}
+                        name='slider_input'
+                        id='0'
+                        component={SliderField}
+                        label='Slider Label'
+                        minLabel='minimum'
+                        maxLabel='maximum'
+                        theme={window.useStorybookTheme ? themedSlider : null} />
+                      <Field validate={required} component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 0}, {text: 'Item two', value: 1}, {text: 'Item three', value: 2}]} theme={window.useStorybookTheme ? themedRadioGroup : null} />
+                      <Field validate={required} type='file' name='file_upload' component={FileField} label='Upload Your File' theme={window.useStorybookTheme ? themedFileField : null} />
+                      <PrimaryButton
+                        type='submit'
+                        isLoading={false}
+                        disabled={false}
+                        theme={window.useStorybookTheme ? themedPrimaryButton : null}>
+                        Submit
+                      </PrimaryButton>
+                    </div>
+                  </div>
+                </div>
+              </ValidationFormContainer>
+            </StorybookPageLayout>
+          )
+        }
+      )
+    )
+  )

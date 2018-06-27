@@ -2,46 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 
-const sampleValidate = (values) => {
+const sampleValidate = (values, props) => {
   const errors = {}
   if (!values.text_input) {
-    errors.text_input = 'Normal Input is required'
-  }
-  if (!values.places_input) {
-    errors.places_input = 'Places Input is required'
-  }
-  if (!values.hint_input) {
-    errors.hint_input = 'Normal Input with hint is required'
+    errors.text_input = 'Required'
   }
   if (!values.masked_input) {
-    errors.masked_input = 'Masked Input is required'
+    errors.masked_input = 'Required'
   }
   if (!values.select_input) {
     errors.select_input = 'Required'
   }
-  if (!values.area_input) {
-    errors.area_input = 'Text Area is required'
-  }
-  if (!values.date_input) {
-    errors.date_input = 'Date Input is required'
-  }
-  if (!values.password_input) {
-    errors.password_input = 'With tooltip is required'
+  if (!values.textarea_input) {
+    errors.textarea_input = 'Required'
   }
   if (!values.radios_input) {
-    errors.radios_input = 'Single Select Tab is required'
+    errors.radios_input = 'Required'
   }
   if (!values.checkbox_input) {
     errors.checkbox_input = 'Required'
   }
   if (!values.file_upload) {
-    errors.file_upload = 'Upload your file is required'
+    errors.file_upload = 'Required'
   }
-  if (!values.drop_zone) {
-    errors.drop_zone = 'Upload your file is required'
-  }
-  if (!values.type_ahead) {
-    errors.type_ahead = 'Helpful Field is required'
+  if (!values.slider_input) {
+    errors.slider_input = 'Required'
   }
   return errors
 }
@@ -62,5 +47,5 @@ ValidationFormContainer.propTypes = {
 
 export default reduxForm({
   form: 'ValidationFormContainer', // a unique identifier for this form
-  validate: sampleValidate
+  // validate: sampleValidate
 })(ValidationFormContainer)

@@ -10,6 +10,6 @@
   @include field-hint;
 }
 
-.readonly {
-  @include readonly-selectfield;
+.field-error {
+  @include field-error;
 }

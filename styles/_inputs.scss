@@ -36,6 +36,12 @@
   }
 
   &:read-only {
+    &:not(select) { // :read-only on select elements. needs to be ::read-only below
+      cursor: not-allowed;
+    }
+  }
+
+  &::read-only { // for select element
     cursor: not-allowed;
   }
 
@@ -65,6 +71,11 @@
   
 }
 
+@mixin field-error {
+  color: red;
+  font-size: 80%;
+}
+
 /* ---------------SPECIFIC INPUTS----------------*/
 
 // Text Inputs
@@ -82,12 +93,6 @@
 
   &.initialized {
     color: gray
-  }
-}
-
-@mixin readonly-selectfield {
-  select {
-    cursor: not-allowed;
   }
 }
 
