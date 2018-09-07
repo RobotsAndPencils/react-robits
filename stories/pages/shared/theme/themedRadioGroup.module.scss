@@ -29,6 +29,12 @@
 .radioGroup-container {
     .field-container {
         @include radioGroup-field-container;
+
+        &.invalid {
+            input {
+                box-shadow: 0 0 0 1px $error-color;
+            }
+        }
     }
 }
 
@@ -48,4 +54,8 @@
 
 .field-container {
     margin-top: 10px;
+}
+
+.field-error {
+    @include field-error;
 }

@@ -4,6 +4,11 @@
     @include disabled-field;
 }
 
+.field-error {
+    @include field-error;
+    flex-basis: 100%;
+}
+
 .checkbox-field {
     appearance: none;
     cursor: pointer;
@@ -33,6 +38,10 @@
             top: 5px;
             left: 4px;
         }
+    }
+
+    &.invalid {
+        border-color: red;
     }
 }
   

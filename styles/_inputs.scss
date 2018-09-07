@@ -123,6 +123,7 @@
 
   &.invalid {
     box-shadow: 0 0 0 1px #ce4e5a;
+    border-radius: 3px;
   }
 }
 
@@ -134,6 +135,7 @@
 
 @mixin checkbox-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 // Radio Buttons
@@ -160,6 +162,13 @@
 
   &.side-by-side {
     flex-direction: row;
+  }
+
+  &.invalid {
+    input {
+      box-shadow: 0 0 0 2px #ce4e5a;
+      border-radius: 50%;
+    }
   }
 }
 
@@ -204,7 +213,6 @@
 
 @mixin slider {
   :global {
-
     .slider {
       width: 100% !important;
   
@@ -221,7 +229,16 @@
         box-sizing: border-box;
       }
     }
-  
+  }
+
+  &.invalid {
+    :global {
+      .slider {    
+        &.slider-horizontal .slider-handle {
+          border-color: #ce4e5a;
+        }
+      }
+    }
   }
 }
 

@@ -185,7 +185,7 @@ storiesOf('Forms/Input Types', module)
           let hint = text('Hint text', '')
 
           return (
-            <StorybookPageLayout title='Radio Buttons'>
+            <StorybookPageLayout title='Text Area'>
               <GenericFormContainer onSubmit={submitForm}>
                 <div>
                   <div style={{marginBottom: '35px'}}>
@@ -330,7 +330,7 @@ storiesOf('Forms/Samples', module)
                         minLabel='minimum'
                         maxLabel='maximum'
                         theme={window.useStorybookTheme ? themedSlider : null} />
-                      <Field validate={required} component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 0}, {text: 'Item two', value: 1}, {text: 'Item three', value: 2}]} theme={window.useStorybookTheme ? themedRadioGroup : null} />
+                      <Field validate={required} component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 1}, {text: 'Item two', value: 2}, {text: 'Item three', value: 3}]} theme={window.useStorybookTheme ? themedRadioGroup : null} />
                       <Field validate={required} type='file' name='file_upload' component={FileField} label='Upload Your File' theme={window.useStorybookTheme ? themedFileField : null} />
                       <PrimaryButton
                         type='submit'

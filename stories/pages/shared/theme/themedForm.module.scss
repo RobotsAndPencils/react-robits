@@ -5,6 +5,11 @@
     transition: all 200ms linear;
 }
 
+@mixin themed-error {
+    color: red;
+    font-size: 80%;
+}
+
 @mixin themed-input-field {
     @include input-field;
     appearance: none;
@@ -49,4 +54,8 @@
     padding: 10px;
     outline: none;
     resize: none;
+}
+
+.field-error {
+    @include themed-error;
 }

@@ -34,3 +34,7 @@
 .uploaded-file {
     @include uploaded-file;
 }
+
+.field-error {
+    @include field-error;
+}

@@ -4,15 +4,18 @@
 
 .field-container {
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .field-label {
   @include field-label;
   margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .field-error {
   @include field-error;
+  flex-basis: 100%;
 }
 
 .checkbox-container {
