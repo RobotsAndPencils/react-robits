@@ -1,11 +1,11 @@
 .truncate-view-action {
   margin-top: 5px;
   cursor: pointer;
-  color: $secondary-action;
+  color: #bbb;
   display: inline-block;
 
   &:hover {
-    color: $secondary-highlight;
+    color: #ccc;
   }
 
   svg {

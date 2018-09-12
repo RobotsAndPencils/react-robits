@@ -1,7 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import { storiesOf } from '@storybook/react'
-import colors from '../../../styles/_0colors.scss'
 import ValidationFormContainer from '../../pages/forms/validationFormContainer'
 import GenericFormContainer from '../../pages/forms/genericFormContainer'
 
@@ -16,7 +15,7 @@ import themedPrimaryButton from '../../pages/shared/theme/themedPrimaryButton.mo
 
 // addons
 import { action } from '@storybook/addon-actions'
-import { boolean, text, array, select } from '@storybook/addon-knobs'
+import { boolean, text, array } from '@storybook/addon-knobs'
 import { withNotes } from '@storybook/addon-notes'
 import { withInfo } from '@storybook/addon-info'
 
@@ -289,11 +288,6 @@ storiesOf('Forms/Input Types', module)
     )
   )
 
-const required = value => (value ? undefined : 'Required')
-const requiredDirty = (value, allValues, props) => {
-  return (value ? undefined : 'Required')
-}
-
 storiesOf('Forms/Samples', module)
   .add('Basic Validation',
     withInfo('Basic usage:')(
@@ -310,19 +304,19 @@ storiesOf('Forms/Samples', module)
                   </div>
                   <div className='row'>
                     <div className='col-sm-6'>
-                      <Field validate={required} name='text_input' type='text' component={InputField} placeholder='Placeholder...' label='Normal Input' theme={window.useStorybookTheme ? themedForm : null} />
-                      <Field validate={required} name='masked_input' type='text' component={MaskedInputField} mask='11/11/1111' placeholder='MM / DD / YYYY' label='Masked Input' theme={window.useStorybookTheme ? themedForm : null} />
-                      <Field validate={required} name='select_input' label='Select Input' component={SelectField} theme={window.useStorybookTheme ? themedSelect : null}>
+                      <Field name='text_input' type='text' component={InputField} placeholder='Placeholder...' label='Normal Input' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field name='masked_input' type='text' component={MaskedInputField} mask='11/11/1111' placeholder='MM / DD / YYYY' label='Masked Input' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field name='select_input' label='Select Input' component={SelectField} theme={window.useStorybookTheme ? themedSelect : null}>
                         <option hidden>Select ...</option>
                         <option value='one'>One</option>
                         <option value='two'>Two</option>
                         <option value='three'>Three</option>
                       </Field>
-                      <Field validate={required} name='textarea_input' component={TextArea} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' theme={window.useStorybookTheme ? themedForm : null} />
-                      <Field validate={required} name='checkbox_input' component={Checkbox} theme={window.useStorybookTheme ? themedCheckbox : null}>
+                      <Field name='textarea_input' component={TextArea} placeholder="This is optional. Tell us as much or as little as you'd like." label='Text Area' theme={window.useStorybookTheme ? themedForm : null} />
+                      <Field name='checkbox_input' component={Checkbox} theme={window.useStorybookTheme ? themedCheckbox : null}>
                         Basic Checkbox Label
                       </Field>
-                      <Field validate={requiredDirty}
+                      <Field
                         name='slider_input'
                         id='0'
                         component={SliderField}
@@ -330,8 +324,8 @@ storiesOf('Forms/Samples', module)
                         minLabel='minimum'
                         maxLabel='maximum'
                         theme={window.useStorybookTheme ? themedSlider : null} />
-                      <Field validate={required} component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 1}, {text: 'Item two', value: 2}, {text: 'Item three', value: 3}]} theme={window.useStorybookTheme ? themedRadioGroup : null} />
-                      <Field validate={required} type='file' name='file_upload' component={FileField} label='Upload Your File' theme={window.useStorybookTheme ? themedFileField : null} />
+                      <Field component={RadioGroup} stretch={false} name='radios_input' label='Default Radio Buttons' buttons={[{text: 'Item one', value: 1}, {text: 'Item two', value: 2}, {text: 'Item three', value: 3}]} theme={window.useStorybookTheme ? themedRadioGroup : null} />
+                      <Field type='file' name='file_upload' component={FileField} label='Upload Your File' theme={window.useStorybookTheme ? themedFileField : null} />
                       <PrimaryButton
                         type='submit'
                         isLoading={false}

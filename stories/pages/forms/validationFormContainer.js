@@ -2,31 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 
-const sampleValidate = (values, props) => {
+const sampleValidate = (values) => {
   const errors = {}
   if (!values.text_input) {
-    errors.text_input = 'Required'
+    errors.text_input = 'Requireds'
   }
   if (!values.masked_input) {
-    errors.masked_input = 'Required'
+    errors.masked_input = 'Requireds'
   }
   if (!values.select_input) {
-    errors.select_input = 'Required'
+    errors.select_input = 'Requireds'
   }
   if (!values.textarea_input) {
-    errors.textarea_input = 'Required'
+    errors.textarea_input = 'Requireds'
   }
   if (!values.radios_input) {
-    errors.radios_input = 'Required'
+    errors.radios_input = 'Requireds'
   }
   if (!values.checkbox_input) {
-    errors.checkbox_input = 'Required'
+    errors.checkbox_input = 'Requireds'
   }
   if (!values.file_upload) {
-    errors.file_upload = 'Required'
+    errors.file_upload = 'Requireds'
   }
   if (!values.slider_input) {
-    errors.slider_input = 'Required'
+    errors.slider_input = 'Requireds'
   }
   return errors
 }
@@ -47,5 +47,5 @@ ValidationFormContainer.propTypes = {
 
 export default reduxForm({
   form: 'ValidationFormContainer', // a unique identifier for this form
-  // validate: sampleValidate
+  validate: sampleValidate
 })(ValidationFormContainer)

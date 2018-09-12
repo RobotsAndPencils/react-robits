@@ -1,0 +1,17 @@
+@import 'themeVariables.scss';
+
+.truncate-view-action {
+    margin-top: 10px;
+    cursor: pointer;
+    color: $primary-color;
+    display: inline-block;
+    font-size: 90%;
+  
+    &:hover {
+      color: lighten($primary-color, 10);
+    }
+  
+    svg {
+      margin: 0 0 -3px 8px;
+    }
+  }
