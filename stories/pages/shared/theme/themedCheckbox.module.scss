@@ -1,0 +1,68 @@
+@import 'themeVariables.scss';
+
+.disabled {
+    @include disabled-field;
+}
+
+.field-error {
+    @include field-error;
+    flex-basis: 100%;
+}
+
+.checkbox-field {
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 2px;
+    border: 1px solid $light-gray;
+    margin: 2px 12px 0 0;
+
+    &:focus {
+        outline: none !important;
+        border-color: $primary-color;
+    }
+
+    &:checked {
+        outline: none;
+        border-color: $primary-color;
+        background: $primary-color;
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: 9px;
+            width: 10px;
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI5cHgiIHZpZXdCb3g9IjAgMCAxMCA5IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MiAoMzY3ODEpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkFydGJvYXJkPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IkFydGJvYXJkIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHBvbHlnb24gaWQ9IkNoZWNrZWQiIHBvaW50cz0iOC4zMzMyNSAwIDEwIDEuODQ5NTYxOTUgMy42Mjc1IDkgMy41Mjk1IDguOTE3MjA5MDEgMCA0Ljk0MTgzMzU0IDEuNjY2NzUgMy4wOTE5ODk5OSAzLjYyNzUgNS4zMDA1OTQ0OSI+PC9wb2x5Z29uPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+");
+            top: 5px;
+            left: 4px;
+        }
+    }
+
+    &.invalid {
+        border-color: red;
+    }
+}
+  
+.checkbox-container {
+    @include checkbox-container;
+    margin-top: 10px;
+    margin-bottom: 21px;
+
+    .field-label {
+        margin: 5px 0;
+    }
+
+    a {
+        color: $primary-color;
+    }
+
+    .field-container {
+        display: inline-block;
+    }
+}
+
+.readonly {
+    @include readonly-checkbox;
+}

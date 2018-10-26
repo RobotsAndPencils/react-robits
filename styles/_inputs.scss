@@ -1,0 +1,281 @@
+/* ---------------SHARED INPUT MIXINS------------------*/
+
+@mixin field-label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+@mixin disabled-field {
+  cursor: not-allowed !important;
+  color: #C0C0C0;
+
+  * {
+    cursor: not-allowed !important;
+  }
+
+  label {
+    color: #C0C0C0;
+  }
+
+  input {
+    opacity: 0.5;
+  }
+}
+
+@mixin field-hint {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+@mixin input-field {
+  box-sizing: border-box;
+  width: 100%;
+
+  &:focus {
+    outline:none;
+  }
+
+  &:read-only {
+    &:not(select) { // :read-only on select elements. needs to be ::read-only below
+      cursor: not-allowed;
+    }
+  }
+
+  &::read-only { // for select element
+    cursor: not-allowed;
+  }
+
+  &.invalid {
+    border-color: red;
+    border-width: 1px;
+  }
+
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+  }
+
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: #C0C0C0;
+  }
+
+  &:-ms-input-placeholder { /* IE */
+    color: #C0C0C0;
+  }
+
+  &:-ms-input-placeholder { /* IE Edge */
+    color: #C0C0C0;
+  }
+  
+}
+
+@mixin field-error {
+  color: red;
+  font-size: 80%;
+}
+
+/* ---------------SPECIFIC INPUTS----------------*/
+
+// Text Inputs
+@mixin text-field {
+  @include input-field;
+}
+
+// Select Input
+@mixin select-field {
+  @include input-field;
+
+  > option[hidden] {
+    color: gray;
+  }
+
+  &.initialized {
+    color: gray
+  }
+}
+
+// Text Areas
+@mixin text-area {
+  @include input-field;
+  padding-top: 10px;
+  resize: none;
+}
+
+// Checkboxes
+@mixin checkbox-field {
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:checked {
+    outline: none;
+  }
+
+  &.readonly {
+    cursor: not-allowed;
+  }
+
+  &.invalid {
+    box-shadow: 0 0 0 1px #ce4e5a;
+    border-radius: 3px;
+  }
+}
+
+@mixin readonly-checkbox {
+  input {
+    cursor: not-allowed;
+  }
+}
+
+@mixin checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// Radio Buttons
+@mixin radio-field {
+  display: flex;
+  align-items: center;
+
+  input {
+    border: none;
+    outline: none;
+    flex-shrink: 0;
+
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+
+@mixin radioGroup-field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  &.side-by-side {
+    flex-direction: row;
+  }
+
+  &.invalid {
+    input {
+      box-shadow: 0 0 0 2px #ce4e5a;
+      border-radius: 50%;
+    }
+  }
+}
+
+@mixin readonly-radiogroup {
+  input {
+    cursor: not-allowed;
+  }
+}
+
+// Textarea
+
+@mixin textarea-field {
+  @include input-field;
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  outline: none;
+  resize: none;
+}
+
+// Slider
+
+@mixin slider-labels-container {
+  @include clearfix;
+
+  .min-label, .max-label {
+    color: black;
+    text-transform: lowercase;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: $regular;
+  }
+
+  .min-label {
+    float: left;
+  }
+
+  .max-label {
+    float: right;
+  }
+}
+
+@mixin slider {
+  :global {
+    .slider {
+      width: 100% !important;
+  
+      .slider-track {
+        height: 6px !important;
+        margin-top: -3px !important;
+      }
+  
+      &.slider-horizontal .slider-handle {
+        z-index: 1;
+        background: linear-gradient(to bottom, #f9f9f9, #eee);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        border: 1px solid #bbb;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &.invalid {
+    :global {
+      .slider {    
+        &.slider-horizontal .slider-handle {
+          border-color: #ce4e5a;
+        }
+      }
+    }
+  }
+}
+
+@mixin readonly-slider {
+  :global {
+
+    .slider-track, .slider-handle {
+      cursor: not-allowed;
+    }
+  
+  }
+}
+
+// File Field
+
+@mixin file-field {
+  display: inline-block;
+
+	label {
+		@include base-btn;
+		padding: 2px 8px 3px;
+    font-size: 12px;
+    line-height: 12px;
+		font-weight: 400;
+		appearance: button;
+	}
+
+	input {
+		display: none;
+	}
+}
+
+@mixin uploaded-file {
+  display: block;
+	font-style: italic;
+	font-size: 12px;
+	margin-top: 5px;
+	color: gray;
+}

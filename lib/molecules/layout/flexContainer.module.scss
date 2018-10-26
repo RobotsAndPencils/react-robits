@@ -1,0 +1,15 @@
+.flex-container {
+    display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+
+	&.vertical-only {
+		min-width: none;
+		flex-direction: column;
+	}
+
+	&.horizontal-only {
+		min-height: none;
+		flex-direction: row;
+	}
+}

@@ -1,0 +1,14 @@
+.truncate-view-action {
+  margin-top: 5px;
+  cursor: pointer;
+  color: #bbb;
+  display: inline-block;
+
+  &:hover {
+    color: #ccc;
+  }
+
+  svg {
+    margin: 0 0 -3px 8px;
+  }
+}

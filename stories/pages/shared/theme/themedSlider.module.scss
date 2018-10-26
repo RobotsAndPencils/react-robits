@@ -1,0 +1,68 @@
+@import 'themeVariables.scss';
+
+.slider {
+  :global {
+    .slider {
+      width: 100% !important;
+  
+      .slider-track {
+        height: 6px !important;
+        margin-top: -3px !important;
+      }
+
+      .slider-selection {
+          background: lighten($primary-color, 20%);
+      }
+  
+      &.slider-horizontal .slider-handle {
+        z-index: 1;
+        background: linear-gradient(to bottom,$primary-color, darken($primary-color, 20%));
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &.invalid {
+    :global {
+      .slider {
+        .slider-selection {
+          background: lighten($error-color, 20%);
+        }
+    
+        &.slider-horizontal .slider-handle {
+          background: linear-gradient(to bottom,$error-color, darken($error-color, 20%));
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    :global {
+      .slider {
+        .slider-selection {
+          background: #f9f9f9;
+        }
+    
+        &.slider-horizontal .slider-handle {
+          background: linear-gradient(to bottom, #eee, darken(#eee, 20%));
+        }
+      }
+    }
+  }
+}
+
+.min-max-labels-container {
+    @include slider-labels-container;
+    .min-label, .max-label {
+        color: $light-gray;
+    }
+}
+
+.field-error {
+  @include field-error;
+}
+
+.disabled {
+  @include disabled-field;
+}

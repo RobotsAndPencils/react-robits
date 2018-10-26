@@ -1,0 +1,23 @@
+.icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon-container {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.loader-container {
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+
+    > div {
+      align-self: flex-end;
+      margin: 0 20px;
+    }
+  }
+}
