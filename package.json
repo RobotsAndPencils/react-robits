@@ -61,6 +61,7 @@
     "@storybook/addon-options": "^3.2.6",
     "@storybook/addons": "^3.2.6",
     "@storybook/react": "^3.2.8",
+    "@userfrosting/merge-package-dependencies": ">=1.2.0",
     "autoprefixer": "^7.2.5",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.2.0",
