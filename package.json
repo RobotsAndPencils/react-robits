@@ -7,7 +7,8 @@
   "scripts": {
     "start": "npm run storybook-dist && node main.js",
     "storybook": "start-storybook -p 9002 -c .storybook -s ./stories/static-files,./",
-    "storybook-dist": "build-storybook -c .storybook -o dist , .storybook -s ./stories/static-files"
+    "storybook-dist": "build-storybook -c .storybook -o dist , .storybook -s ./stories/static-files",
+    "eject-robits": "node ejection-script"
   },
   "repository": {
     "type": "git",
@@ -31,9 +32,9 @@
     "@userfrosting/merge-package-dependencies": ">=1.2.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "google-map-react": "^0.24.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.2.0",
-    "moment": "2.18.1",
+    "moment": "^2.24.0",
     "moment-timezone": "0.5.13",
     "prop-types": "^15.6.1",
     "react": "15.6.1",
@@ -48,8 +49,6 @@
     "react-places-autocomplete": "^6.1.3",
     "react-player": "^0.18.0",
     "react-redux": "^5.0.6",
-    "react-slick": "^0.15.0",
-    "react-table": "^6.5.3",
     "redux": "^3.7.2",
     "redux-form": "7.2.3"
   },
@@ -63,10 +62,10 @@
     "@storybook/addons": "^3.2.6",
     "@storybook/react": "^3.2.8",
     "autoprefixer": "^7.2.5",
-    "babel-eslint": "^8.2.2",
-    "babel-jest": "^22.2.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.2.0",
     "babel-loader": "7.0.0",
     "babel-plugin-css-modules-transform": "^1.2.7",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -78,22 +77,22 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "^6.26.0",
-    "css-loader": "^0.28.9",
+    "css-loader": "^3.4.2",
     "file-loader": "^1.1.11",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^2.1.1",
     "react-addons-test-utils": "^15.6.0",
+    "react-svg-loader": "^3.0.3",
     "react-test-renderer": "^15.6.1",
     "redux-devtools-extension": "^2.13.2",
-    "postcss-loader": "^2.1.1",
-    "react-svg-loader": "^2.1.0",
-    "standard": "^11.0.1",
-    "style-loader": "^0.20.2",
     "sass-loader": "^6.0.6",
     "sass-resources-loader": "^1.3.3",
     "sinon": "^2.3.7",
     "snazzy": "^7.0.0",
+    "standard": "^11.0.1",
+    "style-loader": "^0.20.2",
     "url-loader": "^0.6.2",
     "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.5.1"
+    "webpack-dev-server": "^2.11.5"
   }
 }
