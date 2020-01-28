@@ -1,20 +1,45 @@
 {
-  "name": "my-app-two",
-  "version": "0.1.0",
+  "name": "react-robits",
+  "version": "1.0.0",
   "private": true,
+  "description": "R&P common React ui components",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobotsAndPencils/react-robits.git"
+  },
+  "keywords": [
+    "robit",
+    "robits",
+    "react",
+    "ui",
+    "common",
+    "components"
+  ],
+  "author": "Robots & Pencils",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RobotsAndPencils/react-robits/issues"
+  },
+  "homepage": "https://github.com/RobotsAndPencils/react-robits#readme",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "classnames": "^2.2.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "sass-resources-loader": "^2.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 8002 -s public",
+    "build-storybook": "build-storybook -s public",
+    "eject-robits": "node ejection-script"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +55,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.8",
+    "@storybook/addon-backgrounds": "^5.3.9",
+    "@storybook/addon-contexts": "^5.3.9",
+    "@storybook/addon-docs": "^5.3.8",
+    "@storybook/addon-knobs": "^5.3.8",
+    "@storybook/addon-links": "^5.3.8",
+    "@storybook/addon-storysource": "^5.3.8",
+    "@storybook/addons": "^5.3.8",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.3.8",
+    "node-sass": "^4.13.1",
+    "path": "^0.12.7",
+    "react-app-rewired": "^2.1.5",
+    "webpack-merge": "^4.2.2"
   }
 }

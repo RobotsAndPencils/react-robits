@@ -1,0 +1,355 @@
+@import '~themes/default/main';
+
+@mixin spinner ($track: #777, $bar: #fff) {
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid $track;
+    border-top-color: $bar;
+
+    :global {
+        animation: spin .6s linear infinite;
+    }
+  }
+}
+
+// Button variants adjusted to match Shards' design system
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+@mixin button-variant( $background, $border: $background, $hover-background: darken($background, 5%), $hover-border: $hover-background, $hover-box-shadow: 0 4px 10px rgba($background, .25), $active-background: darken($background, 5%), $active-border: darken($border, 10%), $active-box-shadow: inset 0 3px 5px rgba($black, .125)) {
+  color: color-yiq($background);
+  border-color: $border;
+
+  background-color: $background;
+  box-shadow: $btn-box-shadow;
+
+  @include hover {
+    color: color-yiq($hover-background);
+    background-color: $background;
+    border-color: $hover-border;
+    @if $enable-shadows {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), $hover-box-shadow;
+    }
+  }
+
+  &:focus,
+  &.focus {
+    @if $enable-shadows {
+      box-shadow: 0 0 0 3px rgba($background, .15), 0 3px 15px rgba($background, 0.2), 0 2px 5px rgba($black, .1);
+    }
+    @else {
+      box-shadow: 0 0 0 3px rgba($background, .5);
+    }
+  }
+  
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    background-color: $background;
+    border-color: $border;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show>&.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    border-color: $active-border;
+    background-image: none;
+    box-shadow: $active-box-shadow !important;
+  }
+
+  &.loading {
+    color: darken($background, 15);
+    background: darken($background, 10);
+    border-color: darken($background, 10);
+
+    @include spinner(lighten($background, 20), #fff);
+  }
+}
+  
+@mixin button-outline-variant( $color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color) {
+  $button-text-color: $color; // Fix light or white outlined buttons
+
+  @if ($color==theme-color("light") or $color==$white) {
+    $button-text-color: color-yiq($color);
+  }
+
+  background-color: transparent;
+  background-image: none;
+  border-color: $color;
+  color: $button-text-color;
+
+  &:hover {
+    color: color-yiq($color);
+    background-color: $active-background;
+    border-color: $active-border;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba($color, .25);
+  }
+
+  &:focus,
+  &.focus {
+    @if $enable-shadows {
+      box-shadow: 0 0 0 3px rgba($color, .15), 0 3px 15px rgba($color, 0.2), 0 2px 5px rgba($black, .1) !important;
+    }
+    @else {
+      box-shadow: 0 0 0 3px rgba($color, .5) !important;
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show>&.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    border-color: $active-border;
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows {
+        box-shadow: inset 0 3px 5px rgba($black, .125) !important;
+      }
+      @else {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+  
+// Button sizes
+@mixin button-size( $padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+  border-radius: $border-radius;
+}
+  
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-padding-y-lg: .75rem !default;
+$btn-padding-x-lg: 1.75rem !default;
+
+$btn-line-height-sm: $line-height-sm !default;
+$btn-line-height-lg: $line-height-lg !default;
+
+$btn-padding-y-sm: .35rem !default;
+$btn-padding-x-sm: 1rem !default;
+
+$input-btn-padding-y:       .5rem !default;
+$input-btn-padding-x:       1rem !default;
+$input-btn-line-height:     1.125 !default;
+
+$input-btn-padding-y-sm:    .35rem !default;
+$input-btn-padding-x-sm:    .75rem !default;
+
+$input-btn-padding-y-lg:    .75rem !default;
+$input-btn-padding-x-lg:    1rem !default;
+
+$btn-pill-border-radius: 50px !default;
+
+$btn-padding-y:       .75rem !default;
+$btn-padding-x:       1.25rem !default;
+
+$btn-font-weight:                 $font-weight-normal !default;
+$btn-font-size:                   .875rem !default;
+$btn-font-size-sm:                0.75rem !default;
+$btn-font-size-lg:                1.125rem !default;
+$btn-font-family:                 $font-family-poppins-first !default;
+$btn-box-shadow:                  none !default;
+
+$input-btn-focus-width:           .2rem !default;
+
+$btn-active-box-shadow:           inset 0 3px 5px rgba($black,.125) !default;
+
+$btn-link-disabled-color:        $gray-600 !default;
+$btn-block-spacing-y:            .5rem !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:              $border-radius !default;
+$btn-border-radius-lg:           $border-radius-lg !default;
+$btn-border-radius-sm:           $border-radius-sm !default;
+
+$btn-border-width: 1px !default;
+
+$btn-transition:                 $transition-base !default;
+
+$input-btn-border-width:         $border-width !default;
+
+//
+// Base styles
+//
+
+.btn {
+  font-weight: $btn-font-weight;
+  font-family: $btn-font-family;
+  border: $input-btn-border-width solid transparent;
+
+  @include button-size(
+    $btn-padding-y,
+    $btn-padding-x,
+    $btn-font-size,
+    $input-btn-line-height,
+    $btn-border-radius
+  );
+
+  @include transition($btn-transition);
+
+  &:hover,
+  &.hover {
+    cursor: pointer;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+   box-shadow: none;
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    background-image: none;
+   box-shadow: none;
+  }
+
+  //
+  // Class modifiers
+  //
+
+  &.btn-squared {
+    border-radius: 0;
+  }
+
+  &.btn-pill {
+    border-radius: $btn-pill-border-radius;
+  }
+}
+
+//
+// Alternate buttons
+//
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value);
+  }
+}
+
+// White buttons
+.btn-white {
+  @include button-variant($white);
+}
+
+// Black buttons
+.btn-black {
+  @include button-variant($black);
+}
+
+// Outlined default buttons
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+  }
+}
+
+// White outline buttons
+.btn-outline-white {
+  @include button-outline-variant($white);
+  color: $white;
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: $black;
+  }
+}
+
+// Black outline buttons
+.btn-outline-black {
+  @include button-outline-variant($black);
+  color: $black;
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: $white;
+  }
+}
+
+//
+// Link buttons
+//
+
+// Make a button look and behave like a link
+.btn-link {
+  font-weight: $font-weight-normal;
+  color: $link-color;
+
+  @include hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: $link-hover-decoration;
+  }
+
+  &:disabled {
+    color: $btn-link-disabled-color;
+  }
+}
+
+//
+// Button Sizes
+//
+
+.btn-lg {
+  @include button-size(
+    $btn-padding-y-lg,
+    $btn-padding-x-lg,
+    $btn-font-size-lg,
+    $btn-line-height-lg,
+    $btn-border-radius-lg
+  );
+}
+
+.btn-sm {
+  @include button-size(
+    $btn-padding-y-sm,
+    $btn-padding-x-sm,
+    $btn-font-size-sm,
+    $btn-line-height-sm,
+    $btn-border-radius-sm
+  );
+}
+
+//
+// Block button
+//
+
+.btn-block {
+  display: block;
+  width: 100%;
+
+  // Vertically space out multiple block buttons
+  + .btn-block {
+    margin-top: $btn-block-spacing-y;
+  }
+}

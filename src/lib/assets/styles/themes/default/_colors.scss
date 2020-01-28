@@ -1,0 +1,88 @@
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+$blue:    #007bff !default;
+$indigo:  #674eec !default;
+$purple:  #8445f7 !default;
+$pink:    #ff4169 !default;
+$red:     #c4183c !default;
+$orange:  #fb7906 !default;
+$yellow:  #ffb400 !default;
+$green:   #17c671 !default;
+$teal:    #1adba2 !default;
+$cyan:    #00b8d8 !default;
+
+// Shards Specific
+$blueish-grey: #5A6169 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-800
+), $colors);
+
+$primary:       $blue !default;
+$secondary:     $blueish-grey !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-200 !default;
+$dark:          $gray-900 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+), $theme-colors);
+// stylelint-enable
+
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold: 150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark: $gray-900 !default;
+$yiq-text-light: $white !default;
+
+// -- Grays
+$fiord-blue  : #3D5170 !default;
+$shuttle-gray: #5A6169 !default;
+$reagent-gray: #818EA3 !default;
+$mischka     : #CACEDB !default;
+$athens-gray : #E9ECEF !default;
+
+// -- Colors
+$salmon    : #FF4169 !default;
+$royal-blue: #674EEC !default;
+$java      : #1ADBA2 !default;

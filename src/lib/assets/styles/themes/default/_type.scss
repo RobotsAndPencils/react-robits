@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600|Roboto+Mono|Roboto:300,400,500,700');
+
+$font-family-poppins-first: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-system-first: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-monospace: "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+$font-family-sans-serif: $font-family-system-first !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+$font-size-base: 1rem !default;
+$font-size-lg:   1.25rem !default;
+$font-size-sm:   .875rem !default;
+
+$font-weight-normal: 300 !default;
+$font-weight-bold: 500 !default;
+
+$font-weight-base: $font-weight-normal !default;
+$line-height-base: 1.5 !default;
+
+$h1-font-size: 3.052rem !default;
+$h2-font-size: 2.441rem !default;
+$h3-font-size: 1.953rem !default;
+$h4-font-size: 1.563rem !default;
+$h5-font-size: 1.25rem !default;
+$h6-font-size: 1rem !default;
+
+$headings-margin-bottom: .75rem !default;
+
+$headings-font-family:   $font-family-poppins-first !default;
+$headings-font-weight:   400 !default;
+$headings-color:         $gray-900 !default;
+$headings-letter-spacing: -.0625rem !default; // ~1px
+
+$h1-line-height: 3rem !default;
+$h2-line-height: 2.25rem !default;
+$h3-line-height: 2.25rem !default;
+$h4-line-height: 2rem !default;
+$h5-line-height: 1.5rem !default;
+$h6-line-height: 1.5rem !default;
+
+$display1-size: 7.451rem !default;
+$display2-size: 5.96rem !default;
+$display3-size: 4.768rem !default;
+$display4-size: 3.815rem !default;
+
+$display-line-height: 1 !default;
+$display-margin-bottom: 0.75rem !default;
+
+$paragraphs-margin-bottom: 1.75rem !default;
+
+$lead-line-height: 1.875rem !default;
+
+$small-font-size: 80% !default;
+
+$text-muted: $gray-600 !default;
+
+$blockquote-font-size:    1.5rem !default;
+$blockquote-footer-font-size: 1.125rem !default;
+$blockquote-margin-bottom: 0.75rem !default;
+
+//
+// Headings
+//
+
+// Ensure elements that are not headings are properly
+// displayed as block level elements.
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: $headings-margin-bottom;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  color: $headings-color;
+}
+
+h1, .h1 {
+  font-size: $h1-font-size;
+  letter-spacing: $headings-letter-spacing;
+  line-height: $h1-line-height;
+}
+
+h2, .h2 {
+  font-size: $h2-font-size;
+  letter-spacing: $headings-letter-spacing;
+  line-height: $h2-line-height;
+}
+
+h3, .h3 {
+  font-size: $h3-font-size;
+  line-height: $h3-line-height;
+}
+
+h4, .h4 {
+  font-size: $h4-font-size;
+  line-height: $h4-line-height;
+}
+
+h5, .h5 {
+  font-size: $h5-font-size;
+  line-height: $h5-line-height;
+}
+
+h6, .h6 {
+  font-size: $h6-font-size;
+  line-height: $h6-line-height;
+}
+
+.lead {
+  line-height: $lead-line-height;
+}
+
+//
+// Paragraphs
+//
+
+p {
+  margin-bottom: $paragraphs-margin-bottom;
+}
+
+//
+// Horizontal rules
+//
+
+hr {
+  margin-top: $hr-margin-y;
+  margin-bottom: $hr-margin-y;
+  border-top: $hr-border-width solid $hr-border-color;
+}
+
+//
+// Emphasis
+//
+
+small,
+.small {
+  font-size: $small-font-size;
+  font-weight: $font-weight-normal;
+}
+
+mark,
+.mark {
+  padding: $mark-padding;
+  background-color: $mark-bg;
+}
+
+//
+// Misc
+//
+
+// Blockquotes
+.blockquote {
+  margin-bottom: $blockquote-margin-bottom;
+  font-size: $blockquote-font-size;
+}
+
+.blockquote-footer {
+  font-size: $blockquote-footer-font-size;
+}
+
+// Anchor white text hover adjustment
+a.text-white {
+  @include hover-focus {
+    color: darken($white, 10%) !important;
+  }
+}
+
+// Black text variation
+.text-black {
+  color: $black;
+}
+
+// Anchor black text hover adjustment
+a.text-black {
+  @include hover-focus {
+    color: darken($black, 10%) !important;
+  }
+}
