@@ -13,14 +13,14 @@ export const Button = ({
   isLoading = false,
   disabled = false,
   className = '',
-  styleType,
+  styleType = 'primary',
   size,
   pill,
   outline,
   squared,
   active,
   innerRef,
-  tag: Tag,
+  tag: Tag = 'button',
   block,
   onClick,
   ...props
@@ -127,11 +127,6 @@ Button.propTypes = {
     PropTypes.func,
     PropTypes.string
   ])
-}
-
-Button.defaultProps = {
-  styleType: 'primary',
-  tag: 'button'
 }
 
 export default ThemeWrapper(themes)(Button)

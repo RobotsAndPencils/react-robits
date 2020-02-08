@@ -1,0 +1,206 @@
+$form-control-min-width: 250px !default;
+$form-control-padding-y: .5rem !default;
+$form-control-padding-x: .75rem !default;
+
+$form-control-font-size: .95rem !default;
+$form-control-line-height: 1.5 !default;
+$form-control-color: $gray-700 !default;
+
+$form-control-padding-y-sm: .35rem !default;
+$form-control-padding-x-sm: .50rem !default;
+$form-control-line-height-sm: $form-control-line-height !default;
+
+$form-control-padding-y-lg: .75rem !default;
+$form-control-padding-x-lg: 1rem !default;
+$form-control-line-height-lg: $form-control-line-height !default;
+
+$form-control-bg: $white !default;
+$form-control-disabled-bg: $gray-100 !default;
+
+$form-control-border-color: $border-color !default;
+$form-control-border-width: $border-width !default;
+$form-control-border-radius: $border-radius !default;
+$form-control-border-radius-lg: $border-radius-lg !default;
+$form-control-border-radius-sm: $border-radius-sm !default;
+
+$form-control-box-shadow: none !default;
+
+$form-control-focus-bg: $form-control-bg !default;
+$form-control-focus-border-color: $primary !default;
+$form-control-focus-box-shadow: 0 .313rem .719rem rgba($primary, .1), 0 .156rem .125rem rgba($black, .06) !default;
+$form-control-focus-color: $form-control-color !default;
+
+$form-control-hover-border-color: darken($form-control-border-color, 15) !default;
+
+$form-control-placeholder-color: $gray-600 !default;
+
+$form-control-height-border: $form-control-border-width * 2 !default;
+
+$form-control-height-inner: ($form-control-font-size * $form-control-line-height) + ($form-control-padding-y * 2) !default;
+$form-control-height: calc(#{$form-control-height-inner} + #{$form-control-height-border}) !default;
+
+$form-control-height-inner-sm: ($font-size-sm * $form-control-line-height-sm) + ($form-control-padding-y-sm * 2) !default;
+$form-control-height-sm: calc(#{$form-control-height-inner-sm} + #{$form-control-height-border}) !default;
+
+$form-control-height-inner-lg: ($font-size-lg * $form-control-line-height-lg) + ($form-control-padding-y-lg * 2) !default;
+$form-control-height-lg: calc(#{$form-control-height-inner-lg} + #{$form-control-height-border}) !default;
+
+$form-control-transition: box-shadow $transition-duration $ease-in-out-circ, border $transition-duration $ease-in-out-circ !default;
+
+// Form control focus state
+@mixin form-control-focus() {
+  &:focus {
+    color: $form-control-focus-color;
+    background-color: $form-control-focus-bg;
+    border-color: $form-control-focus-border-color;
+    outline: 0;
+    
+    @if $enable-shadows {
+      box-shadow: $form-control-focus-box-shadow;
+    }
+
+    // Set the border color to the focused state border color
+    // when the input is also hovered.
+    &:hover {
+      border-color: $form-control-focus-border-color;
+    }
+  }
+}
+
+@mixin form-validation-state($state, $color) {
+  .form-control,
+  .custom-select {
+    .was-validated &:#{$state},
+    &.#{$state} {
+      border-color: $color;
+      
+      box-shadow: 0 5px 11.5px rgba($color, .1);
+
+      &:focus {
+        box-shadow: 0 5px 11.5px rgba($color, .1), 0 1px 1px .1rem rgba($color, .2);
+      }
+
+      &:hover {
+        border-color: $color;
+      }
+    }
+  }
+}
+
+.form-control {
+  height: $form-control-height;
+  width: 100%;
+  min-width: $form-control-min-width;
+  box-sizing: border-box;
+  padding: $form-control-padding-y $form-control-padding-x;
+  font-size: $form-control-font-size; // $font-size-base
+  line-height: $form-control-line-height;
+  color: $form-control-color;
+  background-color: $form-control-bg;
+  border: $form-control-border-width solid $form-control-border-color;
+  font-weight: $font-weight-normal;
+  will-change: border-color, box-shadow;
+  border-radius: $form-control-border-radius;
+  box-shadow: $form-control-box-shadow;
+  @include transition($form-control-transition);
+
+  &:hover {
+    border-color: $form-control-hover-border-color;
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus();
+
+  // Placeholder
+  &::placeholder {
+    color: $form-control-placeholder-color;
+  }
+
+  // Disabled and read-only inputs
+  &:disabled,
+  &[readonly] {
+    background-color: $form-control-disabled-bg;
+
+    &:hover {
+      border-color: $form-control-border-color;
+      cursor: not-allowed;
+    }
+  }
+
+  // Fix readonly, but not disabled fields box shadow and border color.
+  &[readonly]:not(:disabled) {
+    &:focus {
+      box-shadow: none;
+      border-color: $form-control-border-color;
+    }
+  }
+}
+
+.form-control-hint {
+  font-size: 0.75rem;
+  margin: .5rem;
+  color: $gray-500;
+}
+
+.form-control-container {
+  label + [class*='form-control-hint'] {
+    margin: 0 0 .5rem 0;
+  }
+}
+
+.form-control-error {
+  font-size: 0.75rem;
+  margin: .5rem;
+  color: $danger;
+  font-weight: $medium;
+}
+
+.form-control-descenders {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-control-required {
+  font-size: 0.75rem;
+  margin: .5rem;
+  color: $gray-500;
+  font-weight: $semibold;
+  text-transform: uppercase;
+}
+
+@mixin small-form-control {
+  height: $form-control-height-sm;
+  padding: $form-control-padding-y-sm $form-control-padding-x-sm;
+  font-size: $font-size-sm;
+  line-height: $form-control-line-height-sm;
+  @include border-radius($form-control-border-radius-sm);
+}
+.form-control-sm {
+  @include small-form-control;
+}
+
+.form-control-label-sm {
+  font-size: $font-size-sm;
+}
+
+@mixin large-form-control {
+  height: $form-control-height-lg;
+  padding: $form-control-padding-y-lg $form-control-padding-x-lg;
+  font-size: $font-size-lg;
+  line-height: $form-control-line-height-lg;
+  @include border-radius($form-control-border-radius-lg);
+}
+.form-control-lg {
+  @include large-form-control;
+}
+
+
+// Form validation
+//
+// Provide feedback to users when form field values are valid or invalid. Works
+// primarily for client-side validation via scoped `:invalid` and `:valid`
+// pseudo-classes but also includes `.invalid` and `.alid` classes for
+// server side validation.
+
+@include form-validation-state("valid", $success);
+@include form-validation-state("invalid", $danger);
