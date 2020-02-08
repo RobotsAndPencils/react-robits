@@ -1,0 +1,16 @@
+@mixin disabled-form-control {
+  cursor: not-allowed !important;
+  color: #C0C0C0;
+
+  * {
+    cursor: not-allowed !important;
+  }
+
+  label {
+    color: #C0C0C0;
+  }
+
+  input {
+    opacity: 0.5;
+  }
+}

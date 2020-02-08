@@ -23,7 +23,7 @@ module.exports = {
                 loader: 'sass-resources-loader',
                 options: {
                   // Provide path to the file with resources
-                  resources: './src/lib/assets/styles/*.scss'
+                  resources: './src/lib/styles/*.scss'
                 }
               }
             ]
@@ -38,7 +38,7 @@ module.exports = {
       'module.rules.use': 'append'
     })(config, newLoader)
 
-    combinedConfig.resolve.alias = Object.assign({}, combinedConfig.resolve.alias, { themes: path.resolve(__dirname, '../src/lib/assets/styles/themes')})
+    combinedConfig.resolve.alias = Object.assign({}, combinedConfig.resolve.alias, { themes: path.resolve(__dirname, '../src/lib/styles/themes')})
 
     // console.dir(combinedConfig.resolve, { depth: 10 })
 

@@ -1,0 +1,39 @@
+@import '~themes/default/main';
+
+$form-select-indicator-color: $gray-800 !default;
+$form-select-indicator: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$form-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"), "#", "%23") !default;
+$form-select-indicator-padding: 1rem !default; // Extra padding to account for the presence of the background-image based indicator
+$form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
+
+.form-select {
+  appearance: none;
+  height: $form-control-height;
+  padding: $form-control-padding-y ($form-control-padding-x + $form-select-indicator-padding) $form-control-padding-y $form-control-padding-x;
+  background: $form-control-bg $form-select-indicator no-repeat right $form-control-padding-x center;
+  background-size: $form-select-bg-size;
+
+  &:focus {
+    &::-ms-value {
+      // For visual consistency with other platforms/browsers,
+      // suppress the default white text on blue background highlight given to
+      // the selected option text when the (still closed) <select> receives focus
+      // in IE and (under certain conditions) Edge.
+      // See https://github.com/twbs/bootstrap/issues/19398.
+      // color: $input-color;
+      // background-color: $input-bg;
+    }
+  }
+
+  // &[multiple],
+  // &[size]:not([size="1"]) {
+  //   padding-right: $form-select-padding-x;
+  // }
+}
+
+.form-select-sm {
+  @include small-form-control;
+}
+
+.form-select-lg {
+  @include large-form-control;
+}
