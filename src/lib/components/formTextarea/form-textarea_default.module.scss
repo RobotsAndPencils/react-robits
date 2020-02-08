@@ -1,0 +1,11 @@
+@import '~themes/default/main';
+
+.form-control-container {
+  textarea {
+    height: auto;
+
+    &.noresize {
+      resize: none;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '~themes/unstyled/main';
+
+.form-control-container {
+  textarea {
+    height: auto;
+
+    &.noresize {
+      resize: none;
+    }
+  }
+}

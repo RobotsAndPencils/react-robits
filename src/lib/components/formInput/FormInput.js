@@ -39,8 +39,6 @@ export const FormInput = ({
   )
 
   return (
-    // <input {...props} ref={innerRef} className={classes} />
-
     <div className={containerClasses}>
       {
         label
@@ -73,14 +71,6 @@ FormInput.propTypes = {
    * The class name.
    */
   className: PropTypes.string,
-  /**
-   * The children nodes.
-   */
-  children: PropTypes.node,
-  /**
-   * Whether it is inline, or not.
-   */
-  inline: PropTypes.bool,
   /**
    * The input type.
    */
