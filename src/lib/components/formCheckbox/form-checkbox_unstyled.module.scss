@@ -1,0 +1,28 @@
+@import '~themes/unstyled/main';
+
+.disabled {
+  @include disabled-form-control;
+}
+
+.form-control-container {
+  input {
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:read-only {
+      cursor: not-allowed;
+    }
+
+    &.invalid {
+      border-color: red;
+      border-width: 1px;
+    }
+
+    &::placeholder {
+      color: #C0C0C0;
+    }
+  }
+}

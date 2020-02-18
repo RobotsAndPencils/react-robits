@@ -68,8 +68,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
 }
 
 @mixin form-validation-state($state, $color) {
-  .form-control,
-  .custom-select {
+  .form-control {
     .was-validated &:#{$state},
     &.#{$state} {
       border-color: $color;
@@ -84,6 +83,30 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
         border-color: $color;
       }
     }
+  }
+
+  // Custom toggles validation
+  .form-checkbox {
+    input {
+      &:not(:checked) {
+        .was-validated &:#{$state},
+        &.is-#{$state} {
+          ~ label::before {
+            border-color: $color;
+          }
+        }
+      }
+
+      &:checked {
+        .was-validated &:#{$state},
+        &.is-#{$state} {
+          ~ label::before {
+            background-color: $color;
+            border-color: $color;
+          }
+        }
+      }
+    } 
   }
 }
 
@@ -137,9 +160,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
 }
 
 .form-control-hint {
-  font-size: 0.75rem;
-  margin: .5rem;
-  color: $gray-500;
+  @include form-control-hint;
 }
 
 .form-control-container {
@@ -175,6 +196,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
   line-height: $form-control-line-height-sm;
   @include border-radius($form-control-border-radius-sm);
 }
+
 .form-control-sm {
   @include small-form-control;
 }
@@ -190,6 +212,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
   line-height: $form-control-line-height-lg;
   @include border-radius($form-control-border-radius-lg);
 }
+
 .form-control-lg {
   @include large-form-control;
 }

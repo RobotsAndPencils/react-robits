@@ -1,5 +1,5 @@
 import React from 'react'
-import { boolean, select, text } from '@storybook/addon-knobs'
+import { boolean, select, text, number } from '@storybook/addon-knobs'
 import FormTextarea, { FormTextarea as FormTextareaComponent } from '../../lib/components/formTextarea/FormTextarea'
 
 const reconcileValidity = (componentKnobs) => {
@@ -52,14 +52,15 @@ export const Sizes = ({ theme }) => {
     hintContent: text('Hint Text', ''),
     errorText: text('Error Text', 'There is an error'),
     placeholder: text('Placeholder', ''),
-    required: boolean('Required', false)
+    required: boolean('Required', false),
+    rows: number('Rows', 7),
+    cols: number('Columns', 10)
   }
   componentKnobs = reconcileValidity(componentKnobs)
 
   return (
     <>
-      <FormTextarea {...componentKnobs} theme={theme} placeholder="Normal" />
-      <FormTextarea {...componentKnobs} theme={theme} placeholder="With Rows" rows="10" />
+      <FormTextarea {...componentKnobs} theme={theme} placeholder="With Rows and Columns" />
     </>
   )
 }

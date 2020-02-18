@@ -35,7 +35,8 @@ export const FormTextarea = ({
   const containerClasses = classNames(
     className,
     disabled && styling['disabled'],
-    styling['form-control-container']
+    styling['form-control-container'],
+    props.cols && styling['inline']
   )
 
   return (
