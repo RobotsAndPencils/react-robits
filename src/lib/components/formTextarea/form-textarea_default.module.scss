@@ -1,0 +1,19 @@
+@import '~themes/default/main';
+
+.form-control-container {
+  &.inline {
+    display: inline-block;
+  }
+
+  textarea {
+    height: auto;
+    
+    &[cols] {
+      width: auto;
+    }
+
+    &.noresize {
+      resize: none;
+    }
+  }
+}

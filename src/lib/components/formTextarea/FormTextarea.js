@@ -7,8 +7,7 @@ import classNames from 'classnames'
 /**
  * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
  */
-export const FormSelect = ({
-  children,
+export const FormTextarea = ({
   required,
   styling,
   className,
@@ -21,22 +20,23 @@ export const FormSelect = ({
   readonly = false,
   errorText,
   hintContent,
+  resizeable = true,
   ...props
 }) => {
-  const makeDisabled = disabled || readonly // readonly is not supported for select, so use disabled
-  const selectClasses = classNames(
+  const textareaClasses = classNames(
     styling['form-control'],
-    styling['form-select'],
-    size && styling[`form-select-${size}`],
+    size && styling[`form-control-${size}`],
     valid && styling['valid'],
     invalid && styling['invalid'],
-    disabled && styling['disabled']
+    disabled && styling['disabled'],
+    !resizeable && styling['noresize']
   )
 
   const containerClasses = classNames(
     className,
     disabled && styling['disabled'],
-    styling['form-control-container']
+    styling['form-control-container'],
+    props.cols && styling['inline']
   )
 
   return (
@@ -49,14 +49,12 @@ export const FormSelect = ({
           : []
       }
       {hintContent && label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
-      <select
+      <textarea
         {...props}
         ref={innerRef}
-        disabled={makeDisabled}
+        disabled={disabled}
         readOnly={readonly}
-        className={selectClasses}>
-        {children}
-      </select>
+        className={textareaClasses} />
       <div className={styling['form-control-descenders']}>
         <div>
           {invalid && errorText ? <div className={styling['form-control-error']}>{errorText}</div> : []}
@@ -69,15 +67,11 @@ export const FormSelect = ({
   )
 }
 
-FormSelect.propTypes = {
+FormTextarea.propTypes = {
   /**
    * The class name.
    */
   className: PropTypes.string,
-  /**
-   * The options of the control, as children nodes. 
-   */
-  children: PropTypes.node.isRequired,
   /**
    * The input's size.
    */
@@ -115,4 +109,4 @@ FormSelect.propTypes = {
   required: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormSelect)
+export default ThemeWrapper(themes)(FormTextarea)

@@ -14,3 +14,9 @@
     opacity: 0.5;
   }
 }
+
+@mixin form-control-hint {
+  font-size: 0.75rem;
+  margin: .5rem;
+  color: $gray-500;
+}

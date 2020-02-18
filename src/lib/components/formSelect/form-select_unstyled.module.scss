@@ -5,30 +5,20 @@
 }
 
 .form-control-container {
-  input {
+  select {
     box-sizing: border-box;
 
     &:focus {
       outline: none;
     }
 
-    &:read-only {
-      &:not(select) { // :read-only on select elements. needs to be ::read-only below
-        cursor: not-allowed;
-      }
-    }
-
-    &::read-only { // for select element
+    &:read-only, &::read-only {
       cursor: not-allowed;
     }
 
     &.invalid {
       border-color: red;
       border-width: 1px;
-    }
-
-    &::placeholder {
-      color: #C0C0C0;
     }
   }
 }
