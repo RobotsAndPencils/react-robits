@@ -1,38 +1,24 @@
 @import '~themes/default/main';
 
-$form-checkbox-indicator-checked-color: $white !default;
-$form-checkbox-indicator-checked-bg: $primary !default;
-$form-checkbox-indicator-disabled-bg: $gray-200 !default;
 $form-checkbox-indicator-border-radius: 2px !default;
 $form-checkbox-indicator-transition: transform $transition-duration $ease-in-out-circ, border $transition-duration $ease-in-out-circ !default;
-$form-checkbox-indicator-focus-box-shadow:  0 .313rem .719rem rgba(theme-color("primary"),.1), 0 .156rem .125rem rgba($black, .06) !default;
-$form-checkbox-indicator-active-color: $white !default;
-$form-checkbox-indicator-active-bg: lighten($primary, 35%) !default;
-$form-checkbox-indicator-active-box-shadow: none !default;
-$form-checkbox-indicator-size: 1.125rem !default;
-$form-checkbox-indicator-bg: $white !default;
-$form-checkbox-indicator-bg-size: 50% 50% !default;
-$form-checkbox-indicator-border: $form-control-border-width solid $form-control-border-color !default;
 
 $custom-checkbox-indicator-indeterminate-bg: $component-active-bg !default;
-$custom-checkbox-indicator-indeterminate-color: $form-checkbox-indicator-checked-color !default;
+$custom-checkbox-indicator-indeterminate-color: $custom-control-indicator-checked-color !default;
 $custom-checkbox-indicator-icon-indeterminate: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3E%3C/svg%3E"), "#", "%23") !default;
 $custom-checkbox-indicator-indeterminate-box-shadow: none !default;
 
-$form-checkbox-gutter: 1.688rem !default;
-$form-checkbox-spacer-x: 1rem !default;
 
 // Custom toggle
 $custom-toggle-width: 3.125rem !default;
 $custom-toggle-height: 1.75rem !default;
 $custom-toggle-border-width: 0.0625rem !default;
 $custom-toggle-border: $custom-toggle-border-width solid $form-control-border-color !default;
-$custom-toggle-background-color: $white !default;
 $custom-toggle-border-radius: 100px !default;
 
-$custom-toggle-focus-box-shadow: 0 .313rem .719rem rgba(theme-color("success"),.1), 0 .156rem .125rem rgba($black, .06) !default;
+$custom-toggle-focus-box-shadow: 0 .313rem .719rem rgba($success,.1), 0 .156rem .125rem rgba($black, .06) !default;
 
-$custom-toggle-checked-background: theme-color("success") !default;
+$custom-toggle-checked-background: $success !default;
 $custom-toggle-checked-border-color: $custom-toggle-checked-background !default;
 $custom-toggle-checked-knob-background: $white !default;
 
@@ -52,7 +38,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
   display: inline-flex;
   align-items: center;
   min-height: ($font-size-base * $line-height-base);
-  padding-left: $form-checkbox-gutter;
+  padding-left: $custom-control-gutter;
 
   &:hover:not(.disabled) {
     cursor: pointer;
@@ -70,9 +56,9 @@ $custom-toggle-knob-height-sm: .75rem !default;
 
     &:checked ~ label {
       &::before {
-        color: $form-checkbox-indicator-checked-color;
+        color: $custom-control-indicator-checked-color;
         border-color: transparent;
-        background-color: $form-checkbox-indicator-checked-bg;
+        background-color: $custom-control-indicator-checked-bg;
         background-image: none;
       }
   
@@ -83,29 +69,31 @@ $custom-toggle-knob-height-sm: .75rem !default;
     }
 
     &:focus ~ label::before {
-      box-shadow: $form-checkbox-indicator-focus-box-shadow;
+      box-shadow: $form-control-focus-box-shadow;
     }
 
     &:active ~ label::before {
-      color: $form-checkbox-indicator-active-color;
-      background-color: $form-checkbox-indicator-active-bg;
-      box-shadow: $form-checkbox-indicator-active-box-shadow;
+      color: $custom-control-indicator-active-color;
+      background-color: $custom-control-indicator-active-bg;
+      box-shadow: $custom-control-indicator-active-box-shadow;
     }
 
     &:disabled {
       ~ label {
-        &::before {
-          background-color: $form-checkbox-indicator-disabled-bg;
-        }
+        cursor: not-allowed;
 
-        &:hover {
-          cursor: not-allowed;
+        &::before {
+          background-color: $form-control-disabled-bg;
         }
+      }
+
+      ~ .description {
+        cursor: not-allowed;
       }
 
       &:checked ~ label {
         &::before {
-          background: $form-checkbox-indicator-disabled-bg;
+          background: $form-control-disabled-bg;
           border-color: $border-color;
         }
     
@@ -149,15 +137,15 @@ $custom-toggle-knob-height-sm: .75rem !default;
       box-sizing: border-box;
       position: absolute;
       display: block;
-      pointer-events: all; // none;
+      pointer-events: all;
       content: "";
       user-select: none;
-      top: (($line-height-base - $form-checkbox-indicator-size) / 2);
+      top: (($line-height-base - $custom-control-indicator-size) / 2);
       left: 0;
-      width: $form-checkbox-indicator-size;
-      height: $form-checkbox-indicator-size;
-      background-color: $form-checkbox-indicator-bg;
-      border: $form-checkbox-indicator-border;
+      width: $custom-control-indicator-size;
+      height: $custom-control-indicator-size;
+      background-color: $form-control-bg;
+      border: $custom-control-indicator-border;
       transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
       border-radius: $form-checkbox-indicator-border-radius;
     }
@@ -170,7 +158,6 @@ $custom-toggle-knob-height-sm: .75rem !default;
       content: "";
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: $form-checkbox-indicator-bg-size;
       
       content: '';
       top: 5px;
@@ -189,7 +176,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
 
 .inline {
   display: inline-block;
-  margin-right: $form-checkbox-spacer-x;
+  margin-right: $custom-control-spacer-x;
 }
 
 .as-toggle {
@@ -205,7 +192,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
       display: block;
       width: $custom-toggle-width;
       height: $custom-toggle-height;
-      background: $custom-toggle-background-color;
+      background: $form-control-bg;
       border-radius: $custom-toggle-border-radius;
       border: $custom-toggle-border;
     }
@@ -247,7 +234,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
     // Disabled and checked state
     &:checked:disabled ~ label {
       &::before {
-        background: $form-checkbox-indicator-disabled-bg;
+        background: $form-control-disabled-bg;
         border-color: $border-color;
       }
 
@@ -267,14 +254,14 @@ $custom-toggle-knob-height-sm: .75rem !default;
     // Active, but not checked.
     &:active:not(:checked) ~ label {
       &::before {
-        background-color: $custom-toggle-background-color;
+        background-color: $form-control-bg;
       }
     }
 
     // Disabled and active.
     &:disabled:active ~ label {
       &::before {
-        background-color: $form-checkbox-indicator-disabled-bg;
+        background-color: $form-control-disabled-bg;
       }
     }
 
@@ -305,7 +292,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
         display: block;
         width: $custom-toggle-width-sm;
         height: $custom-toggle-height-sm;
-        background: $custom-toggle-background-color;
+        background: $form-control-bg;
         border-radius: $custom-toggle-border-radius;
         border: $custom-toggle-border;
       }
@@ -346,5 +333,5 @@ $custom-toggle-knob-height-sm: .75rem !default;
 }
 
 .form-control-required, .form-control-error {
-  margin: 0 .5rem .5rem $form-checkbox-gutter;
+  margin: 0 .5rem .5rem $custom-control-gutter;
 }

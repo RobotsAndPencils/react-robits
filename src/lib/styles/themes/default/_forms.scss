@@ -47,6 +47,18 @@ $form-control-height-lg: calc(#{$form-control-height-inner-lg} + #{$form-control
 
 $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, border $transition-duration $ease-in-out-circ !default;
 
+// checkboxes and radios
+$custom-control-gutter: 1.688rem !default;
+$custom-control-spacer-x: 1rem !default;
+$custom-control-indicator-checked-color: $white !default;
+$custom-control-indicator-checked-bg: $primary !default;
+$custom-control-indicator-active-color: $white !default;
+$custom-control-indicator-size: 1.125rem !default;
+$custom-control-indicator-border: $form-control-border-width solid $form-control-border-color !default;
+$custom-control-indicator-active-box-shadow: none !default;
+$custom-control-indicator-active-bg: lighten($primary, 35%) !default;
+
+
 // Form control focus state
 @mixin form-control-focus() {
   &:focus {
@@ -85,8 +97,8 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
     }
   }
 
-  // Custom toggles validation
-  .form-checkbox {
+  // Custom control validation
+  .form-checkbox, .form-radio {
     input {
       &:not(:checked) {
         .was-validated &:#{$state},
@@ -194,7 +206,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
   padding: $form-control-padding-y-sm $form-control-padding-x-sm;
   font-size: $font-size-sm;
   line-height: $form-control-line-height-sm;
-  @include border-radius($form-control-border-radius-sm);
+  border-radius: $form-control-border-radius-sm;
 }
 
 .form-control-sm {
@@ -210,7 +222,7 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ, bor
   padding: $form-control-padding-y-lg $form-control-padding-x-lg;
   font-size: $font-size-lg;
   line-height: $form-control-line-height-lg;
-  @include border-radius($form-control-border-radius-lg);
+  border-radius: $form-control-border-radius-lg;
 }
 
 .form-control-lg {

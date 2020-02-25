@@ -1,0 +1,161 @@
+@import '~themes/default/main';
+
+$form-radio-indicator-checked-disabled-bg: rgba($primary, .5) !default;
+$form-radio-indicator-disabled-bg: $gray-200 !default;
+$form-radio-indicator-checked-box-shadow: none !default;
+$form-radio-indicator-focus-box-shadow: $form-control-focus-box-shadow !default;
+$form-radio-indicator-border-radius: 50% !default;
+$form-radio-indicator-icon-checked: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+.form-control-container {
+  display: inline-flex;
+  flex-direction: column;
+
+  &.inline {
+    .form-radio-group {
+      flex-direction: row;
+      align-items: flex-start;
+      
+      label[class*='form-radio'] {
+        display: inline-flex;
+        margin-right: $custom-control-spacer-x;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    } 
+  }
+}
+
+.form-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.form-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: (1rem * $line-height-base);
+  padding-left: $custom-control-gutter;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  label {
+    margin-bottom: 0;
+    position: static;
+    
+    &:hover {
+      cursor: pointer;
+    }
+
+    // Background-color and (when enabled) gradient
+    &::before {
+      position: absolute;
+      display: block;
+      pointer-events: all; //none
+      content: "";
+      user-select: none;
+      top: (($line-height-base - $custom-control-indicator-size) / 2);
+      left: 0;
+      width: $custom-control-indicator-size;
+      height: $custom-control-indicator-size;
+      background-color: $form-control-bg;
+      border: $custom-control-indicator-border;
+      transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+      box-shadow: $form-control-box-shadow;
+      border-radius: $form-radio-indicator-border-radius;
+      box-sizing: border-box;
+    }
+
+    // Foreground (icon)
+    &::after {
+      content: '';
+      border-radius: 50%;
+      transform: scale(0);
+      background-image: none !important;
+      position: absolute;
+      background: #fff;
+      width: 8px;
+      height: 8px;
+      top: 8px;
+      left: 5px;
+      transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+      transition-delay: .1s;
+      opacity: 0;
+      transform: scale(0);
+      display: block;
+      background-repeat: no-repeat;
+      background-position: center center;
+      box-sizing: border-box;
+    }
+  }
+
+  input {
+    position: absolute;
+    z-index: -1; // Put the input behind the label so it doesn't overlay text
+    opacity: 0;
+
+    &:checked ~ label {
+      &::after {
+        background-image: $form-radio-indicator-icon-checked;
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &::before {
+        color: $custom-control-indicator-checked-color;
+        border-color: transparent;
+        background-color: $custom-control-indicator-checked-bg;
+        box-shadow: $form-radio-indicator-checked-box-shadow;
+      }
+    }
+
+    &:focus ~ label::before {
+      // the mixin is not used here to make sure there is feedback
+      box-shadow: $form-radio-indicator-focus-box-shadow;
+    }
+
+    &:active ~ label::before {
+      color: $custom-control-indicator-active-color;
+      background-color: $custom-control-indicator-active-bg;
+      box-shadow: $custom-control-indicator-active-box-shadow;
+    }
+
+    &:disabled {
+      ~ label {
+        cursor: not-allowed;
+
+
+        &::before {
+          background-color: $form-radio-indicator-disabled-bg;
+        }
+      }
+
+      ~ .description {
+        cursor: not-allowed;
+      }
+
+      &:checked ~ label {
+        &::before {
+          // background-color: $form-radio-indicator-checked-disabled-bg; // background-color: lighten($blueish-grey, 30%);
+          background: $form-radio-indicator-disabled-bg;
+          border-color: $border-color;
+        }
+    
+        &::after {
+          background: $border-color;
+        }
+      }
+    }
+  }
+}
+
+.form-control-descenders {
+  .form-control-hint, .form-control-required, .form-control-error {
+    margin: 0 0 .5rem 0;
+  }
+}

@@ -5,7 +5,7 @@ import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
- * The `FormCheckbox` component is a wrapper over Bootstrap's [custom checkbox component](https://getbootstrap.com/docs/4.1/components/forms/#checkboxes-and-radios-1).
+ * The `FormCheckbox` component allows for a on/off selection in either a checkbox or toggle display
  */
 export const FormCheckbox = ({
   styling,
@@ -20,10 +20,10 @@ export const FormCheckbox = ({
   id,
   errorText,
   required,
-  onChange = () => {},
   ...props
 }) => {
   const containerClasses = classNames(
+    styling['form-control-container'],
     inline && styling['inline'],
     props.disabled && styling['disabled']
   )
@@ -52,8 +52,8 @@ export const FormCheckbox = ({
           required='required'
           className={inputClasses}
         />
-        <label htmlFor={id} aria-hidden='true' onClick={onChange} />
-        <span className={styling['form-checkbox-description']}>{children}</span>
+        <label htmlFor={id} aria-hidden='true'/>
+        <span className={styling['description']}>{children}</span>
       </label>
       <div className={styling['form-control-descenders']}>
         {invalid && errorText ? <div className={styling['form-control-error']}>{errorText}</div> : []}
@@ -93,17 +93,25 @@ FormCheckbox.propTypes = {
    */
   small: PropTypes.bool,
   /**
-   * The onChange handler.
-   */
-  onChange: PropTypes.func,
-  /**
    * The inner ref.
    */
   innerRef: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.func,
     PropTypes.string
-  ])
+  ]),
+  /**
+   * The input ID
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * Text to display if the field is invalid.
+   */
+  errorText : PropTypes.string,
+  /**
+   * Whether the field is required or not
+   */
+  required: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormCheckbox)

@@ -42,9 +42,11 @@ export const FormInput = ({
     <div className={containerClasses}>
       {
         label
-          ? <label htmlFor={props.id} className={`${size ? styling[`form-control-label-${size}`] : ''}`}>
-            {label}{required && '*'}
-          </label>
+          ? (
+            <label htmlFor={props.id} className={`${size ? styling[`form-control-label-${size}`] : ''}`}>
+              {label}{required && '*'}
+            </label>
+          )
           : []
       }
       {hintContent && label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
@@ -61,7 +63,6 @@ export const FormInput = ({
         </div>
         {required && !label && !invalid ? <div className={styling['form-control-required']}>Required</div> : []}
       </div>
-      
     </div>
   )
 }
@@ -98,7 +99,7 @@ FormInput.propTypes = {
   /**
    * Text to display if the field is invalid.
    */
-  errorText : PropTypes.string,
+  errorText: PropTypes.string,
   /**
    * Text to display below the input as clues to the user
    */
