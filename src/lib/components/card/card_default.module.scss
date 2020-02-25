@@ -1,0 +1,131 @@
+@import '~themes/default/main';
+
+$card-spacer-y:                 2.1875rem !default;
+$card-spacer-x:                 1.875rem !default;
+
+$card-header-spacer-x:          $card-spacer-x !default;
+$card-header-spacer-y:          ($card-spacer-y / 2) !default;
+
+$card-footer-spacer-x:          $card-spacer-x !default;
+$card-footer-spacer-y:          ($card-spacer-y / 2) !default;
+
+$card-border-radius:            0.625rem !default;
+$card-inner-border-radius:      $card-border-radius !default;
+
+$card-cap-bg:                   rgba($blueish-grey, .06) !default;
+$card-bg:                       $white !default;
+
+$card-title-font-weight:        500 !default;
+$card-title-margin-bottom:      .75rem !default;
+
+$card-link-font-family:         $font-family-poppins-first !default;
+
+$card-paragraph-margin-bottom:  1.5625rem !default;
+
+$card-box-shadow:               0 .46875rem 2.1875rem rgba($blueish-grey, .1),
+                                0 .9375rem 1.40625rem rgba($blueish-grey, .1),
+                                0 .25rem .53125rem rgba($blueish-grey, .12),
+                                0 .125rem .1875rem rgba($blueish-grey, .1);
+
+$card-img-overlay-padding:      1.875rem 2.1875rem !default;
+$card-deck-margin:              .9375rem !default;
+
+$card-list-group-item-padding:  .8125rem 1.875rem !default;
+$card-group-card-border:        1px solid lighten($blueish-grey, 53%) !default;
+
+$card-columns-count:            3 !default;
+$card-columns-gap:              1.25rem !default;
+$card-columns-margin:           $card-spacer-y !default;
+
+$card-small-spacer-y:           1rem !default;
+$card-small-spacer-x:           1rem !default;
+$card-small-box-shadow:         0 2px 0 rgba($blueish-grey, 0.11),
+                                0 4px 8px rgba($blueish-grey, 0.12),
+                                0 10px 10px rgba($blueish-grey, 0.06),
+                                0 7px 70px rgba($blueish-grey, 0.1) !default;
+
+
+.card {
+  background-color: $card-bg;
+  border: none;
+
+  border-radius: $card-border-radius;
+  box-shadow: $card-box-shadow;
+
+  > .list-group:first-child {
+    .list-group-item:first-child {
+      @include border-top-radius($card-border-radius);
+    }
+  }
+
+  > .list-group:last-child {
+    .list-group-item:last-child {
+      @include border-bottom-radius($card-border-radius);
+    }
+  }
+
+  .list-group-item {
+    padding: $card-list-group-item-padding;
+  }
+
+  // Fix paragraph margins inside cards
+  .card-text {
+    margin-bottom: $card-paragraph-margin-bottom;
+  }
+
+  // Remove text decoration.
+  a:hover {
+    text-decoration: none;
+  }
+
+  // Small card modifier.
+  &-small {
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: $card-small-spacer-y $card-small-spacer-x;
+    }
+
+    box-shadow: $card-small-box-shadow;
+  }
+}
+
+.card-body {
+  padding: $card-spacer-x;
+
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card-link {
+  font-family: $card-link-font-family;
+
+  + .card-link {
+    margin-left: $card-spacer-x;
+  }
+}
+
+//
+// Optional textual caps
+//
+
+.card-header {
+  padding: $card-header-spacer-y $card-header-spacer-x;
+  background-color: $card-cap-bg;
+  border-bottom: none;
+
+  &:first-child {
+    border-radius: $card-inner-border-radius $card-inner-border-radius 0 0;
+  }
+}
+
+.card-footer {
+  padding: $card-footer-spacer-y $card-footer-spacer-x;
+  background-color: $card-cap-bg;
+  border-top: none;
+
+  &:last-child {
+    border-radius: 0 0 $card-inner-border-radius $card-inner-border-radius;
+  }
+}

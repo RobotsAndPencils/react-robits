@@ -44,15 +44,17 @@ export const FormRadio = ({
     <div className={containerClasses} {...props}>
       {
         label
-          ? <label>
-            {label}{required && '*'}
-          </label>
+          ? (
+            <label>
+              {label}{required && '*'}
+            </label>
+          )
           : []
       }
       {hintContent && label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
       <div className={styling['form-radio-group']}>
         {
-          options.map(({label, value}, idx) => {
+          options.map(({ label, value }, idx) => {
             const id = `${name}_${idx}`
             return (
               <label className={labelClasses}>

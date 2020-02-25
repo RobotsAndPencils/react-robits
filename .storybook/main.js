@@ -13,36 +13,91 @@ module.exports = {
     '@storybook/addon-backgrounds'
   ],
   webpackFinal: async (config) => {
-    const newLoader = {
+    const newLoaders = {
       module: {
         rules: [
           {
-            test: /\.module\.(scss|sass)$/,
-            use: [
+            parser: { requireEnsure: false },
+            oneOf: [
               {
-                loader: 'sass-resources-loader',
-                options: {
-                  // Provide path to the file with resources
-                  resources: './src/lib/styles/*.scss'
-                }
+                test: /\.module\.(scss|sass)$/,
+                use: [
+                  {
+                    loader: 'sass-resources-loader',
+                    options: {
+                      // Provide path to the file with resources
+                      resources: './src/lib/styles/tokens/*.scss'
+                    }
+                  }
+                ]
               }
             ]
           }
         ]
       }
     }
-  
-    // NOTE: this technically doesn't append properly, due to the structure of the
-    // default webpack use array ... but it works, and I'm unsure how to how to better scope it
+
     const combinedConfig = merge.smartStrategy({
-      'module.rules.use': 'append'
-    })(config, newLoader)
+      'module.rules.use.oneOf': 'append'
+    })(config, newLoaders)
+
+    // config.module.rules = config.module.rules.map(obj => {
+    //   if (!obj.oneOf) {
+    //     return obj
+    //   } else {
+    //     return {
+    //       oneOf: obj.oneOf.filter(o => {
+    //         if (!o.test) {
+    //           console.log('in default')
+    //           return true
+    //         } else if (o.test.toString() === /\.(scss|sass)$/.toString()) {
+    //           console.log('in normal')
+    //           return false
+    //         } else if (o.test.toString() === /\.module\.(scss|sass)$/.toString()) {
+    //           console.log('in modules')
+    //           return false
+    //         } else {
+    //           console.log('in catch')
+    //           return true
+    //         }
+    //       }).concat([{
+    //         test: /\.module\.(scss|sass)$/,
+    //         use: [
+    //           {
+    //             loader: 'style-loader',
+    //             options: { injectType: 'lazyStyleTag' }
+    //           },
+    //           {
+    //             loader: 'css-loader',
+    //             options: { importLoaders: 4 }
+    //           },
+    //           {
+    //             loader: 'postcss-loader',
+    //             options: { plugins: () => [require('autoprefixer')] }
+    //           },
+    //           {
+    //             loader: 'resolve-url-loader',
+    //             options: { sourceMap: false }
+    //           },
+    //           {
+    //             loader: 'sass-loader',
+    //             options: { sourceMap: true }
+    //           },
+    //           {
+    //             loader: 'sass-resources-loader',
+    //             options: { resources: './src/lib/styles/tokens/*.scss' }
+    //           }
+    //         ]
+    //       }])
+    //     }
+    //   }
+    // })
 
     combinedConfig.resolve.alias = Object.assign({}, combinedConfig.resolve.alias, { themes: path.resolve(__dirname, '../src/lib/styles/themes')})
 
-    // console.dir(combinedConfig.resolve, { depth: 10 })
+    // console.dir(combinedConfig.module.rules, {depth: 10, colors: true});
 
-    // Return the altered config
+    // Return the altered combinedConfig
     return combinedConfig;
   }
 };

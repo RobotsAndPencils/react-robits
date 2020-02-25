@@ -206,7 +206,7 @@ $custom-control-indicator-active-bg: lighten($primary, 35%) !default;
   padding: $form-control-padding-y-sm $form-control-padding-x-sm;
   font-size: $font-size-sm;
   line-height: $form-control-line-height-sm;
-  @include border-radius($form-control-border-radius-sm);
+  border-radius: $form-control-border-radius-sm;
 }
 
 .form-control-sm {
@@ -222,7 +222,7 @@ $custom-control-indicator-active-bg: lighten($primary, 35%) !default;
   padding: $form-control-padding-y-lg $form-control-padding-x-lg;
   font-size: $font-size-lg;
   line-height: $form-control-line-height-lg;
-  @include border-radius($form-control-border-radius-lg);
+  border-radius: $form-control-border-radius-lg;
 }
 
 .form-control-lg {
