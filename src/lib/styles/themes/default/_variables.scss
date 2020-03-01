@@ -82,3 +82,7 @@ $zindex-modal:              1050 !default;
 $zindex-popover:            1060 !default;
 $zindex-tooltip:            1070 !default;
 
+$card-box-shadow:               0 .46875rem 2.1875rem rgba($blueish-grey, .1),
+                                0 .9375rem 1.40625rem rgba($blueish-grey, .1),
+                                0 .25rem .53125rem rgba($blueish-grey, .12),
+                                0 .125rem .1875rem rgba($blueish-grey, .1);
