@@ -1,0 +1,295 @@
+@import './tokens.scss';
+:global {
+
+  //
+  // Reboot
+  //
+
+  // scss-lint:disable QualifyingElement, DuplicateProperty
+
+  //
+  // HTML (element)
+  //
+  html {
+    @include media-breakpoint-down(xs) {
+      font-size: 15px;
+    }
+  }
+
+  //
+  // Body
+  //
+
+  body {
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
+  }
+
+
+  //
+  // Links
+  //
+
+  a {
+    color: $link-color;
+    text-decoration: $link-decoration;
+
+    @include hover {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+    }
+  }
+
+  b, strong {
+    font-weight: $font-weight-bold;
+  }
+
+  //
+  // Typography
+  //
+
+  // Remove top margins from headings
+  //
+  // By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
+  // margin for easier control within type scales as it avoids margin collapsing.
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+  }
+
+  label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: $gray-600;
+  }
+
+
+  //
+  // Headings
+  //
+
+  // Ensure elements that are not headings are properly
+  // displayed as block level elements.
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    display: block;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: $headings-margin-bottom;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    color: $headings-color;
+  }
+
+  h1, .h1 {
+    font-size: $h1-font-size;
+    letter-spacing: $headings-letter-spacing;
+    line-height: $h1-line-height;
+  }
+
+  h2, .h2 {
+    font-size: $h2-font-size;
+    letter-spacing: $headings-letter-spacing;
+    line-height: $h2-line-height;
+  }
+
+  h3, .h3 {
+    font-size: $h3-font-size;
+    line-height: $h3-line-height;
+  }
+
+  h4, .h4 {
+    font-size: $h4-font-size;
+    line-height: $h4-line-height;
+  }
+
+  h5, .h5 {
+    font-size: $h5-font-size;
+    line-height: $h5-line-height;
+  }
+
+  h6, .h6 {
+    font-size: $h6-font-size;
+    line-height: $h6-line-height;
+  }
+
+  .lead {
+    line-height: $lead-line-height;
+  }
+
+  //
+  // Paragraphs
+  //
+
+  p {
+    margin-bottom: $paragraphs-margin-bottom;
+  }
+
+  //
+  // Horizontal rules
+  //
+
+  hr {
+    margin-top: $hr-margin-y;
+    margin-bottom: $hr-margin-y;
+    border-top: $hr-border-width solid $hr-border-color;
+  }
+
+  //
+  // Emphasis
+  //
+
+  small,
+  .small {
+    font-size: $small-font-size;
+    font-weight: $font-weight-normal;
+  }
+
+  mark,
+  .mark {
+    padding: $mark-padding;
+    background-color: $mark-bg;
+  }
+
+  //
+  // Misc
+  //
+
+  // Blockquotes
+  .blockquote {
+    margin-bottom: $blockquote-margin-bottom;
+    font-size: $blockquote-font-size;
+  }
+
+  .blockquote-footer {
+    font-size: $blockquote-footer-font-size;
+  }
+
+  // Anchor white text hover adjustment
+  a.text-white {
+    @include hover-focus {
+      color: darken($white, 10%) !important;
+    }
+  }
+
+  // Black text variation
+  .text-black {
+    color: $black;
+  }
+
+  // Anchor black text hover adjustment
+  a.text-black {
+    @include hover-focus {
+      color: darken($black, 10%) !important;
+    }
+  }
+
+
+  //
+  // Forms
+  //
+
+
+  .form-control {
+    height: $form-control-height;
+    width: 100%;
+    min-width: $form-control-min-width;
+    box-sizing: border-box;
+    padding: $form-control-padding-y $form-control-padding-x;
+    font-size: $form-control-font-size; // $font-size-base
+    line-height: $form-control-line-height;
+    color: $form-control-color;
+    background-color: $form-control-bg;
+    border: $form-control-border-width solid $form-control-border-color;
+    font-weight: $font-weight-normal;
+    will-change: border-color, box-shadow;
+    border-radius: $form-control-border-radius;
+    box-shadow: $form-control-box-shadow;
+    @include transition($form-control-transition);
+
+    &:hover {
+      border-color: $form-control-hover-border-color;
+    }
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus();
+
+    // Placeholder
+    &::placeholder {
+      color: $form-control-placeholder-color;
+    }
+
+    // Disabled and read-only inputs
+    &:disabled,
+    &[readonly] {
+      background-color: $form-control-disabled-bg;
+
+      &:hover {
+        border-color: $form-control-border-color;
+        cursor: not-allowed;
+      }
+    }
+
+    // Fix readonly, but not disabled fields box shadow and border color.
+    &[readonly]:not(:disabled) {
+      &:focus {
+        box-shadow: none;
+        border-color: $form-control-border-color;
+      }
+    }
+  }
+
+  .form-control-hint {
+    @include form-control-hint;
+  }
+
+  .form-control-container {
+    label + [class*='form-control-hint'] {
+      margin: 0 0 .5rem 0;
+    }
+  }
+
+  .form-control-error {
+    font-size: 0.75rem;
+    margin: .5rem;
+    color: $danger;
+    font-weight: $medium;
+  }
+
+  .form-control-descenders {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form-control-required {
+    font-size: 0.75rem;
+    margin: .5rem;
+    color: $gray-500;
+    font-weight: $semibold;
+    text-transform: uppercase;
+  }
+
+  .form-control-sm {
+    @include small-form-control;
+  }
+
+  .form-control-label-sm {
+    font-size: $font-size-sm;
+  }
+
+  .form-control-lg {
+    @include large-form-control;
+  }
+
+  // Form validation
+  //
+  // Provide feedback to users when form field values are valid or invalid. Works
+  // primarily for client-side validation via scoped `:invalid` and `:valid`
+  // pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
+  // server side validation.
+
+  @include form-validation-state("valid", $success);
+  @include form-validation-state("invalid", $danger);
+
+}

@@ -1,4 +1,4 @@
-@import '~themes/default/main';
+@import '~themes/default/tokens';
 
 
 $btn-padding-y:       .75rem !default;
@@ -40,6 +40,12 @@ $btn-transition:                 $transition-base !default;
   font-size: $font-size;
   line-height: $line-height;
   border-radius: $border-radius;
+}
+
+@keyframes :global(spin) {
+  to {
+    transform: rotate(360deg)
+  }
 }
 
 // Loading spinner

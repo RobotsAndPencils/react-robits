@@ -1,4 +1,4 @@
-@import '~themes/default/main';
+@import '~themes/default/tokens';
 
 $form-checkbox-indicator-border-radius: 2px !default;
 $form-checkbox-indicator-transition: transform $transition-duration $ease-in-out-circ, border $transition-duration $ease-in-out-circ !default;
@@ -325,13 +325,18 @@ $custom-toggle-knob-height-sm: .75rem !default;
     }
   }
 
-  & ~ .form-control-descenders {
+  & ~ :global(.form-control-descenders) {
     .form-control-required, .form-control-error {
       margin-left: ($custom-toggle-width + 0.625rem);
     }
   }
 }
 
-.form-control-required, .form-control-error {
-  margin: 0 .5rem .5rem $custom-control-gutter;
+:global {
+  .form-control-required, .form-control-error {
+    margin: 0 .5rem .5rem $custom-control-gutter;
+  }
 }
+
+@include form-validation-state("valid", $success);
+@include form-validation-state("invalid", $danger);

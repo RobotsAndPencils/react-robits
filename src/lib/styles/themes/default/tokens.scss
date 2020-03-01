@@ -3,10 +3,28 @@
 @import "functions";
 @import "colors";
 @import "variables";
-@import "mixins";
+// Utilities
+@import "breakpoints";
+@import "hover";
+@import "gradients";
+
+// Components
+// @import "alert";
+// @import "pagination";
+// @import "lists";
+// @import "list-group";
+// @import "nav-divider";
+// @import "forms";
+// @import "table-row";
+
+// Skins
+@import "background-variant";
+@import "transition";
+
+// @import "caret";
+// @import "grid-framework";
+// @import "grid";
 @import "type";
-@import "root";
-@import "reboot";
 
 // @import "images";
 // @import "code";

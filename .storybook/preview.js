@@ -4,7 +4,7 @@ import { withContexts } from '@storybook/addon-contexts/react'
 import { withKnobs } from '@storybook/addon-knobs'
 import { create } from '@storybook/theming/create'
 import { SyntaxHighlighter } from '@storybook/components'
-import { getComponentMarkdown } from '../src/stories/pages/componenUtils'
+import { getComponentMarkdown } from '../src/stories/pages/componentUtils'
 import {
   Title,
   Subtitle,
@@ -13,6 +13,7 @@ import {
   Props,
   DocsContext
 } from '@storybook/addon-docs/blocks';
+import GlobalStyles from '../src/stories/pages/GlobalStyles'
 const rnpTheme = create({
   base: 'light',
 
@@ -60,17 +61,17 @@ const ContextDecorator = storyFn => {
   return (
     <ThemeDefiner.Consumer>
       {
-        ({ theme }) => storyFn({ theme })
+        ({ theme }) => (
+          <>
+            <GlobalStyles theme={theme} />
+            {storyFn({ theme })}
+          </>
+        )
       }
     </ThemeDefiner.Consumer>
   )
 }
-// addDecorator(story => (
-//   <>
-//     <GlobalStyle />
-//     {story()}
-//   </>
-// ))
+
 addDecorator(ContextDecorator)
 addDecorator(withContexts(topLevelContexts))
 addDecorator(withKnobs) 
