@@ -15,8 +15,8 @@ export const Card = ({
   size,
   innerRef,
   onClick,
-  header = 'Card Header',
-  footer = 'Card Footer',
+  header,
+  footer,
   ...props
 }) => {
   useEffect(() => {

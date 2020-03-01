@@ -1,6 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { boolean } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
 import Card, { Card as CardComponent } from '../lib/components/card/Card'
 import CardBody from '../lib/components/card/CardBody'
 
@@ -25,7 +25,8 @@ export default {
 
 export const Normal = ({ theme }) => {
   let componentKnobs = {
-    disabled: boolean('Disabled', false)
+    header: text('Header', 'Card Header'),
+    footer: text('Footer', 'Card Footer')
   }
   componentKnobs = reconcileCorners(componentKnobs)
 
