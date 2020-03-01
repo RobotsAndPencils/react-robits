@@ -1,4 +1,4 @@
-@import '~themes/unstyled/main';
+@import '~themes/unstyled/tokens';
 
 .disabled {
   @include disabled-form-control;
@@ -16,7 +16,7 @@
       cursor: not-allowed;
     }
 
-    &.invalid {
+    &.is-invalid {
       border-color: red;
       border-width: 1px;
     }

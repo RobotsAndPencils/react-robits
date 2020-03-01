@@ -95,6 +95,35 @@ module.exports = {
 
     combinedConfig.resolve.alias = Object.assign({}, combinedConfig.resolve.alias, { themes: path.resolve(__dirname, '../src/lib/styles/themes')})
 
+    const newRules = combinedConfig.module.rules.map(obj => {
+      if (obj.test) {
+        return obj
+      } else {
+        if ('oneOf' in obj) {
+          const oneOfArray = obj.oneOf
+          const newOneOfArray = oneOfArray.map(subObj => {
+            if (subObj.test && subObj.test.toString() === /\.module\.(scss|sass)$/.toString()) {
+              const useArray = subObj.use
+              useArray.shift()
+              useArray.unshift({
+                loader: 'style-loader',
+                options: { injectType: 'lazyStyleTag' }
+              })
+              subObj.use = useArray
+              return subObj
+            } else {
+              return subObj
+            }
+          })
+          obj.oneOf = newOneOfArray
+          return obj
+        } else {
+          return obj
+        }
+      }
+    })
+    combinedConfig.module.rules = newRules
+
     // console.dir(combinedConfig.module.rules, {depth: 10, colors: true});
 
     // Return the altered combinedConfig

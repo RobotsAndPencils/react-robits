@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -23,46 +23,54 @@ export const FormTextarea = ({
   resizeable = true,
   ...props
 }) => {
+  useEffect(() => {
+    styling.use()
+    return () => {
+      styling.unuse()
+    }
+  }, [styling])
+
   const textareaClasses = classNames(
-    styling['form-control'],
-    size && styling[`form-control-${size}`],
-    valid && styling['valid'],
-    invalid && styling['invalid'],
-    disabled && styling['disabled'],
-    !resizeable && styling['noresize']
+    'form-control',
+    size && `form-control-${size}`,
+    valid && 'is-valid',
+    invalid && 'is-invalid',
+    disabled && 'disabled',
+    !resizeable && styling.locals['noresize']
   )
 
   const containerClasses = classNames(
     className,
-    disabled && styling['disabled'],
-    styling['form-control-container'],
-    props.cols && styling['inline']
+    disabled && 'disabled',
+    'form-control-container',
+    props.cols && styling.locals['inline']
   )
 
   return (
     <div className={containerClasses}>
       {
         label
-          ? <label htmlFor={props.id} className={`${size ? styling[`form-control-label-${size}`] : ''}`}>
-            {label}{required && '*'}
-          </label>
+          ? (
+            <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+              {label}{required && '*'}
+            </label>
+          )
           : []
       }
-      {hintContent && label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
+      {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
       <textarea
         {...props}
         ref={innerRef}
         disabled={disabled}
         readOnly={readonly}
         className={textareaClasses} />
-      <div className={styling['form-control-descenders']}>
+      <div className='form-control-descenders'>
         <div>
-          {invalid && errorText ? <div className={styling['form-control-error']}>{errorText}</div> : []}
-          {hintContent && !label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
+          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+          {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
         </div>
-        {required && !label && !invalid ? <div className={styling['form-control-required']}>Required</div> : []}
+        {required && !label && !invalid ? <div className='form-control-required'>Required</div> : []}
       </div>
-      
     </div>
   )
 }

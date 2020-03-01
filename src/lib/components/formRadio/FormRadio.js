@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -19,29 +19,36 @@ export const FormRadio = ({
   name,
   hintContent,
   label,
-  ...props
+  ...rest
 }) => {
+  useEffect(() => {
+    styling.use()
+    return () => {
+      styling.unuse()
+    }
+  }, [styling])
+
   const [selected, setSelected] = useState()
 
   const containerClasses = classNames(
-    styling['form-control-container'],
-    inline && styling['inline'],
-    props.disabled && styling['disabled']
+    'form-control-container',
+    inline && styling.locals['inline'],
+    rest.disabled && styling.locals['disabled']
   )
 
   const labelClasses = classNames(
-    styling['form-radio'],
-    valid && styling['is-valid'],
-    invalid && styling['is-invalid']
+    styling.locals['form-radio'],
+    valid && styling.locals['is-valid'],
+    invalid && styling.locals['is-invalid']
   )
 
   const inputClasses = classNames(
-    valid && styling['is-valid'],
-    invalid && styling['is-invalid']
+    valid && styling.locals['is-valid'],
+    invalid && styling.locals['is-invalid']
   )
 
   return (
-    <div className={containerClasses} {...props}>
+    <div className={containerClasses} {...rest}>
       {
         label
           ? (
@@ -51,35 +58,35 @@ export const FormRadio = ({
           )
           : []
       }
-      {hintContent && label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
-      <div className={styling['form-radio-group']}>
+      {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+      <div className={styling.locals['form-radio-group']}>
         {
           options.map(({ label, value }, idx) => {
             const id = `${name}_${idx}`
             return (
-              <label className={labelClasses}>
+              <label key={id} className={labelClasses}>
                 <input
                   id={id}
                   type='radio'
                   required='required'
                   className={inputClasses}
                   checked={selected === value}
-                  disabled={props.disabled}
+                  disabled={rest.disabled}
                   onChange={() => setSelected(value)}
                 />
                 <label htmlFor={id} className={styling['custom-control-label']} aria-hidden='true' />
-                <span className={styling['description']}>{label}</span>
+                <span className={styling.locals['description']}>{label}</span>
               </label>
             )
           })
         }
       </div>
-      <div className={styling['form-control-descenders']}>
+      <div className='form-control-descenders'>
         <div>
-          {invalid && errorText ? <div className={styling['form-control-error']}>{errorText}</div> : []}
-          {hintContent && !label ? <div className={styling['form-control-hint']}>{hintContent}</div> : []}
+          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+          {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
         </div>
-        {required && !label && !invalid ? <div className={styling['form-control-required']}>Required</div> : []}
+        {required && !label && !invalid ? <div className='form-control-required'>Required</div> : []}
       </div>
     </div>
   )

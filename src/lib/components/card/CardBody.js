@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -14,9 +14,16 @@ export const CardBody = ({
   innerRef,
   ...props
 }) => {
+  useEffect(() => {
+    styling.use()
+    return () => {
+      styling.unuse()
+    }
+  }, [styling])
+
   const classes = classNames(
     className,
-    styling['card-body']
+    styling.locals['card-body']
   )
 
   return (

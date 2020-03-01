@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -19,10 +19,17 @@ export const Card = ({
   footer = 'Card Footer',
   ...props
 }) => {
+  useEffect(() => {
+    styling.use()
+    return () => {
+      styling.unuse()
+    }
+  }, [styling])
+
   const classes = classNames(
     className,
-    styling.card,
-    size && styling[`card-${size}`]
+    styling.locals.card,
+    size && styling.locals[`card-${size}`]
   )
 
   const onClickHandler = (e) => {
@@ -45,13 +52,13 @@ export const Card = ({
       {...props}>
       {
         header
-          ? <div className={styling['card-header']}>{header}</div>
+          ? <div className={styling.locals['card-header']}>{header}</div>
           : []
       }
       {children}
       {
         footer
-          ? <div className={styling['card-footer']}>{footer}</div>
+          ? <div className={styling.locals['card-footer']}>{footer}</div>
           : []
       }
     </div>

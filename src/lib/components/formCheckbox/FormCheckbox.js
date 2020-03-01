@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -22,23 +22,30 @@ export const FormCheckbox = ({
   required,
   ...props
 }) => {
+  useEffect(() => {
+    styling.use()
+    return () => {
+      styling.unuse()
+    }
+  }, [styling])
+
   const containerClasses = classNames(
-    styling['form-control-container'],
-    inline && styling['inline'],
-    props.disabled && styling['disabled']
+    'form-control-container',
+    inline && 'inline',
+    props.disabled && 'disabled'
   )
 
   const labelClasses = classNames(
-    styling['form-checkbox'],
-    toggle && styling['as-toggle'],
-    small && styling['smaller'],
-    valid && styling['is-valid'],
-    invalid && styling['is-invalid']
+    styling.locals['form-checkbox'],
+    toggle && styling.locals['as-toggle'],
+    small && styling.locals['smaller'],
+    valid && styling.locals['is-valid'],
+    invalid && styling.locals['is-invalid']
   )
 
   const inputClasses = classNames(
-    valid && styling['is-valid'],
-    invalid && styling['is-invalid']
+    valid && styling.locals['is-valid'],
+    invalid && styling.locals['is-invalid']
   )
 
   return (
@@ -52,12 +59,12 @@ export const FormCheckbox = ({
           required='required'
           className={inputClasses}
         />
-        <label htmlFor={id} aria-hidden='true'/>
-        <span className={styling['description']}>{children}</span>
+        <label htmlFor={id} aria-hidden='true' />
+        <span className={styling.locals['description']}>{children}</span>
       </label>
-      <div className={styling['form-control-descenders']}>
-        {invalid && errorText ? <div className={styling['form-control-error']}>{errorText}</div> : []}
-        {required && !invalid ? <div className={styling['form-control-required']}>Required</div> : []}
+      <div className='form-control-descenders'>
+        {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+        {required && !invalid ? <div className='form-control-required'>Required</div> : []}
       </div>
     </div>
   )

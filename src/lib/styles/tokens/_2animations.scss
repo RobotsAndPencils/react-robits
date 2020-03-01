@@ -1,26 +1,28 @@
 /* ---------------ANIMATIONS-------------------*/
 $cubic-bezier: cubic-bezier(0.215, 0.61, 0.355, 1);
 
-@keyframes :global(fade-in) {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+// The below are for reference only, they must be used in local stylesheets
 
-@keyframes :global(fade-out) {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+// @keyframes :global(fade-in) {
+//   0% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
 
-@keyframes :global(spin) {
-  to {
-    transform: rotate(360deg)
-  }
-}
+// @keyframes :global(fade-out) {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+
+// @keyframes :global(spin) {
+//   to {
+//     transform: rotate(360deg)
+//   }
+// }
