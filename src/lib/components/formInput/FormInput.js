@@ -22,6 +22,7 @@ export const FormInput = ({
   readonly = false,
   errorText,
   hintContent,
+  children,
   ...props
 }) => {
   useEffect(() => {
@@ -45,6 +46,64 @@ export const FormInput = ({
     'form-control-container'
   )
 
+  const renderInputRow = () => {
+    if (children) {
+      const prependers = []
+      const leaders = []
+      const trailers = []
+      const appenders = []
+
+      React.Children.forEach(children, element => {
+        if (!React.isValidElement(element)) return
+
+        switch (element.props.type) {
+          case 'prepend':
+            prependers.push(element)
+            break
+          case 'leading':
+            leaders.push(element)
+            break
+          case 'trailing':
+            trailers.push(element)
+            break
+          case 'append':
+            appenders.push(element)
+            break
+          default:
+        }
+      })
+
+      const inputGroupClasses = classNames(
+        styling.locals['input-group'],
+        (leaders.length + trailers.length > 0) && styling.locals['input-group-seamless'],
+        size && styling.locals[`input-group-${size}`]
+      )
+
+      return (
+        <div className={inputGroupClasses}>
+          {prependers}
+          {leaders}
+          {renderInput()}
+          {trailers}
+          {appenders}
+        </div>
+      )
+    } else {
+      return renderInput()
+    }
+  }
+
+  const renderInput = () => {
+    return (
+      <input
+        {...props}
+        ref={innerRef}
+        disabled={disabled}
+        readOnly={readonly}
+        className={inputClasses} />
+    )
+  }
+
   return (
     <div className={containerClasses}>
       {
@@ -57,12 +116,7 @@ export const FormInput = ({
           : []
       }
       {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
-      <input
-        {...props}
-        ref={innerRef}
-        disabled={disabled}
-        readOnly={readonly}
-        className={inputClasses} />
+      {renderInputRow()}
       <div className='form-control-descenders'>
         <div>
           {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
