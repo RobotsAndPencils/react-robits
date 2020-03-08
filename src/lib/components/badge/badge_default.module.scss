@@ -1,0 +1,104 @@
+@import '~themes/default/tokens';
+
+// $badge-padding-y:                   .25em !default;
+// $badge-padding-x:                   .4em !default;
+// $badge-border-radius:               $border-radius !default;
+// $badge-pill-padding-x:              .6em !default;
+
+// Use a higher than normal value to ensure completely rounded edges when
+// customizing padding or font-size on labels.
+
+$badge-color:                 $white !default;
+$badge-font-size:             75% !default;
+$badge-font-weight:           $font-weight-bold !default;
+$badge-padding-y:             .375rem !default;
+$badge-padding-x:             .5rem !default;
+$badge-font-family:           $font-family-system-first !default;
+$badge-pill-border-radius:    10rem !default;
+$badge-border-radius:         .375rem !default;
+$badge-pill-padding-x:        $badge-padding-x !default;
+
+.badge {
+  display: inline-block;
+  padding: $badge-padding-y $badge-padding-x;
+  font-size: $badge-font-size;
+  font-weight: $badge-font-weight;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+
+  font-family: $badge-font-family;
+  color: $badge-color;
+
+  border-radius: $badge-border-radius;
+
+  // Empty badges collapse automatically
+  &:empty {
+    display: none;
+  }
+}
+
+// Quick fix for badges in buttons
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+
+// Badge anchor transitions
+a.badge {
+  @include transition($transition-base);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Pill badges
+.badge-pill {
+  padding-right: $badge-pill-padding-x;
+  padding-left: $badge-pill-padding-x;
+  border-radius: $badge-pill-border-radius;
+}
+
+.removable {
+  padding-right: 1.375rem;
+  position: relative;
+}
+
+.remove {
+  cursor: pointer;
+
+  svg {
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    width: .55rem;
+    height: .55rem;
+    transform: translateY(-50%);
+    fill: currentColor;
+  }
+}
+
+// Squared badges
+.badge-squared {
+  border-radius: 0;
+}
+
+// Contextual Colors
+@each $color, $value in $theme-colors {
+  .badge-#{$color} {
+    @include badge-variant($value);
+  }
+
+  .badge-outline-#{$color} {
+    background: none;
+    border: 1px solid $value;
+    color: $value;
+
+    // Fix light outlined badges
+    @if ( $value == theme-color("light") ) {
+      color: color-yiq($value);
+    }
+  }
+}
