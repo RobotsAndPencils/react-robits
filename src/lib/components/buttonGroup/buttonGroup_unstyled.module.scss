@@ -1,0 +1,31 @@
+@import '~themes/unstyled/tokens';
+
+.btn {
+	display: inline-flex;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  // @include primary-font;
+  font-weight: $regular;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+
+  &:focus, &:hover {
+    text-decoration: none;
+  }
+
+  &:focus, &.focus {
+    outline: 0;
+  }
+
+  &.disabled, &:disabled {
+    cursor: not-allowed;
+  }
+
+	&.loading {
+		position: relative;
+	}
+}

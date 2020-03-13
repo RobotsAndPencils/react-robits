@@ -292,4 +292,7 @@
   @include form-validation-state("valid", $success);
   @include form-validation-state("invalid", $danger);
 
+  .sr-only {
+    @include sr-only;
+  }
 }
