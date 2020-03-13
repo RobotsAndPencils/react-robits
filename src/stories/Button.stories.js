@@ -2,6 +2,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { boolean, select } from '@storybook/addon-knobs'
 import Button, { Button as ButtonComponent } from '../lib/components/button/Button'
+import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
 
 const reconcileCorners = (componentKnobs) => {
   const cornersStyle = {
@@ -83,5 +84,18 @@ export const Block = ({ theme }) => {
       <Button {...componentKnobs} theme={theme} block onClick={action('clicked')}>Hello Button</Button>
       <Button {...componentKnobs} theme={theme} block styleType='secondary' onClick={action('clicked')}>Hello Button</Button>
     </>
+  )
+}
+
+export const Groups = ({ theme }) => {
+  const vertical = boolean('Vertical', false)
+  const size = select('Size', ['sm', 'md', 'lg'], 'md')
+
+  return (
+    <ButtonGroup vertical={vertical} theme={theme}>
+      <Button theme={theme} size={size} styleType='success' onClick={action('Positive')}>Positive</Button>
+      <Button theme={theme} size={size} styleType='secondary' onClick={action('Neutral')}>Neutral</Button>
+      <Button theme={theme} size={size} styleType='danger' onClick={action('Negative')}>Negative</Button>
+    </ButtonGroup>
   )
 }

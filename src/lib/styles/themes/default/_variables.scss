@@ -11,6 +11,7 @@ $input-frozen-color: #abb6bf !default;
 
 // Body
 $body-bg:       $white !default;
+$body-color: $blueish-grey !default;
 
 // Links
 $link-color:            theme-color("primary") !default;
@@ -86,3 +87,7 @@ $card-box-shadow:               0 .46875rem 2.1875rem rgba($blueish-grey, .1),
                                 0 .9375rem 1.40625rem rgba($blueish-grey, .1),
                                 0 .25rem .53125rem rgba($blueish-grey, .12),
                                 0 .125rem .1875rem rgba($blueish-grey, .1);
+
+// Spacing
+
+$spacer: 1.5rem !default; // ~ 24px

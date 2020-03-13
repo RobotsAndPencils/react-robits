@@ -40,14 +40,14 @@ const topLevelContexts = [
         name: 'Unstyled',
         props: {
           value: { theme: 'unstyled' }
-        },
-        default: true
+        }
       },
       {
         name: 'Default',
         props: {
           value: { theme: 'default' }
-        }
+        },
+        default: true
       }
     ],
     options: {

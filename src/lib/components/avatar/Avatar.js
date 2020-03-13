@@ -59,7 +59,7 @@ export const Avatar = ({
     <div className={classes} {...props} onClick={editable && editCallback ? editCallback : undefined}>
       {
         hasImage
-          ? <img src={image} />
+          ? <img src={image} alt='Avatar' />
           : children
       }
     </div>
