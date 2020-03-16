@@ -11,7 +11,7 @@ function _interopRequireDefault (obj) { return obj && obj.__esModule ? obj : { '
 // exports.SecondaryButton = _SecondaryButton2['default']
 
 // find components
-const req = require.context('./lib', true, /.js$/)
+const req = require.context('./src/lib', true, /.js$/)
 
 var regex = /[^\\\\\/]+(?=\.[\w]+$)|[^\\\\\/]+$/
 
