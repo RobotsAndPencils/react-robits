@@ -38,8 +38,7 @@ export const DropdownMenu = ({
   )
 
   if (persist || (context.open && !context.inNavbar)) {
-    const pos1 =
-      DROPDOWN_POSITION_MAP[context.direction.toUpperCase()] || 'bottom'
+    const pos1 = DROPDOWN_POSITION_MAP[context.direction.toUpperCase()] || 'bottom'
     const pos2 = right ? 'end' : 'start'
     rest.placement = `${pos1}-${pos2}`
     rest.component = Tag
@@ -63,8 +62,7 @@ export const DropdownMenu = ({
             x-placement={placement}
             aria-hidden={!context.open}
             tabIndex='-1'
-            role='menu'
-          >
+            role='menu'>
             {children}
           </div>
         )}

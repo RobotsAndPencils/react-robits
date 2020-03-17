@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import ThemeWrapper from '../../lib/utils/ThemeWrapper'
 import * as themes from './globalThemes'
 
-export const GlobalStyles = ({
-  styling
-}) => {
+export const GlobalStyles = ({ styling }) => {
   useEffect(() => {
     styling.use()
     return () => {

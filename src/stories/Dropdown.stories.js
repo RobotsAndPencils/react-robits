@@ -17,7 +17,7 @@ export default {
 export const Normal = ({ theme }) => {
   const componentKnobs = {
     disabled: boolean('Disabled', false),
-    direction: select('Direction', ['up', 'down', 'left', 'right'], 'down'),
+    direction: select('Direction', ['up', 'down', 'left', 'right'], 'down')
   }
 
   const caret = boolean('With Caret', false)
@@ -29,15 +29,28 @@ export const Normal = ({ theme }) => {
       render={(open, toggleOpen) => (
         <>
           <Dropdown {...componentKnobs} theme={theme} open={open} toggle={() => toggleOpen(!open)}>
-            <DropdownToggle caret={caret} size={size} disabled={componentKnobs.disabled} theme={theme}>Options</DropdownToggle>
+            <DropdownToggle
+              caret={caret}
+              size={size}
+              disabled={componentKnobs.disabled}
+              theme={theme}>
+              Options
+            </DropdownToggle>
             <DropdownMenu theme={theme}>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>Action</DropdownItem>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>Another action</DropdownItem>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>Something else here</DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
+                Action
+              </DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>
+                Another action
+              </DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>
+                Something else here
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </>
-      )} />
+      )}
+    />
   )
 }
 
@@ -56,16 +69,25 @@ export const Split = ({ theme }) => {
         <>
           <Dropdown {...componentKnobs} theme={theme} open={open} toggle={() => toggleOpen(!open)}>
             <ButtonGroup>
-              <Button size={size} disabled={componentKnobs.disabled} theme={theme}>Options</Button>
+              <Button size={size} disabled={componentKnobs.disabled} theme={theme}>
+                Options
+              </Button>
               <DropdownToggle split size={size} disabled={componentKnobs.disabled} theme={theme} />
             </ButtonGroup>
             <DropdownMenu theme={theme} size={size}>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>Action</DropdownItem>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>Another action</DropdownItem>
-              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>Something else here</DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
+                Action
+              </DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>
+                Another action
+              </DropdownItem>
+              <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>
+                Something else here
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </>
-      )} />
+      )}
+    />
   )
 }

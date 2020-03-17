@@ -26,7 +26,7 @@ export const DropdownItem = ({
 
   const context = useContext(DropdownContext)
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     if (rest.disabled || header || divider) {
       e.preventDefault()
       return
@@ -72,11 +72,7 @@ export const DropdownItem = ({
 
   return (
     <Tag
-      type={
-        Tag === 'button' && (rest.onClick || toggle)
-          ? 'button'
-          : undefined
-      }
+      type={Tag === 'button' && (rest.onClick || toggle) ? 'button' : undefined}
       {...rest}
       tabIndex={tabIndex}
       className={classes}

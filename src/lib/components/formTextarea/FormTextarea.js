@@ -36,40 +36,44 @@ export const FormTextarea = ({
     valid && 'is-valid',
     invalid && 'is-invalid',
     disabled && 'disabled',
-    !resizeable && styling.locals['noresize']
+    !resizeable && styling.locals.noresize
   )
 
   const containerClasses = classNames(
     className,
     disabled && 'disabled',
     'form-control-container',
-    props.cols && styling.locals['inline']
+    props.cols && styling.locals.inline
   )
 
   return (
     <div className={containerClasses}>
-      {
-        label
-          ? (
-            <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-              {label}{required && '*'}
-            </label>
-          )
-          : []
-      }
+      {label ? (
+        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+          {label}
+          {required && '*'}
+        </label>
+      ) : (
+        []
+      )}
       {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
       <textarea
         {...props}
         ref={innerRef}
         disabled={disabled}
         readOnly={readonly}
-        className={textareaClasses} />
+        className={textareaClasses}
+      />
       <div className='form-control-descenders'>
         <div>
           {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
           {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
         </div>
-        {required && !label && !invalid ? <div className='form-control-required'>Required</div> : []}
+        {required && !label && !invalid ? (
+          <div className='form-control-required'>Required</div>
+        ) : (
+          []
+        )}
       </div>
     </div>
   )
@@ -95,22 +99,15 @@ FormTextarea.propTypes = {
   /**
    * The inner ref.
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ]),
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
   /**
    * Text to display if the field is invalid.
    */
-  errorText : PropTypes.string,
+  errorText: PropTypes.string,
   /**
    * Text to display below the input as clues to the user
    */
-  hintContent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string
-  ]),
+  hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
    * Whether the field is required or not
    */

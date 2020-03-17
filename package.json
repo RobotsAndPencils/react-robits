@@ -41,7 +41,9 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 8002 -s public",
     "build-storybook": "build-storybook -s public",
-    "eject-robits": "node ejection-script"
+    "eject-robits": "node ejection-script",
+    "lint": "prettier-standard --lint",
+    "format": "prettier-standard --format"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,9 +71,20 @@
     "@storybook/addons": "^5.3.8",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.8",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
+    "prettier-standard": "^16.2.1",
     "react-app-rewired": "^2.1.5",
     "webpack-merge": "^4.2.2"
+  },
+  "lint-staged": {
+    "**/*": "prettier-standard --lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

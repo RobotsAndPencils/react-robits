@@ -7,13 +7,7 @@ import classNames from 'classnames'
 /**
  * Modal body, with baked in padding
  */
-export const ModalBody = ({
-  styling,
-  children,
-  className = '',
-  innerRef,
-  ...props
-}) => {
+export const ModalBody = ({ styling, children, className = '', innerRef, ...props }) => {
   useEffect(() => {
     styling.use()
     return () => {
@@ -21,16 +15,10 @@ export const ModalBody = ({
     }
   }, [styling])
 
-  const classes = classNames(
-    className,
-    styling.locals['modal-body']
-  )
+  const classes = classNames(className, styling.locals['modal-body'])
 
   return (
-    <div
-      ref={innerRef}
-      className={classes}
-      {...props}>
+    <div ref={innerRef} className={classes} {...props}>
       {children}
     </div>
   )
@@ -49,11 +37,7 @@ ModalBody.propTypes = {
    * The inner ref.
    * @type {[type]}
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ])
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(ModalBody)

@@ -7,14 +7,7 @@ import classNames from 'classnames'
 /**
  * Button groups allow you to group buttons together on a single line.
  */
-export const ButtonGroup = ({
-  styling,
-  children,
-  className,
-  vertical,
-  size,
-  ...rest
-}) => {
+export const ButtonGroup = ({ styling, children, className, vertical, size, ...rest }) => {
   useEffect(() => {
     styling.use()
     return () => {
@@ -28,7 +21,11 @@ export const ButtonGroup = ({
     vertical ? styling.locals['btn-group-vertical'] : styling.locals['btn-group']
   )
 
-  return <div className={classes} {...rest}>{children}</div>
+  return (
+    <div className={classes} {...rest}>
+      {children}
+    </div>
+  )
 }
 
 ButtonGroup.propTypes = {

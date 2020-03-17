@@ -12,7 +12,7 @@ module.exports = {
     '@storybook/addon-contexts',
     '@storybook/addon-backgrounds'
   ],
-  webpackFinal: async (config) => {
+  webpackFinal: async config => {
     const newLoaders = {
       module: {
         rules: [
@@ -40,8 +40,6 @@ module.exports = {
     const combinedConfig = merge.smartStrategy({
       'module.rules.use.oneOf': 'append'
     })(config, newLoaders)
-
-    combinedConfig.resolve.alias = Object.assign({}, combinedConfig.resolve.alias, { themes: path.resolve(__dirname, '../src/lib/styles/themes')})
 
     // the below is a hefty effort to simply add { injectType: 'lazyStyleTag' } to the existing style-loader config
     const newRules = combinedConfig.module.rules.map(obj => {
@@ -76,6 +74,6 @@ module.exports = {
     // console.dir(combinedConfig.module.rules, {depth: 10, colors: true});
 
     // Return the altered combinedConfig
-    return combinedConfig;
+    return combinedConfig
   }
-};
+}

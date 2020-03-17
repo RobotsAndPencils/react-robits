@@ -4,7 +4,7 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
 
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import { Manager } from 'react-popper'
 
 import { KEYCODES, EVENTS } from '../../constants/constants'
@@ -40,17 +40,6 @@ export const Dropdown = ({
 
   const containerRef = useRef(null)
 
-  useEffect(() => {
-    handleListeners()
-    return () => {
-      removeListeners()
-    }
-  }, [])
-
-  useEffect(() => {
-    handleListeners()
-  }, [open])
-
   const handleListeners = () => {
     if (open) {
       addListeners()
@@ -60,23 +49,27 @@ export const Dropdown = ({
     removeListeners()
   }
 
-  const addListeners = () => {
-    EVENTS.CLICK.forEach(e =>
-      document.addEventListener(e, handleDocumentClick, true)
-    )
-  }
-
   const removeListeners = () => {
-    EVENTS.CLICK.forEach(e =>
-      document.removeEventListener(e, handleDocumentClick, true)
-    )
+    EVENTS.CLICK.forEach(e => document.removeEventListener(e, handleDocumentClick, true))
   }
 
-  const handleDocumentClick = (e) => {
-    if (
-      e &&
-      (e.which === 3 || (e.type === 'keyup' && e.which !== KEYCODES.TAB))
-    ) {
+  useEffect(() => {
+    handleListeners()
+    return () => {
+      removeListeners()
+    }
+  }, [handleListeners, removeListeners])
+
+  useEffect(() => {
+    handleListeners()
+  }, [open, handleListeners])
+
+  const addListeners = () => {
+    EVENTS.CLICK.forEach(e => document.addEventListener(e, handleDocumentClick, true))
+  }
+
+  const handleDocumentClick = e => {
+    if (e && (e.which === 3 || (e.type === 'keyup' && e.which !== KEYCODES.TAB))) {
       return
     }
 
@@ -91,7 +84,7 @@ export const Dropdown = ({
     handleToggle(e)
   }
 
-  const handleToggle = (e) => {
+  const handleToggle = e => {
     if (disabled) {
       return e && e.preventDefault()
     }
@@ -103,12 +96,9 @@ export const Dropdown = ({
 
   let subItemIsActive = false
   if (setActiveFromChild) {
-    React.Children.map(
-      children[1].props.children,
-      dropdownItem => {
-        if (dropdownItem && dropdownItem.props.active) subItemIsActive = true
-      }
-    )
+    React.Children.map(children[1].props.children, dropdownItem => {
+      if (dropdownItem && dropdownItem.props.active) subItemIsActive = true
+    })
   }
 
   const classes = classNames(
@@ -128,7 +118,11 @@ export const Dropdown = ({
     <DropdownContext.Provider value={{ toggle: handleToggle, open, direction, nav }}>
       <Manager {...rest}>
         <DropdownContext.Consumer>
-          {() => <div ref={containerRef} className={classes}>{children}</div>}
+          {() => (
+            <div ref={containerRef} className={classes}>
+              {children}
+            </div>
+          )}
         </DropdownContext.Consumer>
       </Manager>
     </DropdownContext.Provider>

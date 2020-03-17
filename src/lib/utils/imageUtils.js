@@ -4,8 +4,12 @@ const imageExists = url => {
     // Image is part of DOM and not ECMAScript
     let img = new Image()
     /* eslint-enable */
-    img.onload = function () { resolve(true) }
-    img.onerror = function () { reject(false) }
+    img.onload = function () {
+      resolve(true)
+    }
+    img.onerror = function () {
+      reject(false) // eslint-disable-line
+    }
     img.src = url
   })
 }

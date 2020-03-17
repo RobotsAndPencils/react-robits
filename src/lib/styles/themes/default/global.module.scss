@@ -1,6 +1,5 @@
 @import './tokens.scss';
 :global {
-
   //
   // Reboot
   //
@@ -25,7 +24,6 @@
     font-weight: $font-weight-base;
   }
 
-
   //
   // Links
   //
@@ -40,7 +38,8 @@
     }
   }
 
-  b, strong {
+  b,
+  strong {
     font-weight: $font-weight-bold;
   }
 
@@ -52,17 +51,21 @@
   //
   // By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
   // margin for easier control within type scales as it avoids margin collapsing.
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 0;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 
   label {
     display: inline-block;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     color: $gray-600;
   }
-
 
   //
   // Headings
@@ -70,46 +73,67 @@
 
   // Ensure elements that are not headings are properly
   // displayed as block level elements.
-  .h1, .h2, .h3, .h4, .h5, .h6 {
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     display: block;
   }
 
-  h1, h2, h3, h4, h5, h6,
-  .h1, .h2, .h3, .h4, .h5, .h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     margin-bottom: $headings-margin-bottom;
     font-family: $headings-font-family;
     font-weight: $headings-font-weight;
     color: $headings-color;
   }
 
-  h1, .h1 {
+  h1,
+  .h1 {
     font-size: $h1-font-size;
     letter-spacing: $headings-letter-spacing;
     line-height: $h1-line-height;
   }
 
-  h2, .h2 {
+  h2,
+  .h2 {
     font-size: $h2-font-size;
     letter-spacing: $headings-letter-spacing;
     line-height: $h2-line-height;
   }
 
-  h3, .h3 {
+  h3,
+  .h3 {
     font-size: $h3-font-size;
     line-height: $h3-line-height;
   }
 
-  h4, .h4 {
+  h4,
+  .h4 {
     font-size: $h4-font-size;
     line-height: $h4-line-height;
   }
 
-  h5, .h5 {
+  h5,
+  .h5 {
     font-size: $h5-font-size;
     line-height: $h5-line-height;
   }
 
-  h6, .h6 {
+  h6,
+  .h6 {
     font-size: $h6-font-size;
     line-height: $h6-line-height;
   }
@@ -185,11 +209,9 @@
     }
   }
 
-
   //
   // Forms
   //
-
 
   .form-control {
     height: $form-control-height;
@@ -246,13 +268,13 @@
 
   .form-control-container {
     label + [class*='form-control-hint'] {
-      margin: 0 0 .5rem 0;
+      margin: 0 0 0.5rem 0;
     }
   }
 
   .form-control-error {
     font-size: 0.75rem;
-    margin: .5rem;
+    margin: 0.5rem;
     color: $danger;
     font-weight: $medium;
   }
@@ -264,7 +286,7 @@
 
   .form-control-required {
     font-size: 0.75rem;
-    margin: .5rem;
+    margin: 0.5rem;
     color: $gray-500;
     font-weight: $semibold;
     text-transform: uppercase;
@@ -289,8 +311,8 @@
   // pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
   // server side validation.
 
-  @include form-validation-state("valid", $success);
-  @include form-validation-state("invalid", $danger);
+  @include form-validation-state('valid', $success);
+  @include form-validation-state('invalid', $danger);
 
   .sr-only {
     @include sr-only;

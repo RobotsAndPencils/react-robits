@@ -48,7 +48,7 @@ export const Modal = ({
   }, [open])
 
   const handleOnEntered = (type, node) => {
-    node.classList.add(styling.locals['show'])
+    node.classList.add(styling.locals.show)
 
     if (type === 'modal') {
       modalShown && modalShown()
@@ -56,14 +56,14 @@ export const Modal = ({
   }
 
   const handleOnExit = (type, node) => {
-    node.classList.remove(styling.locals['show'])
+    node.classList.remove(styling.locals.show)
   }
 
   const handleOnExited = () => {
     modalHidden && modalHidden()
   }
 
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = e => {
     if (!modalContent.current.contains(e.target) && closeOnBackdropClick) {
       toggleModal()
     }
@@ -75,15 +75,11 @@ export const Modal = ({
 
   const backdropClasses = classNames(
     styling.locals['modal-backdrop'],
-    styling.locals['fade'],
+    styling.locals.fade,
     backdropClassName
   )
 
-  const modalClasses = classNames(
-    styling.locals['modal'],
-    styling.locals['fade'],
-    modalClassName
-  )
+  const modalClasses = classNames(styling.locals.modal, styling.locals.fade, modalClassName)
 
   const modalAttrs = {
     'aria-hidden': true,
@@ -103,10 +99,7 @@ export const Modal = ({
     position && styling.locals[`modal-${position}`]
   )
 
-  const contentClasses = classNames(
-    styling.locals['modal-content'],
-    modalContentClassName
-  )
+  const contentClasses = classNames(styling.locals['modal-content'], modalContentClassName)
 
   return (
     <>
@@ -119,8 +112,7 @@ export const Modal = ({
           unmountOnExit
           onEntered={node => handleOnEntered('backdrop', node)}
           onExit={node => handleOnExit('backdrop', node)}
-          onExited={handleOnExited}
-        >
+          onExited={handleOnExited}>
           <div className={backdropClasses} />
         </Transition>
       )}
@@ -132,38 +124,31 @@ export const Modal = ({
         unmountOnExit
         onClick={handleBackdropClick}
         onEntered={node => handleOnEntered('modal', node)}
-        onExit={node => handleOnExit('modal', node)}
-      >
+        onExit={node => handleOnExit('modal', node)}>
         <div className={modalClasses} {...modalAttrs}>
           <div className={modalDialogClasses} role='document'>
-            <div
-              ref={modalContent}
-              className={contentClasses}
-            >
-              {
-                header
-                  ? (
-                    <div className={styling.locals['modal-header']}>
-                      {header}
-                      {
-                        withCloseButton
-                          ? (
-                            <button type='button' onClick={toggleModal} class={styling.locals.close} data-dismiss='modal' aria-label='Close'>
-                              <span aria-hidden='true'>×</span>
-                            </button>
-                          )
-                          : []
-                      }
-                    </div>
-                  )
-                  : []
-              }
+            <div ref={modalContent} className={contentClasses}>
+              {header ? (
+                <div className={styling.locals['modal-header']}>
+                  {header}
+                  {withCloseButton ? (
+                    <button
+                      type='button'
+                      onClick={toggleModal}
+                      class={styling.locals.close}
+                      data-dismiss='modal'
+                      aria-label='Close'>
+                      <span aria-hidden='true'>×</span>
+                    </button>
+                  ) : (
+                    []
+                  )}
+                </div>
+              ) : (
+                []
+              )}
               {children}
-              {
-                footer
-                  ? <div className={styling.locals['modal-footer']}>{footer}</div>
-                  : []
-              }
+              {footer ? <div className={styling.locals['modal-footer']}>{footer}</div> : []}
             </div>
           </div>
         </div>
@@ -236,10 +221,7 @@ Modal.propTypes = {
   /**
    * The children nodes.
    */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 }
 
 export default ThemeWrapper(themes)(Modal)

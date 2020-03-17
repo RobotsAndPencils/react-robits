@@ -35,12 +35,15 @@ export const Avatar = ({
     getImage(image)
   }, [image])
 
-  const getImage = (src) => {
-    imageUtils.imageExists(src).then(() => {
-      setHasImage(true)
-    }).catch(() => {
-      setHasImage(false)
-    })
+  const getImage = src => {
+    imageUtils
+      .imageExists(src)
+      .then(() => {
+        setHasImage(true)
+      })
+      .catch(() => {
+        setHasImage(false)
+      })
   }
 
   const classes = classNames(
@@ -56,12 +59,11 @@ export const Avatar = ({
   )
 
   return (
-    <div className={classes} {...props} onClick={editable && editCallback ? editCallback : undefined}>
-      {
-        hasImage
-          ? <img src={image} alt='Avatar' />
-          : children
-      }
+    <div
+      className={classes}
+      {...props}
+      onClick={editable && editCallback ? editCallback : undefined}>
+      {hasImage ? <img src={image} alt='Avatar' /> : children}
     </div>
   )
 }

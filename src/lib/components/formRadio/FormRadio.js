@@ -32,8 +32,8 @@ export const FormRadio = ({
 
   const containerClasses = classNames(
     'form-control-container',
-    inline && styling.locals['inline'],
-    rest.disabled && styling.locals['disabled']
+    inline && styling.locals.inline,
+    rest.disabled && styling.locals.disabled
   )
 
   const labelClasses = classNames(
@@ -49,44 +49,45 @@ export const FormRadio = ({
 
   return (
     <div className={containerClasses} {...rest}>
-      {
-        label
-          ? (
-            <label>
-              {label}{required && '*'}
-            </label>
-          )
-          : []
-      }
+      {label ? (
+        <label>
+          {label}
+          {required && '*'}
+        </label>
+      ) : (
+        []
+      )}
       {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
       <div className={styling.locals['form-radio-group']}>
-        {
-          options.map(({ label, value }, idx) => {
-            const id = `${name}_${idx}`
-            return (
-              <label key={id} className={labelClasses}>
-                <input
-                  id={id}
-                  type='radio'
-                  required='required'
-                  className={inputClasses}
-                  checked={selected === value}
-                  disabled={rest.disabled}
-                  onChange={() => setSelected(value)}
-                />
-                <label htmlFor={id} className={styling['custom-control-label']} aria-hidden='true' />
-                <span className={styling.locals['description']}>{label}</span>
-              </label>
-            )
-          })
-        }
+        {options.map(({ label, value }, idx) => {
+          const id = `${name}_${idx}`
+          return (
+            <label key={id} className={labelClasses}>
+              <input
+                id={id}
+                type='radio'
+                required='required'
+                className={inputClasses}
+                checked={selected === value}
+                disabled={rest.disabled}
+                onChange={() => setSelected(value)}
+              />
+              <label htmlFor={id} className={styling['custom-control-label']} aria-hidden='true' />
+              <span className={styling.locals.description}>{label}</span>
+            </label>
+          )
+        })}
       </div>
       <div className='form-control-descenders'>
         <div>
           {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
           {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
         </div>
-        {required && !label && !invalid ? <div className='form-control-required'>Required</div> : []}
+        {required && !label && !invalid ? (
+          <div className='form-control-required'>Required</div>
+        ) : (
+          []
+        )}
       </div>
     </div>
   )
@@ -120,10 +121,7 @@ FormRadio.propTypes = {
   /**
    * Text to display below the input as clues to the user
    */
-  hintContent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string
-  ]),
+  hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
    * Radio group label
    */

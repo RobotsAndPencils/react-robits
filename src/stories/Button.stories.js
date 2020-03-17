@@ -4,7 +4,7 @@ import { boolean, select } from '@storybook/addon-knobs'
 import Button, { Button as ButtonComponent } from '../lib/components/button/Button'
 import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
 
-const reconcileCorners = (componentKnobs) => {
+const reconcileCorners = componentKnobs => {
   const cornersStyle = {
     squared: false,
     pill: false
@@ -36,14 +36,30 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Button {...componentKnobs} theme={theme} styleType='primary' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='secondary' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='success' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='info' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='warning' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='danger' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='light' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} styleType='dark' onClick={action('clicked')}>Hello Button</Button>
+      <Button {...componentKnobs} theme={theme} styleType='primary' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='secondary' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='success' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='info' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='warning' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='danger' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='light' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} styleType='dark' onClick={action('clicked')}>
+        Hello Button
+      </Button>
     </>
   )
 }
@@ -61,9 +77,15 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <Button {...componentKnobs} theme={theme} size='lg' onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} size='sm' onClick={action('clicked')}>Hello Button</Button>
+      <Button {...componentKnobs} theme={theme} size='lg' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} theme={theme} size='sm' onClick={action('clicked')}>
+        Hello Button
+      </Button>
     </>
   )
 }
@@ -81,8 +103,17 @@ export const Block = ({ theme }) => {
 
   return (
     <>
-      <Button {...componentKnobs} theme={theme} block onClick={action('clicked')}>Hello Button</Button>
-      <Button {...componentKnobs} theme={theme} block styleType='secondary' onClick={action('clicked')}>Hello Button</Button>
+      <Button {...componentKnobs} theme={theme} block onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        theme={theme}
+        block
+        styleType='secondary'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
     </>
   )
 }
@@ -93,9 +124,15 @@ export const Groups = ({ theme }) => {
 
   return (
     <ButtonGroup vertical={vertical} theme={theme}>
-      <Button theme={theme} size={size} styleType='success' onClick={action('Positive')}>Positive</Button>
-      <Button theme={theme} size={size} styleType='secondary' onClick={action('Neutral')}>Neutral</Button>
-      <Button theme={theme} size={size} styleType='danger' onClick={action('Negative')}>Negative</Button>
+      <Button theme={theme} size={size} styleType='success' onClick={action('Positive')}>
+        Positive
+      </Button>
+      <Button theme={theme} size={size} styleType='secondary' onClick={action('Neutral')}>
+        Neutral
+      </Button>
+      <Button theme={theme} size={size} styleType='danger' onClick={action('Negative')}>
+        Negative
+      </Button>
     </ButtonGroup>
   )
 }

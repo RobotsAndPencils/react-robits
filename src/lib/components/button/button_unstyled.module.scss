@@ -1,7 +1,7 @@
-@import '~themes/unstyled/tokens';
+@import '../../styles/themes/unstyled/tokens';
 
 .btn {
-	display: inline-flex;
+  display: inline-flex;
   position: relative;
   text-align: center;
   white-space: nowrap;
@@ -13,19 +13,22 @@
   justify-content: center;
   align-items: center;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     text-decoration: none;
   }
 
-  &:focus, &.focus {
+  &:focus,
+  &.focus {
     outline: 0;
   }
 
-  &.disabled, &:disabled {
+  &.disabled,
+  &:disabled {
     cursor: not-allowed;
   }
 
-	&.loading {
-		position: relative;
-	}
+  &.loading {
+    position: relative;
+  }
 }

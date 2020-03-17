@@ -12,7 +12,7 @@ import {
   Primary,
   Props,
   DocsContext
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs/blocks'
 import GlobalStyles from '../src/stories/pages/GlobalStyles'
 const rnpTheme = create({
   base: 'light',
@@ -23,7 +23,7 @@ const rnpTheme = create({
 
   brandTitle: 'React Robits',
   brandUrl: 'https://www.robotsandpencils.com/',
-  brandImage: '/rnp-logo.svg',
+  brandImage: '/rnp-logo.svg'
 })
 
 const ThemeDefiner = React.createContext({
@@ -56,25 +56,22 @@ const topLevelContexts = [
   }
 ]
 
-
 const ContextDecorator = storyFn => {
   return (
     <ThemeDefiner.Consumer>
-      {
-        ({ theme }) => (
-          <>
-            <GlobalStyles theme={theme} />
-            {storyFn({ theme })}
-          </>
-        )
-      }
+      {({ theme }) => (
+        <>
+          <GlobalStyles theme={theme} />
+          {storyFn({ theme })}
+        </>
+      )}
     </ThemeDefiner.Consumer>
   )
 }
 
 addDecorator(ContextDecorator)
 addDecorator(withContexts(topLevelContexts))
-addDecorator(withKnobs) 
+addDecorator(withKnobs)
 
 addParameters({
   options: {
@@ -83,11 +80,11 @@ addParameters({
   },
   backgrounds: [
     { name: 'White', value: '#FFFFFF', default: true },
-    { name: 'Black', value: '#000000'}
+    { name: 'Black', value: '#000000' }
   ],
   docs: {
     page: () => {
-      const context = React.useContext(DocsContext);
+      const context = React.useContext(DocsContext)
       return (
         <>
           <Title />

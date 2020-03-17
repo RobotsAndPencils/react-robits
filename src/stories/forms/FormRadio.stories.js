@@ -1,8 +1,10 @@
 import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
-import FormRadio, { FormRadio as FormRadioComponent } from '../../lib/components/formRadio/FormRadio'
+import FormRadio, {
+  FormRadio as FormRadioComponent
+} from '../../lib/components/formRadio/FormRadio'
 
-const reconcileValidity = (componentKnobs) => {
+const reconcileValidity = componentKnobs => {
   const validityStyles = {
     valid: false,
     invalid: false
@@ -39,11 +41,12 @@ export const Normal = ({ theme }) => {
         {...componentKnobs}
         name='story-radio'
         options={[
-          { label: 'Radio 1', value: 'one'},
-          { label: 'Radio 2', value: 'two'},
-          { label: 'Radio 3', value: 'three'}
+          { label: 'Radio 1', value: 'one' },
+          { label: 'Radio 2', value: 'two' },
+          { label: 'Radio 3', value: 'three' }
         ]}
-        theme={theme} />
+        theme={theme}
+      />
     </>
   )
 }

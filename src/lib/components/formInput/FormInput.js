@@ -40,11 +40,7 @@ export const FormInput = ({
     disabled && 'disabled'
   )
 
-  const containerClasses = classNames(
-    className,
-    disabled && 'disabled',
-    'form-control-container'
-  )
+  const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
   const renderInputRow = () => {
     if (children) {
@@ -75,7 +71,7 @@ export const FormInput = ({
 
       const inputGroupClasses = classNames(
         styling.locals['input-group'],
-        (leaders.length + trailers.length > 0) && styling.locals['input-group-seamless'],
+        leaders.length + trailers.length > 0 && styling.locals['input-group-seamless'],
         size && styling.locals[`input-group-${size}`]
       )
 
@@ -100,21 +96,21 @@ export const FormInput = ({
         ref={innerRef}
         disabled={disabled}
         readOnly={readonly}
-        className={inputClasses} />
+        className={inputClasses}
+      />
     )
   }
 
   return (
     <div className={containerClasses}>
-      {
-        label
-          ? (
-            <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-              {label}{required && '*'}
-            </label>
-          )
-          : []
-      }
+      {label ? (
+        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+          {label}
+          {required && '*'}
+        </label>
+      ) : (
+        []
+      )}
       {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
       {renderInputRow()}
       <div className='form-control-descenders'>
@@ -122,7 +118,11 @@ export const FormInput = ({
           {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
           {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
         </div>
-        {required && !label && !invalid ? <div className='form-control-required'>Required</div> : []}
+        {required && !label && !invalid ? (
+          <div className='form-control-required'>Required</div>
+        ) : (
+          []
+        )}
       </div>
     </div>
   )
@@ -152,11 +152,7 @@ FormInput.propTypes = {
   /**
    * The inner ref.
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ]),
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
   /**
    * Text to display if the field is invalid.
    */
@@ -164,10 +160,7 @@ FormInput.propTypes = {
   /**
    * Text to display below the input as clues to the user
    */
-  hintContent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string
-  ]),
+  hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
    * Whether the field is required or not
    */

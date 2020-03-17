@@ -1,4 +1,4 @@
-@import '~themes/default/tokens';
+@import '../../styles/themes/default/tokens';
 
 .form-control-container {
   &.inline {
@@ -7,7 +7,7 @@
 
   textarea {
     height: auto;
-    
+
     &[cols] {
       width: auto;
     }

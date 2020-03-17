@@ -7,13 +7,7 @@ import classNames from 'classnames'
 /**
  * Card body, with baked in padding
  */
-export const CardBody = ({
-  styling,
-  children,
-  className = '',
-  innerRef,
-  ...props
-}) => {
+export const CardBody = ({ styling, children, className = '', innerRef, ...props }) => {
   useEffect(() => {
     styling.use()
     return () => {
@@ -21,16 +15,10 @@ export const CardBody = ({
     }
   }, [styling])
 
-  const classes = classNames(
-    className,
-    styling.locals['card-body']
-  )
+  const classes = classNames(className, styling.locals['card-body'])
 
   return (
-    <div
-      ref={innerRef}
-      className={classes}
-      {...props}>
+    <div ref={innerRef} className={classes} {...props}>
       {children}
     </div>
   )
@@ -49,11 +37,7 @@ CardBody.propTypes = {
    * The inner ref.
    * @type {[type]}
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ])
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(CardBody)

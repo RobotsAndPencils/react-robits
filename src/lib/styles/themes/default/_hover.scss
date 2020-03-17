@@ -12,7 +12,9 @@
 // Issue: https://github.com/twbs/bootstrap/issues/25195
 
 @mixin hover {
-  &:hover { @content; }
+  &:hover {
+    @content;
+  }
 }
 
 @mixin hover-focus {
@@ -31,5 +33,7 @@
 }
 
 @mixin hover-not-disabled {
-  &:not([disabled]):not(.disabled):hover { @content; }
+  &:not([disabled]):not(.disabled):hover {
+    @content;
+  }
 }

@@ -4,7 +4,7 @@ import { text } from '@storybook/addon-knobs'
 import Card, { Card as CardComponent } from '../lib/components/card/Card'
 import CardBody from '../lib/components/card/CardBody'
 
-const reconcileCorners = (componentKnobs) => {
+const reconcileCorners = componentKnobs => {
   const cornersStyle = {
     squared: false,
     pill: false

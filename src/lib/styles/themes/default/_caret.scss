@@ -1,4 +1,4 @@
-$caret-width: .3em !default;
+$caret-width: 0.3em !default;
 
 @mixin caret-down {
   border-top: $caret-width solid;
@@ -33,8 +33,8 @@ $caret-width: .3em !default;
     width: 0;
     height: 0;
     margin-left: $caret-width * 1.667;
-    vertical-align: $caret-width * .41667;
-    content: "";
+    vertical-align: $caret-width * 0.41667;
+    content: '';
     @if $direction == down {
       @include caret-down;
     } @else if $direction == up {
@@ -54,8 +54,8 @@ $caret-width: .3em !default;
       width: 0;
       height: 0;
       margin-right: $caret-width * 1.667;
-      vertical-align: $caret-width * .41667;
-      content: "";
+      vertical-align: $caret-width * 0.41667;
+      content: '';
       @include caret-left;
     }
   }

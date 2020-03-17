@@ -1,13 +1,13 @@
 @mixin disabled-form-control {
   cursor: not-allowed !important;
-  color: #C0C0C0;
+  color: #c0c0c0;
 
   * {
     cursor: not-allowed !important;
   }
 
   label {
-    color: #C0C0C0;
+    color: #c0c0c0;
   }
 
   input {
@@ -17,6 +17,6 @@
 
 @mixin form-control-hint {
   font-size: 0.75rem;
-  margin: .5rem;
+  margin: 0.5rem;
   color: $gray-500;
 }

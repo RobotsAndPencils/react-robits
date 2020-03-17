@@ -38,7 +38,7 @@ export const FormCheckbox = ({
   const labelClasses = classNames(
     styling.locals['form-checkbox'],
     toggle && styling.locals['as-toggle'],
-    small && styling.locals['smaller'],
+    small && styling.locals.smaller,
     valid && styling.locals['is-valid'],
     invalid && styling.locals['is-invalid']
   )
@@ -60,7 +60,7 @@ export const FormCheckbox = ({
           className={inputClasses}
         />
         <label htmlFor={id} aria-hidden='true' />
-        <span className={styling.locals['description']}>{children}</span>
+        <span className={styling.locals.description}>{children}</span>
       </label>
       <div className='form-control-descenders'>
         {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
@@ -102,11 +102,7 @@ FormCheckbox.propTypes = {
   /**
    * The inner ref.
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ]),
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
   /**
    * The input ID
    */
@@ -114,7 +110,7 @@ FormCheckbox.propTypes = {
   /**
    * Text to display if the field is invalid.
    */
-  errorText : PropTypes.string,
+  errorText: PropTypes.string,
   /**
    * Whether the field is required or not
    */
