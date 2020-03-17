@@ -1,14 +1,14 @@
-@import '~themes/default/tokens';
+@import '../../styles/themes/default/tokens';
 
-$badge-color:                 $white !default;
-$badge-font-size:             75% !default;
-$badge-font-weight:           $font-weight-bold !default;
-$badge-padding-y:             .375rem !default;
-$badge-padding-x:             .5rem !default;
-$badge-font-family:           $font-family-system-first !default;
-$badge-pill-border-radius:    10rem !default;
-$badge-border-radius:         .375rem !default;
-$badge-pill-padding-x:        $badge-padding-x !default;
+$badge-color: $white !default;
+$badge-font-size: 75% !default;
+$badge-font-weight: $font-weight-bold !default;
+$badge-padding-y: 0.375rem !default;
+$badge-padding-x: 0.5rem !default;
+$badge-font-family: $font-family-system-first !default;
+$badge-pill-border-radius: 10rem !default;
+$badge-border-radius: 0.375rem !default;
+$badge-pill-padding-x: $badge-padding-x !default;
 
 .badge {
   display: inline-block;
@@ -63,10 +63,10 @@ a.badge {
 
   svg {
     position: absolute;
-    right: .5rem;
+    right: 0.5rem;
     top: 50%;
-    width: .55rem;
-    height: .55rem;
+    width: 0.55rem;
+    height: 0.55rem;
     transform: translateY(-50%);
     fill: currentColor;
   }
@@ -89,7 +89,7 @@ a.badge {
     color: $value;
 
     // Fix light outlined badges
-    @if ( $value == theme-color("light") ) {
+    @if ($value == theme-color('light')) {
       color: color-yiq($value);
     }
   }

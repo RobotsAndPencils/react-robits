@@ -1,8 +1,10 @@
 import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
-import FormCheckbox, { FormCheckbox as FormCheckboxComponent } from '../../lib/components/formCheckbox/FormCheckbox'
+import FormCheckbox, {
+  FormCheckbox as FormCheckboxComponent
+} from '../../lib/components/formCheckbox/FormCheckbox'
 
-const reconcileValidity = (componentKnobs) => {
+const reconcileValidity = componentKnobs => {
   const validityStyles = {
     valid: false,
     invalid: false
@@ -36,9 +38,15 @@ export const Normal = ({ theme }) => {
   return (
     <>
       <label>Options:</label>
-      <FormCheckbox id='story_check_1' {...componentKnobs} theme={theme}>Checkbox 1</FormCheckbox>
-      <FormCheckbox id='story_check_2' {...componentKnobs} theme={theme}>Checkbox 2</FormCheckbox>
-      <FormCheckbox id='story_check_3' {...componentKnobs} theme={theme}>Checkbox 3</FormCheckbox>
+      <FormCheckbox id='story_check_1' {...componentKnobs} theme={theme}>
+        Checkbox 1
+      </FormCheckbox>
+      <FormCheckbox id='story_check_2' {...componentKnobs} theme={theme}>
+        Checkbox 2
+      </FormCheckbox>
+      <FormCheckbox id='story_check_3' {...componentKnobs} theme={theme}>
+        Checkbox 3
+      </FormCheckbox>
     </>
   )
 }
@@ -57,9 +65,15 @@ export const Toggles = ({ theme }) => {
   return (
     <>
       <label>Options:</label>
-      <FormCheckbox id='story_check_1' toggle {...componentKnobs} theme={theme}>Checkbox 1</FormCheckbox>
-      <FormCheckbox id='story_check_2' toggle {...componentKnobs} theme={theme}>Checkbox 2</FormCheckbox>
-      <FormCheckbox id='story_check_3' toggle {...componentKnobs} theme={theme}>Checkbox 3</FormCheckbox>
+      <FormCheckbox id='story_check_1' toggle {...componentKnobs} theme={theme}>
+        Checkbox 1
+      </FormCheckbox>
+      <FormCheckbox id='story_check_2' toggle {...componentKnobs} theme={theme}>
+        Checkbox 2
+      </FormCheckbox>
+      <FormCheckbox id='story_check_3' toggle {...componentKnobs} theme={theme}>
+        Checkbox 3
+      </FormCheckbox>
     </>
   )
 }

@@ -1,5 +1,7 @@
 //
-function _interopRequireDefault (obj) { return obj && obj.__esModule ? obj : { 'default': obj } }
+function _interopRequireDefault (obj) {
+  return obj && obj.__esModule ? obj : { default: obj }
+}
 
 // var _PrimaryButton1 = require('./lib/atoms/buttons/primaryButton/PrimaryButton')
 // var _PrimaryButton2 = _interopRequireDefault(_PrimaryButton1)
@@ -13,14 +15,14 @@ function _interopRequireDefault (obj) { return obj && obj.__esModule ? obj : { '
 // find components
 const req = require.context('./src/lib', true, /.js$/)
 
-var regex = /[^\\\\\/]+(?=\.[\w]+$)|[^\\\\\/]+$/
+var regex = /[^\\\\\/]+(?=\.[\w]+$)|[^\\\\\/]+$/ // eslint-disable-line
 
 // dynamically load and export them
-req.keys().forEach((filename) => {
-  let first = req(filename)
-  let second = _interopRequireDefault(first)
+req.keys().forEach(filename => {
+  const first = req(filename)
+  const second = _interopRequireDefault(first)
 
   var name = filename.match(regex)[0]
 
-  exports[name] = second['default']
+  exports[name] = second.default
 })

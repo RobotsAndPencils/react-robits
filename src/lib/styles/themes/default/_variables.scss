@@ -1,8 +1,8 @@
 // Options
 // Quickly modify global styling by enabling or disabling optional features.
-$enable-shadows:            true !default;
-$enable-gradients:          false !default; // Not supported by Shards.
-$enable-fonts-import:       true !default;
+$enable-shadows: true !default;
+$enable-gradients: false !default; // Not supported by Shards.
+$enable-fonts-import: true !default;
 
 // Forms
 
@@ -10,13 +10,13 @@ $border-color: #becad6 !default;
 $input-frozen-color: #abb6bf !default;
 
 // Body
-$body-bg:       $white !default;
+$body-bg: $white !default;
 $body-color: $blueish-grey !default;
 
 // Links
-$link-color:            theme-color("primary") !default;
-$link-decoration:       none !default;
-$link-hover-color:      darken($link-color, 15%) !default;
+$link-color: theme-color('primary') !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;
 
 // Grid breakpoints
@@ -28,9 +28,8 @@ $grid-breakpoints: (
   xl: 1200px
 ) !default;
 
-@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include _assert-starts-at-zero($grid-breakpoints);
-
 
 // Grid containers
 // Define the maximum width of `.container` for different screen sizes.
@@ -41,33 +40,32 @@ $container-max-widths: (
   xl: 1140px
 ) !default;
 
-@include _assert-ascending($container-max-widths, "$container-max-widths");
-
+@include _assert-ascending($container-max-widths, '$container-max-widths');
 
 // Components
 
 $border-width: 1px !default;
-$border-radius:          .375rem !default;
-$border-radius-lg:       .5rem !default;
-$border-radius-sm:       .35rem !default;
+$border-radius: 0.375rem !default;
+$border-radius-lg: 0.5rem !default;
+$border-radius-sm: 0.35rem !default;
 
 $component-active-color: $white !default;
-$component-active-bg:    theme-color("primary") !default;
+$component-active-bg: theme-color('primary') !default;
 
 // Easings
-$ease-in-out-circ: cubic-bezier(.27,.01,.38,1.06);
+$ease-in-out-circ: cubic-bezier(0.27, 0.01, 0.38, 1.06);
 
 // Transitions
-$transition-duration:     250ms;
-$transition-base:         all $transition-duration $ease-in-out-circ !default;
-$transition-fade:         opacity 200ms ease-in-out !default;
-$transition-collapse:     height 350ms ease-in-out !default;
+$transition-duration: 250ms;
+$transition-base: all $transition-duration $ease-in-out-circ !default;
+$transition-fade: opacity 200ms ease-in-out !default;
+$transition-collapse: height 350ms ease-in-out !default;
 
-$hr-border-color: rgba($black,.1) !default;
+$hr-border-color: rgba($black, 0.1) !default;
 $hr-border-width: $border-width !default;
 $hr-margin-y: 1.125rem !default;
 
-$mark-padding: .2em !default;
+$mark-padding: 0.2em !default;
 $mark-bg: #fff09e !default;
 
 // Z-index master list
@@ -75,18 +73,17 @@ $mark-bg: #fff09e !default;
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
-$zindex-dropdown:           1000 !default;
-$zindex-sticky:             1020 !default;
-$zindex-fixed:              1030 !default;
-$zindex-modal-backdrop:     1040 !default;
-$zindex-modal:              1050 !default;
-$zindex-popover:            1060 !default;
-$zindex-tooltip:            1070 !default;
+$zindex-dropdown: 1000 !default;
+$zindex-sticky: 1020 !default;
+$zindex-fixed: 1030 !default;
+$zindex-modal-backdrop: 1040 !default;
+$zindex-modal: 1050 !default;
+$zindex-popover: 1060 !default;
+$zindex-tooltip: 1070 !default;
 
-$card-box-shadow:               0 .46875rem 2.1875rem rgba($blueish-grey, .1),
-                                0 .9375rem 1.40625rem rgba($blueish-grey, .1),
-                                0 .25rem .53125rem rgba($blueish-grey, .12),
-                                0 .125rem .1875rem rgba($blueish-grey, .1);
+$card-box-shadow: 0 0.46875rem 2.1875rem rgba($blueish-grey, 0.1),
+  0 0.9375rem 1.40625rem rgba($blueish-grey, 0.1), 0 0.25rem 0.53125rem rgba($blueish-grey, 0.12),
+  0 0.125rem 0.1875rem rgba($blueish-grey, 0.1);
 
 // Spacing
 

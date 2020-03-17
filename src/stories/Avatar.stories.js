@@ -9,7 +9,7 @@ export default {
 }
 
 export const Normal = ({ theme }) => {
-  let componentKnobs = {
+  const componentKnobs = {
     squared: boolean('Squared', false),
     bordered: boolean('Bordered', false),
     withShadow: boolean('With Shadow', false),
@@ -20,9 +20,27 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Avatar {...componentKnobs} size='sm' editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined} theme={theme}>{text('Initials', 'RNP')}</Avatar>
-      <Avatar {...componentKnobs} size='md' editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined} theme={theme}>{text('Initials', 'RNP')}</Avatar>
-      <Avatar {...componentKnobs} size='lg' editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined} theme={theme}>{text('Initials', 'RNP')}</Avatar>
+      <Avatar
+        {...componentKnobs}
+        size='sm'
+        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        theme={theme}>
+        {text('Initials', 'RNP')}
+      </Avatar>
+      <Avatar
+        {...componentKnobs}
+        size='md'
+        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        theme={theme}>
+        {text('Initials', 'RNP')}
+      </Avatar>
+      <Avatar
+        {...componentKnobs}
+        size='lg'
+        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        theme={theme}>
+        {text('Initials', 'RNP')}
+      </Avatar>
     </>
   )
 }

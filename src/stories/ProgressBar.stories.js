@@ -1,6 +1,8 @@
 import React from 'react'
 import { boolean, text, number, select } from '@storybook/addon-knobs'
-import ProgressBar, { ProgressBar as ProgressBarComponent } from '../lib/components/progressBar/ProgressBar'
+import ProgressBar, {
+  ProgressBar as ProgressBarComponent
+} from '../lib/components/progressBar/ProgressBar'
 
 export default {
   title: 'Robits/ProgressBar',
@@ -19,7 +21,9 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <ProgressBar {...componentKnobs} theme={theme}>{componentKnobs.withValue ? componentKnobs.value : null}</ProgressBar>
+      <ProgressBar {...componentKnobs} theme={theme}>
+        {componentKnobs.withValue ? componentKnobs.value : null}
+      </ProgressBar>
     </>
   )
 }
@@ -35,9 +39,15 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <ProgressBar {...componentKnobs} label='Large' size='lg' theme={theme}>{componentKnobs.withValue ? componentKnobs.value : null}</ProgressBar>
-      <ProgressBar {...componentKnobs} label='Normal' theme={theme}>{componentKnobs.withValue ? componentKnobs.value : null}</ProgressBar>
-      <ProgressBar {...componentKnobs} label='Small' size='sm' theme={theme}>{componentKnobs.withValue ? componentKnobs.value : null}</ProgressBar>
+      <ProgressBar {...componentKnobs} label='Large' size='lg' theme={theme}>
+        {componentKnobs.withValue ? componentKnobs.value : null}
+      </ProgressBar>
+      <ProgressBar {...componentKnobs} label='Normal' theme={theme}>
+        {componentKnobs.withValue ? componentKnobs.value : null}
+      </ProgressBar>
+      <ProgressBar {...componentKnobs} label='Small' size='sm' theme={theme}>
+        {componentKnobs.withValue ? componentKnobs.value : null}
+      </ProgressBar>
     </>
   )
 }
@@ -56,7 +66,11 @@ export const Multiples = ({ theme }) => {
 
   const secondKnobs = {
     value: number('Second Value', 25),
-    barColor: select('Second Bar Color', ['primary', 'secondary', 'success', 'warning'], 'secondary')
+    barColor: select(
+      'Second Bar Color',
+      ['primary', 'secondary', 'success', 'warning'],
+      'secondary'
+    )
   }
 
   const thirdKnobs = {
@@ -67,9 +81,15 @@ export const Multiples = ({ theme }) => {
   return (
     <>
       <ProgressBar multi theme={theme}>
-        <ProgressBar {...parentKnobs} {...firstKnobs} bar theme={theme}>{parentKnobs.withValue ? firstKnobs.value : null}</ProgressBar>
-        <ProgressBar {...parentKnobs} {...secondKnobs} bar theme={theme}>{parentKnobs.withValue ? secondKnobs.value : null}</ProgressBar>
-        <ProgressBar {...parentKnobs} {...thirdKnobs} bar theme={theme}>{parentKnobs.withValue ? thirdKnobs.value : null}</ProgressBar>
+        <ProgressBar {...parentKnobs} {...firstKnobs} bar theme={theme}>
+          {parentKnobs.withValue ? firstKnobs.value : null}
+        </ProgressBar>
+        <ProgressBar {...parentKnobs} {...secondKnobs} bar theme={theme}>
+          {parentKnobs.withValue ? secondKnobs.value : null}
+        </ProgressBar>
+        <ProgressBar {...parentKnobs} {...thirdKnobs} bar theme={theme}>
+          {parentKnobs.withValue ? thirdKnobs.value : null}
+        </ProgressBar>
       </ProgressBar>
     </>
   )

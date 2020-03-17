@@ -6,7 +6,6 @@
 
     // Fix cards with background colors.
     &.card {
-
       // Improve content accessibility.
       .card-title,
       .card-body,
@@ -21,7 +20,6 @@
         background: darken($color, 3%);
       }
     }
-
   }
   a#{$parent} {
     @include hover-focus {

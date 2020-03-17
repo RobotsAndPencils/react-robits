@@ -56,8 +56,7 @@ export const ProgressBar = ({
       role='progressbar'
       aria-valuenow={value}
       aria-valuemin='0'
-      aria-valuemax={max}
-    >
+      aria-valuemax={max}>
       {children}
     </div>
   )
@@ -68,15 +67,7 @@ export const ProgressBar = ({
 
   return (
     <>
-      {
-        label
-          ? (
-            <label>
-              {label}
-            </label>
-          )
-          : []
-      }
+      {label ? <label>{label}</label> : []}
       <Tag {...rest} className={progressClasses}>
         {ProgressBar}
       </Tag>

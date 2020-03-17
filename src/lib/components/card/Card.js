@@ -26,13 +26,9 @@ export const Card = ({
     }
   }, [styling])
 
-  const classes = classNames(
-    className,
-    styling.locals.card,
-    size && styling.locals[`card-${size}`]
-  )
+  const classes = classNames(className, styling.locals.card, size && styling.locals[`card-${size}`])
 
-  const onClickHandler = (e) => {
+  const onClickHandler = e => {
     if (disabled) {
       e.preventDefault()
       return
@@ -44,23 +40,10 @@ export const Card = ({
   }
 
   return (
-    <div
-      ref={innerRef}
-      disabled={disabled}
-      className={classes}
-      onClick={onClickHandler}
-      {...props}>
-      {
-        header
-          ? <div className={styling.locals['card-header']}>{header}</div>
-          : []
-      }
+    <div ref={innerRef} disabled={disabled} className={classes} onClick={onClickHandler} {...props}>
+      {header ? <div className={styling.locals['card-header']}>{header}</div> : []}
       {children}
-      {
-        footer
-          ? <div className={styling.locals['card-footer']}>{footer}</div>
-          : []
-      }
+      {footer ? <div className={styling.locals['card-footer']}>{footer}</div> : []}
     </div>
   )
 }
@@ -86,11 +69,7 @@ Card.propTypes = {
    * The inner ref.
    * @type {[type]}
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ])
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(Card)

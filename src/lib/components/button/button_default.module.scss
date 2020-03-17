@@ -1,11 +1,10 @@
-@import '~themes/default/tokens';
+@import '../../styles/themes/default/tokens';
 
-
-$btn-padding-y:       .75rem !default;
-$btn-padding-x:       1.25rem !default;
-$btn-padding-y-lg: .75rem !default;
+$btn-padding-y: 0.75rem !default;
+$btn-padding-x: 1.25rem !default;
+$btn-padding-y-lg: 0.75rem !default;
 $btn-padding-x-lg: 1.75rem !default;
-$btn-padding-y-sm: .35rem !default;
+$btn-padding-y-sm: 0.35rem !default;
 $btn-padding-x-sm: 1rem !default;
 
 $btn-line-height-base: 1.125 !default;
@@ -14,28 +13,28 @@ $btn-line-height-lg: $line-height-lg !default;
 
 $btn-pill-border-radius: 50px !default;
 
-$btn-font-weight:                 $font-weight-normal !default;
-$btn-font-size:                   .875rem !default;
-$btn-font-size-sm:                0.75rem !default;
-$btn-font-size-lg:                1.125rem !default;
-$btn-font-family:                 $font-family-poppins-first !default;
+$btn-font-weight: $font-weight-normal !default;
+$btn-font-size: 0.875rem !default;
+$btn-font-size-sm: 0.75rem !default;
+$btn-font-size-lg: 1.125rem !default;
+$btn-font-family: $font-family-poppins-first !default;
 
-$btn-box-shadow:                  none !default;
-$btn-active-box-shadow:           inset 0 3px 5px rgba($black,.125) !default;
+$btn-box-shadow: none !default;
+$btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125) !default;
 
-$btn-link-disabled-color:        $gray-600 !default;
-$btn-block-spacing-y:            .5rem !default;
+$btn-link-disabled-color: $gray-600 !default;
+$btn-block-spacing-y: 0.5rem !default;
 
-$btn-border-radius:              $border-radius !default;
-$btn-border-radius-lg:           $border-radius-lg !default;
-$btn-border-radius-sm:           $border-radius-sm !default;
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-lg: $border-radius-lg !default;
+$btn-border-radius-sm: $border-radius-sm !default;
 
 $btn-border-width: 1px !default;
 
-$btn-transition:                 $transition-base !default;
+$btn-transition: $transition-base !default;
 
 // Button sizes
-@mixin button-size( $padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
   padding: $padding-y $padding-x;
   font-size: $font-size;
   line-height: $line-height;
@@ -44,12 +43,12 @@ $btn-transition:                 $transition-base !default;
 
 @keyframes :global(spin) {
   to {
-    transform: rotate(360deg)
+    transform: rotate(360deg);
   }
 }
 
 // Loading spinner
-@mixin spinner ($track: #777, $bar: #fff) {
+@mixin spinner($track: #777, $bar: #fff) {
   &:after {
     content: '';
     box-sizing: border-box;
@@ -65,13 +64,22 @@ $btn-transition:                 $transition-base !default;
     border-top-color: $bar;
 
     :global {
-      animation: spin .6s linear infinite;
+      animation: spin 0.6s linear infinite;
     }
   }
 }
 
 // Button variants
-@mixin button-variant( $background, $border: $background, $hover-background: darken($background, 5%), $hover-border: $hover-background, $hover-box-shadow: 0 4px 10px rgba($background, .25), $active-background: darken($background, 5%), $active-border: darken($border, 10%), $active-box-shadow: inset 0 3px 5px rgba($black, .125)) {
+@mixin button-variant(
+  $background,
+  $border: $background,
+  $hover-background: darken($background, 5%),
+  $hover-border: $hover-background,
+  $hover-box-shadow: 0 4px 10px rgba($background, 0.25),
+  $active-background: darken($background, 5%),
+  $active-border: darken($border, 10%),
+  $active-box-shadow: inset 0 3px 5px rgba($black, 0.125)
+) {
   color: color-yiq($background);
   border-color: $border;
   background-color: $background;
@@ -93,16 +101,16 @@ $btn-transition:                 $transition-base !default;
   &:focus,
   &.focus {
     @if $enable-shadows {
-      box-shadow: 0 0 0 3px rgba($background, .15), 0 3px 15px rgba($background, 0.2), 0 2px 5px rgba($black, .1);
-    }
-    @else {
-      box-shadow: 0 0 0 3px rgba($background, .5);
+      box-shadow: 0 0 0 3px rgba($background, 0.15), 0 3px 15px rgba($background, 0.2),
+        0 2px 5px rgba($black, 0.1);
+    } @else {
+      box-shadow: 0 0 0 3px rgba($background, 0.5);
     }
   }
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active,
-  .show>&.dropdown-toggle {
+  .show > &.dropdown-toggle {
     color: color-yiq($active-background);
     background-color: $active-background;
     border-color: $active-border;
@@ -118,11 +126,16 @@ $btn-transition:                 $transition-base !default;
     @include spinner(lighten($background, 20), #fff);
   }
 }
-  
-@mixin button-outline-variant( $color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color) {
+
+@mixin button-outline-variant(
+  $color,
+  $color-hover: color-yiq($color),
+  $active-background: $color,
+  $active-border: $color
+) {
   $button-text-color: $color; // Fix light or white outlined buttons
 
-  @if ($color==theme-color("light") or $color==$white) {
+  @if ($color==theme-color('light') or $color==$white) {
     $button-text-color: color-yiq($color);
   }
 
@@ -135,16 +148,16 @@ $btn-transition:                 $transition-base !default;
     color: color-yiq($color);
     background-color: $active-background;
     border-color: $active-border;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba($color, .25);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba($color, 0.25);
   }
 
   &:focus,
   &.focus {
     @if $enable-shadows {
-      box-shadow: 0 0 0 3px rgba($color, .15), 0 3px 15px rgba($color, 0.2), 0 2px 5px rgba($black, .1) !important;
-    }
-    @else {
-      box-shadow: 0 0 0 3px rgba($color, .5) !important;
+      box-shadow: 0 0 0 3px rgba($color, 0.15), 0 3px 15px rgba($color, 0.2),
+        0 2px 5px rgba($black, 0.1) !important;
+    } @else {
+      box-shadow: 0 0 0 3px rgba($color, 0.5) !important;
     }
   }
 
@@ -157,24 +170,23 @@ $btn-transition:                 $transition-base !default;
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active,
-  .show>&.dropdown-toggle {
+  .show > &.dropdown-toggle {
     color: color-yiq($active-background);
     background-color: $active-background;
     border-color: $active-border;
     &:focus {
       // Avoid using mixin so we can pass custom focus shadow properly
       @if $enable-shadows {
-        box-shadow: inset 0 3px 5px rgba($black, .125) !important;
-      }
-      @else {
+        box-shadow: inset 0 3px 5px rgba($black, 0.125) !important;
+      } @else {
         box-shadow: none !important;
       }
     }
   }
 
   &.loading {
-    color: rgba(0,0,0,0.04);
-    @include spinner(rgba(0,0,0,0.15), lighten($color, 10));
+    color: rgba(0, 0, 0, 0.04);
+    @include spinner(rgba(0, 0, 0, 0.15), lighten($color, 10));
   }
 }
 
@@ -205,13 +217,13 @@ $btn-transition:                 $transition-base !default;
   &:focus,
   &.focus {
     outline: 0;
-   box-shadow: none;
+    box-shadow: none;
   }
 
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled).active {
     background-image: none;
-   box-shadow: none;
+    box-shadow: none;
   }
 
   // Disabled comes first so active can properly restyle

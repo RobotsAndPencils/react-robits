@@ -29,11 +29,18 @@ export const Normal = ({ theme }) => {
       initialValue={false}
       render={(modalOpen, setModalOpen) => (
         <>
-          <Button theme={theme} onClick={() => setModalOpen(true)}>Open Modal</Button>
-          <Modal {...componentKnobs} theme={theme} open={modalOpen} toggleModal={() => setModalOpen(!modalOpen)}>
+          <Button theme={theme} onClick={() => setModalOpen(true)}>
+            Open Modal
+          </Button>
+          <Modal
+            {...componentKnobs}
+            theme={theme}
+            open={modalOpen}
+            toggleModal={() => setModalOpen(!modalOpen)}>
             <ModalBody theme={theme}>Hello World</ModalBody>
           </Modal>
         </>
-      )} />
+      )}
+    />
   )
 }

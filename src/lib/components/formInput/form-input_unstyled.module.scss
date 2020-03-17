@@ -1,4 +1,4 @@
-@import '~themes/unstyled/tokens';
+@import '../../styles/themes/unstyled/tokens';
 
 .disabled {
   @include disabled-form-control;
@@ -22,7 +22,7 @@
     }
 
     &::placeholder {
-      color: #C0C0C0;
+      color: #c0c0c0;
     }
   }
 }

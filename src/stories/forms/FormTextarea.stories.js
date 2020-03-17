@@ -1,8 +1,10 @@
 import React from 'react'
 import { boolean, select, text, number } from '@storybook/addon-knobs'
-import FormTextarea, { FormTextarea as FormTextareaComponent } from '../../lib/components/formTextarea/FormTextarea'
+import FormTextarea, {
+  FormTextarea as FormTextareaComponent
+} from '../../lib/components/formTextarea/FormTextarea'
 
-const reconcileValidity = (componentKnobs) => {
+const reconcileValidity = componentKnobs => {
   const validityStyles = {
     valid: false,
     invalid: false
@@ -42,7 +44,6 @@ export const Normal = ({ theme }) => {
   )
 }
 
-
 export const Sizes = ({ theme }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
@@ -60,7 +61,7 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <FormTextarea {...componentKnobs} theme={theme} placeholder="With Rows and Columns" />
+      <FormTextarea {...componentKnobs} theme={theme} placeholder='With Rows and Columns' />
     </>
   )
 }

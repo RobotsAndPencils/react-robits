@@ -1,4 +1,4 @@
-@import '~themes/unstyled/tokens';
+@import '../../styles/themes/unstyled/tokens';
 
 .disabled {
   @include disabled-form-control;
@@ -12,7 +12,8 @@
       outline: none;
     }
 
-    &:read-only, &::read-only {
+    &:read-only,
+    &::read-only {
       cursor: not-allowed;
     }
 

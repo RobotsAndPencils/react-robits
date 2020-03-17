@@ -29,7 +29,7 @@ export const DropdownToggle = ({
 
   const context = useContext(DropdownContext)
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     if (rest.disabled) {
       e.preventDefault()
       return
@@ -55,9 +55,7 @@ export const DropdownToggle = ({
     nav && styling.locals['nav-link']
   )
 
-  const dropdownChildren = rest.children || (
-    <span className='sr-only'>{ariaLabel}</span>
-  )
+  const dropdownChildren = rest.children || <span className='sr-only'>{ariaLabel}</span>
 
   let Tag
 
@@ -75,12 +73,7 @@ export const DropdownToggle = ({
     return (
       <Reference>
         {() => (
-          <Tag
-            {...rest}
-            className={classes}
-            onClick={handleClick}
-            aria-expanded={context.open}
-          >
+          <Tag {...rest} className={classes} onClick={handleClick} aria-expanded={context.open}>
             {dropdownChildren}
           </Tag>
         )}
@@ -91,12 +84,7 @@ export const DropdownToggle = ({
   return (
     <Reference>
       {() => (
-        <Tag
-          {...rest}
-          className={classes}
-          onClick={handleClick}
-          aria-expanded={context.open}
-        >
+        <Tag {...rest} className={classes} onClick={handleClick} aria-expanded={context.open}>
           {dropdownChildren}
         </Tag>
       )}

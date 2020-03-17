@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const UseState = ({ render, initialValue }) => {
   const [variable, setVariable] = useState(initialValue)

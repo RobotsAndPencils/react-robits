@@ -1,13 +1,17 @@
-@import '~themes/default/tokens';
+@import '../../styles/themes/default/tokens';
 
 $form-checkbox-indicator-border-radius: 2px !default;
-$form-checkbox-indicator-transition: transform $transition-duration $ease-in-out-circ, border $transition-duration $ease-in-out-circ !default;
+$form-checkbox-indicator-transition: transform $transition-duration $ease-in-out-circ,
+  border $transition-duration $ease-in-out-circ !default;
 
 $custom-checkbox-indicator-indeterminate-bg: $component-active-bg !default;
 $custom-checkbox-indicator-indeterminate-color: $custom-control-indicator-checked-color !default;
-$custom-checkbox-indicator-icon-indeterminate: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3E%3C/svg%3E"), "#", "%23") !default;
+$custom-checkbox-indicator-icon-indeterminate: str-replace(
+  url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3E%3C/svg%3E"),
+  '#',
+  '%23'
+) !default;
 $custom-checkbox-indicator-indeterminate-box-shadow: none !default;
-
 
 // Custom toggle
 $custom-toggle-width: 3.125rem !default;
@@ -16,7 +20,8 @@ $custom-toggle-border-width: 0.0625rem !default;
 $custom-toggle-border: $custom-toggle-border-width solid $form-control-border-color !default;
 $custom-toggle-border-radius: 100px !default;
 
-$custom-toggle-focus-box-shadow: 0 .313rem .719rem rgba($success,.1), 0 .156rem .125rem rgba($black, .06) !default;
+$custom-toggle-focus-box-shadow: 0 0.313rem 0.719rem rgba($success, 0.1),
+  0 0.156rem 0.125rem rgba($black, 0.06) !default;
 
 $custom-toggle-checked-background: $success !default;
 $custom-toggle-checked-border-color: $custom-toggle-checked-background !default;
@@ -27,11 +32,11 @@ $custom-toggle-knob-height: 1.25rem !default;
 $custom-toggle-knob-border-radius: 6.25rem !default;
 $custom-toggle-knob-active-width: 1.625rem !default;
 
-$custom-toggle-width-sm : 2.1875rem !default;
-$custom-toggle-height-sm : 1.125rem !default;
-$custom-toggle-knob-width-sm: .75rem !default;
+$custom-toggle-width-sm: 2.1875rem !default;
+$custom-toggle-height-sm: 1.125rem !default;
+$custom-toggle-knob-width-sm: 0.75rem !default;
 $custom-toggle-knob-active-width-sm: 1rem !default;
-$custom-toggle-knob-height-sm: .75rem !default;
+$custom-toggle-knob-height-sm: 0.75rem !default;
 
 .form-checkbox {
   position: relative;
@@ -61,7 +66,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
         background-color: $custom-control-indicator-checked-bg;
         background-image: none;
       }
-  
+
       &::after {
         opacity: 1;
         transform: rotate(45deg) scale(1);
@@ -96,7 +101,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
           background: $form-control-disabled-bg;
           border-color: $border-color;
         }
-    
+
         &::after {
           border-color: $border-color;
         }
@@ -109,7 +114,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
         background-color: $custom-checkbox-indicator-indeterminate-bg;
         box-shadow: $custom-checkbox-indicator-indeterminate-box-shadow;
       }
-  
+
       &::after {
         content: '';
         position: absolute;
@@ -138,7 +143,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
       position: absolute;
       display: block;
       pointer-events: all;
-      content: "";
+      content: '';
       user-select: none;
       top: (($line-height-base - $custom-control-indicator-size) / 2);
       left: 0;
@@ -146,7 +151,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
       height: $custom-control-indicator-size;
       background-color: $form-control-bg;
       border: $custom-control-indicator-border;
-      transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+      transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);
       border-radius: $form-checkbox-indicator-border-radius;
     }
 
@@ -155,10 +160,10 @@ $custom-toggle-knob-height-sm: .75rem !default;
       box-sizing: border-box;
       position: absolute;
       display: block;
-      content: "";
+      content: '';
       background-repeat: no-repeat;
       background-position: center center;
-      
+
       content: '';
       top: 5px;
       left: 7px;
@@ -287,7 +292,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
     label {
       // Background
       &::before {
-        top: .1875rem;
+        top: 0.1875rem;
         position: absolute;
         display: block;
         width: $custom-toggle-width-sm;
@@ -301,7 +306,7 @@ $custom-toggle-knob-height-sm: .75rem !default;
       &::after {
         content: '';
         position: absolute;
-        top: .375rem;
+        top: 0.375rem;
         left: 0.1875rem;
         width: $custom-toggle-knob-width-sm;
         height: $custom-toggle-knob-height-sm;
@@ -326,17 +331,19 @@ $custom-toggle-knob-height-sm: .75rem !default;
   }
 
   & ~ :global(.form-control-descenders) {
-    .form-control-required, .form-control-error {
+    .form-control-required,
+    .form-control-error {
       margin-left: ($custom-toggle-width + 0.625rem);
     }
   }
 }
 
 :global {
-  .form-control-required, .form-control-error {
-    margin: 0 .5rem .5rem $custom-control-gutter;
+  .form-control-required,
+  .form-control-error {
+    margin: 0 0.5rem 0.5rem $custom-control-gutter;
   }
 }
 
-@include form-validation-state("valid", $success);
-@include form-validation-state("invalid", $danger);
+@include form-validation-state('valid', $success);
+@include form-validation-state('invalid', $danger);

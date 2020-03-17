@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { boolean, select } from '@storybook/addon-knobs'
 import Badge, { Badge as BadgeComponent } from '../lib/components/badge/Badge'
 
-const reconcileCorners = (componentKnobs) => {
+const reconcileCorners = componentKnobs => {
   const cornersStyle = {
     squared: false,
     pill: false
@@ -33,14 +33,30 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Badge {...componentKnobs} theme={theme} styleType='primary' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='secondary' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='success' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='info' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='warning' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='danger' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='light' onClick={action('removed')}>Hello Badge</Badge>
-      <Badge {...componentKnobs} theme={theme} styleType='dark' onClick={action('removed')}>Hello Badge</Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='primary' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='secondary' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='success' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='info' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='warning' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='danger' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='light' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
+      <Badge {...componentKnobs} theme={theme} styleType='dark' onClick={action('removed')}>
+        Hello Badge
+      </Badge>
     </>
   )
 }

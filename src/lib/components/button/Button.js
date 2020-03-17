@@ -34,22 +34,22 @@ export const Button = ({
 
   const classes = classNames(
     className,
-    styling.locals['btn'],
-    isLoading && styling.locals['loading'],
-    disabled && styling.locals['disabled'],
+    styling.locals.btn,
+    isLoading && styling.locals.loading,
+    disabled && styling.locals.disabled,
     styleType && styling.locals[`btn-${outline ? 'outline-' : ''}${styleType}`],
     size && styling.locals[`btn-${size}`],
     pill && styling.locals['btn-pill'],
     squared && styling.locals['btn-squared'],
     block && styling.locals['btn-block'],
-    active && styling.locals['active']
+    active && styling.locals.active
   )
 
   if (isLoading) {
     disabled = true
   }
 
-  const onClickHandler = (e) => {
+  const onClickHandler = e => {
     if (disabled) {
       e.preventDefault()
       return
@@ -129,11 +129,7 @@ Button.propTypes = {
    * The inner ref.
    * @type {[type]}
    */
-  innerRef: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func,
-    PropTypes.string
-  ])
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(Button)
