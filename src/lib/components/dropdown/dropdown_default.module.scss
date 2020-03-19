@@ -55,6 +55,10 @@ $btn-padding-x-sm: 1rem !default;
 .dropleft {
   position: relative;
   display: inline-block;
+
+  > *:first-child {
+    cursor: pointer;
+  }
 }
 
 .dropdown-toggle {
@@ -190,6 +194,7 @@ $btn-padding-x-sm: 1rem !default;
   border: 0; // For `<button>`s
   font-size: $dropdown-item-font-size;
   transition: $dropdown-item-transition;
+  cursor: pointer;
 
   @include hover-focus {
     color: $dropdown-link-hover-color;
