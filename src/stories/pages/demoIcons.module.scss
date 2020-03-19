@@ -1,0 +1,32 @@
+.grid-caption {
+  font-size: 14px;
+  max-width: 800px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: #999;
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: 15fr 15fr 15fr 15fr 15fr 15fr;
+  align-items: baseline;
+
+  > * {
+    margin: 25px;
+    font-size: 13px;
+    color: #999999;
+    text-align: center;
+
+    svg {
+      display: block;
+      margin: 0 auto 15px;
+    }
+  }
+}
+
+code {
+  background-color: #f7f7f7;
+  border-radius: 2px;
+  padding: 2px 5px;
+}

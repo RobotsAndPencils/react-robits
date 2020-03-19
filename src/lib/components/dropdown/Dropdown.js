@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -40,18 +40,52 @@ export const Dropdown = ({
 
   const containerRef = useRef(null)
 
-  const handleListeners = () => {
+  const handleToggle = useCallback(
+    e => {
+      if (disabled) {
+        return e && e.preventDefault()
+      }
+
+      return toggle(e)
+    },
+    [toggle, disabled]
+  )
+
+  const handleDocumentClick = useCallback(
+    e => {
+      if (e && (e.which === 3 || (e.type === 'keyup' && e.which !== KEYCODES.TAB))) {
+        return
+      }
+
+      if (
+        containerRef.current.contains(e.target) &&
+        containerRef.current !== e.target &&
+        (e.type !== 'keyup' || e.which === KEYCODES.TAB)
+      ) {
+        return
+      }
+
+      handleToggle(e)
+    },
+    [handleToggle]
+  )
+
+  const removeListeners = useCallback(() => {
+    EVENTS.CLICK.forEach(e => document.removeEventListener(e, handleDocumentClick, true))
+  }, [handleDocumentClick])
+
+  const addListeners = useCallback(() => {
+    EVENTS.CLICK.forEach(e => document.addEventListener(e, handleDocumentClick, true))
+  }, [handleDocumentClick])
+
+  const handleListeners = useCallback(() => {
     if (open) {
       addListeners()
       return
     }
 
     removeListeners()
-  }
-
-  const removeListeners = () => {
-    EVENTS.CLICK.forEach(e => document.removeEventListener(e, handleDocumentClick, true))
-  }
+  }, [open, addListeners, removeListeners])
 
   useEffect(() => {
     handleListeners()
@@ -63,34 +97,6 @@ export const Dropdown = ({
   useEffect(() => {
     handleListeners()
   }, [open, handleListeners])
-
-  const addListeners = () => {
-    EVENTS.CLICK.forEach(e => document.addEventListener(e, handleDocumentClick, true))
-  }
-
-  const handleDocumentClick = e => {
-    if (e && (e.which === 3 || (e.type === 'keyup' && e.which !== KEYCODES.TAB))) {
-      return
-    }
-
-    if (
-      containerRef.current.contains(e.target) &&
-      containerRef.current !== e.target &&
-      (e.type !== 'keyup' || e.which === KEYCODES.TAB)
-    ) {
-      return
-    }
-
-    handleToggle(e)
-  }
-
-  const handleToggle = e => {
-    if (disabled) {
-      return e && e.preventDefault()
-    }
-
-    return toggle(e)
-  }
 
   rest.tag = rest.tag || (nav ? 'li' : 'div')
 

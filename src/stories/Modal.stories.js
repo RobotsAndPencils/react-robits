@@ -1,9 +1,9 @@
 import React from 'react'
+import { useState } from '@storybook/client-api'
 import { text, boolean, select } from '@storybook/addon-knobs'
 import Modal, { Modal as ModalComponent } from '../lib/components/modal/Modal'
 import ModalBody from '../lib/components/modal/ModalBody'
 import Button from '../lib/components/button/Button'
-import UseState from './pages/UseState'
 
 export default {
   title: 'Robits/Modal',
@@ -24,23 +24,20 @@ export const Normal = ({ theme }) => {
     delete componentKnobs.size
   }
 
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
-    <UseState
-      initialValue={false}
-      render={(modalOpen, setModalOpen) => (
-        <>
-          <Button theme={theme} onClick={() => setModalOpen(true)}>
-            Open Modal
-          </Button>
-          <Modal
-            {...componentKnobs}
-            theme={theme}
-            open={modalOpen}
-            toggleModal={() => setModalOpen(!modalOpen)}>
-            <ModalBody theme={theme}>Hello World</ModalBody>
-          </Modal>
-        </>
-      )}
-    />
+    <>
+      <Button theme={theme} onClick={() => setModalOpen(true)}>
+        Open Modal
+      </Button>
+      <Modal
+        {...componentKnobs}
+        theme={theme}
+        open={modalOpen}
+        toggleModal={() => setModalOpen(!modalOpen)}>
+        <ModalBody theme={theme}>Hello World</ModalBody>
+      </Modal>
+    </>
   )
 }
