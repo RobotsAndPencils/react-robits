@@ -31,7 +31,7 @@ export const Normal = ({ theme }) => {
         <DropdownToggle caret={caret} size={size} disabled={componentKnobs.disabled} theme={theme}>
           Options
         </DropdownToggle>
-        <DropdownMenu theme={theme}>
+        <DropdownMenu theme={theme} size={size}>
           <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
             Action
           </DropdownItem>

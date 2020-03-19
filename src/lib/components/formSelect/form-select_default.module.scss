@@ -6,7 +6,7 @@ $form-select-indicator: str-replace(
   '#',
   '%23'
 ) !default;
-$form-select-indicator-padding: 1rem !default; // Extra padding to account for the presence of the background-image based indicator
+$form-select-indicator-padding: 1.6rem !default; // Extra padding to account for the presence of the background-image based indicator
 $form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
 
 .form-select {
