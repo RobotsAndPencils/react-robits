@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { addDecorator, addParameters } from '@storybook/react'
 import { withContexts } from '@storybook/addon-contexts/react'
 import { withKnobs } from '@storybook/addon-knobs'
@@ -62,7 +63,7 @@ const ContextDecorator = storyFn => {
       {({ theme }) => (
         <>
           <GlobalStyles theme={theme} />
-          {storyFn({ theme })}
+          {storyFn(theme)}
         </>
       )}
     </ThemeDefiner.Consumer>
