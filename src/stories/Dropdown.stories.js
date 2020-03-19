@@ -8,6 +8,7 @@ import DropdownToggle from '../lib/components/dropdown/DropdownToggle'
 import DropdownMenu from '../lib/components/dropdown/DropdownMenu'
 import DropdownItem from '../lib/components/dropdown/DropdownItem'
 import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
+import Avatar from '../lib/components/avatar/Avatar'
 
 export default {
   title: 'Robits/Dropdown',
@@ -28,7 +29,12 @@ export const Normal = ({ theme }) => {
   return (
     <>
       <Dropdown {...componentKnobs} theme={theme} open={open} toggle={() => toggleOpen(!open)}>
-        <DropdownToggle caret={caret} size={size} disabled={componentKnobs.disabled} theme={theme}>
+        <DropdownToggle
+          tag={Avatar}
+          caret={caret}
+          size={size}
+          disabled={componentKnobs.disabled}
+          theme={theme}>
           Options
         </DropdownToggle>
         <DropdownMenu theme={theme}>
