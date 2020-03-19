@@ -1,17 +1,17 @@
 $form-control-min-width: 250px !default;
-$form-control-padding-y: 0.5rem !default;
-$form-control-padding-x: 0.75rem !default;
+$form-control-padding-y: 0.8rem !default;
+$form-control-padding-x: 1.2rem !default;
 
-$form-control-font-size: 0.95rem !default;
+$form-control-font-size: 1.52rem !default;
 $form-control-line-height: 1.5 !default;
 $form-control-color: $gray-700 !default;
 
-$form-control-padding-y-sm: 0.35rem !default;
-$form-control-padding-x-sm: 0.5rem !default;
+$form-control-padding-y-sm: 0.56rem !default;
+$form-control-padding-x-sm: 0.8rem !default;
 $form-control-line-height-sm: $form-control-line-height !default;
 
-$form-control-padding-y-lg: 0.75rem !default;
-$form-control-padding-x-lg: 1rem !default;
+$form-control-padding-y-lg: 1.2rem !default;
+$form-control-padding-x-lg: 1.6rem !default;
 $form-control-line-height-lg: $form-control-line-height !default;
 
 $form-control-bg: $white !default;
@@ -27,8 +27,8 @@ $form-control-box-shadow: none !default;
 
 $form-control-focus-bg: $form-control-bg !default;
 $form-control-focus-border-color: $primary !default;
-$form-control-focus-box-shadow: 0 0.313rem 0.719rem rgba($primary, 0.1),
-  0 0.156rem 0.125rem rgba($black, 0.06) !default;
+$form-control-focus-box-shadow: 0 0.5008rem 1.1504rem rgba($primary, 0.1),
+  0 0.2496rem 0.2rem rgba($black, 0.06) !default;
 $form-control-focus-color: $form-control-color !default;
 
 $form-control-hover-border-color: darken($form-control-border-color, 15) !default;
@@ -57,12 +57,12 @@ $form-control-transition: box-shadow $transition-duration $ease-in-out-circ,
   border $transition-duration $ease-in-out-circ !default;
 
 // checkboxes and radios
-$custom-control-gutter: 1.688rem !default;
-$custom-control-spacer-x: 1rem !default;
+$custom-control-gutter: 2.7008rem !default;
+$custom-control-spacer-x: 1.6rem !default;
 $custom-control-indicator-checked-color: $white !default;
 $custom-control-indicator-checked-bg: $primary !default;
 $custom-control-indicator-active-color: $white !default;
-$custom-control-indicator-size: 1.125rem !default;
+$custom-control-indicator-size: 1.8rem !default;
 $custom-control-indicator-border: $form-control-border-width solid $form-control-border-color !default;
 $custom-control-indicator-active-box-shadow: none !default;
 $custom-control-indicator-active-bg: lighten($primary, 35%) !default;
@@ -95,7 +95,7 @@ $custom-control-indicator-active-bg: lighten($primary, 35%) !default;
       box-shadow: 0 5px 11.5px rgba($color, 0.1);
 
       &:focus {
-        box-shadow: 0 5px 11.5px rgba($color, 0.1), 0 1px 1px 0.1rem rgba($color, 0.2);
+        box-shadow: 0 5px 11.5px rgba($color, 0.1), 0 1px 1px 0.16rem rgba($color, 0.2);
       }
 
       &:hover {

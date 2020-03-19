@@ -10,6 +10,7 @@
   // HTML (element)
   //
   html {
+    font-size: 10px;
     @include media-breakpoint-down(xs) {
       font-size: 15px;
     }
@@ -58,12 +59,12 @@
   h5,
   h6 {
     margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
 
   label {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     color: $gray-600;
   }
 
@@ -268,13 +269,13 @@
 
   .form-control-container {
     label + [class*='form-control-hint'] {
-      margin: 0 0 0.5rem 0;
+      margin: 0 0 0.8rem 0;
     }
   }
 
   .form-control-error {
-    font-size: 0.75rem;
-    margin: 0.5rem;
+    font-size: 1.2rem;
+    margin: 0.8rem;
     color: $danger;
     font-weight: $medium;
   }
@@ -285,8 +286,8 @@
   }
 
   .form-control-required {
-    font-size: 0.75rem;
-    margin: 0.5rem;
+    font-size: 1.2rem;
+    margin: 0.8rem;
     color: $gray-500;
     font-weight: $semibold;
     text-transform: uppercase;

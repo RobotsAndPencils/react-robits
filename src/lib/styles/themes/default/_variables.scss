@@ -45,9 +45,9 @@ $container-max-widths: (
 // Components
 
 $border-width: 1px !default;
-$border-radius: 0.375rem !default;
-$border-radius-lg: 0.5rem !default;
-$border-radius-sm: 0.35rem !default;
+$border-radius: 0.6rem !default;
+$border-radius-lg: 0.8rem !default;
+$border-radius-sm: 0.56rem !default;
 
 $component-active-color: $white !default;
 $component-active-bg: theme-color('primary') !default;
@@ -63,7 +63,7 @@ $transition-collapse: height 350ms ease-in-out !default;
 
 $hr-border-color: rgba($black, 0.1) !default;
 $hr-border-width: $border-width !default;
-$hr-margin-y: 1.125rem !default;
+$hr-margin-y: 1.8rem !default;
 
 $mark-padding: 0.2em !default;
 $mark-bg: #fff09e !default;
@@ -81,10 +81,10 @@ $zindex-modal: 1050 !default;
 $zindex-popover: 1060 !default;
 $zindex-tooltip: 1070 !default;
 
-$card-box-shadow: 0 0.46875rem 2.1875rem rgba($blueish-grey, 0.1),
-  0 0.9375rem 1.40625rem rgba($blueish-grey, 0.1), 0 0.25rem 0.53125rem rgba($blueish-grey, 0.12),
-  0 0.125rem 0.1875rem rgba($blueish-grey, 0.1);
+$card-box-shadow: 0 0.75rem 3.5rem rgba($blueish-grey, 0.1),
+  0 1.5rem 2.25rem rgba($blueish-grey, 0.1), 0 0.4rem 0.85rem rgba($blueish-grey, 0.12),
+  0 0.2rem 0.3rem rgba($blueish-grey, 0.1);
 
 // Spacing
 
-$spacer: 1.5rem !default; // ~ 24px
+$spacer: 2.4rem !default; // ~ 24px

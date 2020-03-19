@@ -5,14 +5,14 @@ $zindex-modal: 1050 !default;
 
 $modal-content-border-color: rgba($black, 0.2) !default;
 $modal-content-border-radius: $border-radius-lg !default;
-$modal-content-box-shadow-xs: 0 0.25rem 0.5rem rgba($black, 0.5) !default;
-$modal-content-box-shadow-sm-up: 0 0.5rem 1rem rgba($black, 0.5) !default;
+$modal-content-box-shadow-xs: 0 0.4rem 0.8rem rgba($black, 0.5) !default;
+$modal-content-box-shadow-sm-up: 0 0.8rem 1.6rem rgba($black, 0.5) !default;
 
-$modal-inner-padding: 1.875rem 2.1875rem !default;
-$modal-footer-padding: 0.9375rem 2.1875rem !default;
+$modal-inner-padding: 3rem 3.5rem !default;
+$modal-footer-padding: 1.5rem 3.5rem !default;
 
-$modal-dialog-margin: 0.625rem !default;
-$modal-dialog-margin-y-sm-up: 1.875rem !default;
+$modal-dialog-margin: 1rem !default;
+$modal-dialog-margin-y-sm-up: 3rem !default;
 
 $modal-title-line-height: $line-height-base !default;
 
@@ -27,7 +27,7 @@ $modal-footer-border-color: lighten($blueish-grey, 50%) !default;
 $modal-header-border-width: $modal-content-border-width !default;
 $modal-footer-border-width: $modal-header-border-width !default;
 
-$modal-header-padding: 0.9375rem 2.1875rem !default;
+$modal-header-padding: 1.5rem 3.5rem !default;
 
 $modal-lg: 800px !default;
 $modal-md: 500px !default;
@@ -147,7 +147,7 @@ $modal-transition: transform 0.3s ease-out !default;
 
   .close {
     float: right;
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 300;
     line-height: 1;
     color: #000;
@@ -195,10 +195,10 @@ $modal-transition: transform 0.3s ease-out !default;
 
   // Easily place margin between footer elements
   > :not(:first-child) {
-    margin-left: 0.25rem;
+    margin-left: 0.4rem;
   }
   > :not(:last-child) {
-    margin-right: 0.25rem;
+    margin-right: 0.4rem;
   }
 }
 

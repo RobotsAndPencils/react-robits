@@ -10,55 +10,55 @@ $font-family-monospace: 'Roboto Mono', Menlo, Monaco, Consolas, 'Liberation Mono
 $font-family-sans-serif: $font-family-system-first !default;
 $font-family-base: $font-family-sans-serif !default;
 
-$font-size-base: 1rem !default;
-$font-size-lg: 1.25rem !default;
-$font-size-sm: 0.875rem !default;
+$font-size-base: 1.6rem !default;
+$font-size-lg: 1.8rem !default;
+$font-size-sm: 1.4rem !default;
 
 $font-weight-normal: 300 !default;
 $font-weight-bold: 500 !default;
 
 $font-weight-base: $font-weight-normal !default;
-$line-height-base: 1.5 !default;
-$line-height-lg: 1.5 !default;
-$line-height-sm: 1.5 !default;
+$line-height-base: 2.4 !default;
+$line-height-lg: 2.4 !default;
+$line-height-sm: 2.4 !default;
 
-$h1-font-size: 3.052rem !default;
-$h2-font-size: 2.441rem !default;
-$h3-font-size: 1.953rem !default;
-$h4-font-size: 1.563rem !default;
-$h5-font-size: 1.25rem !default;
-$h6-font-size: 1rem !default;
+$h1-font-size: 4.8832rem !default;
+$h2-font-size: 3.9056rem !default;
+$h3-font-size: 3.1248rem !default;
+$h4-font-size: 2.5008rem !default;
+$h5-font-size: 1.8rem !default;
+$h6-font-size: 1.6rem !default;
 
-$headings-margin-bottom: 0.75rem !default;
+$headings-margin-bottom: 1.2rem !default;
 
 $headings-font-family: $font-family-poppins-first !default;
 $headings-font-weight: 400 !default;
 $headings-color: $gray-900 !default;
-$headings-letter-spacing: -0.0625rem !default; // ~1px
+$headings-letter-spacing: -0.1rem !default; // ~1px
 
-$h1-line-height: 3rem !default;
-$h2-line-height: 2.25rem !default;
-$h3-line-height: 2.25rem !default;
-$h4-line-height: 2rem !default;
-$h5-line-height: 1.5rem !default;
-$h6-line-height: 1.5rem !default;
+$h1-line-height: 4.8rem !default;
+$h2-line-height: 3.6rem !default;
+$h3-line-height: 3.6rem !default;
+$h4-line-height: 3.2rem !default;
+$h5-line-height: 2.4rem !default;
+$h6-line-height: 2.4rem !default;
 
-$display1-size: 7.451rem !default;
-$display2-size: 5.96rem !default;
-$display3-size: 4.768rem !default;
-$display4-size: 3.815rem !default;
+$display1-size: 7.451.6rem !default;
+$display2-size: 9.536rem !default;
+$display3-size: 7.6288rem !default;
+$display4-size: 6.104rem !default;
 
 $display-line-height: 1 !default;
-$display-margin-bottom: 0.75rem !default;
+$display-margin-bottom: 1.2rem !default;
 
-$paragraphs-margin-bottom: 1.75rem !default;
+$paragraphs-margin-bottom: 1.88rem !default;
 
-$lead-line-height: 1.875rem !default;
+$lead-line-height: 3rem !default;
 
 $small-font-size: 80% !default;
 
 $text-muted: $gray-600 !default;
 
-$blockquote-font-size: 1.5rem !default;
-$blockquote-footer-font-size: 1.125rem !default;
-$blockquote-margin-bottom: 0.75rem !default;
+$blockquote-font-size: 2.4rem !default;
+$blockquote-footer-font-size: 1.8rem !default;
+$blockquote-margin-bottom: 1.2rem !default;

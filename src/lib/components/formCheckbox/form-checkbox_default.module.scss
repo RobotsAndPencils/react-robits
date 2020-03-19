@@ -14,35 +14,35 @@ $custom-checkbox-indicator-icon-indeterminate: str-replace(
 $custom-checkbox-indicator-indeterminate-box-shadow: none !default;
 
 // Custom toggle
-$custom-toggle-width: 3.125rem !default;
-$custom-toggle-height: 1.75rem !default;
-$custom-toggle-border-width: 0.0625rem !default;
+$custom-toggle-width: 5rem !default;
+$custom-toggle-height: 2.8rem !default;
+$custom-toggle-border-width: 0.1rem !default;
 $custom-toggle-border: $custom-toggle-border-width solid $form-control-border-color !default;
 $custom-toggle-border-radius: 100px !default;
 
-$custom-toggle-focus-box-shadow: 0 0.313rem 0.719rem rgba($success, 0.1),
-  0 0.156rem 0.125rem rgba($black, 0.06) !default;
+$custom-toggle-focus-box-shadow: 0 0.5008rem 1.1504rem rgba($success, 0.1),
+  0 0.2496rem 0.2rem rgba($black, 0.06) !default;
 
 $custom-toggle-checked-background: $success !default;
 $custom-toggle-checked-border-color: $custom-toggle-checked-background !default;
 $custom-toggle-checked-knob-background: $white !default;
 
-$custom-toggle-knob-width: 1.25rem !default;
-$custom-toggle-knob-height: 1.25rem !default;
-$custom-toggle-knob-border-radius: 6.25rem !default;
-$custom-toggle-knob-active-width: 1.625rem !default;
+$custom-toggle-knob-width: 2rem !default;
+$custom-toggle-knob-height: 2rem !default;
+$custom-toggle-knob-border-radius: 10rem !default;
+$custom-toggle-knob-active-width: 2.6rem !default;
 
-$custom-toggle-width-sm: 2.1875rem !default;
-$custom-toggle-height-sm: 1.125rem !default;
-$custom-toggle-knob-width-sm: 0.75rem !default;
-$custom-toggle-knob-active-width-sm: 1rem !default;
-$custom-toggle-knob-height-sm: 0.75rem !default;
+$custom-toggle-width-sm: 3.5rem !default;
+$custom-toggle-height-sm: 1.8rem !default;
+$custom-toggle-knob-width-sm: 1.2rem !default;
+$custom-toggle-knob-active-width-sm: 1.6rem !default;
+$custom-toggle-knob-height-sm: 1.2rem !default;
 
 .form-checkbox {
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: ($font-size-base * $line-height-base);
+  min-height: (1rem * $line-height-base);
   padding-left: $custom-control-gutter;
 
   &:hover:not(.disabled) {
@@ -186,7 +186,7 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
 
 .as-toggle {
   position: relative;
-  padding-left: ($custom-toggle-width + 0.625rem);
+  padding-left: ($custom-toggle-width + 1rem);
 
   label {
     // Background
@@ -206,8 +206,8 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
     &::after {
       content: '';
       position: absolute;
-      top: 0.25rem;
-      left: 0.25rem;
+      top: 0.4rem;
+      left: 0.4rem;
       width: $custom-toggle-knob-width;
       height: $custom-toggle-knob-height;
       background: $form-control-border-color;
@@ -230,7 +230,7 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
 
       // Knob
       &::after {
-        left: $custom-toggle-width - $custom-toggle-border-width - 0.1875rem;
+        left: $custom-toggle-width - $custom-toggle-border-width - 0.3rem;
         transform: translateX(-100%);
         background: $custom-toggle-checked-knob-background;
       }
@@ -287,12 +287,12 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
   }
 
   &.smaller {
-    padding-left: 2.625rem;
+    padding-left: 4.2rem;
 
     label {
       // Background
       &::before {
-        top: 0.1875rem;
+        top: 0.3rem;
         position: absolute;
         display: block;
         width: $custom-toggle-width-sm;
@@ -306,8 +306,8 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
       &::after {
         content: '';
         position: absolute;
-        top: 0.375rem;
-        left: 0.1875rem;
+        top: 0.6rem;
+        left: 0.3rem;
         width: $custom-toggle-knob-width-sm;
         height: $custom-toggle-knob-height-sm;
       }
@@ -317,7 +317,7 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
     input:checked ~ label {
       // Knob
       &::after {
-        left: $custom-toggle-width-sm - $custom-toggle-border-width - 0.1875rem;
+        left: $custom-toggle-width-sm - $custom-toggle-border-width - 0.3rem;
       }
     }
 
@@ -333,7 +333,7 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
   & ~ :global(.form-control-descenders) {
     .form-control-required,
     .form-control-error {
-      margin-left: ($custom-toggle-width + 0.625rem);
+      margin-left: ($custom-toggle-width + 1rem);
     }
   }
 }
@@ -341,7 +341,7 @@ $custom-toggle-knob-height-sm: 0.75rem !default;
 :global {
   .form-control-required,
   .form-control-error {
-    margin: 0 0.5rem 0.5rem $custom-control-gutter;
+    margin: 0 0.8rem 0.8rem $custom-control-gutter;
   }
 }
 

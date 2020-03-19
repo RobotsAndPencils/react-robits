@@ -1,7 +1,7 @@
 @import '../../styles/themes/default/tokens';
 
-$card-spacer-y: 2.1875rem !default;
-$card-spacer-x: 1.875rem !default;
+$card-spacer-y: 3.5rem !default;
+$card-spacer-x: 3rem !default;
 
 $card-header-spacer-x: $card-spacer-x !default;
 $card-header-spacer-y: ($card-spacer-y / 2) !default;
@@ -9,31 +9,31 @@ $card-header-spacer-y: ($card-spacer-y / 2) !default;
 $card-footer-spacer-x: $card-spacer-x !default;
 $card-footer-spacer-y: ($card-spacer-y / 2) !default;
 
-$card-border-radius: 0.625rem !default;
+$card-border-radius: 1rem !default;
 $card-inner-border-radius: $card-border-radius !default;
 
 $card-cap-bg: rgba($blueish-grey, 0.06) !default;
 $card-bg: $white !default;
 
 $card-title-font-weight: 500 !default;
-$card-title-margin-bottom: 0.75rem !default;
+$card-title-margin-bottom: 1.2rem !default;
 
 $card-link-font-family: $font-family-poppins-first !default;
 
-$card-paragraph-margin-bottom: 1.5625rem !default;
+$card-paragraph-margin-bottom: 2.5rem !default;
 
-$card-img-overlay-padding: 1.875rem 2.1875rem !default;
-$card-deck-margin: 0.9375rem !default;
+$card-img-overlay-padding: 3rem 3.5rem !default;
+$card-deck-margin: 1.5rem !default;
 
-$card-list-group-item-padding: 0.8125rem 1.875rem !default;
+$card-list-group-item-padding: 1.3rem 3rem !default;
 $card-group-card-border: 1px solid lighten($blueish-grey, 53%) !default;
 
 $card-columns-count: 3 !default;
-$card-columns-gap: 1.25rem !default;
+$card-columns-gap: 2rem !default;
 $card-columns-margin: $card-spacer-y !default;
 
-$card-small-spacer-y: 1rem !default;
-$card-small-spacer-x: 1rem !default;
+$card-small-spacer-y: 1.6rem !default;
+$card-small-spacer-x: 1.6rem !default;
 $card-small-box-shadow: 0 2px 0 rgba($blueish-grey, 0.11), 0 4px 8px rgba($blueish-grey, 0.12),
   0 10px 10px rgba($blueish-grey, 0.06), 0 7px 70px rgba($blueish-grey, 0.1) !default;
 
