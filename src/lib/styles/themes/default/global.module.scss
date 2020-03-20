@@ -22,7 +22,7 @@
 
   body {
     font-size: $font-size-base;
-    font-weight: $font-weight-base;
+    font-weight: $font-weight-light;
   }
 
   //
@@ -41,7 +41,7 @@
 
   b,
   strong {
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-medium;
   }
 
   //
@@ -168,7 +168,7 @@
   small,
   .small {
     font-size: $small-font-size;
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-light;
   }
 
   mark,
@@ -225,7 +225,7 @@
     color: $form-control-color;
     background-color: $form-control-bg;
     border: $form-control-border-width solid $form-control-border-color;
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-light;
     will-change: border-color, box-shadow;
     border-radius: $form-control-border-radius;
     box-shadow: $form-control-box-shadow;
@@ -277,7 +277,7 @@
     font-size: 1.2rem;
     margin: 0.8rem;
     color: $danger;
-    font-weight: $medium;
+    font-weight: $font-weight-medium;
   }
 
   .form-control-descenders {
@@ -289,7 +289,7 @@
     font-size: 1.2rem;
     margin: 0.8rem;
     color: $gray-500;
-    font-weight: $semibold;
+    font-weight: $font-weight-semibold;
     text-transform: uppercase;
   }
 
