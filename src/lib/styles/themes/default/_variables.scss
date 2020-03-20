@@ -52,15 +52,6 @@ $border-radius-sm: 0.56rem !default;
 $component-active-color: $white !default;
 $component-active-bg: theme-color('primary') !default;
 
-// Easings
-$ease-in-out-circ: cubic-bezier(0.27, 0.01, 0.38, 1.06);
-
-// Transitions
-$transition-duration: 250ms;
-$transition-base: all $transition-duration $ease-in-out-circ !default;
-$transition-fade: opacity 200ms ease-in-out !default;
-$transition-collapse: height 350ms ease-in-out !default;
-
 $hr-border-color: rgba($black, 0.1) !default;
 $hr-border-width: $border-width !default;
 $hr-margin-y: 1.8rem !default;

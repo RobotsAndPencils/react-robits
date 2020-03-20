@@ -1,8 +1,13 @@
 /* ---------------TYPOGRAPHY------------------------*/
 
-//Font weights
-$thin: 100;
-$regular: 300;
-$medium: 400;
-$semibold: 600;
-$bold: 700;
+$font-weight-thin: 100;
+$font-weight-extralight: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+@mixin letterspacing($units) {
+  letter-spacing: ($units/1000 * 1rem);
+}

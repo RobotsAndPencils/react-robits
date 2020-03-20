@@ -1,23 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600|Roboto+Mono|Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,400,400i,600,600i,|Roboto+Mono|Roboto:400,400i,900,900i');
 
-$font-family-poppins-first: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  'Helvetica Neue', Arial, sans-serif !default;
-$font-family-system-first: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-  Arial, sans-serif !default;
-$font-family-monospace: 'Roboto Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-  monospace !default;
-
-$font-family-sans-serif: $font-family-system-first !default;
-$font-family-base: $font-family-sans-serif !default;
+$featured-font: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', 'HelveticaNeue-Light',
+  'Helvetica Neue Light', -apple-system, BlinkMacSystemFont, Arial, sans-serif !default;
+$body-font: 'Roboto', 'Helvetica Neue', 'HelveticaNeue-Light', 'Helvetica Neue Light', -apple-system,
+  BlinkMacSystemFont, Arial, sans-serif !default;
+$monospace-font: 'Roboto Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
 
 $font-size-base: 1.6rem !default;
 $font-size-lg: 1.8rem !default;
 $font-size-sm: 1.4rem !default;
 
-$font-weight-normal: 300 !default;
-$font-weight-bold: 500 !default;
-
-$font-weight-base: $font-weight-normal !default;
 $line-height-base: 2.4 !default;
 $line-height-lg: 2.4 !default;
 $line-height-sm: 2.4 !default;
@@ -31,7 +23,7 @@ $h6-font-size: 1.6rem !default;
 
 $headings-margin-bottom: 1.2rem !default;
 
-$headings-font-family: $font-family-poppins-first !default;
+$headings-font-family: $featured-font !default;
 $headings-font-weight: 400 !default;
 $headings-color: $gray-900 !default;
 $headings-letter-spacing: -0.1rem !default; // ~1px
