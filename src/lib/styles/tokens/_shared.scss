@@ -40,3 +40,44 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin hover {
+  @include hover-no-touch {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover-focus {
+  @include hover-no-touch {
+    &:hover,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+@mixin hover-focus-active {
+  @include hover-no-touch {
+    &:hover,
+    &:focus,
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin hover-not-disabled {
+  @include hover-no-touch {
+    &:not([disabled]):not(.disabled):hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover-no-touch {
+  @media (hover: hover) {
+    @content;
+  }
+}
