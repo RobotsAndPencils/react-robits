@@ -1,13 +1,13 @@
 @import '../../styles/themes/default/tokens';
 
 $body-bg: $white !default;
-$body-color: $blueish-grey !default;
+$body-color: $gray-700 !default;
 
 $progress-height: 1rem !default;
 $progress-font-size: 1rem !default;
-$progress-bg: lighten($blueish-grey, 58%) !default;
+$progress-bg: lighten($gray-700, 58%) !default;
 $progress-border-radius: 2rem !default;
-$progress-box-shadow: inset 0 0.16rem 0.16rem rgba($blueish-grey, 0.15) !default;
+$progress-box-shadow: inset 0 0.16rem 0.16rem rgba($gray-700, 0.15) !default;
 $progress-bar-color: $white !default;
 $progress-bar-bg: $primary !default;
 $progress-bar-animation-timing: 1s linear infinite !default;

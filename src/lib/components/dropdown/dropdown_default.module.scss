@@ -14,9 +14,9 @@ $dropdown-box-shadow: 0 0.8rem 6.4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0
 
 $dropdown-link-color: $gray-900 !default;
 $dropdown-link-hover-color: darken($gray-900, 5%) !default;
-$dropdown-link-hover-bg: lighten($blueish-grey, 55%) !default;
+$dropdown-link-hover-bg: lighten($gray-700, 55%) !default;
 $dropdown-link-active-color: $component-active-color !default;
-$dropdown-link-active-bg: lighten($blueish-grey, 40%) !default;
+$dropdown-link-active-bg: lighten($gray-700, 40%) !default;
 $dropdown-link-disabled-color: $gray-600 !default;
 
 $dropdown-item-padding-y: 0.8rem !default;

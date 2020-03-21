@@ -20,10 +20,10 @@ $modal-content-bg: $white !default;
 $modal-content-border-width: $border-width !default;
 $modal-content-box-shadow: $card-box-shadow !default;
 
-$modal-backdrop-bg: $blueish-grey !default;
+$modal-backdrop-bg: $gray-700 !default;
 $modal-backdrop-opacity: 0.12 !default;
-$modal-header-border-color: lighten($blueish-grey, 50%) !default;
-$modal-footer-border-color: lighten($blueish-grey, 50%) !default;
+$modal-header-border-color: lighten($gray-700, 50%) !default;
+$modal-footer-border-color: lighten($gray-700, 50%) !default;
 $modal-header-border-width: $modal-content-border-width !default;
 $modal-footer-border-width: $modal-header-border-width !default;
 
