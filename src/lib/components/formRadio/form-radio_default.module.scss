@@ -144,7 +144,7 @@ $form-radio-indicator-icon-checked: str-replace(
 
       &:checked ~ label {
         &::before {
-          // background-color: $form-radio-indicator-checked-disabled-bg; // background-color: lighten($blueish-grey, 30%);
+          // background-color: $form-radio-indicator-checked-disabled-bg; // background-color: lighten($gray-700, 30%);
           background: $form-radio-indicator-disabled-bg;
           border-color: $border-color;
         }

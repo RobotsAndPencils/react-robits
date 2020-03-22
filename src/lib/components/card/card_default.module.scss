@@ -12,7 +12,7 @@ $card-footer-spacer-y: ($card-spacer-y / 2) !default;
 $card-border-radius: 1rem !default;
 $card-inner-border-radius: $card-border-radius !default;
 
-$card-cap-bg: rgba($blueish-grey, 0.06) !default;
+$card-cap-bg: rgba($gray-700, 0.06) !default;
 $card-bg: $white !default;
 
 $card-title-font-weight: 500 !default;
@@ -26,7 +26,7 @@ $card-img-overlay-padding: 3rem 3.5rem !default;
 $card-deck-margin: 1.5rem !default;
 
 $card-list-group-item-padding: 1.3rem 3rem !default;
-$card-group-card-border: 1px solid lighten($blueish-grey, 53%) !default;
+$card-group-card-border: 1px solid lighten($gray-700, 53%) !default;
 
 $card-columns-count: 3 !default;
 $card-columns-gap: 2rem !default;
@@ -34,8 +34,8 @@ $card-columns-margin: $card-spacer-y !default;
 
 $card-small-spacer-y: 1.6rem !default;
 $card-small-spacer-x: 1.6rem !default;
-$card-small-box-shadow: 0 2px 0 rgba($blueish-grey, 0.11), 0 4px 8px rgba($blueish-grey, 0.12),
-  0 10px 10px rgba($blueish-grey, 0.06), 0 7px 70px rgba($blueish-grey, 0.1) !default;
+$card-small-box-shadow: 0 2px 0 rgba($gray-700, 0.11), 0 4px 8px rgba($gray-700, 0.12),
+  0 10px 10px rgba($gray-700, 0.06), 0 7px 70px rgba($gray-700, 0.1) !default;
 
 .card {
   background-color: $card-bg;
