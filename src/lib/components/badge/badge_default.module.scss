@@ -10,6 +10,23 @@ $badge-pill-border-radius: 16rem !default;
 $badge-border-radius: 0.6rem !default;
 $badge-pill-padding-x: $badge-padding-x !default;
 
+@mixin badge-variant($bg) {
+  color: color-yiq($bg);
+  background-color: $bg;
+
+  &[href] {
+    @include hover-focus {
+      color: color-yiq($bg);
+      text-decoration: none;
+      background-color: darken($bg, 10%);
+    }
+  }
+
+  &:hover {
+    color: color-yiq($bg);
+  }
+}
+
 .badge {
   display: inline-block;
   padding: $badge-padding-y $badge-padding-x;

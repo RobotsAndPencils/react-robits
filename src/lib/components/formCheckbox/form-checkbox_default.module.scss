@@ -23,7 +23,7 @@ $custom-toggle-border-radius: 100px !default;
 $custom-toggle-focus-box-shadow: 0 0.5008rem 1.1504rem rgba($success, 0.1),
   0 0.2496rem 0.2rem rgba($black, 0.06) !default;
 
-$custom-toggle-checked-background: $success !default;
+$custom-toggle-checked-background: $primary !default;
 $custom-toggle-checked-border-color: $custom-toggle-checked-background !default;
 $custom-toggle-checked-knob-background: $white !default;
 
@@ -37,6 +37,28 @@ $custom-toggle-height-sm: 1.8rem !default;
 $custom-toggle-knob-width-sm: 1.2rem !default;
 $custom-toggle-knob-active-width-sm: 1.6rem !default;
 $custom-toggle-knob-height-sm: 1.2rem !default;
+
+@mixin toggle-variant($parent, $color) {
+  #{$parent} {
+    label {
+      // Background
+      &::before {
+        background: $color;
+        border-color: $color;
+      }
+
+      // Knob
+      &::after {
+        background: color-yiq($color);
+      }
+    }
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
 
 .form-checkbox {
   position: relative;
@@ -184,9 +206,24 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
   margin-right: $custom-control-spacer-x;
 }
 
+.left-label {
+  margin-right: 1rem;
+}
+
 .as-toggle {
   position: relative;
   padding-left: ($custom-toggle-width + 1rem);
+  min-height: $custom-toggle-height;
+
+  @each $color, $value in $grays {
+    @include toggle-variant('&.left-#{$color}', $value);
+  }
+  @each $color, $value in $colors {
+    @include toggle-variant('&.left-#{$color}', $value);
+  }
+  @each $color, $value in $theme-colors {
+    @include toggle-variant('&.left-#{$color}', $value);
+  }
 
   label {
     // Background

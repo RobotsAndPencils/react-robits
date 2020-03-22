@@ -1,0 +1,14 @@
+@import './tokens.scss';
+:export {
+  x_white: $white;
+  x_black: $black;
+  @each $color, $value in $grays {
+    x_gray_#{$color}: $value;
+  }
+  @each $color, $value in $colors {
+    x_#{$color}: $value;
+  }
+  @each $color, $value in $theme-colors {
+    x_#{$color}: $value;
+  }
+}

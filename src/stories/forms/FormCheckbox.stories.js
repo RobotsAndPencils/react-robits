@@ -1,8 +1,9 @@
 import React from 'react'
-import { boolean, select, text } from '@storybook/addon-knobs'
+import { boolean, select, text, color } from '@storybook/addon-knobs'
 import FormCheckbox, {
   FormCheckbox as FormCheckboxComponent
 } from '../../lib/components/formCheckbox/FormCheckbox'
+import colors from '../../lib/styles/themes/default/themeColors.module.scss'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {
@@ -51,6 +52,8 @@ export const Normal = ({ theme }) => {
   )
 }
 
+const colorKeys = Object.keys(colors.locals).map(key => key.replace('x_', ''))
+colorKeys.unshift('none')
 export const Toggles = ({ theme }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
@@ -58,9 +61,15 @@ export const Toggles = ({ theme }) => {
     errorText: text('Error Text', 'There is an error'),
     required: boolean('Required', false),
     inline: boolean('Inline', false),
-    small: boolean('Small', false)
+    small: boolean('Small', false),
+    leftColor: select('Left Color', colorKeys, 'none'),
+    leftLabel: text('Left Label', '')
   }
   componentKnobs = reconcileValidity(componentKnobs)
+
+  if (componentKnobs.leftColor === 'none') {
+    delete componentKnobs.leftColor
+  }
 
   return (
     <>

@@ -20,6 +20,8 @@ export const FormCheckbox = ({
   id,
   errorText,
   required,
+  leftColor,
+  leftLabel,
   ...props
 }) => {
   useEffect(() => {
@@ -31,6 +33,7 @@ export const FormCheckbox = ({
 
   const containerClasses = classNames(
     'form-control-container',
+    styling.locals['checkbox-container'],
     inline && 'inline',
     props.disabled && 'disabled'
   )
@@ -40,7 +43,8 @@ export const FormCheckbox = ({
     toggle && styling.locals['as-toggle'],
     small && styling.locals.smaller,
     valid && styling.locals['is-valid'],
-    invalid && styling.locals['is-invalid']
+    invalid && styling.locals['is-invalid'],
+    toggle && leftColor && styling.locals[`left-${leftColor}`]
   )
 
   const inputClasses = classNames(
@@ -50,6 +54,15 @@ export const FormCheckbox = ({
 
   return (
     <div className={containerClasses}>
+      {leftLabel && toggle ? (
+        <label
+          htmlFor={id}
+          className={`${styling.locals.description} ${styling.locals['left-label']}`}>
+          {leftLabel}
+        </label>
+      ) : (
+        []
+      )}
       <label className={labelClasses}>
         <input
           {...props}
@@ -114,7 +127,15 @@ FormCheckbox.propTypes = {
   /**
    * Whether the field is required or not
    */
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  /**
+   * The background color when the toggle is inactive (to the left)
+   */
+  leftColor: PropTypes.string,
+  /**
+   * A label placed to the left of the toggle to identify the inactive state
+   */
+  leftLabel: PropTypes.string
 }
 
 export default ThemeWrapper(themes)(FormCheckbox)
