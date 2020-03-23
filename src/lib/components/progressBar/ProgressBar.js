@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -25,26 +25,19 @@ export const ProgressBar = ({
   tag: Tag = 'div',
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const percent = (toNumber(value) / toNumber(max)) * 100
   const progressClasses = classNames(
     className,
-    size && styling.locals[`progress-${size}`],
-    styling.locals.progress
+    size && styling[`progress-${size}`],
+    styling.progress
   )
 
   const progressBarClasses = classNames(
-    styling.locals['progress-bar'],
+    styling['progress-bar'],
     bar ? className || barClassName : barClassName,
-    animated && styling.locals['progress-bar-animated'],
-    barColor && styling.locals[`bg-${barColor}`],
-    (striped || animated) && styling.locals['progress-bar-striped']
+    animated && styling['progress-bar-animated'],
+    barColor && styling[`bg-${barColor}`],
+    (striped || animated) && styling['progress-bar-striped']
   )
 
   const ProgressBar = multi ? (

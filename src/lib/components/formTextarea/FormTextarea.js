@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -23,27 +23,20 @@ export const FormTextarea = ({
   resizeable = true,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const textareaClasses = classNames(
     'form-control',
     size && `form-control-${size}`,
     valid && 'is-valid',
     invalid && 'is-invalid',
     disabled && 'disabled',
-    !resizeable && styling.locals.noresize
+    !resizeable && 'noresize'
   )
 
   const containerClasses = classNames(
     className,
     disabled && 'disabled',
     'form-control-container',
-    props.cols && styling.locals.inline
+    props.cols && 'inline'
   )
 
   return (

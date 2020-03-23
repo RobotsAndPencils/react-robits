@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -23,18 +23,11 @@ export const FormSelect = ({
   hintContent,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const makeDisabled = disabled || readonly // readonly is not supported for select, so use disabled
   const selectClasses = classNames(
     'form-control',
-    styling.locals['form-select'],
-    size && styling.locals[`form-select-${size}`],
+    styling['form-select'],
+    size && styling[`form-select-${size}`],
     valid && 'is-valid',
     invalid && 'is-invalid',
     disabled && 'disabled'

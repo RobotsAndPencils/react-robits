@@ -63,7 +63,7 @@ const ContextDecorator = storyFn => {
       {({ theme }) => (
         <>
           <GlobalStyles theme={theme} />
-          {storyFn(theme)}
+          {storyFn({ theme })}
         </>
       )}
     </ThemeDefiner.Consumer>

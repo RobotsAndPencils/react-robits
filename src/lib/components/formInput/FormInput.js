@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -25,13 +25,6 @@ export const FormInput = ({
   children,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const inputClasses = classNames(
     'form-control',
     size && `form-control-${size}`,
@@ -70,9 +63,9 @@ export const FormInput = ({
       })
 
       const inputGroupClasses = classNames(
-        styling.locals['input-group'],
-        leaders.length + trailers.length > 0 && styling.locals['input-group-seamless'],
-        size && styling.locals[`input-group-${size}`]
+        styling['input-group'],
+        leaders.length + trailers.length > 0 && styling['input-group-seamless'],
+        size && styling[`input-group-${size}`]
       )
 
       return (

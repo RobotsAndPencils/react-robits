@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -8,17 +8,10 @@ import classNames from 'classnames'
  * Button groups allow you to group buttons together on a single line.
  */
 export const ButtonGroup = ({ styling, children, className, vertical, size, ...rest }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const classes = classNames(
     className,
-    size && styling.locals[`btn-group-${size}`],
-    vertical ? styling.locals['btn-group-vertical'] : styling.locals['btn-group']
+    size && styling[`btn-group-${size}`],
+    vertical ? styling['btn-group-vertical'] : styling['btn-group']
   )
 
   return (

@@ -31,13 +31,6 @@ export const Dropdown = ({
   direction = 'down',
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const containerRef = useRef(null)
 
   const handleToggle = useCallback(
@@ -109,15 +102,15 @@ export const Dropdown = ({
 
   const classes = classNames(
     className,
-    direction !== 'down' && styling.locals[`drop${direction}`],
-    nav && active && styling.locals.active,
-    setActiveFromChild && subItemIsActive && styling.locals.active,
-    addonType && styling.locals[`input-group-${addonType}`],
-    group && styling.locals['btn-group'],
-    !!size && styling.locals[`btn-group-${size}`],
-    !group && !addonType && styling.locals.dropdown,
-    open && styling.locals.show,
-    nav && styling.locals['nav-item']
+    direction !== 'down' && styling[`drop${direction}`],
+    nav && active && styling.active,
+    setActiveFromChild && subItemIsActive && styling.active,
+    addonType && styling[`input-group-${addonType}`],
+    group && styling['btn-group'],
+    !!size && styling[`btn-group-${size}`],
+    !group && !addonType && styling.dropdown,
+    open && styling.show,
+    nav && styling['nav-item']
   )
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -20,21 +20,14 @@ export const DropdownMenu = ({
   flip = true,
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const context = useContext(DropdownContext)
 
   const classes = classNames(
     className,
-    styling.locals['dropdown-menu'],
-    size && styling.locals[`dropdown-menu-${size}`],
-    right && styling.locals['dropdown-menu-right'],
-    context.open && styling.locals.show
+    styling['dropdown-menu'],
+    size && styling[`dropdown-menu-${size}`],
+    right && styling['dropdown-menu-right'],
+    context.open && styling.show
   )
 
   if (persist || (context.open && !context.inNavbar)) {

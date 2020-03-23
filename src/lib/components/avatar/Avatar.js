@@ -25,13 +25,6 @@ export const Avatar = ({
   const [hasImage, setHasImage] = useState(false)
 
   useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
-  useEffect(() => {
     getImage(image)
   }, [image])
 
@@ -48,14 +41,14 @@ export const Avatar = ({
 
   const classes = classNames(
     className,
-    styling.locals.avatar,
-    size && styling.locals[`avatar-${size}`],
-    editable && styling.locals.editable,
-    squared && styling.locals.squared,
-    bordered && styling.locals.bordered,
-    transparent && styling.locals.transparent,
-    withShadow && styling.locals['with-shadow'],
-    hasImage && styling.locals['with-image']
+    styling.avatar,
+    size && styling[`avatar-${size}`],
+    editable && styling.editable,
+    squared && styling.squared,
+    bordered && styling.bordered,
+    transparent && styling.transparent,
+    withShadow && styling['with-shadow'],
+    hasImage && styling['with-image']
   )
 
   return (

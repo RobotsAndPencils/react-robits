@@ -37,18 +37,11 @@ export const Modal = ({
   const modalContent = useRef(null)
 
   useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
-  useEffect(() => {
     setOpenStatus(open)
   }, [open])
 
   const handleOnEntered = (type, node) => {
-    node.classList.add(styling.locals.show)
+    node.classList.add(styling.show)
 
     if (type === 'modal') {
       modalShown && modalShown()
@@ -56,7 +49,7 @@ export const Modal = ({
   }
 
   const handleOnExit = (type, node) => {
-    node.classList.remove(styling.locals.show)
+    node.classList.remove(styling.show)
   }
 
   const handleOnExited = () => {
@@ -73,13 +66,9 @@ export const Modal = ({
     return false
   }
 
-  const backdropClasses = classNames(
-    styling.locals['modal-backdrop'],
-    styling.locals.fade,
-    backdropClassName
-  )
+  const backdropClasses = classNames(styling['modal-backdrop'], styling.fade, backdropClassName)
 
-  const modalClasses = classNames(styling.locals.modal, styling.locals.fade, modalClassName)
+  const modalClasses = classNames(styling.modal, styling.fade, modalClassName)
 
   const modalAttrs = {
     'aria-hidden': true,
@@ -92,14 +81,14 @@ export const Modal = ({
   }
 
   const modalDialogClasses = classNames(
-    styling.locals['modal-dialog'],
+    styling['modal-dialog'],
     className,
-    size && styling.locals[`modal-${size}`],
-    centered && styling.locals['modal-dialog-centered'],
-    position && styling.locals[`modal-${position}`]
+    size && styling[`modal-${size}`],
+    centered && styling['modal-dialog-centered'],
+    position && styling[`modal-${position}`]
   )
 
-  const contentClasses = classNames(styling.locals['modal-content'], modalContentClassName)
+  const contentClasses = classNames(styling['modal-content'], modalContentClassName)
 
   return (
     <>
@@ -129,13 +118,13 @@ export const Modal = ({
           <div className={modalDialogClasses} role='document'>
             <div ref={modalContent} className={contentClasses}>
               {header ? (
-                <div className={styling.locals['modal-header']}>
+                <div className={styling['modal-header']}>
                   {header}
                   {withCloseButton ? (
                     <button
                       type='button'
                       onClick={toggleModal}
-                      class={styling.locals.close}
+                      class={styling.close}
                       data-dismiss='modal'
                       aria-label='Close'>
                       <span aria-hidden='true'>×</span>
@@ -148,7 +137,7 @@ export const Modal = ({
                 []
               )}
               {children}
-              {footer ? <div className={styling.locals['modal-footer']}>{footer}</div> : []}
+              {footer ? <div className={styling['modal-footer']}>{footer}</div> : []}
             </div>
           </div>
         </div>

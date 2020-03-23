@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -24,40 +24,28 @@ export const FormCheckbox = ({
   leftLabel,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const containerClasses = classNames(
     'form-control-container',
-    styling.locals['checkbox-container'],
+    styling['checkbox-container'],
     inline && 'inline',
     props.disabled && 'disabled'
   )
 
   const labelClasses = classNames(
-    styling.locals['form-checkbox'],
-    toggle && styling.locals['as-toggle'],
-    small && styling.locals.smaller,
-    valid && styling.locals['is-valid'],
-    invalid && styling.locals['is-invalid'],
-    toggle && leftColor && styling.locals[`left-${leftColor}`]
+    styling['form-checkbox'],
+    toggle && styling['as-toggle'],
+    small && styling.smaller,
+    valid && styling['is-valid'],
+    invalid && styling['is-invalid'],
+    toggle && leftColor && styling[`left-${leftColor}`]
   )
 
-  const inputClasses = classNames(
-    valid && styling.locals['is-valid'],
-    invalid && styling.locals['is-invalid']
-  )
+  const inputClasses = classNames(valid && styling['is-valid'], invalid && styling['is-invalid'])
 
   return (
     <div className={containerClasses}>
       {leftLabel && toggle ? (
-        <label
-          htmlFor={id}
-          className={`${styling.locals.description} ${styling.locals['left-label']}`}>
+        <label htmlFor={id} className={`${styling.description} ${styling['left-label']}`}>
           {leftLabel}
         </label>
       ) : (
@@ -73,7 +61,7 @@ export const FormCheckbox = ({
           className={inputClasses}
         />
         <label htmlFor={id} aria-hidden='true' />
-        <span className={styling.locals.description}>{children}</span>
+        <span className={styling.description}>{children}</span>
       </label>
       <div className='form-control-descenders'>
         {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}

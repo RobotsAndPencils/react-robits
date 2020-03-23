@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -25,24 +25,17 @@ export const Button = ({
   onClick,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
-
   const classes = classNames(
     className,
-    styling.locals.btn,
-    isLoading && styling.locals.loading,
-    disabled && styling.locals.disabled,
-    styleType && styling.locals[`btn-${outline ? 'outline-' : ''}${styleType}`],
-    size && styling.locals[`btn-${size}`],
-    pill && styling.locals['btn-pill'],
-    squared && styling.locals['btn-squared'],
-    block && styling.locals['btn-block'],
-    active && styling.locals.active
+    styling.btn,
+    isLoading && styling.loading,
+    disabled && styling.disabled,
+    styleType && styling[`btn-${outline ? 'outline-' : ''}${styleType}`],
+    size && styling[`btn-${size}`],
+    pill && styling['btn-pill'],
+    squared && styling['btn-squared'],
+    block && styling['btn-block'],
+    active && styling.active
   )
 
   if (isLoading) {
