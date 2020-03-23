@@ -44,9 +44,9 @@ const topLevelContexts = [
         }
       },
       {
-        name: 'Default',
+        name: 'Talent Portal',
         props: {
-          value: { theme: 'default' }
+          value: { theme: 'talentPortal' }
         },
         default: true
       }

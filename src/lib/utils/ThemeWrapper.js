@@ -6,7 +6,7 @@ export const wrapper = themes => WrappedComponent => {
   class ThemeWrapper extends React.Component {
     render () {
       const props = Object.assign({}, this.props, {
-        styling: this.props.theme ? themes[`theme_${this.props.theme}`] : themes.theme_default
+        styling: this.props.theme ? themes[`theme_${this.props.theme}`] : themes.theme_talentPortal
       })
       return (
         <>

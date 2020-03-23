@@ -3,7 +3,7 @@ import { boolean, select, text, color } from '@storybook/addon-knobs'
 import FormCheckbox, {
   FormCheckbox as FormCheckboxComponent
 } from '../../lib/components/formCheckbox/FormCheckbox'
-import colors from '../../lib/styles/themes/default/themeColors.module.scss'
+import colors from '../../lib/styles/themes/talentPortal/themeColors.module.scss'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {
