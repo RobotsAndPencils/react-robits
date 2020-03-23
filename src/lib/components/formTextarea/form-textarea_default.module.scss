@@ -1,19 +1,1 @@
 @import '../../styles/themes/default/tokens';
-
-.form-control-container {
-  &.inline {
-    display: inline-block;
-  }
-
-  textarea {
-    height: auto;
-
-    &[cols] {
-      width: auto;
-    }
-
-    &.noresize {
-      resize: none;
-    }
-  }
-}

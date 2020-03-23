@@ -273,6 +273,22 @@
     label + [class*='form-control-hint'] {
       margin: 0 0 0.8rem 0;
     }
+
+    &.inline {
+      display: inline-block;
+    }
+
+    textarea {
+      height: auto;
+
+      &[cols] {
+        width: auto;
+      }
+
+      &.noresize {
+        resize: none;
+      }
+    }
   }
 
   .form-control-error {

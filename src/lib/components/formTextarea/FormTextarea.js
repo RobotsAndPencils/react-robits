@@ -29,14 +29,14 @@ export const FormTextarea = ({
     valid && 'is-valid',
     invalid && 'is-invalid',
     disabled && 'disabled',
-    !resizeable && styling.noresize
+    !resizeable && 'noresize'
   )
 
   const containerClasses = classNames(
     className,
     disabled && 'disabled',
     'form-control-container',
-    props.cols && styling.inline
+    props.cols && 'inline'
   )
 
   return (
