@@ -19,14 +19,14 @@ export const Card = ({
   footer,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
-  const classes = classNames(className, styling.locals.card, size && styling.locals[`card-${size}`])
+  const classes = classNames(className, styling.card, size && styling[`card-${size}`])
 
   const onClickHandler = e => {
     if (disabled) {
@@ -41,9 +41,9 @@ export const Card = ({
 
   return (
     <div ref={innerRef} disabled={disabled} className={classes} onClick={onClickHandler} {...props}>
-      {header ? <div className={styling.locals['card-header']}>{header}</div> : []}
+      {header ? <div className={styling['card-header']}>{header}</div> : []}
       {children}
-      {footer ? <div className={styling.locals['card-footer']}>{footer}</div> : []}
+      {footer ? <div className={styling['card-footer']}>{footer}</div> : []}
     </div>
   )
 }

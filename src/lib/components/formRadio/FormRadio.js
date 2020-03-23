@@ -21,31 +21,28 @@ export const FormRadio = ({
   label,
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const [selected, setSelected] = useState()
 
   const containerClasses = classNames(
     'form-control-container',
-    inline && styling.locals.inline,
-    rest.disabled && styling.locals.disabled
+    inline && styling.inline,
+    rest.disabled && styling.disabled
   )
 
   const labelClasses = classNames(
-    styling.locals['form-radio'],
-    valid && styling.locals['is-valid'],
-    invalid && styling.locals['is-invalid']
+    styling['form-radio'],
+    valid && styling['is-valid'],
+    invalid && styling['is-invalid']
   )
 
-  const inputClasses = classNames(
-    valid && styling.locals['is-valid'],
-    invalid && styling.locals['is-invalid']
-  )
+  const inputClasses = classNames(valid && styling['is-valid'], invalid && styling['is-invalid'])
 
   return (
     <div className={containerClasses} {...rest}>
@@ -58,7 +55,7 @@ export const FormRadio = ({
         []
       )}
       {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
-      <div className={styling.locals['form-radio-group']}>
+      <div className={styling['form-radio-group']}>
         {options.map(({ label, value }, idx) => {
           const id = `${name}_${idx}`
           return (
@@ -73,7 +70,7 @@ export const FormRadio = ({
                 onChange={() => setSelected(value)}
               />
               <label htmlFor={id} className={styling['custom-control-label']} aria-hidden='true' />
-              <span className={styling.locals.description}>{label}</span>
+              <span className={styling.description}>{label}</span>
             </label>
           )
         })}

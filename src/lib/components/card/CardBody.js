@@ -8,14 +8,14 @@ import classNames from 'classnames'
  * Card body, with baked in padding
  */
 export const CardBody = ({ styling, children, className = '', innerRef, ...props }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
-  const classes = classNames(className, styling.locals['card-body'])
+  const classes = classNames(className, styling['card-body'])
 
   return (
     <div ref={innerRef} className={classes} {...props}>

@@ -52,7 +52,7 @@ export const Normal = ({ theme }) => {
   )
 }
 
-const colorKeys = Object.keys(colors.locals).map(key => key.replace('x_', ''))
+const colorKeys = Object.keys(colors).map(key => key.replace('x_', ''))
 colorKeys.unshift('none')
 export const Toggles = ({ theme }) => {
   let componentKnobs = {

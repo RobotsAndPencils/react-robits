@@ -25,12 +25,12 @@ export const FormInput = ({
   children,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const inputClasses = classNames(
     'form-control',
@@ -70,9 +70,9 @@ export const FormInput = ({
       })
 
       const inputGroupClasses = classNames(
-        styling.locals['input-group'],
-        leaders.length + trailers.length > 0 && styling.locals['input-group-seamless'],
-        size && styling.locals[`input-group-${size}`]
+        styling['input-group'],
+        leaders.length + trailers.length > 0 && styling['input-group-seamless'],
+        size && styling[`input-group-${size}`]
       )
 
       return (

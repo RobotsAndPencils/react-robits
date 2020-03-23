@@ -20,21 +20,21 @@ export const Badge = ({
   removeHandler,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const classes = classNames(
     className,
-    styling.locals.badge,
-    styleType && !outline && styling.locals[`badge-${styleType}`],
-    outline && styling.locals[`badge-outline-${styleType}`],
-    pill && styling.locals['badge-pill'],
-    squared && styling.locals['badge-squared'],
-    removable && styling.locals.removable
+    styling.badge,
+    styleType && !outline && styling[`badge-${styleType}`],
+    outline && styling[`badge-outline-${styleType}`],
+    pill && styling['badge-pill'],
+    squared && styling['badge-squared'],
+    removable && styling.removable
   )
 
   Tag = props.href && Tag === 'span' ? 'a' : Tag
@@ -43,7 +43,7 @@ export const Badge = ({
     <Tag className={classes} {...props}>
       {children}
       {removable ? (
-        <span className={styling.locals.remove} onClick={removeHandler}>
+        <span className={styling.remove} onClick={removeHandler}>
           <svg
             width='24px'
             height='24px'

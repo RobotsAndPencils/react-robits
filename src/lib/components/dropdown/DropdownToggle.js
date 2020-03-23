@@ -20,12 +20,12 @@ export const DropdownToggle = ({
   // 'aria-haspopup' = true,
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const context = useContext(DropdownContext)
 
@@ -49,10 +49,10 @@ export const DropdownToggle = ({
   const ariaLabel = rest['aria-label'] || 'Toggle Dropdown'
   const classes = classNames(
     className,
-    (caret || split) && styling.locals['dropdown-toggle'],
-    split && styling.locals['dropdown-toggle-split'],
-    rest.size && styling.locals[rest.size],
-    nav && styling.locals['nav-link']
+    (caret || split) && styling['dropdown-toggle'],
+    split && styling['dropdown-toggle-split'],
+    rest.size && styling[rest.size],
+    nav && styling['nav-link']
   )
 
   const dropdownChildren = rest.children || <span className='sr-only'>{ariaLabel}</span>

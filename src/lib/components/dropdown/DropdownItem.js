@@ -17,12 +17,12 @@ export const DropdownItem = ({
   toggle = true,
   ...rest
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const context = useContext(DropdownContext)
 
@@ -53,11 +53,11 @@ export const DropdownItem = ({
 
   const classes = classNames(
     className,
-    rest.disabled && styling.locals.disabled,
-    !divider && !header && styling.locals['dropdown-item'],
-    header && styling.locals['dropdown-header'],
-    divider && styling.locals['dropdown-divider'],
-    active && styling.locals.active
+    rest.disabled && styling.disabled,
+    !divider && !header && styling['dropdown-item'],
+    header && styling['dropdown-header'],
+    divider && styling['dropdown-divider'],
+    active && styling.active
   )
 
   if (Tag === 'button') {

@@ -23,12 +23,12 @@ export const FormTextarea = ({
   resizeable = true,
   ...props
 }) => {
-  useEffect(() => {
-    styling.use()
-    return () => {
-      styling.unuse()
-    }
-  }, [styling])
+  // useEffect(() => {
+  //   styling.use()
+  //   return () => {
+  //     styling.unuse()
+  //   }
+  // }, [styling])
 
   const textareaClasses = classNames(
     'form-control',
@@ -36,14 +36,14 @@ export const FormTextarea = ({
     valid && 'is-valid',
     invalid && 'is-invalid',
     disabled && 'disabled',
-    !resizeable && styling.locals.noresize
+    !resizeable && styling.noresize
   )
 
   const containerClasses = classNames(
     className,
     disabled && 'disabled',
     'form-control-container',
-    props.cols && styling.locals.inline
+    props.cols && styling.inline
   )
 
   return (
