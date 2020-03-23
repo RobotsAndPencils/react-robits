@@ -42,14 +42,14 @@ const topLevelContexts = [
         props: {
           value: { theme: 'unstyled' }
         }
-      },
-      {
-        name: 'Talent Portal',
-        props: {
-          value: { theme: 'talentPortal' }
-        },
-        default: true
       }
+      // {
+      //   name: 'Talent Portal',
+      //   props: {
+      //     value: { theme: 'talentPortal' }
+      //   },
+      //   default: true
+      // }
     ],
     options: {
       deep: true
