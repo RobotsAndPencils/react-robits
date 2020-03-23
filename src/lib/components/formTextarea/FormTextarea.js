@@ -23,13 +23,6 @@ export const FormTextarea = ({
   resizeable = true,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const textareaClasses = classNames(
     'form-control',
     size && `form-control-${size}`,

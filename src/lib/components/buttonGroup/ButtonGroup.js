@@ -8,13 +8,6 @@ import classNames from 'classnames'
  * Button groups allow you to group buttons together on a single line.
  */
 export const ButtonGroup = ({ styling, children, className, vertical, size, ...rest }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const classes = classNames(
     className,
     size && styling[`btn-group-${size}`],

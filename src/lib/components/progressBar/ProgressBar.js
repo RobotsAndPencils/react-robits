@@ -25,13 +25,6 @@ export const ProgressBar = ({
   tag: Tag = 'div',
   ...rest
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const percent = (toNumber(value) / toNumber(max)) * 100
   const progressClasses = classNames(
     className,

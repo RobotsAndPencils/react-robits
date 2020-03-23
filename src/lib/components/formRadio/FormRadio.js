@@ -21,13 +21,6 @@ export const FormRadio = ({
   label,
   ...rest
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const [selected, setSelected] = useState()
 
   const containerClasses = classNames(

@@ -20,13 +20,6 @@ export const Badge = ({
   removeHandler,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const classes = classNames(
     className,
     styling.badge,

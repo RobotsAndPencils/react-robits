@@ -23,13 +23,6 @@ export const FormSelect = ({
   hintContent,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const makeDisabled = disabled || readonly // readonly is not supported for select, so use disabled
   const selectClasses = classNames(
     'form-control',

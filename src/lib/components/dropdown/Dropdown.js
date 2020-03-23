@@ -31,13 +31,6 @@ export const Dropdown = ({
   direction = 'down',
   ...rest
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const containerRef = useRef(null)
 
   const handleToggle = useCallback(

@@ -24,13 +24,6 @@ export const Avatar = ({
 }) => {
   const [hasImage, setHasImage] = useState(false)
 
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   useEffect(() => {
     getImage(image)
   }, [image])

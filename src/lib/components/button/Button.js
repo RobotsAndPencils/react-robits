@@ -25,13 +25,6 @@ export const Button = ({
   onClick,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const classes = classNames(
     className,
     styling.btn,

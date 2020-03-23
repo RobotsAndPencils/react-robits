@@ -24,13 +24,6 @@ export const FormCheckbox = ({
   leftLabel,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const containerClasses = classNames(
     'form-control-container',
     styling['checkbox-container'],

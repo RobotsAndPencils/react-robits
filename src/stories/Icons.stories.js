@@ -18,11 +18,6 @@ export const icons = () => {
   }
   const width = number('Width', 24, widthOptions)
 
-  // eslint-disable-next-line
-  // useEffect(() => {
-  //   styles.use()
-  // }, [])
-
   return (
     <>
       <p className={styles['grid-caption']}>

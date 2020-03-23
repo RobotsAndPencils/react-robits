@@ -25,13 +25,6 @@ export const FormInput = ({
   children,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const inputClasses = classNames(
     'form-control',
     size && `form-control-${size}`,

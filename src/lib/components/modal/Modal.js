@@ -36,13 +36,6 @@ export const Modal = ({
   const [isOpen, setOpenStatus] = useState(open || false)
   const modalContent = useRef(null)
 
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   useEffect(() => {
     setOpenStatus(open)
   }, [open])

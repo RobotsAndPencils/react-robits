@@ -19,13 +19,6 @@ export const Card = ({
   footer,
   ...props
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const classes = classNames(className, styling.card, size && styling[`card-${size}`])
 
   const onClickHandler = e => {

@@ -5,13 +5,6 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 
 const FormInputAddon = ({ styling, className, children, tag: Tag = 'div', type, ...rest }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const classes = classNames(className, styling[`input-group-${type}`])
 
   return (

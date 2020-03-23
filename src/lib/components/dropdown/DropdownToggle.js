@@ -20,13 +20,6 @@ export const DropdownToggle = ({
   // 'aria-haspopup' = true,
   ...rest
 }) => {
-  // useEffect(() => {
-  //   styling.use()
-  //   return () => {
-  //     styling.unuse()
-  //   }
-  // }, [styling])
-
   const context = useContext(DropdownContext)
 
   const handleClick = e => {
