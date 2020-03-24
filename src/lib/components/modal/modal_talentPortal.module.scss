@@ -34,11 +34,20 @@ $modal-md: 500px !default;
 $modal-sm: 300px !default;
 
 $modal-transition: transform 0.3s ease-out !default;
+$transition-fade: opacity 200ms ease-in-out !default;
 
 // .modal-open      - body class for killing the scroll
 // .modal           - container to scroll within
 // .modal-dialog    - positioning shell for the actual modal
 // .modal-content   - actual modal w/ bg and corners and stuff
+
+.fade {
+  @include transition($transition-fade);
+
+  &:not(.show) {
+    opacity: 0;
+  }
+}
 
 .modal-open {
   // Kill the scroll on the body
