@@ -12,7 +12,7 @@ export const DropdownMenu = ({
   styling,
   className,
   children,
-  right,
+  alignment,
   tag: Tag = 'div',
   size,
   modifiers,
@@ -24,16 +24,18 @@ export const DropdownMenu = ({
 
   const classes = classNames(
     className,
-    styling['dropdown-menu'],
-    size && styling[`dropdown-menu-${size}`],
-    right && styling['dropdown-menu-right'],
-    context.open && styling.show
+    'dropdown-menu',
+    size && `dropdown-menu-${size}`,
+    // right && styling['dropdown-menu-right'],
+    context.open && 'show'
   )
 
   if (persist || (context.open && !context.inNavbar)) {
     const pos1 = DROPDOWN_POSITION_MAP[context.direction.toUpperCase()] || 'bottom'
-    const pos2 = right ? 'end' : 'start'
-    rest.placement = `${pos1}-${pos2}`
+    let pos2
+    if (alignment === 'right') pos2 = 'end'
+    if (alignment === 'left') pos2 = 'start'
+    rest.placement = `${pos1}${pos2 ? `-${pos2}` : ''}`
     rest.component = Tag
     rest.modifiers = !flip
       ? {
@@ -46,10 +48,12 @@ export const DropdownMenu = ({
       }
       : modifiers
 
+    console.log(rest.placement)
     return (
       <Popper {...rest}>
-        {({ ref, placement }) => (
+        {({ ref, placement, style }) => (
           <div
+            style={style}
             ref={ref}
             className={classes}
             x-placement={placement}
@@ -80,9 +84,9 @@ DropdownMenu.propTypes = {
    */
   children: PropTypes.node.isRequired,
   /**
-   * Whether it is positioned on the right side, or not.
+   * The alignment of the dropdown relative to the trigger (center, right, left). Defaults to center
    */
-  right: PropTypes.bool,
+  alignment: PropTypes.string,
   /**
    * Whether it should flip, or not.
    */

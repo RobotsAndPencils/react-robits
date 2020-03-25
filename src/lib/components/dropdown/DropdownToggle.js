@@ -65,8 +65,13 @@ export const DropdownToggle = ({
   if (context.inNavbar) {
     return (
       <Reference>
-        {() => (
-          <Tag {...rest} className={classes} onClick={handleClick} aria-expanded={context.open}>
+        {({ ref }) => (
+          <Tag
+            innerRef={ref}
+            {...rest}
+            className={classes}
+            onClick={handleClick}
+            aria-expanded={context.open}>
             {dropdownChildren}
           </Tag>
         )}
@@ -76,8 +81,13 @@ export const DropdownToggle = ({
 
   return (
     <Reference>
-      {() => (
-        <Tag {...rest} className={classes} onClick={handleClick} aria-expanded={context.open}>
+      {({ ref }) => (
+        <Tag
+          innerRef={ref}
+          {...rest}
+          className={classes}
+          onClick={handleClick}
+          aria-expanded={context.open}>
           {dropdownChildren}
         </Tag>
       )}
