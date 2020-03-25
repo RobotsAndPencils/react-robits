@@ -47,9 +47,9 @@ export const DropdownItem = ({
   const classes = classNames(
     className,
     rest.disabled && styling.disabled,
-    !divider && !header && styling['dropdown-item'],
+    !divider && !header && 'dropdown-item',
     header && styling['dropdown-header'],
-    divider && styling['dropdown-divider'],
+    divider && 'dropdown-divider',
     active && styling.active
   )
 

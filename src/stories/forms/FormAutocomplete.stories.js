@@ -1,8 +1,9 @@
 import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
-import FormInput, {
-  FormInput as FormInputComponent
-} from '../../lib/components/formInput/FormInput'
+import FormAutocomplete, {
+  FormAutocomplete as FormAutocompleteComponent
+} from '../../lib/components/formAutocomplete/FormAutocomplete'
+import { states } from '../pages/testData'
 import FormInputAddon from '../../lib/components/formInput/FormInputAddon'
 
 const reconcileValidity = componentKnobs => {
@@ -20,48 +21,39 @@ const reconcileValidity = componentKnobs => {
 }
 
 export default {
-  title: 'Robits/Form/FormInput',
-  component: FormInputComponent
+  title: 'Robits/Form/FormAutocomplete',
+  component: FormAutocompleteComponent
 }
 
 export const Normal = ({ theme }) => {
+  const handleSelection = selection => {
+    console.log('selection made', selection)
+  }
+
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
-    readonly: boolean('Read Only', false),
     label: text('Label', ''),
     hintContent: text('Hint Text', ''),
     errorText: text('Error Text', 'There is an error'),
     placeholder: text('Placeholder', ''),
-    required: boolean('Required', false)
+    required: boolean('Required', false),
+    multiple: boolean('Multiple', true),
+    forceMatch: boolean('Force a match', false),
+    allowNew: boolean('Allow new tokens', true),
+    size: select('Size', ['sm', 'md', 'lg'], 'md')
   }
   componentKnobs = reconcileValidity(componentKnobs)
 
   return (
     <>
-      <FormInput {...componentKnobs} theme={theme} />
-    </>
-  )
-}
-
-export const Sizes = ({ theme }) => {
-  let componentKnobs = {
-    disabled: boolean('Disabled', false),
-    validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
-    readonly: boolean('Read Only', false),
-    label: text('Label', ''),
-    hintContent: text('Hint Text', ''),
-    errorText: text('Error Text', 'There is an error'),
-    placeholder: text('Placeholder', ''),
-    required: boolean('Required', false)
-  }
-  componentKnobs = reconcileValidity(componentKnobs)
-
-  return (
-    <>
-      <FormInput {...componentKnobs} size='lg' theme={theme} placeholder='Large' />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Normal' />
-      <FormInput {...componentKnobs} size='sm' theme={theme} placeholder='Small' />
+      <FormAutocomplete
+        {...componentKnobs}
+        options={states}
+        labelKey='name'
+        onChange={handleSelection}
+        theme={theme}
+      />
     </>
   )
 }
@@ -70,7 +62,6 @@ export const Addons = ({ theme }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
-    readonly: boolean('Read Only', false),
     label: text('Label', ''),
     hintContent: text('Hint Text', ''),
     errorText: text('Error Text', 'There is an error'),
@@ -79,30 +70,49 @@ export const Addons = ({ theme }) => {
   }
   componentKnobs = reconcileValidity(componentKnobs)
 
+  componentKnobs.options = states
+  componentKnobs.labelKey = 'name'
+
   return (
     <>
-      <FormInput {...componentKnobs} theme={theme} placeholder='Prepender'>
+      <FormAutocomplete
+        id='autocomplete-example-1'
+        {...componentKnobs}
+        theme={theme}
+        placeholder='Prepender'>
         <FormInputAddon type='prepend' theme={theme}>
           $
         </FormInputAddon>
-      </FormInput>
+      </FormAutocomplete>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Appender'>
+      <FormAutocomplete
+        id='autocomplete-example-2'
+        {...componentKnobs}
+        theme={theme}
+        placeholder='Appender'>
         <FormInputAddon type='append' theme={theme}>
           $
         </FormInputAddon>
-      </FormInput>
+      </FormAutocomplete>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Both'>
+      <FormAutocomplete
+        id='autocomplete-example-3'
+        {...componentKnobs}
+        theme={theme}
+        placeholder='Both'>
         <FormInputAddon type='prepend' theme={theme}>
           $
         </FormInputAddon>
         <FormInputAddon type='append' theme={theme}>
           .00
         </FormInputAddon>
-      </FormInput>
+      </FormAutocomplete>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Leading'>
+      <FormAutocomplete
+        id='autocomplete-example-4'
+        {...componentKnobs}
+        theme={theme}
+        placeholder='Leading'>
         <FormInputAddon type='leading' theme={theme}>
           <svg
             version='1.1'
@@ -119,9 +129,13 @@ export const Addons = ({ theme }) => {
             />
           </svg>
         </FormInputAddon>
-      </FormInput>
+      </FormAutocomplete>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Leading'>
+      <FormAutocomplete
+        id='autocomplete-example-5'
+        {...componentKnobs}
+        theme={theme}
+        placeholder='Leading'>
         <FormInputAddon type='trailing' theme={theme}>
           <svg
             version='1.1'
@@ -132,7 +146,7 @@ export const Addons = ({ theme }) => {
             <path d='M16 32c-8.822 0-16-7.177-16-16 0-8.822 7.178-16 16-16s16 7.178 16 16c0 8.823-7.178 16-16 16zM16 2c-7.72 0-14 6.28-14 14s6.28 14 14 14 14-6.281 14-14c0-7.72-6.28-14-14-14zM16 25c-0.26 0-0.521-0.11-0.71-0.29-0.181-0.19-0.29-0.45-0.29-0.71s0.109-0.52 0.29-0.71c0.37-0.37 1.050-0.37 1.42 0 0.18 0.19 0.29 0.45 0.29 0.71s-0.11 0.52-0.29 0.71c-0.191 0.18-0.45 0.29-0.71 0.29zM16 21c-0.553 0-1-0.447-1-1v-12c0-0.553 0.447-0.999 1-0.999s1 0.446 1 0.999v12c0 0.553-0.447 1-1 1z' />
           </svg>
         </FormInputAddon>
-      </FormInput>
+      </FormAutocomplete>
     </>
   )
 }

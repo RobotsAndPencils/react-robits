@@ -4,7 +4,6 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
 
-// import ReactDOM from 'react-dom'
 import { Manager } from 'react-popper'
 
 import { KEYCODES, EVENTS } from '../../constants/constants'

@@ -56,8 +56,12 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
 }
 
 .checkbox-container {
-  display: flex;
-  align-items: center;
+  :global {
+    .form-control-required,
+    .form-control-error {
+      margin: 0 0.8rem 0.8rem $custom-control-gutter;
+    }
+  }
 }
 
 .form-checkbox {
@@ -211,9 +215,8 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
 }
 
 .as-toggle {
-  position: relative;
-  padding-left: ($custom-toggle-width + 1rem);
-  min-height: $custom-toggle-height;
+  display: flex;
+  align-items: center;
 
   @each $color, $value in $grays {
     @include toggle-variant('&.left-#{$color}', $value);
@@ -225,34 +228,91 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
     @include toggle-variant('&.left-#{$color}', $value);
   }
 
-  label {
-    // Background
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: $custom-toggle-width;
-      height: $custom-toggle-height;
-      background: $form-control-bg;
-      border-radius: $custom-toggle-border-radius;
-      border: $custom-toggle-border;
+  > label {
+    position: relative;
+    padding-left: ($custom-toggle-width + 1rem);
+    min-height: $custom-toggle-height;
+
+    &.smaller {
+      padding-left: 4.2rem;
+
+      label {
+        // Background
+        &::before {
+          top: 0.3rem;
+          position: absolute;
+          display: block;
+          width: $custom-toggle-width-sm;
+          height: $custom-toggle-height-sm;
+          background: $form-control-bg;
+          border-radius: $custom-toggle-border-radius;
+          border: $custom-toggle-border;
+        }
+
+        // Knob
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0.6rem;
+          left: 0.3rem;
+          width: $custom-toggle-knob-width-sm;
+          height: $custom-toggle-knob-height-sm;
+        }
+      }
+
+      // Checked state
+      input:checked ~ label {
+        // Knob
+        &::after {
+          left: $custom-toggle-width-sm - $custom-toggle-border-width - 0.3rem;
+        }
+      }
+
+      // Active state
+      input:active:not(:disabled) ~ label {
+        // Knob
+        &::after {
+          width: $custom-toggle-knob-active-width-sm;
+        }
+      }
     }
 
-    // Knob
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0.4rem;
-      left: 0.4rem;
-      width: $custom-toggle-knob-width;
-      height: $custom-toggle-knob-height;
-      background: $form-control-border-color;
-      border-radius: $custom-toggle-knob-border-radius;
-      transition: 350ms;
-      opacity: 1;
-      transform: none;
-      border: none;
+    & ~ :global(.form-control-descenders) {
+      .form-control-required,
+      .form-control-error {
+        margin-left: ($custom-toggle-width + 1rem);
+      }
+    }
+
+    label {
+      // Background
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: $custom-toggle-width;
+        height: $custom-toggle-height;
+        background: $form-control-bg;
+        border-radius: $custom-toggle-border-radius;
+        border: $custom-toggle-border;
+      }
+
+      // Knob
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0.4rem;
+        left: 0.4rem;
+        width: $custom-toggle-knob-width;
+        height: $custom-toggle-knob-height;
+        background: $form-control-border-color;
+        border-radius: $custom-toggle-knob-border-radius;
+        transition: 350ms;
+        opacity: 1;
+        transform: none;
+        border: none;
+      }
     }
   }
 
@@ -321,64 +381,6 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
         }
       }
     }
-  }
-
-  &.smaller {
-    padding-left: 4.2rem;
-
-    label {
-      // Background
-      &::before {
-        top: 0.3rem;
-        position: absolute;
-        display: block;
-        width: $custom-toggle-width-sm;
-        height: $custom-toggle-height-sm;
-        background: $form-control-bg;
-        border-radius: $custom-toggle-border-radius;
-        border: $custom-toggle-border;
-      }
-
-      // Knob
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0.6rem;
-        left: 0.3rem;
-        width: $custom-toggle-knob-width-sm;
-        height: $custom-toggle-knob-height-sm;
-      }
-    }
-
-    // Checked state
-    input:checked ~ label {
-      // Knob
-      &::after {
-        left: $custom-toggle-width-sm - $custom-toggle-border-width - 0.3rem;
-      }
-    }
-
-    // Active state
-    input:active:not(:disabled) ~ label {
-      // Knob
-      &::after {
-        width: $custom-toggle-knob-active-width-sm;
-      }
-    }
-  }
-
-  & ~ :global(.form-control-descenders) {
-    .form-control-required,
-    .form-control-error {
-      margin-left: ($custom-toggle-width + 1rem);
-    }
-  }
-}
-
-:global {
-  .form-control-required,
-  .form-control-error {
-    margin: 0 0.8rem 0.8rem $custom-control-gutter;
   }
 }
 

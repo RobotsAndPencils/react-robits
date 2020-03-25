@@ -1,13 +1,12 @@
-// stylelint-disable
-$blue-100: #3da9db !default;
-$blue-200: #3da9db !default;
-$blue-300: #3da9db !default;
-$blue-400: #3da9db !default;
-$blue-500: #3da9db !default;
-$blue-600: #3da9db !default;
-$blue-700: #3da9db !default;
-$blue-800: #3da9db !default;
-$blue-900: #3da9db !default;
+$blue-100: #d5ecfc !default;
+$blue-200: #acd6fa !default;
+$blue-300: #80b9f2 !default;
+$blue-400: #5e9ce5 !default;
+$blue-500: #2e73d5 !default;
+$blue-600: #2159b7 !default;
+$blue-700: #174299 !default;
+$blue-800: #0e2d7b !default;
+$blue-900: #081f66 !default;
 
 $blues: () !default;
 $blues: map-merge(
@@ -25,26 +24,24 @@ $blues: map-merge(
   $blues
 );
 
-$indigo: #674eec !default;
 $purple: #8445f7 !default;
 $red: #de0008 !default;
 $yellow: #fcc717 !default;
 $green: #17c671 !default;
-$cyan: #00b8d8 !default;
-$lightblue: #8cbcd8 !default;
-$navy: #242e40 !default;
+$lightblue: #8cbcd8;
+$navy: #242e40;
+$background: #f9fafc;
 
 $colors: () !default;
 $colors: map-merge(
   (
-    'indigo': $indigo,
     'purple': $purple,
     'red': $red,
     'yellow': $yellow,
     'green': $green,
-    'cyan': $cyan,
     'lightblue': $lightblue,
-    'navy': $navy
+    'navy': $navy,
+    'background': $background
   ),
   $colors
 );
@@ -52,7 +49,7 @@ $colors: map-merge(
 $primary: $blue-500 !default;
 $secondary: $gray-700 !default;
 $success: $green !default;
-$info: $cyan !default;
+$info: $lightblue !default;
 $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-200 !default;

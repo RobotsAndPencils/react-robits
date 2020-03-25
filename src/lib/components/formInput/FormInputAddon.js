@@ -5,12 +5,12 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 
 const FormInputAddon = ({ styling, className, children, tag: Tag = 'div', type, ...rest }) => {
-  const classes = classNames(className, styling[`input-group-${type}`])
+  const classes = classNames(className, `input-group-${type}`)
 
   return (
     <Tag {...rest} className={classes}>
       {typeof children === 'string' ? (
-        <div class={styling['input-group-text']}>{children}</div>
+        <div class='input-group-text'>{children}</div>
       ) : (
         <>{children}</>
       )}

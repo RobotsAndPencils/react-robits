@@ -28,12 +28,12 @@ export const FormCheckbox = ({
     'form-control-container',
     styling['checkbox-container'],
     inline && 'inline',
-    props.disabled && 'disabled'
+    props.disabled && 'disabled',
+    toggle && styling['as-toggle']
   )
 
   const labelClasses = classNames(
     styling['form-checkbox'],
-    toggle && styling['as-toggle'],
     small && styling.smaller,
     valid && styling['is-valid'],
     invalid && styling['is-invalid'],

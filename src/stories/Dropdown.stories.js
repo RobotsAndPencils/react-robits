@@ -17,11 +17,12 @@ export default {
 export const Normal = ({ theme }) => {
   const componentKnobs = {
     disabled: boolean('Disabled', false),
-    direction: select('Direction', ['up', 'down', 'left', 'right'], 'down')
+    direction: select('Preferred Direction', ['up', 'down', 'left', 'right'], 'down')
   }
 
   const caret = boolean('With Caret', false)
   const size = select('Size', ['sm', 'md', 'lg'], 'md')
+  const alignment = select('Menu Alignment ', ['center', 'left', 'right'], 'center')
 
   const [open, toggleOpen] = useState(false)
 
@@ -31,7 +32,7 @@ export const Normal = ({ theme }) => {
         <DropdownToggle caret={caret} size={size} disabled={componentKnobs.disabled} theme={theme}>
           Options
         </DropdownToggle>
-        <DropdownMenu theme={theme} size={size}>
+        <DropdownMenu theme={theme} size={size} alignment={alignment}>
           <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
             Action
           </DropdownItem>

@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
+import { Typeahead, AsyncTypeahead } from 'react-bootstrap-typeahead'
 
 import { INPUT_TYPES } from '../../constants/constants'
 
 /**
- * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
+ * The form input allows you to type with automatic suggestions, select from those suggestions, add multiple tokenized values
  */
-export const FormInput = ({
+export const FormAutocomplete = ({
   required,
   styling,
   className,
@@ -19,19 +20,18 @@ export const FormInput = ({
   valid = false,
   innerRef,
   disabled = false,
-  readonly = false,
   errorText,
   hintContent,
   children,
-  ...props
+  multiple = true,
+  forceMatch = false,
+  allowNew = false,
+  onSearch = undefined,
+  options,
+  labelKey = 'label',
+  ...rest
 }) => {
-  const inputClasses = classNames(
-    'form-control',
-    size && `form-control-${size}`,
-    valid && 'is-valid',
-    invalid && 'is-invalid',
-    disabled && 'disabled'
-  )
+  const Tag = onSearch ? AsyncTypeahead : Typeahead
 
   const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
@@ -84,12 +84,21 @@ export const FormInput = ({
 
   const renderInput = () => {
     return (
-      <input
-        {...props}
-        ref={innerRef}
+      <Tag
+        {...rest}
         disabled={disabled}
-        readOnly={readonly}
-        className={inputClasses}
+        bsSize={size}
+        isValid={valid}
+        isInvalid={invalid}
+        inputProps={{
+          ref: innerRef
+        }}
+        multiple={multiple}
+        allowNew={multiple && allowNew}
+        forceMatch={forceMatch}
+        onSearch={onSearch}
+        options={options}
+        labelKey={labelKey}
       />
     )
   }
@@ -97,7 +106,7 @@ export const FormInput = ({
   return (
     <div className={containerClasses}>
       {label ? (
-        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+        <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
           {label}
           {required && '*'}
         </label>
@@ -121,7 +130,7 @@ export const FormInput = ({
   )
 }
 
-FormInput.propTypes = {
+FormAutocomplete.propTypes = {
   /**
    * The class name.
    */
@@ -160,4 +169,4 @@ FormInput.propTypes = {
   required: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormInput)
+export default ThemeWrapper(themes)(FormAutocomplete)

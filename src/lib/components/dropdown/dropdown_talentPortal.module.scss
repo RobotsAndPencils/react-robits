@@ -1,53 +1,5 @@
 @import '../../styles/themes/talentPortal/tokens';
 
-$dropdown-bg: $white !default;
-$dropdown-min-width: 16rem !default;
-$dropdown-padding-y: 0.8rem !default;
-$dropdown-spacer: 0 !default;
-$dropdown-border-color: rgba($black, 0.05) !default;
-$dropdown-border-width: $border-width !default;
-$dropdown-divider-bg: $gray-200 !default;
-$dropdown-border-radius: $border-radius !default;
-
-$dropdown-box-shadow: 0 0.8rem 6.4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05),
-  0 2px 3px rgba(0, 0, 0, 0.06) !default;
-
-$dropdown-link-color: $gray-900 !default;
-$dropdown-link-hover-color: darken($gray-900, 5%) !default;
-$dropdown-link-hover-bg: lighten($gray-700, 55%) !default;
-$dropdown-link-active-color: $component-active-color !default;
-$dropdown-link-active-bg: lighten($gray-700, 40%) !default;
-$dropdown-link-disabled-color: $gray-600 !default;
-
-$dropdown-item-padding-y: 0.8rem !default;
-$dropdown-item-padding-x: 2rem !default;
-$dropdown-item-font-size: 1.5rem !default;
-$dropdown-item-transition: background-color $transition-duration $ease-in-out-circ,
-  color $transition-duration $ease-in-out-circ !default;
-
-$dropdown-header-color: $gray-600 !default;
-
-// Small dropdowns
-$dropdown-sm-padding-y: 0.4rem !default;
-$dropdown-sm-font-size: 1.3008rem !default;
-$dropdown-sm-box-shadow: 0 0.8rem 3.2rem rgba(0, 0, 0, 0.11), 0 3px 10px rgba(0, 0, 0, 0.05),
-  0 2px 3px rgba(0, 0, 0, 0.06) !default;
-
-$dropdown-sm-item-padding-y: 0.6rem !default;
-$dropdown-sm-item-padding-x: 1.4rem !default;
-
-$dropdown-sm-item-font-size: 1.3008rem !default;
-
-$dropdown-sm-divider-margin-x: 0 !default;
-$dropdown-sm-divider-margin-y: 0.4rem !default;
-
-$btn-padding-y: 0.8rem !default;
-$btn-padding-x: 1.6rem !default;
-$btn-padding-y-lg: 1.2rem !default;
-$btn-padding-x-lg: 2.8rem !default;
-$btn-padding-y-sm: 0.56rem !default;
-$btn-padding-x-sm: 1.6rem !default;
-
 // The dropdown wrapper (`<div>`)
 .dropup,
 .dropright,
@@ -66,43 +18,6 @@ $btn-padding-x-sm: 1.6rem !default;
   @include caret;
 }
 
-// The dropdown menu
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: $zindex-dropdown;
-  display: none; // none by default, but block on "open" of the menu
-  float: left;
-  min-width: $dropdown-min-width;
-  padding: $dropdown-padding-y 0;
-  margin: $dropdown-spacer 0 0; // override default ul
-  font-size: $font-size-base; // Redeclare because nesting can cause inheritance issues
-  color: $body-color;
-  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
-  list-style: none;
-  background-color: $dropdown-bg;
-  background-clip: padding-box;
-  border: $dropdown-border-width solid $dropdown-border-color;
-  border-radius: $dropdown-border-radius;
-  box-shadow: $dropdown-box-shadow;
-
-  &-sm {
-    box-shadow: $dropdown-sm-box-shadow;
-    padding: $dropdown-sm-padding-y 0;
-    font-size: $dropdown-sm-font-size;
-
-    .dropdown-item {
-      padding: $dropdown-sm-item-padding-y $dropdown-sm-item-padding-x;
-      font-size: $dropdown-sm-item-font-size;
-    }
-
-    .dropdown-divider {
-      margin: $dropdown-sm-divider-margin-y $dropdown-sm-divider-margin-x;
-    }
-  }
-}
-
 .dropdown-menu-right {
   right: 0;
   left: auto;
@@ -111,7 +26,7 @@ $btn-padding-x-sm: 1.6rem !default;
 // Allow for dropdowns to go bottom up (aka, dropup-menu)
 // Just add .dropup after the standard .dropdown class and you're set.
 .dropup {
-  .dropdown-menu {
+  :global(.dropdown-menu) {
     top: auto;
     bottom: 100%;
     margin-top: 0;
@@ -124,7 +39,7 @@ $btn-padding-x-sm: 1.6rem !default;
 }
 
 .dropright {
-  .dropdown-menu {
+  :global(.dropdown-menu) {
     top: 0;
     right: auto;
     left: 100%;
@@ -141,7 +56,7 @@ $btn-padding-x-sm: 1.6rem !default;
 }
 
 .dropleft {
-  .dropdown-menu {
+  :global(.dropdown-menu) {
     top: 0;
     right: 100%;
     left: auto;
@@ -155,78 +70,6 @@ $btn-padding-x-sm: 1.6rem !default;
       vertical-align: 0;
     }
   }
-}
-
-// When enabled Popper.js, reset basic dropdown position
-// stylelint-disable no-duplicate-selectors
-.dropdown-menu {
-  &[x-placement^='top'],
-  &[x-placement^='right'],
-  &[x-placement^='bottom'],
-  &[x-placement^='left'] {
-    right: auto;
-    bottom: auto;
-  }
-}
-// stylelint-enable no-duplicate-selectors
-
-// Dividers (basically an `<hr>`) within the dropdown
-.dropdown-divider {
-  height: 0;
-  margin: ($spacer / 2) 0;
-  overflow: hidden;
-  border-top: 1px solid $dropdown-divider-bg;
-}
-
-// Links, buttons, and more within the dropdown menu
-//
-// `<button>`-specific styles are denoted with `// For <button>s`
-.dropdown-item {
-  display: block;
-  width: 100%; // For `<button>`s
-  padding: $dropdown-item-padding-y $dropdown-item-padding-x;
-  clear: both;
-  font-weight: $font-weight-light;
-  color: $dropdown-link-color;
-  text-align: inherit; // For `<button>`s
-  white-space: nowrap; // prevent links from randomly breaking onto new lines
-  background-color: transparent; // For `<button>`s
-  border: 0; // For `<button>`s
-  font-size: $dropdown-item-font-size;
-  transition: $dropdown-item-transition;
-  cursor: pointer;
-
-  @include hover-focus {
-    color: $dropdown-link-hover-color;
-    text-decoration: none;
-    @include gradient-bg($dropdown-link-hover-bg);
-  }
-
-  &.active,
-  &:active {
-    color: $dropdown-link-active-color;
-    text-decoration: none;
-    @include gradient-bg($dropdown-link-active-bg);
-  }
-
-  &.disabled,
-  &:disabled {
-    color: $dropdown-link-disabled-color;
-    background-color: transparent;
-    // Remove CSS gradients if they're enabled
-    @if $enable-gradients {
-      background-image: none;
-    }
-
-    &:hover {
-      background: none;
-      cursor: not-allowed;
-    }
-  }
-}
-
-.dropdown-menu.show {
-  display: block;
 }
 
 // Dropdown section headers

@@ -1,0 +1,47 @@
+$dropdown-bg: $white !default;
+$dropdown-min-width: 16rem !default;
+$dropdown-padding-y: 0.8rem !default;
+$dropdown-spacer: 0 !default;
+$dropdown-border-color: rgba($black, 0.05) !default;
+$dropdown-border-width: $border-width !default;
+$dropdown-divider-bg: $gray-200 !default;
+$dropdown-border-radius: $border-radius !default;
+
+$dropdown-box-shadow: 0 0.8rem 6.4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.06) !default;
+
+$dropdown-link-color: $gray-900 !default;
+$dropdown-link-hover-color: darken($gray-900, 5%) !default;
+$dropdown-link-hover-bg: lighten($gray-700, 55%) !default;
+$dropdown-link-active-color: $component-active-color !default;
+$dropdown-link-active-bg: lighten($gray-700, 40%) !default;
+$dropdown-link-disabled-color: $gray-600 !default;
+
+$dropdown-item-padding-y: 0.8rem !default;
+$dropdown-item-padding-x: 2rem !default;
+$dropdown-item-font-size: 1.5rem !default;
+$dropdown-item-transition: background-color $transition-duration $ease-in-out-circ,
+  color $transition-duration $ease-in-out-circ !default;
+
+$dropdown-header-color: $gray-600 !default;
+
+// Small dropdowns
+$dropdown-sm-padding-y: 0.4rem !default;
+$dropdown-sm-font-size: 1.3008rem !default;
+$dropdown-sm-box-shadow: 0 0.8rem 3.2rem rgba(0, 0, 0, 0.11), 0 3px 10px rgba(0, 0, 0, 0.05),
+  0 2px 3px rgba(0, 0, 0, 0.06) !default;
+
+$dropdown-sm-item-padding-y: 0.6rem !default;
+$dropdown-sm-item-padding-x: 1.4rem !default;
+
+$dropdown-sm-item-font-size: 1.3008rem !default;
+
+$dropdown-sm-divider-margin-x: 0 !default;
+$dropdown-sm-divider-margin-y: 0.4rem !default;
+
+$btn-padding-y: 0.8rem !default;
+$btn-padding-x: 1.6rem !default;
+$btn-padding-y-lg: 1.2rem !default;
+$btn-padding-x-lg: 2.8rem !default;
+$btn-padding-y-sm: 0.56rem !default;
+$btn-padding-x-sm: 1.6rem !default;
