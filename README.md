@@ -132,7 +132,11 @@ $ heroku git:remote --app react-robits
 $ git remote -v # List available remotes
 ```
 
-Deploy changes from `master`:
+First, run `npm run build-storybook` to recompile the distributable package from the branch you wish to deploy.
+
+Then, run one of the following commands...
+
+If you are deploying the `master` branch, run:
 
 ```
 $ git push heroku master
