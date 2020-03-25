@@ -119,7 +119,13 @@ or
 
 This is currently deployed to Heroku on a free tier. To deploy from your terminal, you'll need the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and logged in to your Heroku account.
 
-From the root of your project folder, add Heroku git remote if you haven't already:
+From the root of your project folder, generate new storybook build:
+
+```
+$ npm run build-storybook
+```
+
+Add Heroku git remote if you haven't already:
 
 ```
 $ heroku git:remote --app react-robits
