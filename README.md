@@ -1,5 +1,5 @@
 <h1>
-  React Robits <img align="right" width="300" src="robits.png"> 
+  React Robits <img align="right" width="300" src="robits.png">
 </h1>
 A library of React components, by the Frontend Team at Robots & Pencils, to share amongst projects in an effort to challenge ourselves to think reusable/themeable so we can bootstrap development and save time.
 
@@ -114,3 +114,34 @@ or
 - `npm run lint`: runs the eslint
 - `npm run format`: runs the prettier formatting
 - "eject-robits": this should only be run via the parent project via `npm explore` in order to copy the components into the project and erase any footprint to this library
+
+## Deployment
+
+This is currently deployed to Heroku on a free tier. To deploy from your terminal, you'll need the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and logged in to your Heroku account.
+
+Add Heroku git remote if you haven't already:
+
+```
+$ heroku git:remote --app react-robits
+$ git remote -v # List available remotes
+```
+
+Deploy changes from `master`:
+
+```
+$ git push heroku master
+```
+
+Deploy changes from a branch besides `master`:
+
+```
+$ git push heroku testbranch:master
+```
+
+Launch Heroku app in browser:
+
+```
+$ heroku open --app react-robits
+```
+
+Or visit https://react-robits.herokuapp.com
