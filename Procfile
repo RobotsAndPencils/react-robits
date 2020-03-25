@@ -1,1 +1,1 @@
-web: npm run storybook:port
+web: node server/server.js
