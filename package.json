@@ -43,6 +43,7 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 8002 -s public",
+    "storybook:port": "start-storybook -p $PORT -s public",
     "build-storybook": "build-storybook -s public",
     "eject-robits": "node ejection-script",
     "lint": "prettier-standard --lint",
