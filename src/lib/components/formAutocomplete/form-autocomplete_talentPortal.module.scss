@@ -1,0 +1,172 @@
+@import '../../styles/themes/talentPortal/tokens';
+
+:global {
+  .rbt {
+    .dropdown-menu {
+      > li {
+        a {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-decoration: none;
+          color: $gray-700;
+          padding: 5px 15px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        &.active {
+          a {
+            background-color: $blue-500;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .rbt-menu-custom-option {
+      border-top: 1px dashed $gray-200;
+      padding-top: 6px;
+    }
+
+    /* Hide IE's native "clear" button */
+    input[type='text']::-ms-clear {
+      display: none;
+    }
+
+    .rbt-input-hint {
+      box-sizing: border-box;
+    }
+
+    .rbt-highlight-text {
+      background-color: inherit;
+      color: inherit;
+      font-weight: bold;
+      padding: 0;
+    }
+
+    .rbt-input-multi {
+      cursor: text;
+      overflow: hidden;
+      position: relative;
+      height: auto;
+      min-height: $form-control-height;
+      display: flex;
+      align-items: flex-start;
+
+      .rbt-input-wrapper {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: -5px;
+        overflow: hidden;
+
+        input {
+          margin-top: 5px;
+        }
+      }
+
+      .rbt-input-main {
+        font-size: $form-control-font-size; // $font-size-base
+        line-height: $form-control-line-height;
+        color: $form-control-color;
+        font-weight: $font-weight-light;
+      }
+
+      &.form-control-sm {
+        min-height: $form-control-height-sm;
+        padding: $form-control-padding-y-sm $form-control-padding-x-sm;
+        font-size: $font-size-sm;
+        line-height: $form-control-line-height-sm;
+        border-radius: $form-control-border-radius-sm;
+
+        .rbt-token {
+          padding: 5px 25px 5px 10px;
+        }
+      }
+
+      &.form-control-lg {
+        min-height: $form-control-height-lg;
+        padding: $form-control-padding-y-lg $form-control-padding-x-lg;
+        font-size: $font-size-lg;
+        line-height: $form-control-line-height-lg;
+        border-radius: $form-control-border-radius-lg;
+      }
+    }
+  }
+
+  /* Fix styles when used with input-group */
+  .input-group:not(.input-group-seamless) .rbt:not(:first-child) .form-control {
+    @include border-left-radius(0);
+  }
+  .input-group:not(.input-group-seamless) .rbt:not(:last-child) .form-control {
+    @include border-right-radius(0);
+  }
+
+  .input-group > .rbt {
+    display: flex;
+    flex: 1;
+  }
+
+  .rbt-input-wrapper {
+    &::after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+  }
+
+  .rbt-token {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    color: $gray-700;
+    border: none;
+    background: $gray-400;
+    padding: 6px 25px 6px 10px;
+    margin: 5px 5px 0px 0;
+    position: relative;
+    max-width: 100%;
+    border-radius: 3px;
+    cursor: default;
+
+    &-disabled {
+      background-color: #ddd;
+      color: #888;
+      pointer-events: none;
+    }
+
+    &-removeable {
+      cursor: pointer;
+      padding-right: 21px;
+    }
+
+    &-active {
+      background-color: $blue-500;
+      color: #fff;
+      outline: none;
+      text-decoration: none;
+    }
+
+    .close {
+      padding: 0 7px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      line-height: 12px;
+      text-transform: uppercase;
+      color: inherit;
+      opacity: 1;
+      text-shadow: none;
+      font-weight: normal;
+      outline: 0;
+      background: transparent;
+      border: 0;
+      -webkit-appearance: none;
+    }
+  }
+}

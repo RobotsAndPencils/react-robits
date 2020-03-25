@@ -11,7 +11,7 @@ $form-radio-indicator-icon-checked: str-replace(
   '%23'
 ) !default;
 
-.form-control-container {
+.radios-container {
   display: inline-flex;
   flex-direction: column;
 
@@ -157,13 +157,13 @@ $form-radio-indicator-icon-checked: str-replace(
   }
 }
 
-.form-control-descenders {
-  .form-control-hint,
-  .form-control-required,
-  .form-control-error {
-    margin: 0 0 0.8rem 0;
-  }
-}
+// .form-control-descenders {
+//   .form-control-hint,
+//   .form-control-required,
+//   .form-control-error {
+//     margin: 0 0 0.8rem 0;
+//   }
+// }
 
 @include form-validation-state('valid', $success);
 @include form-validation-state('invalid', $danger);

@@ -25,6 +25,7 @@ export const FormRadio = ({
 
   const containerClasses = classNames(
     'form-control-container',
+    styling['radios-container'],
     inline && styling.inline,
     rest.disabled && styling.disabled
   )

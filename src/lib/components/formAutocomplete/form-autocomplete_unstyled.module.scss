@@ -1,0 +1,28 @@
+@import '../../styles/themes/unstyled/tokens';
+
+.disabled {
+  @include disabled-form-control;
+}
+
+.form-control-container {
+  input {
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:read-only {
+      cursor: not-allowed;
+    }
+
+    &.is-invalid {
+      border-color: red;
+      border-width: 1px;
+    }
+
+    &::placeholder {
+      color: #c0c0c0;
+    }
+  }
+}

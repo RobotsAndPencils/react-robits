@@ -43,13 +43,13 @@ Download this repo as an npm package into your project:
 To pull the library into your project, run the following command line in the root of your project directory:
 
 ```
-npm install --save git+https://github.com/RobotsAndPencils/react-robits.git#master
+npm install --save git+https://github.com/RobotsAndPencils/react-robits.git#[branch-name-of-desired-theme]
 ```
 
 _Note_: this package will need reinstalled to grab updates. To do so, it's recommended to set up a shortcut script in your project's `package.json` for ease-of-use:
 
 ```
-  "install-robits": "npm i --save git+https://github.com/RobotsAndPencils/react-robits.git#master"
+  "install-robits": "npm i --save git+https://github.com/RobotsAndPencils/react-robits.git#[branch-name-of-desired-theme]"
 ```
 
 There are a few key pieces to include in your project's webpack config.
