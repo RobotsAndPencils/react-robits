@@ -119,12 +119,6 @@ or
 
 This is currently deployed to Heroku on a free tier. To deploy from your terminal, you'll need the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and logged in to your Heroku account.
 
-From the root of your project folder, generate new storybook build:
-
-```
-$ npm run build-storybook
-```
-
 Add Heroku git remote if you haven't already:
 
 ```
@@ -132,7 +126,7 @@ $ heroku git:remote --app react-robits
 $ git remote -v # List available remotes
 ```
 
-First, run `npm run build-storybook` to recompile the distributable package from the branch you wish to deploy.
+First, from the root of your project folder, run `npm run build-storybook` to compile the distributable package from the branch you wish to deploy.
 
 Then, run one of the following commands...
 
@@ -142,7 +136,7 @@ If you are deploying the `master` branch, run:
 $ git push heroku master
 ```
 
-Deploy changes from a branch besides `master`:
+Deploy changes from a branch besides `master`, such as `testbranch`:
 
 ```
 $ git push heroku testbranch:master
