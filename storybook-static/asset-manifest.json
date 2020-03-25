@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/RobotsAndPencils/react-robits/static/css/main.20aa5ebb.chunk.css",
-    "main.js": "/RobotsAndPencils/react-robits/main.a87492a8d612bd2f20e0.bundle.js",
-    "main.css.map": "/RobotsAndPencils/react-robits/static/css/main.20aa5ebb.chunk.css.map",
-    "main.js.map": "/RobotsAndPencils/react-robits/main.a87492a8d612bd2f20e0.bundle.js.map",
-    "runtime~main.js": "/RobotsAndPencils/react-robits/runtime~main.a87492a8d612bd2f20e0.bundle.js",
-    "runtime~main.js.map": "/RobotsAndPencils/react-robits/runtime~main.a87492a8d612bd2f20e0.bundle.js.map",
-    "vendors~main.js": "/RobotsAndPencils/react-robits/vendors~main.a87492a8d612bd2f20e0.bundle.js",
-    "vendors~main.js.map": "/RobotsAndPencils/react-robits/vendors~main.a87492a8d612bd2f20e0.bundle.js.map",
+    "main.css": "/RobotsAndPencils/react-robits/static/css/main.3cccdf5f.chunk.css",
+    "main.js": "/RobotsAndPencils/react-robits/main.dff43e3bb404ab904bf4.bundle.js",
+    "main.css.map": "/RobotsAndPencils/react-robits/static/css/main.3cccdf5f.chunk.css.map",
+    "main.js.map": "/RobotsAndPencils/react-robits/main.dff43e3bb404ab904bf4.bundle.js.map",
+    "runtime~main.js": "/RobotsAndPencils/react-robits/runtime~main.dff43e3bb404ab904bf4.bundle.js",
+    "runtime~main.js.map": "/RobotsAndPencils/react-robits/runtime~main.dff43e3bb404ab904bf4.bundle.js.map",
+    "vendors~main.js": "/RobotsAndPencils/react-robits/vendors~main.dff43e3bb404ab904bf4.bundle.js",
+    "vendors~main.js.map": "/RobotsAndPencils/react-robits/vendors~main.dff43e3bb404ab904bf4.bundle.js.map",
     "iframe.html": "/RobotsAndPencils/react-robits/iframe.html",
-    "precache-manifest.b539779674e3962fa23f1ac531af3c76.js": "/RobotsAndPencils/react-robits/precache-manifest.b539779674e3962fa23f1ac531af3c76.js",
+    "precache-manifest.caec1ff7bfe59d2e19364a6440ae9786.js": "/RobotsAndPencils/react-robits/precache-manifest.caec1ff7bfe59d2e19364a6440ae9786.js",
     "service-worker.js": "/RobotsAndPencils/react-robits/service-worker.js",
-    "vendors~main.a87492a8d612bd2f20e0.bundle.js.LICENSE": "/RobotsAndPencils/react-robits/vendors~main.a87492a8d612bd2f20e0.bundle.js.LICENSE"
+    "vendors~main.dff43e3bb404ab904bf4.bundle.js.LICENSE": "/RobotsAndPencils/react-robits/vendors~main.dff43e3bb404ab904bf4.bundle.js.LICENSE"
   },
   "entrypoints": [
-    "runtime~main.a87492a8d612bd2f20e0.bundle.js",
-    "vendors~main.a87492a8d612bd2f20e0.bundle.js",
-    "static/css/main.20aa5ebb.chunk.css",
-    "main.a87492a8d612bd2f20e0.bundle.js"
+    "runtime~main.dff43e3bb404ab904bf4.bundle.js",
+    "vendors~main.dff43e3bb404ab904bf4.bundle.js",
+    "static/css/main.3cccdf5f.chunk.css",
+    "main.dff43e3bb404ab904bf4.bundle.js"
   ]
 }
