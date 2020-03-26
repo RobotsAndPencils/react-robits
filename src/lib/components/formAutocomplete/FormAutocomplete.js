@@ -145,6 +145,7 @@ export const FormAutocomplete = ({
         labelKey={labelKey}
         ref={componentRef}
         onBlur={onBlur}
+        onChange={onChange}
       />
     )
   }
