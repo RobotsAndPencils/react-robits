@@ -157,13 +157,5 @@ $form-radio-indicator-icon-checked: str-replace(
   }
 }
 
-// .form-control-descenders {
-//   .form-control-hint,
-//   .form-control-required,
-//   .form-control-error {
-//     margin: 0 0 0.8rem 0;
-//   }
-// }
-
 @include form-validation-state('valid', $success);
 @include form-validation-state('invalid', $danger);
