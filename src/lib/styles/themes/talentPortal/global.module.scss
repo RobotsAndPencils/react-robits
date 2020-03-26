@@ -172,7 +172,8 @@
   small,
   .small {
     font-size: $small-font-size;
-    font-weight: $font-weight-light;
+    font-weight: $font-weight-extralight;
+    text-transform: uppercase;
   }
 
   mark,
