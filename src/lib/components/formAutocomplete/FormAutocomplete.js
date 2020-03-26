@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
@@ -23,15 +23,59 @@ export const FormAutocomplete = ({
   errorText,
   hintContent,
   children,
-  multiple = true,
+  multiple = false,
   forceMatch = false,
   allowNew = false,
   onSearch = undefined,
-  options,
+  options = [],
   labelKey = 'label',
+  onChange = () => {},
   ...rest
 }) => {
   const Tag = onSearch ? AsyncTypeahead : Typeahead
+  const componentRef = useRef(null)
+
+  const onBlur = async e => {
+    const instance = componentRef.current.getInstance()
+
+    // figure out if the extra text should be cleared due to a mis-match when forceMatch is configured
+    if (forceMatch) {
+      let shouldClear = false
+      if (instance.props.multiple) {
+        if (instance.state.text && instance.state.text.length > 0) {
+          shouldClear = true
+        }
+      } else {
+        let hasMatch = false
+        if (instance.state.text.length > 0 && instance.state.selected.length > 0) {
+          const selectionByLabelKey =
+            typeof instance.props.labelKey === 'function'
+              ? instance.props.labelKey(instance.state.selected[0])
+              : instance.state.selected[0][instance.props.labelKey]
+          hasMatch = selectionByLabelKey === instance.state.text
+        }
+        shouldClear = instance.state.selected.length === 0 || !hasMatch
+      }
+
+      if (!instance.state.isFocused && shouldClear) {
+        if (instance.props.multiple && instance.state.selected.length > 0) {
+          // must clear and re-select in order to reset the mismatched text and plugin state
+          const resetValues = instance.state.selected
+          await instance.clear()
+          instance._handleSelectionAdd(resetValues)
+        } else {
+          instance.clear()
+        }
+
+        // bubble up any change
+        onChange(instance.state.selected)
+      }
+    }
+
+    if (!instance.state.isFocused && rest.onBlur) {
+      rest.onBlur(instance.state.selected) // resume normal onBlur if present
+    }
+  }
 
   const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
@@ -99,6 +143,8 @@ export const FormAutocomplete = ({
         onSearch={onSearch}
         options={options}
         labelKey={labelKey}
+        ref={componentRef}
+        onBlur={onBlur}
       />
     )
   }
