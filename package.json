@@ -4,6 +4,9 @@
   "private": true,
   "description": "R&P common React ui components",
   "main": "index.js",
+  "engines": {
+    "node": "11.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RobotsAndPencils/react-robits.git"
@@ -27,6 +30,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "react": "^16.12.0",
     "react-bootstrap-typeahead": "^4.1.0",
     "react-dom": "^16.12.0",
