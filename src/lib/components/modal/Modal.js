@@ -117,27 +117,7 @@ export const Modal = ({
         <div className={modalClasses} {...modalAttrs}>
           <div className={modalDialogClasses} role='document'>
             <div ref={modalContent} className={contentClasses}>
-              {header ? (
-                <div className={styling['modal-header']}>
-                  {header}
-                  {withCloseButton ? (
-                    <button
-                      type='button'
-                      onClick={toggleModal}
-                      class={styling.close}
-                      data-dismiss='modal'
-                      aria-label='Close'>
-                      <span aria-hidden='true'>×</span>
-                    </button>
-                  ) : (
-                    []
-                  )}
-                </div>
-              ) : (
-                []
-              )}
               {children}
-              {footer ? <div className={styling['modal-footer']}>{footer}</div> : []}
             </div>
           </div>
         </div>

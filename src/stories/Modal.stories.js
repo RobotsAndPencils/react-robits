@@ -3,6 +3,8 @@ import { useState } from '@storybook/client-api'
 import { text, boolean, select } from '@storybook/addon-knobs'
 import Modal, { Modal as ModalComponent } from '../lib/components/modal/Modal'
 import ModalBody from '../lib/components/modal/ModalBody'
+import ModalHeader from '../lib/components/modal/ModalHeader'
+import ModalFooter from '../lib/components/modal/ModalFooter'
 import Button from '../lib/components/button/Button'
 
 export default {
@@ -13,9 +15,6 @@ export default {
 export const Normal = ({ theme }) => {
   const componentKnobs = {
     closeOnBackdropClick: boolean('Close on Backdrop Click', true),
-    withCloseButton: boolean('With Close Button', false),
-    header: text('Header', 'Modal Header'),
-    footer: text('Footer', 'Modal Footer'),
     size: select('Size', ['sm', 'md', 'lg'], 'md'),
     centered: boolean('Centered', false)
   }
@@ -23,6 +22,10 @@ export const Normal = ({ theme }) => {
   if (componentKnobs.size === 'md') {
     delete componentKnobs.size
   }
+
+  const withCloseButton = boolean('With Close Button', false)
+  const header = text('Header', 'Modal Header')
+  const footer = text('Footer', 'Modal Footer')
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -36,7 +39,17 @@ export const Normal = ({ theme }) => {
         theme={theme}
         open={modalOpen}
         toggleModal={() => setModalOpen(!modalOpen)}>
+        {header ? (
+          <ModalHeader
+            withCloseButton={withCloseButton}
+            closeModal={() => setModalOpen(!modalOpen)}>
+            {header}
+          </ModalHeader>
+        ) : (
+          []
+        )}
         <ModalBody theme={theme}>Hello World</ModalBody>
+        {footer ? <ModalFooter>{footer}</ModalFooter> : []}
       </Modal>
     </>
   )
