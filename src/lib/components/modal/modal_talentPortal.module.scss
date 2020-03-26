@@ -49,7 +49,7 @@ $transition-fade: opacity 200ms ease-in-out !default;
   }
 }
 
-.modal-open {
+:global(.modal-open) {
   // Kill the scroll on the body
   overflow: hidden;
 
