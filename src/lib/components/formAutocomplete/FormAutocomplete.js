@@ -39,13 +39,14 @@ export const FormAutocomplete = ({
     const instance = componentRef.current.getInstance()
 
     // figure out if the extra text should be cleared due to a mis-match when forceMatch is configured
-    if (forceMatch) {
+    if (forceMatch || (multiple && allowNew)) {
       let shouldClear = false
       if (instance.props.multiple) {
         if (instance.state.text && instance.state.text.length > 0) {
           shouldClear = true
         }
-      } else {
+      } else if (forceMatch) {
+        // not multiple but force matched
         let hasMatch = false
         if (instance.state.text.length > 0 && instance.state.selected.length > 0) {
           const selectionByLabelKey =
