@@ -20,6 +20,7 @@ export const Avatar = ({
   bordered,
   transparent,
   size = 'md',
+  innerRef,
   ...props
 }) => {
   const [hasImage, setHasImage] = useState(false)
@@ -53,6 +54,7 @@ export const Avatar = ({
 
   return (
     <div
+      ref={innerRef}
       className={classes}
       {...props}
       onClick={editable && editCallback ? editCallback : props.onClick || undefined}>
@@ -73,7 +75,12 @@ Avatar.propTypes = {
   /**
    * The image source.
    */
-  image: PropTypes.string
+  image: PropTypes.string,
+  /**
+   * The inner ref.
+   * @type {[type]}
+   */
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(Avatar)
