@@ -30,7 +30,7 @@ FormInputAddon.propTypes = {
   /**
    * The addon type.
    */
-  type: PropTypes.oneOf(['prepend', 'append']).isRequired,
+  type: PropTypes.oneOf(['leading', 'trailing']).isRequired,
   /**
    * The component's tag type.
    */

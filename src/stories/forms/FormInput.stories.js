@@ -121,7 +121,7 @@ export const Addons = ({ theme }) => {
         </FormInputAddon>
       </FormInput>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Leading'>
+      <FormInput {...componentKnobs} theme={theme} placeholder='Trailing'>
         <FormInputAddon type='trailing' theme={theme}>
           <svg
             version='1.1'
