@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
+import classNames from 'classnames'
 
-const ModalHeader = ({ children, styling, withCloseButton, closeModal }) => {
+const ModalHeader = ({ children, styling, withCloseButton, closeModal, className, ...rest }) => {
+  const classes = classNames(className, styling['modal-header'])
+
   return (
-    <div className={styling['modal-header']}>
+    <div className={classes} {...rest}>
       {children}
       {withCloseButton ? (
         <button
