@@ -1,37 +1,41 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,400,400i,600,600i,|Roboto+Mono|Roboto:400,400i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,400,400i,600,600i,|Roboto+Mono|Roboto:400,400i,700,700i');
 
 @import './tokens.scss';
 @import './forms.module.scss';
 
 :global {
-  //
-  // Reboot
-  //
-
-  // scss-lint:disable QualifyingElement, DuplicateProperty
-
-  //
-  // HTML (element)
-  //
   html {
     font-size: 10px;
-    @include media-breakpoint-down(xs) {
-      font-size: 15px;
-    }
+    // @include media-breakpoint-down(md) {
+    //   font-size: 15px;
+    // }
   }
-
-  //
-  // Body
-  //
 
   body {
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+    background: $background;
+    color: $gray-900;
+    font-family: $body-font;
     font-size: $font-size-base;
-    font-weight: $font-weight-light;
+    font-weight: $font-weight-regular;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  //
-  // Links
-  //
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  svg {
+    height: auto;
+    fill: currentColor;
+  }
 
   a {
     color: $link-color;
@@ -45,7 +49,7 @@
 
   b,
   strong {
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-bold;
   }
 
   //
@@ -141,6 +145,7 @@
   .h6 {
     font-size: $h6-font-size;
     line-height: $h6-line-height;
+    font-weight: $font-weight-extralight;
   }
 
   .lead {
