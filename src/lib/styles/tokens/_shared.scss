@@ -1,3 +1,12 @@
+@function fluidCalc($minSize, $maxSize, $minViewport, $maxViewport) {
+  // without "px"
+  // refernce: https://www.madebymike.com.au/writing/fluid-type-calc-examples/
+  @return calc(
+    #{$minSize}px + (#{$maxSize} - #{$minSize}) * (100vw - #{$minViewport}px) /
+      (#{$maxViewport} - #{$minViewport})
+  );
+}
+
 // Color contrast
 @function color-yiq($color) {
   $r: red($color);

@@ -63,7 +63,7 @@ const ContextDecorator = storyFn => {
       {({ theme }) => (
         <>
           <GlobalStyles theme={theme} />
-          {storyFn({ theme })}
+          <div style={{ padding: '30px' }}>{storyFn({ theme })}</div>
         </>
       )}
     </ThemeDefiner.Consumer>

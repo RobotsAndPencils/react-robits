@@ -31,7 +31,8 @@ export const Normal = ({ theme }) => {
     label: text('Label', ''),
     hintContent: text('Hint Text', ''),
     errorText: text('Error Text', 'There is an error'),
-    required: boolean('Required', false)
+    required: boolean('Required', false),
+    size: select('Size', ['sm', 'md', 'lg'], 'md')
   }
   componentKnobs = reconcileValidity(componentKnobs)
 
