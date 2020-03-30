@@ -72,7 +72,7 @@ export const Alert = ({
           type='button'
           className={closeClasses}
           aria-label={closeAriaLabel}
-          onClick={dismissible}>
+          onClick={() => dismissible(id)}>
           <span aria-hidden='true'>&times;</span>
         </button>
       ) : null}
