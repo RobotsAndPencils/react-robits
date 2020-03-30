@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
 
 import Fade from '../Fade'
+import { TIMEOUT } from '../../constants/constants'
 
 /**
  * The alert component can be used to display contextual user messages.
@@ -19,6 +20,8 @@ export const Alert = ({
   styleType = 'primary',
   open = false,
   dismissible,
+  autoDismissDelay,
+  removeHandler,
   children,
   transition = {
     ...Fade.defaultProps,
@@ -28,6 +31,22 @@ export const Alert = ({
   centered = true,
   ...rest
 }) => {
+  const [isOpen, setIsOpen] = useState(open)
+
+  useEffect(() => {
+    if (autoDismissDelay && open) {
+      if (open && !isOpen) {
+        setIsOpen(true)
+      }
+      setTimeout(() => {
+        setIsOpen(false)
+        setTimeout(() => {
+          removeHandler()
+        }, TIMEOUT.FADE + 100)
+      }, autoDismissDelay)
+    }
+  }, [autoDismissDelay, open])
+
   const classes = classNames(
     className,
     styling.alert,
@@ -46,7 +65,7 @@ export const Alert = ({
   }
 
   return (
-    <Fade {...rest} {...alertTransition} tag={Tag} className={classes} in={open} role='alert'>
+    <Fade {...rest} {...alertTransition} tag={Tag} className={classes} in={isOpen} role='alert'>
       {dismissible ? (
         <button
           type='button'

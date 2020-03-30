@@ -63,12 +63,16 @@ export const SelfDismissing = ({ theme }) => {
 
   const showAlert = () => {
     setVisible(true)
-    setTimeout(() => setVisible(false), 4000)
   }
 
   return (
     <>
-      <Alert open={visible} theme={theme} styleType='success'>
+      <Alert
+        open={visible}
+        theme={theme}
+        autoDismissDelay={4000}
+        removeHandler={() => console.log('removing')}
+        styleType='success'>
         Your request was successful! (4 seconds)
       </Alert>
       <Button onClick={showAlert}>Submit</Button>
