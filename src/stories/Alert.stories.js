@@ -10,37 +10,25 @@ export default {
   component: AlertComponent
 }
 
-export const Normal = ({ theme }) => {
-  const [visible, setVisible] = useState(true)
+const remove = () => {
+  console.log('removing / cleanup')
+}
 
+export const Normal = ({ theme }) => {
   const componentKnobs = {
     centered: boolean('Centered', true),
-    dismissible: boolean('Dismissible', false)
-  }
-
-  const dismiss = () => {
-    setVisible(false)
-  }
-
-  if (componentKnobs.dismissible) {
-    componentKnobs.dismissible = dismiss
-  } else {
-    componentKnobs.dismissible = undefined
+    dismissible: boolean('Dismissible', false),
+    open: boolean('Open', true)
   }
 
   return (
     <>
-      <Alert
-        id='primary-example'
-        open={visible}
-        {...componentKnobs}
-        theme={theme}
-        styleType='primary'>
+      <Alert id='primary-example' removeHandler={remove} {...componentKnobs} styleType='primary'>
         Hello Alert
       </Alert>
       <Alert
         id='secondary-example'
-        open={visible}
+        removeHandler={remove}
         {...componentKnobs}
         theme={theme}
         styleType='secondary'>
@@ -48,18 +36,23 @@ export const Normal = ({ theme }) => {
       </Alert>
       <Alert
         id='success-example'
-        open={visible}
+        removeHandler={remove}
         {...componentKnobs}
         theme={theme}
         styleType='success'>
         Hello Alert
       </Alert>
-      <Alert id='info-example' open={visible} {...componentKnobs} theme={theme} styleType='info'>
+      <Alert
+        id='info-example'
+        removeHandler={remove}
+        {...componentKnobs}
+        theme={theme}
+        styleType='info'>
         Hello Alert
       </Alert>
       <Alert
         id='warning-example'
-        open={visible}
+        removeHandler={remove}
         {...componentKnobs}
         theme={theme}
         styleType='warning'>
@@ -67,16 +60,26 @@ export const Normal = ({ theme }) => {
       </Alert>
       <Alert
         id='danger-example'
-        open={visible}
+        removeHandler={remove}
         {...componentKnobs}
         theme={theme}
         styleType='danger'>
         Hello Alert
       </Alert>
-      <Alert id='light-example' open={visible} {...componentKnobs} theme={theme} styleType='light'>
+      <Alert
+        id='light-example'
+        removeHandler={remove}
+        {...componentKnobs}
+        theme={theme}
+        styleType='light'>
         Hello Alert
       </Alert>
-      <Alert id='dark-example' open={visible} {...componentKnobs} theme={theme} styleType='dark'>
+      <Alert
+        id='dark-example'
+        removeHandler={remove}
+        {...componentKnobs}
+        theme={theme}
+        styleType='dark'>
         Hello Alert
       </Alert>
     </>

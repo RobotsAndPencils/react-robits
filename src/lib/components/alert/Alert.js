@@ -34,17 +34,23 @@ export const Alert = ({
 }) => {
   const [isOpen, setIsOpen] = useState(open)
 
+  const dismiss = () => {
+    setIsOpen(false)
+    setTimeout(() => {
+      removeHandler(id)
+    }, TIMEOUT.FADE + 100)
+  }
+
   useEffect(() => {
     if (autoDismissDelay && open) {
       if (open && !isOpen) {
         setIsOpen(true)
       }
       setTimeout(() => {
-        setIsOpen(false)
-        setTimeout(() => {
-          removeHandler(id)
-        }, TIMEOUT.FADE + 100)
+        dismiss()
       }, autoDismissDelay)
+    } else {
+      setIsOpen(open)
     }
   }, [autoDismissDelay, open, removeHandler, id])
 
@@ -72,7 +78,7 @@ export const Alert = ({
           type='button'
           className={closeClasses}
           aria-label={closeAriaLabel}
-          onClick={() => dismissible(id)}>
+          onClick={() => dismiss(id)}>
           <span aria-hidden='true'>&times;</span>
         </button>
       ) : null}
@@ -113,7 +119,11 @@ Alert.propTypes = {
   /**
    * Whether is dismissible, or not.
    */
-  dismissible: PropTypes.func,
+  dismissible: PropTypes.bool,
+  /**
+   * The function to run after it is dismissed, for cleanup
+   */
+  removeHandler: PropTypes.func,
   /**
    * The transition config. See `Fade` component for more details.
    */
