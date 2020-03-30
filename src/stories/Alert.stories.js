@@ -30,28 +30,53 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='primary'>
+      <Alert
+        id='primary-example'
+        open={visible}
+        {...componentKnobs}
+        theme={theme}
+        styleType='primary'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='secondary'>
+      <Alert
+        id='secondary-example'
+        open={visible}
+        {...componentKnobs}
+        theme={theme}
+        styleType='secondary'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='success'>
+      <Alert
+        id='success-example'
+        open={visible}
+        {...componentKnobs}
+        theme={theme}
+        styleType='success'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='info'>
+      <Alert id='info-example' open={visible} {...componentKnobs} theme={theme} styleType='info'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='warning'>
+      <Alert
+        id='warning-example'
+        open={visible}
+        {...componentKnobs}
+        theme={theme}
+        styleType='warning'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='danger'>
+      <Alert
+        id='danger-example'
+        open={visible}
+        {...componentKnobs}
+        theme={theme}
+        styleType='danger'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='light'>
+      <Alert id='light-example' open={visible} {...componentKnobs} theme={theme} styleType='light'>
         Hello Alert
       </Alert>
-      <Alert open={visible} {...componentKnobs} theme={theme} styleType='dark'>
+      <Alert id='dark-example' open={visible} {...componentKnobs} theme={theme} styleType='dark'>
         Hello Alert
       </Alert>
     </>
@@ -68,10 +93,11 @@ export const SelfDismissing = ({ theme }) => {
   return (
     <>
       <Alert
+        id='auto-dismiss-example'
         open={visible}
         theme={theme}
         autoDismissDelay={4000}
-        removeHandler={() => console.log('removing')}
+        removeHandler={id => console.log('removing', id)}
         styleType='success'>
         Your request was successful! (4 seconds)
       </Alert>

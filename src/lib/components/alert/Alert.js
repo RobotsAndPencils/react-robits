@@ -29,6 +29,7 @@ export const Alert = ({
   },
   fade = true,
   centered = true,
+  id,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(open)
@@ -41,11 +42,11 @@ export const Alert = ({
       setTimeout(() => {
         setIsOpen(false)
         setTimeout(() => {
-          removeHandler()
+          removeHandler(id)
         }, TIMEOUT.FADE + 100)
       }, autoDismissDelay)
     }
-  }, [autoDismissDelay, open])
+  }, [autoDismissDelay, open, removeHandler, id])
 
   const classes = classNames(
     className,
@@ -120,7 +121,11 @@ Alert.propTypes = {
   /**
    * The component tag type.
    */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * A unique ID for the alert
+   */
+  id: PropTypes.string.isRequired
 }
 
 export default ThemeWrapper(themes)(Alert)
