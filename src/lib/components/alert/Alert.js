@@ -78,7 +78,7 @@ export const Alert = ({
           type='button'
           className={closeClasses}
           aria-label={closeAriaLabel}
-          onClick={() => dismiss(id)}>
+          onClick={dismiss}>
           <span aria-hidden='true'>&times;</span>
         </button>
       ) : null}
