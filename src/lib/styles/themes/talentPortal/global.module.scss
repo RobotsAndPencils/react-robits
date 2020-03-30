@@ -225,4 +225,12 @@
   .sr-only {
     @include sr-only;
   }
+
+  .fade {
+    @include transition(opacity 200ms ease-in-out);
+
+    &:not(.show) {
+      opacity: 0;
+    }
+  }
 }

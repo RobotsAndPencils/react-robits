@@ -41,7 +41,7 @@ export const Modal = ({
   }, [open])
 
   const handleOnEntered = (type, node) => {
-    node.classList.add(styling.show)
+    node.classList.add('show')
 
     if (type === 'modal') {
       modalShown && modalShown()
@@ -49,7 +49,7 @@ export const Modal = ({
   }
 
   const handleOnExit = (type, node) => {
-    node.classList.remove(styling.show)
+    node.classList.remove('show')
   }
 
   const handleOnExited = () => {
@@ -66,9 +66,9 @@ export const Modal = ({
     return false
   }
 
-  const backdropClasses = classNames(styling['modal-backdrop'], styling.fade, backdropClassName)
+  const backdropClasses = classNames(styling['modal-backdrop'], 'fade', backdropClassName)
 
-  const modalClasses = classNames(styling.modal, styling.fade, modalClassName)
+  const modalClasses = classNames(styling.modal, 'fade', modalClassName)
 
   const modalAttrs = {
     'aria-hidden': true,

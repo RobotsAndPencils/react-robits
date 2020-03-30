@@ -78,3 +78,12 @@ $card-box-shadow: 0 0.75rem 3.5rem rgba($gray-700, 0.1), 0 1.5rem 2.25rem rgba($
 // Spacing
 
 $spacer: 2.4rem !default; // ~ 24px
+
+// Buttons (shared between btn and dropdown)
+
+$btn-padding-y: 1.2rem !default;
+$btn-padding-x: 2rem !default;
+$btn-padding-y-lg: 1.2rem !default;
+$btn-padding-x-lg: 2.8rem !default;
+$btn-padding-y-sm: 0.56rem !default;
+$btn-padding-x-sm: 1.6rem !default;

@@ -1,3 +1,26 @@
+export const TIMEOUT = {
+  FADE: 150,
+  COLLAPSE: 350,
+  SHOW: 0,
+  HIDE: 0
+}
+
+export const TRANSITION_KEYS = [
+  'in',
+  'mountOnEnter',
+  'unmountOnExit',
+  'appear',
+  'enter',
+  'exit',
+  'timeout',
+  'onEnter',
+  'onEntering',
+  'onEntered',
+  'onExit',
+  'onExiting',
+  'onExited'
+]
+
 export const INPUT_TYPES = [
   'text',
   'password',

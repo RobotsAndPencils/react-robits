@@ -34,20 +34,11 @@ $modal-md: 700px !default;
 $modal-sm: 500px !default;
 
 $modal-transition: transform 0.3s ease-out !default;
-$transition-fade: opacity 200ms ease-in-out !default;
 
 // .modal-open      - body class for killing the scroll
 // .modal           - container to scroll within
 // .modal-dialog    - positioning shell for the actual modal
 // .modal-content   - actual modal w/ bg and corners and stuff
-
-.fade {
-  @include transition($transition-fade);
-
-  &:not(.show) {
-    opacity: 0;
-  }
-}
 
 :global(.modal-open) {
   // Kill the scroll on the body
@@ -84,11 +75,11 @@ $transition-fade: opacity 200ms ease-in-out !default;
   pointer-events: none;
 
   // When fading in the modal, animate it to slide down
-  .modal.fade & {
+  .modal:global(.fade) & {
     transition: $modal-transition;
     transform: translate(0, -25%);
   }
-  .modal.show & {
+  .modal:global(.show) & {
     transform: translate(0, 0);
   }
 }
@@ -138,10 +129,10 @@ $transition-fade: opacity 200ms ease-in-out !default;
   transition: opacity 0.2s ease-in-out;
 
   // Fade for backdrop
-  &.fade {
+  &:global(.fade) {
     opacity: 0;
   }
-  &.show {
+  &:global(.show) {
     opacity: $modal-backdrop-opacity;
   }
 }
