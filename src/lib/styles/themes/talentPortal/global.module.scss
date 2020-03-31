@@ -39,7 +39,8 @@
     fill: currentColor;
   }
 
-  a {
+  a,
+  .link {
     color: $link-color;
     text-decoration: $link-decoration;
 
