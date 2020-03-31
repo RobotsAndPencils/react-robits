@@ -1,0 +1,40 @@
+$badge-color: $white !default;
+$badge-font-size: 75% !default;
+$badge-font-weight: $font-weight-medium !default;
+$badge-padding-y: 0.6rem !default;
+$badge-padding-x: 0.8rem !default;
+$badge-font-family: $featured-font !default;
+$badge-pill-border-radius: 16rem !default;
+$badge-border-radius: 0.6rem !default;
+$badge-pill-padding-x: $badge-padding-x !default;
+
+@mixin base-badge {
+  display: inline-block;
+  padding: $badge-padding-y $badge-padding-x;
+  font-size: $badge-font-size;
+  font-weight: $badge-font-weight;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  font-family: $badge-font-family;
+  color: $badge-color;
+  border-radius: $badge-border-radius;
+}
+
+@mixin badge-variant($bg) {
+  color: color-yiq($bg);
+  background-color: $bg;
+
+  &[href] {
+    @include hover-focus {
+      color: color-yiq($bg);
+      text-decoration: none;
+      background-color: darken($bg, 10%);
+    }
+  }
+
+  &:hover {
+    color: color-yiq($bg);
+  }
+}
