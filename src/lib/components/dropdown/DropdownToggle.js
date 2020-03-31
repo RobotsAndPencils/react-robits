@@ -17,6 +17,7 @@ export const DropdownToggle = ({
   nav,
   tag,
   onClick,
+  useANormalRef = false,
   // 'aria-haspopup' = true,
   ...rest
 }) => {
@@ -83,7 +84,8 @@ export const DropdownToggle = ({
     <Reference>
       {({ ref }) => (
         <Tag
-          innerRef={ref}
+          ref={useANormalRef ? ref : undefined}
+          innerRef={!useANormalRef ? ref : undefined}
           {...rest}
           className={classes}
           onClick={handleClick}
@@ -135,7 +137,11 @@ DropdownToggle.propTypes = {
   /**
    * The component's tag type.
    */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  /**
+   * The dropdown toggle requires the attachment of a ref. If the Tag is a Robits component, it should use the defined `innerRef` of that passed in Tag. Otherwise, you HAVE to set this value as TRUE, so that it falls back to a normal `ref` attribute
+   */
+  useANormalRef: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(DropdownToggle)
