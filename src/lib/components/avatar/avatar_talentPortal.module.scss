@@ -36,7 +36,7 @@
     background-color: transparent;
   }
 
-  &.clickable {
+  &:global(.clickable) {
     cursor: pointer;
     @include transition;
   }

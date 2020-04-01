@@ -23,21 +23,21 @@ export const Normal = ({ theme }) => {
       <Avatar
         {...componentKnobs}
         size='sm'
-        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
         theme={theme}>
         {text('Initials', 'RNP')}
       </Avatar>
       <Avatar
         {...componentKnobs}
         size='md'
-        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
         theme={theme}>
         {text('Initials', 'RNP')}
       </Avatar>
       <Avatar
         {...componentKnobs}
         size='lg'
-        editCallback={componentKnobs.editable ? action('Clicked to edit') : undefined}
+        onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
         theme={theme}>
         {text('Initials', 'RNP')}
       </Avatar>
