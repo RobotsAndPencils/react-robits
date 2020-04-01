@@ -23,6 +23,7 @@ export const Button = ({
   tag: Tag = 'button',
   block,
   onClick,
+  ghost,
   ...props
 }) => {
   const classes = classNames(
@@ -35,7 +36,8 @@ export const Button = ({
     pill && styling['btn-pill'],
     squared && styling['btn-squared'],
     block && styling['btn-block'],
-    active && styling.active
+    active && styling.active,
+    ghost && styling['btn-ghost']
   )
 
   if (isLoading) {
@@ -114,6 +116,10 @@ Button.propTypes = {
    * Whether it is disabled, or not.
    */
   disabled: PropTypes.bool,
+  /**
+   * Ghost buttons take on their `styleType` color for text, but no background or border
+   */
+  ghost: PropTypes.bool,
   /**
    * The component tag.
    */

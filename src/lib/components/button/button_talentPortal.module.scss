@@ -78,6 +78,13 @@ $btn-transition: $transition-base !default;
   background-color: $background;
   box-shadow: $btn-box-shadow;
 
+  &.btn-ghost {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: $background !important;
+    box-shadow: none !important;
+  }
+
   &[class*='dropdown-toggle-split'] {
     background-color: darken($background, 7);
   }
@@ -127,6 +134,13 @@ $btn-transition: $transition-base !default;
   $active-border: $color
 ) {
   $button-text-color: $color; // Fix light or white outlined buttons
+
+  &.btn-ghost {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: $color !important;
+    box-shadow: none !important;
+  }
 
   @if ($color==theme-color('light') or $color==$white) {
     $button-text-color: color-yiq($color);

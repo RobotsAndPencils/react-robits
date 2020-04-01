@@ -54,6 +54,14 @@ export const Normal = ({ theme }) => {
       <Button {...componentKnobs} theme={theme} styleType='danger' onClick={action('clicked')}>
         Hello Button
       </Button>
+      <Button
+        {...componentKnobs}
+        theme={theme}
+        styleType='primary'
+        ghost
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
       <Button {...componentKnobs} theme={theme} styleType='light' onClick={action('clicked')}>
         Hello Button
       </Button>

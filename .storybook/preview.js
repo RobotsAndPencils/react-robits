@@ -81,7 +81,8 @@ addParameters({
   },
   backgrounds: [
     { name: 'White', value: '#FFFFFF', default: true },
-    { name: 'Black', value: '#000000' }
+    { name: 'Black', value: '#000000' },
+    { name: 'Talent Portal Background', value: '#f9fafc' }
   ],
   docs: {
     page: () => {
