@@ -36,6 +36,11 @@
     background-color: transparent;
   }
 
+  &:not(.clickable) {
+    cursor: pointer;
+    @include transition;
+  }
+
   &.editable {
     position: relative;
     cursor: pointer;

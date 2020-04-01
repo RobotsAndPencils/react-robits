@@ -43,6 +43,7 @@
   .link {
     color: $link-color;
     text-decoration: $link-decoration;
+    cursor: pointer;
 
     @include hover {
       color: $link-hover-color;

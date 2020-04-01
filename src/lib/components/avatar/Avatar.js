@@ -14,7 +14,6 @@ export const Avatar = ({
   image,
   className,
   editable,
-  editCallback,
   withShadow,
   squared,
   bordered,
@@ -49,15 +48,12 @@ export const Avatar = ({
     bordered && styling.bordered,
     transparent && styling.transparent,
     withShadow && styling['with-shadow'],
-    hasImage && styling['with-image']
+    hasImage && styling['with-image'],
+    props.onClick && 'clickable'
   )
 
   return (
-    <div
-      ref={innerRef}
-      className={classes}
-      {...props}
-      onClick={editable && editCallback ? editCallback : props.onClick || undefined}>
+    <div ref={innerRef} className={classes} {...props}>
       {hasImage ? <img src={image} alt='Avatar' /> : children}
     </div>
   )
