@@ -141,11 +141,12 @@ $modal-transition: transform 0.3s ease-out !default;
   display: flex;
   align-items: center;
   justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
-  padding: $modal-header-padding;
+  padding: 3rem 3.5rem 0.5rem;
   @include border-top-radius($modal-content-border-radius);
 
   &.with-border {
     border-bottom: $modal-header-border-width solid $modal-header-border-color;
+    padding: $modal-header-padding;
   }
 
   .close {
