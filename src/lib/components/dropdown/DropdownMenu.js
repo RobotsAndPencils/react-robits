@@ -48,7 +48,6 @@ export const DropdownMenu = ({
       }
       : modifiers
 
-    console.log(rest.placement)
     return (
       <Popper {...rest}>
         {({ ref, placement, style }) => (
