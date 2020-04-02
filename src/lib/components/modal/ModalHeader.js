@@ -4,8 +4,20 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
 
-const ModalHeader = ({ children, styling, withCloseButton, closeModal, className, ...rest }) => {
-  const classes = classNames(className, styling['modal-header'])
+const ModalHeader = ({
+  children,
+  styling,
+  withCloseButton,
+  closeModal,
+  className,
+  withBorder = false,
+  ...rest
+}) => {
+  const classes = classNames(
+    className,
+    styling['modal-header'],
+    withBorder && styling['with-border']
+  )
 
   return (
     <div className={classes} {...rest}>

@@ -26,6 +26,7 @@ export const Normal = ({ theme }) => {
   const withCloseButton = boolean('With Close Button', false)
   const header = text('Header', 'Modal Header')
   const footer = text('Footer', 'Modal Footer')
+  const withHeaderBorder = boolean('Header With Border', false)
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -41,6 +42,7 @@ export const Normal = ({ theme }) => {
         toggleModal={() => setModalOpen(!modalOpen)}>
         {header ? (
           <ModalHeader
+            withBorder={withHeaderBorder}
             withCloseButton={withCloseButton}
             closeModal={() => setModalOpen(!modalOpen)}>
             {header}
