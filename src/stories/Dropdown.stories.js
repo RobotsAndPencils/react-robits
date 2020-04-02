@@ -36,7 +36,10 @@ export const Normal = ({ theme }) => {
           <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
             Action
           </DropdownItem>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>
+          <DropdownItem
+            active
+            theme={theme}
+            onClick={action('Clicked dropdown item: Another action')}>
             Another action
           </DropdownItem>
           <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>

@@ -50,7 +50,7 @@ export const DropdownItem = ({
     !divider && !header && 'dropdown-item',
     header && styling['dropdown-header'],
     divider && 'dropdown-divider',
-    active && styling.active
+    active && 'active'
   )
 
   if (Tag === 'button') {
