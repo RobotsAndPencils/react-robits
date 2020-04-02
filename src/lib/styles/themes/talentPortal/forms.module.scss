@@ -230,12 +230,12 @@
 
       > .rbt {
         &:not(:last-child) {
-          > .form-control {
+          .form-control {
             padding-right: 3.5rem;
           }
         }
         &:not(:first-child) {
-          > .form-control {
+          .form-control {
             padding-left: 3.5rem;
           }
         }
