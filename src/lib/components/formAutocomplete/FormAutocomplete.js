@@ -147,6 +147,7 @@ export const FormAutocomplete = ({
         ref={componentRef}
         onBlur={onBlur}
         onChange={onChange}
+        emptyLabel='Nothing to suggest'
       />
     )
   }

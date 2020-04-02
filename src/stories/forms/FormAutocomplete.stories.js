@@ -49,7 +49,6 @@ export const Normal = ({ theme }) => {
     <>
       <FormAutocomplete
         {...componentKnobs}
-        options={states}
         labelKey='name'
         onChange={handleSelection}
         theme={theme}
