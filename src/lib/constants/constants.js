@@ -61,3 +61,17 @@ export const DROPDOWN_POSITION_MAP = {
   RIGHT: 'right',
   DOWN: 'bottom'
 }
+
+export const TRANSITION_STATUS = {
+  ENTERING: 'entering',
+  ENTERED: 'entered',
+  EXITING: 'exiting',
+  EXITED: 'exited'
+}
+
+export const TRANSITION_CLASS_MAP = {
+  [TRANSITION_STATUS.ENTERING]: 'collapsing',
+  [TRANSITION_STATUS.ENTERED]: 'collapse show',
+  [TRANSITION_STATUS.EXITING]: 'collapsing',
+  [TRANSITION_STATUS.EXITED]: 'collapse'
+}
