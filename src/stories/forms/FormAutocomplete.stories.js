@@ -52,6 +52,7 @@ export const Normal = ({ theme }) => {
         labelKey='name'
         onChange={handleSelection}
         theme={theme}
+        options={states}
       />
     </>
   )
