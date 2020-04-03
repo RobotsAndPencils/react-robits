@@ -26,7 +26,7 @@ const ModalHeader = ({
         <button
           type='button'
           onClick={closeModal}
-          class={styling.close}
+          className={styling.close}
           data-dismiss='modal'
           aria-label='Close'>
           <span aria-hidden='true'>×</span>
