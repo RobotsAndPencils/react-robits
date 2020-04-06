@@ -37,12 +37,12 @@ const topLevelContexts = [
     title: 'Theme',
     components: [ThemeDefiner.Provider],
     params: [
-      // {
-      //   name: 'Unstyled',
-      //   props: {
-      //     value: { theme: 'unstyled' }
-      //   }
-      // },
+      {
+        name: 'Unstyled',
+        props: {
+          value: { theme: 'unstyled' }
+        }
+      },
       {
         name: 'Talent Portal',
         props: {
