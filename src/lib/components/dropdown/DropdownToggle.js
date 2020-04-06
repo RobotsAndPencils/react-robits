@@ -9,16 +9,16 @@ import Button from '../button/Button'
 import { DropdownContext } from './DropdownContext'
 
 export const DropdownToggle = ({
-  styling,
-  className,
-  styleType = 'primary',
   caret,
-  split,
+  className,
+  children,
   nav,
-  tag,
   onClick,
+  split,
+  styling,
+  styleType = 'primary',
+  tag,
   useANormalRef = false,
-  // 'aria-haspopup' = true,
   ...rest
 }) => {
   const context = useContext(DropdownContext)
@@ -49,7 +49,7 @@ export const DropdownToggle = ({
     nav && styling['nav-link']
   )
 
-  const dropdownChildren = rest.children || <span className='sr-only'>{ariaLabel}</span>
+  const dropdownChildren = children || <span className='sr-only'>{ariaLabel}</span>
 
   let Tag
 
@@ -103,10 +103,6 @@ DropdownToggle.propTypes = {
    */
   caret: PropTypes.bool,
   /**
-   * The styleType color.
-   */
-  styleType: PropTypes.string,
-  /**
    * The children nodes.
    */
   children: PropTypes.node,
@@ -119,27 +115,27 @@ DropdownToggle.propTypes = {
    */
   disabled: PropTypes.bool,
   /**
+   * Whether it is located inside a nav, or not.
+   */
+  nav: PropTypes.bool,
+  /**
    * The function that should be triggered on click.
    */
   onClick: PropTypes.func,
   /**
-   * The aria-haspopup attribute.
-   */
-  'aria-haspopup': PropTypes.bool,
-  /**
-   * Whether it is split, or not.
+   * Whether it is split trigger, or not.
    */
   split: PropTypes.bool,
   /**
-   * Whether it is located inside a nav, or not.
+   * The styleType color. Defaults to 'primary'
    */
-  nav: PropTypes.bool,
+  styleType: PropTypes.string,
   /**
    * The component's tag type.
    */
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   /**
-   * The dropdown toggle requires the attachment of a ref. If the Tag is a Robits component, it should use the defined `innerRef` of that passed in Tag. Otherwise, you HAVE to set this value as TRUE, so that it falls back to a normal `ref` attribute
+   * The dropdown toggle requires the attachment of a ref. If the Tag is a Robits component, it should use the defined `innerRef` of that passed in Tag. Otherwise, you HAVE to set this value as TRUE, so that it falls back to a normal `ref` attribute. Defaults to false.
    */
   useANormalRef: PropTypes.bool
 }

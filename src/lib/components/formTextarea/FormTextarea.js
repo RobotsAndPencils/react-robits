@@ -5,22 +5,22 @@ import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
- * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
+ * The textarea lets the user input multiple sentences of data (a text blob)
  */
 export const FormTextarea = ({
-  required,
-  styling,
   className,
-  label,
-  size,
-  invalid = false,
-  valid = false,
-  innerRef,
   disabled = false,
-  readonly = false,
   errorText,
   hintContent,
+  invalid = false,
+  innerRef,
+  label,
+  readonly = false,
   resizeable = true,
+  required,
+  size,
+  styling,
+  valid = false,
   ...props
 }) => {
   const textareaClasses = classNames(
@@ -78,21 +78,9 @@ FormTextarea.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The input's size.
+   * Whether or not the input is disabled or not
    */
-  size: PropTypes.string,
-  /**
-   * Whether it is valid, or not.
-   */
-  valid: PropTypes.bool,
-  /**
-   * Whether it is invalid, or not.
-   */
-  invalid: PropTypes.bool,
-  /**
-   * The inner ref.
-   */
-  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  disabled: PropTypes.bool,
   /**
    * Text to display if the field is invalid.
    */
@@ -102,9 +90,37 @@ FormTextarea.propTypes = {
    */
   hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
+   * Whether it is invalid, or not.
+   */
+  invalid: PropTypes.bool,
+  /**
+   * The inner ref.
+   */
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  /**
+   * Optional label to display above the input
+   */
+  label: PropTypes.string,
+  /**
+   * Whether or not the input is readonly
+   */
+  readonly: PropTypes.bool,
+  /**
    * Whether the field is required or not
    */
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  /**
+   * Whether or not the user is allowed to resize the input manually
+   */
+  resizeable: PropTypes.bool,
+  /**
+   * The input's size.
+   */
+  size: PropTypes.string,
+  /**
+   * Whether it is valid, or not.
+   */
+  valid: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormTextarea)

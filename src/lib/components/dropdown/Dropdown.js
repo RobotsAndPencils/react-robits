@@ -14,20 +14,20 @@ import { DropdownContext } from './DropdownContext'
  * You can use dropdowns to display accessible contextual overlays for displaying lists of links and more.
  */
 export const Dropdown = ({
-  styling,
-  className,
-  children,
-  open = false,
-  group,
-  size,
-  nav = false,
-  setActiveFromChild,
   active,
   addonType,
-  toggle,
-  disabled,
-  inNavbar,
+  className,
+  children,
   direction = 'down',
+  disabled,
+  group,
+  inNavbar,
+  open = false,
+  nav = false,
+  setActiveFromChild,
+  size,
+  styling,
+  toggle,
   ...rest
 }) => {
   const containerRef = useRef(null)
@@ -129,33 +129,57 @@ export const Dropdown = ({
 
 Dropdown.propTypes = {
   /**
-   * Whether it is open, or not.
+   * Whether the dropdown element is visually marked as active. Applies only to in-nav uses
    */
-  open: PropTypes.bool,
+  active: PropTypes.bool,
+  /**
+   * When used as part of an input group, the type of addon it is being used as. One of ['append', 'prepend']
+   */
+  addonType: PropTypes.string,
+  /**
+   * Custom class name
+   */
+  className: PropTypes.string,
+  /**
+   * The children nodes.
+   */
+  children: PropTypes.any,
+  /**
+   * The desired direction the menu should display in
+   */
+  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
   /**
    * Whether it is disabled, or not.
    */
   disabled: PropTypes.bool,
   /**
+   * Whether or not the button trigger is part of a button group
+   */
+  group: PropTypes.bool,
+  /**
+   * Whether it is located inside a Navbar component, or not.
+   */
+  inNavbar: PropTypes.bool,
+  /**
+   * Whether it is open, or not.
+   */
+  open: PropTypes.bool,
+  /**
+   * Whether it is located inside a Nav component, or not.
+   */
+  nav: PropTypes.bool,
+  /**
+   * The preset size of the component to display. One of ['sm', 'md', 'lg']
+   */
+  size: PropTypes.string,
+  /**
    * The toggle function.
    */
   toggle: PropTypes.func,
   /**
-   * Whether it is located inside a navbar, or not.
-   */
-  inNavbar: PropTypes.bool,
-  /**
    * The component's tag type.
    */
-  tag: PropTypes.string,
-  /**
-   * Whether it is located inside a Nav, or not.
-   */
-  nav: PropTypes.bool,
-  /**
-   * The direction.
-   */
-  direction: PropTypes.oneOf(['up', 'down', 'left', 'right'])
+  tag: PropTypes.string
 }
 
 export default ThemeWrapper(themes)(Dropdown)

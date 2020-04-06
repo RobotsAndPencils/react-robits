@@ -8,20 +8,20 @@ import classNames from 'classnames'
  * The `FormCheckbox` component allows for a on/off selection in either a checkbox or toggle display
  */
 export const FormCheckbox = ({
-  styling,
   className,
   children,
+  errorText,
   inline,
-  valid,
   invalid,
   innerRef,
-  toggle,
-  small,
   id,
-  errorText,
-  required,
   leftColor,
   leftLabel,
+  required,
+  small,
+  styling,
+  toggle,
+  valid,
   ...props
 }) => {
   const containerClasses = classNames(
@@ -81,25 +81,17 @@ FormCheckbox.propTypes = {
    */
   children: PropTypes.node,
   /**
+   * Text to display if the field is invalid.
+   */
+  errorText: PropTypes.string,
+  /**
    * Whether it is inline, or not.
    */
   inline: PropTypes.bool,
   /**
-   * Whether it is valid, or not.
-   */
-  valid: PropTypes.bool,
-  /**
    * Whether it is invalid, or not.
    */
   invalid: PropTypes.bool,
-  /**
-   * Whether it is a toggle button, or not.
-   */
-  toggle: PropTypes.bool,
-  /**
-   * Whether it is small (toggle), or not.
-   */
-  small: PropTypes.bool,
   /**
    * The inner ref.
    */
@@ -109,21 +101,29 @@ FormCheckbox.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
-   * Text to display if the field is invalid.
-   */
-  errorText: PropTypes.string,
-  /**
-   * Whether the field is required or not
-   */
-  required: PropTypes.bool,
-  /**
    * The background color when the toggle is inactive (to the left)
    */
   leftColor: PropTypes.string,
   /**
    * A label placed to the left of the toggle to identify the inactive state
    */
-  leftLabel: PropTypes.string
+  leftLabel: PropTypes.string,
+  /**
+   * Whether the field is required or not
+   */
+  required: PropTypes.bool,
+  /**
+   * Whether it is small (toggle), or not.
+   */
+  small: PropTypes.bool,
+  /**
+   * Whether it is a toggle button, or not.
+   */
+  toggle: PropTypes.bool,
+  /**
+   * Whether it is valid, or not.
+   */
+  valid: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormCheckbox)

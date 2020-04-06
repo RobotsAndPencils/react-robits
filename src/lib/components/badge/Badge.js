@@ -8,16 +8,16 @@ import classNames from 'classnames'
  * Generic badge
  */
 export const Badge = ({
-  styling,
   children,
-  tag: Tag = 'span',
   className,
-  styleType = 'primary',
-  pill = false,
   outline = false,
-  squared = false,
-  removable = false,
+  pill = false,
   removeHandler,
+  removable = false,
+  styleType = 'primary',
+  squared = false,
+  styling,
+  tag: Tag = 'span',
   ...props
 }) => {
   const classes = classNames(
@@ -63,17 +63,29 @@ Badge.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The styling color.
-   */
-  styleType: PropTypes.string,
-  /**
-   * Whether it should be outlined, or not.
+   * Whether it should be outlined, or not. Defaults to false
    */
   outline: PropTypes.bool,
   /**
-   * Whether it should be a pill, or not.
+   * Whether it should be a pill, or not. Defaults to false
    */
   pill: PropTypes.bool,
+  /**
+   * Whether or not the component is capability of being removed. Defaults to false.
+   */
+  removable: PropTypes.bool,
+  /**
+   * The function to call to remove the component
+   */
+  removeHandler: PropTypes.func,
+  /**
+   * The styling color. Defaults to 'primary'
+   */
+  styleType: PropTypes.string,
+  /**
+   * Whether or not to square off the corners. Defaults to false.
+   */
+  squared: PropTypes.bool,
   /**
    * The component tag.
    */

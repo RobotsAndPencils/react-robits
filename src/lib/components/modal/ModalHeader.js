@@ -6,11 +6,11 @@ import classNames from 'classnames'
 
 const ModalHeader = ({
   children,
-  styling,
-  withCloseButton,
   closeModal,
   className,
+  styling,
   withBorder = false,
+  withCloseButton,
   ...rest
 }) => {
   const classes = classNames(
@@ -39,7 +39,26 @@ const ModalHeader = ({
 }
 
 ModalHeader.propTypes = {
-  children: PropTypes.any
+  /**
+   * The children nodes.
+   */
+  children: PropTypes.any,
+  /**
+   * The function to call to close the modal. Triggered via the "X" icon close button, when enabled
+   */
+  closeModal: PropTypes.func,
+  /**
+   * Custom class to apply to the component
+   */
+  className: PropTypes.string,
+  /**
+   * Whether or not to include a bottom border on the component
+   */
+  withBorder: PropTypes.bool,
+  /**
+   * Whether or not to include a "X" icon to allow users to exit the modal
+   */
+  withCloseButton: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(ModalHeader)

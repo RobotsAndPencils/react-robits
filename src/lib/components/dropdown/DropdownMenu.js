@@ -9,15 +9,15 @@ import { DropdownContext } from './DropdownContext'
 import { DROPDOWN_POSITION_MAP } from '../../constants/constants'
 
 export const DropdownMenu = ({
-  styling,
+  alignment,
   className,
   children,
-  alignment,
-  tag: Tag = 'div',
-  size,
+  flip = true,
   modifiers,
   persist,
-  flip = true,
+  size,
+  styling,
+  tag: Tag = 'div',
   ...rest
 }) => {
   const context = useContext(DropdownContext)
@@ -75,37 +75,37 @@ export const DropdownMenu = ({
 
 DropdownMenu.propTypes = {
   /**
-   * The component tag.
+   * The alignment of the dropdown relative to the trigger (center, right, left). Defaults to center
    */
-  tag: PropTypes.string,
+  alignment: PropTypes.string,
   /**
    * The children nodes.
    */
   children: PropTypes.node.isRequired,
   /**
-   * The alignment of the dropdown relative to the trigger (center, right, left). Defaults to center
+   * The class name.
    */
-  alignment: PropTypes.string,
+  className: PropTypes.string,
   /**
-   * Whether it should flip, or not.
+   * Whether or not it should flip based on the viewport real estate. Defaults to true.
    */
   flip: PropTypes.bool,
+  /**
+   * The modifiers config object. See Popper.js
+   */
+  modifiers: PropTypes.object,
+  /**
+   * Whether it should persist, or not.
+   */
+  persist: PropTypes.bool,
   /**
    * Size of the dropdown
    */
   size: PropTypes.string,
   /**
-   * The modifiers config object.
+   * The component tag.
    */
-  modifiers: PropTypes.object,
-  /**
-   * The class name.
-   */
-  className: PropTypes.string,
-  /**
-   * Whether it should persist, or not.
-   */
-  persist: PropTypes.bool
+  tag: PropTypes.string
 }
 
 export default ThemeWrapper(themes)(DropdownMenu)

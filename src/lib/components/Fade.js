@@ -9,11 +9,17 @@ import { TIMEOUT, TRANSITION_KEYS } from '../constants/constants'
 /**
  * The `Fade` component allows you to easily fade in and out content and is powered by [react-transition-group](https://github.com/reactjs/react-transition-group).
  */
-const Fade = props => {
-  const { tag: Tag, baseClass, baseClassActive, className, children, innerRef, ...attrs } = props
-
-  const transitionProps = pick(attrs, TRANSITION_KEYS)
-  const childProps = omit(attrs, TRANSITION_KEYS)
+const Fade = ({
+  baseClass = 'fade',
+  baseClassActive = 'show',
+  className,
+  children,
+  innerRef,
+  tag: Tag = 'div',
+  ...rest
+}) => {
+  const transitionProps = pick(rest, TRANSITION_KEYS)
+  const childProps = omit(rest, TRANSITION_KEYS)
 
   return (
     <Transition {...transitionProps}>
@@ -32,19 +38,34 @@ const Fade = props => {
 
 Fade.propTypes = {
   ...Transition.propTypes,
+  /**
+   * The component's tag type. Defaults to 'div'
+   */
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  /**
+   * The base class to apply to the component. Defaults to 'fade'
+   */
   baseClass: PropTypes.string,
+  /**
+   * The class to apply when the componen is activited. Defaults to 'show'
+   */
   baseClassActive: PropTypes.string,
+  /**
+   * Custom class to apply
+   */
   className: PropTypes.string,
+  /**
+   * The inner ref.
+   */
   innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.func]),
+  /**
+   * The children nodes.
+   */
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 }
 
 Fade.defaultProps = {
   ...Transition.defaultProps,
-  tag: 'div',
-  baseClass: 'fade',
-  baseClassActive: 'show',
   timeout: TIMEOUT.FADE,
   appear: true,
   enter: true,

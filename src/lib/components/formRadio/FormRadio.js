@@ -8,17 +8,17 @@ import classNames from 'classnames'
  * The `FormRadio` component is a group of radio buttons under a common form name
  */
 export const FormRadio = ({
-  styling,
   className,
-  inline,
-  valid,
-  invalid,
   errorText,
-  required,
-  options,
-  name,
   hintContent,
+  inline,
+  invalid,
   label,
+  name,
+  options,
+  required,
+  styling,
+  valid,
   ...rest
 }) => {
   const [selected, setSelected] = useState()
@@ -90,33 +90,45 @@ FormRadio.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Whether it is inline, or not.
+   * The error to display below the input
    */
-  inline: PropTypes.bool,
-  /**
-   * Whether it is valid, or not.
-   */
-  valid: PropTypes.bool,
-  /**
-   * Whether it is invalid, or not.
-   */
-  invalid: PropTypes.bool,
-  /**
-   * Whether it is a toggle button, or not.
-   */
-  toggle: PropTypes.bool,
-  /**
-   * The form input name
-   */
-  name: PropTypes.string.isRequired,
+  errorText: PropTypes.string,
   /**
    * Text to display below the input as clues to the user
    */
   hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
+   * Whether it is inline, or not.
+   */
+  inline: PropTypes.bool,
+  /**
+   * Whether it is invalid, or not.
+   */
+  invalid: PropTypes.bool,
+  /**
    * Radio group label
    */
-  label: PropTypes.string
+  label: PropTypes.string,
+  /**
+   * The form input name
+   */
+  name: PropTypes.string.isRequired,
+  /**
+   * The array of option config objects
+   */
+  options: PropTypes.array.isRequired,
+  /**
+   * Whether or not the input is requires within a form
+   */
+  required: PropTypes.bool,
+  /**
+   * Whether it is a toggle button, or not.
+   */
+  toggle: PropTypes.bool,
+  /**
+   * Whether it is valid, or not.
+   */
+  valid: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormRadio)

@@ -7,13 +7,14 @@ import * as themes from './themes'
 import { DropdownContext } from './DropdownContext'
 
 export const DropdownItem = ({
-  styling,
+  active,
   className,
   children,
-  header,
   divider,
+  header,
+  onClick,
+  styling,
   tag: Tag = 'button',
-  active,
   toggle = true,
   ...rest
 }) => {
@@ -25,8 +26,8 @@ export const DropdownItem = ({
       return
     }
 
-    if (rest.onClick) {
-      rest.onClick(e)
+    if (onClick) {
+      onClick(e)
     }
 
     if (toggle) {
@@ -65,7 +66,7 @@ export const DropdownItem = ({
 
   return (
     <Tag
-      type={Tag === 'button' && (rest.onClick || toggle) ? 'button' : undefined}
+      type={Tag === 'button' && (onClick || toggle) ? 'button' : undefined}
       {...rest}
       tabIndex={tabIndex}
       className={classes}
@@ -77,19 +78,23 @@ export const DropdownItem = ({
 
 DropdownItem.propTypes = {
   /**
+   * Whether it is active, or not.
+   */
+  active: PropTypes.bool,
+  /**
    * The children nodes.
    */
   children: PropTypes.node,
   /**
-   * Whether it is active, or not.
+   * The class name.
    */
-  active: PropTypes.bool,
+  className: PropTypes.string,
   /**
    * Whether it is disabled, or not.
    */
   disabled: PropTypes.bool,
   /**
-   * Whether it is a divider, or not.
+   * Whether it is a divider element, or not.
    */
   divider: PropTypes.bool,
   /**
@@ -100,10 +105,6 @@ DropdownItem.propTypes = {
    * The function that should be triggered on click.
    */
   onClick: PropTypes.func,
-  /**
-   * The class name.
-   */
-  className: PropTypes.string,
   /**
    * Whether it should toggle the dropdown, or not.
    */

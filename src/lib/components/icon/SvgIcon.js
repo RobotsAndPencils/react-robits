@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+/**
+ * Renders an SVG as a React component. If using Create React App, it's recommended to use their built in method. This is more for apps not using that as a bootstrap
+ */
 const SvgIcon = ({ source, name, width, height = 'auto', ...props }) => {
   const icon = source[name]
   return (

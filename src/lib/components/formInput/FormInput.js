@@ -4,26 +4,24 @@ import ThemeWrapper from '../../utils/ThemeWrapper'
 import * as themes from './themes'
 import classNames from 'classnames'
 
-import { INPUT_TYPES } from '../../constants/constants'
-
 /**
  * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
  */
 export const FormInput = ({
-  required,
-  styling,
   className,
-  label,
-  size,
-  invalid = false,
-  valid = false,
-  innerRef,
+  children,
   disabled = false,
-  readonly = false,
   errorText,
   hintContent,
-  children,
-  ...props
+  invalid = false,
+  innerRef,
+  label,
+  readonly = false,
+  required,
+  size,
+  styling,
+  valid = false,
+  ...rest
 }) => {
   const inputClasses = classNames(
     'form-control',
@@ -85,7 +83,7 @@ export const FormInput = ({
   const renderInput = () => {
     return (
       <input
-        {...props}
+        {...rest}
         ref={innerRef}
         disabled={disabled}
         readOnly={readonly}
@@ -97,7 +95,7 @@ export const FormInput = ({
   return (
     <div className={containerClasses}>
       {label ? (
-        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+        <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
           {label}
           {required && '*'}
         </label>
@@ -127,25 +125,13 @@ FormInput.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The input type.
+   * The children nodes.
    */
-  type: PropTypes.oneOf(INPUT_TYPES),
+  children: PropTypes.node,
   /**
-   * The input's size.
+   * Whether or not the component is disabled
    */
-  size: PropTypes.string,
-  /**
-   * Whether it is valid, or not.
-   */
-  valid: PropTypes.bool,
-  /**
-   * Whether it is invalid, or not.
-   */
-  invalid: PropTypes.bool,
-  /**
-   * The inner ref.
-   */
-  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  disabled: PropTypes.bool,
   /**
    * Text to display if the field is invalid.
    */
@@ -155,9 +141,33 @@ FormInput.propTypes = {
    */
   hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
+   * Whether it is invalid, or not.
+   */
+  invalid: PropTypes.bool,
+  /**
+   * The inner ref.
+   */
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  /**
+   * Optional label to display above the input
+   */
+  label: PropTypes.bool,
+  /**
    * Whether the field is required or not
    */
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  /**
+   * Whether or not the field is readonly
+   */
+  readonly: PropTypes.bool,
+  /**
+   * The input's size.
+   */
+  size: PropTypes.string,
+  /**
+   * Whether it is valid, or not.
+   */
+  valid: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormInput)

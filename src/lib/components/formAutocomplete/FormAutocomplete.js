@@ -5,31 +5,29 @@ import * as themes from './themes'
 import classNames from 'classnames'
 import { Typeahead, AsyncTypeahead } from 'react-bootstrap-typeahead'
 
-import { INPUT_TYPES } from '../../constants/constants'
-
 /**
- * The form input allows you to type with automatic suggestions, select from those suggestions, add multiple tokenized values
+ * The autocomplete input allows you to type with automatic suggestions, select from those suggestions, add multiple tokenized values
  */
 export const FormAutocomplete = ({
-  required,
-  styling,
+  allowNew = false,
   className,
-  label,
-  size,
-  invalid = false,
-  valid = false,
-  innerRef,
+  children,
   disabled = false,
   errorText,
-  hintContent,
-  children,
-  multiple = false,
   forceMatch = false,
-  allowNew = false,
+  hintContent,
+  invalid = false,
+  innerRef,
+  label,
+  labelKey = 'label',
+  multiple = false,
   onSearch = undefined,
   options = [],
-  labelKey = 'label',
   onChange = () => {},
+  required,
+  size,
+  styling,
+  valid = false,
   ...rest
 }) => {
   const Tag = onSearch ? AsyncTypeahead : Typeahead
@@ -181,21 +179,33 @@ export const FormAutocomplete = ({
 
 FormAutocomplete.propTypes = {
   /**
+   * Whether or not the user can enter a new token. Defaults to false
+   */
+  allowNew: PropTypes.bool,
+  /**
    * The class name.
    */
   className: PropTypes.string,
   /**
-   * The input type.
+   * The children nodes.
    */
-  type: PropTypes.oneOf(INPUT_TYPES),
+  children: PropTypes.node,
   /**
-   * The input's size.
+   * Whether or not the component is disabled
    */
-  size: PropTypes.string,
+  disabled: PropTypes.bool,
   /**
-   * Whether it is valid, or not.
+   * Text to display if the field is invalid.
    */
-  valid: PropTypes.bool,
+  errorText: PropTypes.string,
+  /**
+   * Whether or not the component should force a match from the suggestions, clearing anything unmatched. Defaults to false
+   */
+  forceMatch: PropTypes.bool,
+  /**
+   * Text to display below the input as clues to the user
+   */
+  hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   /**
    * Whether it is invalid, or not.
    */
@@ -205,17 +215,41 @@ FormAutocomplete.propTypes = {
    */
   innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
   /**
-   * Text to display if the field is invalid.
+   * Optional label to display above the input
    */
-  errorText: PropTypes.string,
+  label: PropTypes.string,
   /**
-   * Text to display below the input as clues to the user
+   * The key in the data object to use for display. Can be a callback function, allowing you to transform your data and return a compound string rather than just a single data field.
    */
-  hintContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  labelKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  /**
+   * Whether or not the component accepts multiple distinct inputs
+   */
+  multiple: PropTypes.bool,
+  /**
+   * Callback function to use for async dataset updates based on user input
+   */
+  onSearch: PropTypes.func,
+  /**
+   * Data set to use for suggestions
+   */
+  options: PropTypes.array,
+  /**
+   * The function to call after a change has been made to the selection(s)
+   */
+  onChange: PropTypes.func,
   /**
    * Whether the field is required or not
    */
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  /**
+   * The input's size.
+   */
+  size: PropTypes.string,
+  /**
+   * Whether it is valid, or not.
+   */
+  valid: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(FormAutocomplete)

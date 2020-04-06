@@ -8,15 +8,15 @@ import classNames from 'classnames'
  * Cards provide a flexible content container that you can use to display a variety of content using contextual background colors, headers and footers.
  */
 export const Card = ({
-  styling,
-  children,
   disabled,
+  children,
   className = '',
-  size,
+  footer,
+  header,
   innerRef,
   onClick,
-  header,
-  footer,
+  size,
+  styling,
   ...props
 }) => {
   const classes = classNames(className, styling.card, size && styling[`card-${size}`])
@@ -43,6 +43,10 @@ export const Card = ({
 
 Card.propTypes = {
   /**
+   * Whether it is disabled, or not.
+   */
+  disabled: PropTypes.bool,
+  /**
    * The class name.
    */
   className: PropTypes.string,
@@ -51,18 +55,26 @@ Card.propTypes = {
    */
   children: PropTypes.any.isRequired,
   /**
-   * The size.
+   * Optional footer content, sectioned out separately
    */
-  size: PropTypes.string,
+  footer: PropTypes.any,
   /**
-   * Whether it is disabled, or not.
+   * Optional header content, sectioned out separately
    */
-  disabled: PropTypes.bool,
+  header: PropTypes.any,
   /**
    * The inner ref.
    * @type {[type]}
    */
-  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  /**
+   * Click handler (explicit to handle disbaled state)
+   */
+  onClick: PropTypes.func,
+  /**
+   * The size.
+   */
+  size: PropTypes.string
 }
 
 export default ThemeWrapper(themes)(Card)

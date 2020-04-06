@@ -9,20 +9,20 @@ import { toNumber } from 'lodash'
  * You can use the `Progress Bar` component to display simple or complex progress bars.
  */
 export const ProgressBar = ({
-  label,
-  styling,
-  children,
-  className,
-  barClassName,
-  value = 0,
-  max = 100,
   animated,
-  striped,
+  barClassName,
   barColor,
   bar,
+  children,
+  className,
+  label,
+  max = 100,
   multi,
+  striped,
+  styling,
   size,
   tag: Tag = 'div',
+  value = 0,
   ...rest
 }) => {
   const percent = (toNumber(value) / toNumber(max)) * 100
@@ -70,49 +70,57 @@ export const ProgressBar = ({
 
 ProgressBar.propTypes = {
   /**
-   * The children nodes.
+   * Whether it is animated, or not.
    */
-  children: PropTypes.node,
+  animated: PropTypes.bool,
   /**
    * Whether it is a bar, or not.
    */
   bar: PropTypes.bool,
   /**
-   * Whether there are multiple progress bars nested, or not.
+   * The class name for the bar element.
    */
-  multi: PropTypes.bool,
-  /**
-   * The component's tag type.
-   */
-  tag: PropTypes.string,
-  /**
-   * Whether it is animated, or not.
-   */
-  animated: PropTypes.bool,
-  /**
-   * Whether it is striped, or not.
-   */
-  striped: PropTypes.bool,
+  barClassName: PropTypes.string,
   /**
    * The bar color.
    */
   barColor: PropTypes.string,
   /**
+   * The children nodes.
+   */
+  children: PropTypes.node,
+  /**
    * The class name.
    */
   className: PropTypes.string,
   /**
-   * The class name for the bar element.
+   * Optional label to show above the component
    */
-  barClassName: PropTypes.string,
+  label: PropTypes.string,
+  /**
+   * Whether there are multiple progress bars nested, or not.
+   */
+  multi: PropTypes.bool,
+  /**
+   * The max value. Defaults to 100
+   */
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Whether it is striped, or not.
+   */
+  striped: PropTypes.bool,
+  /**
+   * Which of the preset sizes of the component to display. One of ['sm', 'md', 'lg']
+   */
+  size: PropTypes.string,
+  /**
+   * The component's tag type. Defaults to 'div'
+   */
+  tag: PropTypes.string,
   /**
    * The value.
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * The max value.
-   */
-  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 export default ThemeWrapper(themes)(ProgressBar)

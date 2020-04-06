@@ -9,28 +9,28 @@ import { Transition } from 'react-transition-group'
  * A dialog overlay
  */
 export const Modal = ({
-  styling,
-  children,
-  open = false,
-  id,
-  backdrop = true,
-  tabIndex,
-  backdropClassName,
-  modalClassName,
   animation,
+  backdrop = true,
+  backdropClassName,
+  className,
+  children,
+  closeOnBackdropClick = true,
+  centered,
+  footer,
+  header,
+  id,
+  modalClassName,
   modalContentClassName,
+  modalShown,
+  modalHidden,
+  open = false,
   position,
   role = 'dialog',
   size,
-  centered,
-  className,
-  modalShown,
+  styling,
   toggleModal,
-  modalHidden,
-  header,
-  footer,
+  tabIndex,
   withCloseButton,
-  closeOnBackdropClick = true,
   ...rest
 }) => {
   const [isOpen, setOpenStatus] = useState(open || false)
@@ -128,21 +128,45 @@ export const Modal = ({
 
 Modal.propTypes = {
   /**
-   * The id.
+   *
    */
-  id: PropTypes.string,
+  animation: PropTypes.bool,
+  /**
+   * Whether it should display a backdrop, or not. Defaults to true.
+   */
+  backdrop: PropTypes.bool,
+  /**
+   * The class name for the backdrop element.
+   */
+  backdropClassName: PropTypes.string,
+  /**
+   * The children nodes.
+   */
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  /**
+   * Whether it should be centered, or not.
+   */
+  centered: PropTypes.bool,
   /**
    * The class name.
    */
   className: PropTypes.string,
   /**
-   * Whether it is open, or not.
+   * Whether or not clicking the backdrop closes the modal. Defaults to true.
    */
-  open: PropTypes.bool,
+  closeOnBackdropClick: PropTypes.bool,
   /**
-   * Whether it should display a backdrop, or not.
+   * Optional header content to display at the top of the modal, sectioned out separately
    */
-  backdrop: PropTypes.bool,
+  header: PropTypes.any,
+  /**
+   * Optional footer content to display at the the bottom of the modal, sectioned out separately
+   */
+  footer: PropTypes.any,
+  /**
+   * The unique id of the component
+   */
+  id: PropTypes.string,
   /**
    * The function that should be triggered when the modal is shown.
    */
@@ -152,25 +176,21 @@ Modal.propTypes = {
    */
   modalHidden: PropTypes.func,
   /**
-   * Whether it should be centered, or not.
-   */
-  centered: PropTypes.bool,
-  /**
-   * The class name for the backdrop element.
-   */
-  backdropClassName: PropTypes.string,
-  /**
-   * The toggle function.
-   */
-  toggleModal: PropTypes.func,
-  /**
    * The class name for the modal.
    */
   modalClassName: PropTypes.string,
   /**
-   *
+   * The class name for the modal content.
    */
-  animation: PropTypes.bool,
+  modalContentClassName: PropTypes.string,
+  /**
+   * Whether it is open, or not. Defaults to false
+   */
+  open: PropTypes.bool,
+  /**
+   * The role attribute for the modal. Defaults to 'dialog'
+   */
+  role: PropTypes.string,
   /**
    * The size. 'sm' or 'lg' (otherwise defaults to normal 'md')
    */
@@ -180,17 +200,13 @@ Modal.propTypes = {
    */
   tabIndex: PropTypes.string,
   /**
-   * The class name for the modal content.
+   * The toggle function.
    */
-  modalContentClassName: PropTypes.string,
+  toggleModal: PropTypes.func,
   /**
-   * The role attribute for the modal.
+   * Whether or not a "X" icon is included in the top right to allow the user to exit the dialog
    */
-  role: PropTypes.string,
-  /**
-   * The children nodes.
-   */
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  withCloseButton: PropTypes.bool
 }
 
 export default ThemeWrapper(themes)(Modal)

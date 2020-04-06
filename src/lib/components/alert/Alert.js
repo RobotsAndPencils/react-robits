@@ -12,24 +12,24 @@ import { TIMEOUT } from '../../constants/constants'
  */
 
 export const Alert = ({
+  autoDismissDelay,
+  centered = true,
+  children,
   className,
-  styling,
   closeClassName,
   closeAriaLabel = 'Close',
-  tag: Tag = 'div',
-  styleType = 'primary',
-  open = false,
   dismissible,
-  autoDismissDelay,
+  fade = true,
+  id,
+  open = false,
   removeHandler,
-  children,
+  styling,
+  styleType = 'primary',
+  tag: Tag = 'div',
   transition = {
     ...Fade.defaultProps,
     unmountOnExit: true
   },
-  fade = true,
-  centered = true,
-  id,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(open)
@@ -89,11 +89,19 @@ export const Alert = ({
 
 Alert.propTypes = {
   /**
+   * Time in milliseconds the alert should appear for before auto-dismissing itself
+   */
+  autoDismissDelay: PropTypes.number,
+  /**
+   * Whether to center align the alert's contents
+   */
+  centered: PropTypes.bool,
+  /**
    * The children nodes.
    */
   children: PropTypes.node,
   /**
-   * The class name.
+   * Custom class name.
    */
   className: PropTypes.string,
   /**
@@ -113,11 +121,11 @@ Alert.propTypes = {
    */
   fade: PropTypes.bool,
   /**
-   * Whether is open, or not.
+   * Whether it is open, or not.
    */
   open: PropTypes.bool,
   /**
-   * Whether is dismissible, or not.
+   * Whether the user can dismiss it, or not.
    */
   dismissible: PropTypes.bool,
   /**

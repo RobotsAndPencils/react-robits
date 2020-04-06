@@ -8,22 +8,22 @@ import classNames from 'classnames'
  * Generic button
  */
 export const Button = ({
-  styling,
+  active,
+  block,
   children,
-  isLoading = false,
-  disabled = false,
   className = '',
+  disabled = false,
+  ghost,
+  innerRef,
+  isLoading = false,
+  onClick,
+  outline,
+  pill,
+  styling,
   styleType = 'primary',
   size,
-  pill,
-  outline,
   squared,
-  active,
-  innerRef,
   tag: Tag = 'button',
-  block,
-  onClick,
-  ghost,
   ...props
 }) => {
   const classes = classNames(
@@ -73,9 +73,13 @@ export const Button = ({
 
 Button.propTypes = {
   /**
-   * Whether the button action is in process
+   * Whether or not to display its active state
    */
-  isLoading: PropTypes.bool,
+  active: PropTypes.bool,
+  /**
+   * Whether it should be displayed as a block (full-width), or not.
+   */
+  block: PropTypes.bool,
   /**
    * The class name.
    */
@@ -85,13 +89,26 @@ Button.propTypes = {
    */
   children: PropTypes.any.isRequired,
   /**
-   * The style version of the button.
+   * Whether it is disabled, or not. Defaults to false
    */
-  styleType: PropTypes.string,
+  disabled: PropTypes.bool,
   /**
-   * The size.
+   * Ghost buttons take on their `styleType` color for text, but no background or border
    */
-  size: PropTypes.string,
+  ghost: PropTypes.bool,
+  /**
+   * Whether the button action is in process. Defaults to false.
+   */
+  isLoading: PropTypes.bool,
+  /**
+   * The inner ref.
+   * @type {[type]}
+   */
+  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+  /**
+   * Click handler (explicit prop to handle disabled state)
+   */
+  onClick: PropTypes.func,
   /**
    * Whether it is outline, or not.
    */
@@ -105,30 +122,17 @@ Button.propTypes = {
    */
   squared: PropTypes.bool,
   /**
-   * Whether it is active, or not.
+   * The style version of the button.
    */
-  active: PropTypes.bool,
+  styleType: PropTypes.string,
   /**
-   * Whether it should be displayed as a block (full-width), or not.
+   * The size.
    */
-  block: PropTypes.bool,
-  /**
-   * Whether it is disabled, or not.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Ghost buttons take on their `styleType` color for text, but no background or border
-   */
-  ghost: PropTypes.bool,
+  size: PropTypes.string,
   /**
    * The component tag.
    */
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  /**
-   * The inner ref.
-   * @type {[type]}
-   */
-  innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 }
 
 export default ThemeWrapper(themes)(Button)
