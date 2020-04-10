@@ -41,9 +41,6 @@
     "sass-resources-loader": "^2.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 8002 -s public",
     "build-storybook": "build-storybook -s public",
@@ -82,7 +79,6 @@
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "prettier-standard": "^16.2.1",
-    "react-app-rewired": "^2.1.5",
     "webpack-merge": "^4.2.2"
   },
   "lint-staged": {
