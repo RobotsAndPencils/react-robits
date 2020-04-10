@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import { Popper } from 'react-popper'
 
@@ -108,4 +107,4 @@ DropdownMenu.propTypes = {
   tag: PropTypes.string
 }
 
-export default ThemeWrapper(themes)(DropdownMenu)
+export default ThemeWrapper(themeName => `dropdown/dropdown_${themeName}.module.scss`)(DropdownMenu)

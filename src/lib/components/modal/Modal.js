@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import { Transition } from 'react-transition-group'
 
@@ -209,4 +208,4 @@ Modal.propTypes = {
   withCloseButton: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(Modal)
+export default ThemeWrapper(themeName => `modal/modal_${themeName}.module.scss`)(Modal)

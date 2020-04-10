@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import { Typeahead, AsyncTypeahead } from 'react-bootstrap-typeahead'
 
@@ -252,4 +251,6 @@ FormAutocomplete.propTypes = {
   valid: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormAutocomplete)
+export default ThemeWrapper(
+  themeName => `formAutocomplete/formAutocomplete_${themeName}.module.scss`
+)(FormAutocomplete)

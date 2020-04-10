@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import imageUtils from '../../utils/imageUtils'
 
@@ -103,4 +102,4 @@ Avatar.propTypes = {
   withShadow: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(Avatar)
+export default ThemeWrapper(themeName => `avatar/avatar_${themeName}.module.scss`)(Avatar)

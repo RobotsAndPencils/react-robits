@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -123,4 +122,6 @@ FormTextarea.propTypes = {
   valid: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormTextarea)
+export default ThemeWrapper(themeName => `formTextarea/formTextarea_${themeName}.module.scss`)(
+  FormTextarea
+)

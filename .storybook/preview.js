@@ -28,7 +28,7 @@ const rnpTheme = create({
 })
 
 const ThemeDefiner = React.createContext({
-  theme: 'talentPortal'
+  themeName: 'talentPortal'
 })
 
 const topLevelContexts = [
@@ -40,13 +40,13 @@ const topLevelContexts = [
       {
         name: 'Unstyled',
         props: {
-          value: { theme: 'unstyled' }
+          value: { themeName: 'unstyled' }
         }
       },
       {
         name: 'Talent Portal',
         props: {
-          value: { theme: 'talentPortal' }
+          value: { themeName: 'talentPortal' }
         },
         default: true
       }
@@ -60,10 +60,10 @@ const topLevelContexts = [
 const ContextDecorator = storyFn => {
   return (
     <ThemeDefiner.Consumer>
-      {({ theme }) => (
+      {({ themeName }) => (
         <>
-          <GlobalStyles theme={theme} />
-          <div style={{ padding: '30px' }}>{storyFn({ theme })}</div>
+          <GlobalStyles themeName={themeName} />
+          <div style={{ padding: '30px' }}>{storyFn({ themeName })}</div>
         </>
       )}
     </ThemeDefiner.Consumer>

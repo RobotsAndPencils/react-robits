@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -135,4 +134,4 @@ Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 }
 
-export default ThemeWrapper(themes)(Button)
+export default ThemeWrapper(themeName => `button/button_${themeName}.module.scss`)(Button)

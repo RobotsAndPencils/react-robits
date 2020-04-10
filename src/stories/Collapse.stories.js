@@ -8,11 +8,13 @@ export default {
   component: CollapseComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
-      <Button onClick={() => setIsOpen(!isOpen)}>Toggle</Button>
+      <Button themeName={themeName} onClick={() => setIsOpen(!isOpen)}>
+        Toggle
+      </Button>
       <Collapse open={isOpen}>
         <div
           style={{

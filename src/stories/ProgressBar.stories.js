@@ -9,7 +9,7 @@ export default {
   component: ProgressBarComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     striped: boolean('Striped', false),
     animated: boolean('Animated', false),
@@ -21,14 +21,14 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <ProgressBar {...componentKnobs} theme={theme}>
+      <ProgressBar {...componentKnobs} themeName={themeName}>
         {componentKnobs.withValue ? componentKnobs.value : null}
       </ProgressBar>
     </>
   )
 }
 
-export const Sizes = ({ theme }) => {
+export const Sizes = ({ themeName }) => {
   const componentKnobs = {
     striped: boolean('Striped', false),
     animated: boolean('Animated', false),
@@ -39,20 +39,20 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <ProgressBar {...componentKnobs} label='Large' size='lg' theme={theme}>
+      <ProgressBar {...componentKnobs} label='Large' size='lg' themeName={themeName}>
         {componentKnobs.withValue ? componentKnobs.value : null}
       </ProgressBar>
-      <ProgressBar {...componentKnobs} label='Normal' theme={theme}>
+      <ProgressBar {...componentKnobs} label='Normal' themeName={themeName}>
         {componentKnobs.withValue ? componentKnobs.value : null}
       </ProgressBar>
-      <ProgressBar {...componentKnobs} label='Small' size='sm' theme={theme}>
+      <ProgressBar {...componentKnobs} label='Small' size='sm' themeName={themeName}>
         {componentKnobs.withValue ? componentKnobs.value : null}
       </ProgressBar>
     </>
   )
 }
 
-export const Multiples = ({ theme }) => {
+export const Multiples = ({ themeName }) => {
   const parentKnobs = {
     striped: boolean('Striped', false),
     animated: boolean('Animated', false),
@@ -80,14 +80,14 @@ export const Multiples = ({ theme }) => {
 
   return (
     <>
-      <ProgressBar multi theme={theme}>
-        <ProgressBar {...parentKnobs} {...firstKnobs} bar theme={theme}>
+      <ProgressBar multi themeName={themeName}>
+        <ProgressBar {...parentKnobs} {...firstKnobs} bar themeName={themeName}>
           {parentKnobs.withValue ? firstKnobs.value : null}
         </ProgressBar>
-        <ProgressBar {...parentKnobs} {...secondKnobs} bar theme={theme}>
+        <ProgressBar {...parentKnobs} {...secondKnobs} bar themeName={themeName}>
           {parentKnobs.withValue ? secondKnobs.value : null}
         </ProgressBar>
-        <ProgressBar {...parentKnobs} {...thirdKnobs} bar theme={theme}>
+        <ProgressBar {...parentKnobs} {...thirdKnobs} bar themeName={themeName}>
           {parentKnobs.withValue ? thirdKnobs.value : null}
         </ProgressBar>
       </ProgressBar>

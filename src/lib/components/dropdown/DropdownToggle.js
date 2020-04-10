@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Reference } from 'react-popper'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import Button from '../button/Button'
 
@@ -140,4 +139,6 @@ DropdownToggle.propTypes = {
   useANormalRef: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(DropdownToggle)
+export default ThemeWrapper(themeName => `dropdown/dropdown_${themeName}.module.scss`)(
+  DropdownToggle
+)

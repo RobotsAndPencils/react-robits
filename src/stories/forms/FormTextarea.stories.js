@@ -23,7 +23,7 @@ export default {
   component: FormTextareaComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -39,12 +39,12 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <FormTextarea {...componentKnobs} theme={theme} />
+      <FormTextarea {...componentKnobs} themeName={themeName} />
     </>
   )
 }
 
-export const Sizes = ({ theme }) => {
+export const Sizes = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -61,7 +61,7 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <FormTextarea {...componentKnobs} theme={theme} placeholder='With Rows and Columns' />
+      <FormTextarea {...componentKnobs} themeName={themeName} placeholder='With Rows and Columns' />
     </>
   )
 }

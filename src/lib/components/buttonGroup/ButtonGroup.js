@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -40,4 +39,6 @@ ButtonGroup.propTypes = {
   vertical: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(ButtonGroup)
+export default ThemeWrapper(themeName => `buttonGroup/buttonGroup_${themeName}.module.scss`)(
+  ButtonGroup
+)

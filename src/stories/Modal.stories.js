@@ -12,7 +12,7 @@ export default {
   component: ModalComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     closeOnBackdropClick: boolean('Close on Backdrop Click', true),
     size: select('Size', ['sm', 'md', 'lg'], 'md'),
@@ -32,16 +32,17 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Button theme={theme} onClick={() => setModalOpen(true)}>
+      <Button themeName={themeName} onClick={() => setModalOpen(true)}>
         Open Modal
       </Button>
       <Modal
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         open={modalOpen}
         toggleModal={() => setModalOpen(!modalOpen)}>
         {header ? (
           <ModalHeader
+            themeName={themeName}
             withBorder={withHeaderBorder}
             withCloseButton={withCloseButton}
             closeModal={() => setModalOpen(!modalOpen)}>
@@ -50,8 +51,8 @@ export const Normal = ({ theme }) => {
         ) : (
           []
         )}
-        <ModalBody theme={theme}>Hello World</ModalBody>
-        {footer ? <ModalFooter>{footer}</ModalFooter> : []}
+        <ModalBody themeName={themeName}>Hello World</ModalBody>
+        {footer ? <ModalFooter themeName={themeName}>{footer}</ModalFooter> : []}
       </Modal>
     </>
   )

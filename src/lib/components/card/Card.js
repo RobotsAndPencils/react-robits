@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -77,4 +76,4 @@ Card.propTypes = {
   size: PropTypes.string
 }
 
-export default ThemeWrapper(themes)(Card)
+export default ThemeWrapper(themeName => `card/card_${themeName}.module.scss`)(Card)

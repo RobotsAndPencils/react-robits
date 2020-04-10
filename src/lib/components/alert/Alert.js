@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 import Fade from '../Fade'
@@ -146,4 +145,4 @@ Alert.propTypes = {
   id: PropTypes.string.isRequired
 }
 
-export default ThemeWrapper(themes)(Alert)
+export default ThemeWrapper(themeName => `alert/alert_${themeName}.module.scss`)(Alert)

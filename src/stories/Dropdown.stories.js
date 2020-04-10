@@ -14,7 +14,7 @@ export default {
   component: DropdownComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     disabled: boolean('Disabled', false),
     direction: select('Preferred Direction', ['up', 'down', 'left', 'right'], 'down')
@@ -28,21 +28,31 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Dropdown {...componentKnobs} theme={theme} open={open} toggle={() => toggleOpen(!open)}>
-        <DropdownToggle caret={caret} size={size} disabled={componentKnobs.disabled} theme={theme}>
+      <Dropdown
+        {...componentKnobs}
+        themeName={themeName}
+        open={open}
+        toggle={() => toggleOpen(!open)}>
+        <DropdownToggle
+          caret={caret}
+          size={size}
+          disabled={componentKnobs.disabled}
+          themeName={themeName}>
           Options
         </DropdownToggle>
-        <DropdownMenu theme={theme} size={size} alignment={alignment}>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
+        <DropdownMenu themeName={themeName} size={size} alignment={alignment}>
+          <DropdownItem themeName={themeName} onClick={action('Clicked dropdown item: Action')}>
             Action
           </DropdownItem>
           <DropdownItem
             active
-            theme={theme}
+            themeName={themeName}
             onClick={action('Clicked dropdown item: Another action')}>
             Another action
           </DropdownItem>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>
+          <DropdownItem
+            themeName={themeName}
+            onClick={action('Clicked dropdown item: Else action')}>
             Something else here
           </DropdownItem>
         </DropdownMenu>
@@ -51,7 +61,7 @@ export const Normal = ({ theme }) => {
   )
 }
 
-export const Split = ({ theme }) => {
+export const Split = ({ themeName }) => {
   const componentKnobs = {
     disabled: boolean('Disabled', false),
     direction: select('Direction', ['up', 'down', 'left', 'right'], 'down')
@@ -63,21 +73,34 @@ export const Split = ({ theme }) => {
 
   return (
     <>
-      <Dropdown {...componentKnobs} theme={theme} open={open} toggle={() => toggleOpen(!open)}>
-        <ButtonGroup>
-          <Button size={size} disabled={componentKnobs.disabled} theme={theme}>
+      <Dropdown
+        {...componentKnobs}
+        themeName={themeName}
+        open={open}
+        toggle={() => toggleOpen(!open)}>
+        <ButtonGroup themeName={themeName}>
+          <Button size={size} disabled={componentKnobs.disabled} themeName={themeName}>
             Options
           </Button>
-          <DropdownToggle split size={size} disabled={componentKnobs.disabled} theme={theme} />
+          <DropdownToggle
+            split
+            size={size}
+            disabled={componentKnobs.disabled}
+            themeName={themeName}
+          />
         </ButtonGroup>
-        <DropdownMenu theme={theme} size={size}>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Action')}>
+        <DropdownMenu themeName={themeName} size={size}>
+          <DropdownItem themeName={themeName} onClick={action('Clicked dropdown item: Action')}>
             Action
           </DropdownItem>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Another action')}>
+          <DropdownItem
+            themeName={themeName}
+            onClick={action('Clicked dropdown item: Another action')}>
             Another action
           </DropdownItem>
-          <DropdownItem theme={theme} onClick={action('Clicked dropdown item: Else action')}>
+          <DropdownItem
+            themeName={themeName}
+            onClick={action('Clicked dropdown item: Else action')}>
             Something else here
           </DropdownItem>
         </DropdownMenu>

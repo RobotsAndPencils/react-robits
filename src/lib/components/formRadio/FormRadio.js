@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -131,4 +130,4 @@ FormRadio.propTypes = {
   valid: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormRadio)
+export default ThemeWrapper(themeName => `formRadio/formRadio_${themeName}.module.scss`)(FormRadio)

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -92,4 +91,4 @@ Badge.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 }
 
-export default ThemeWrapper(themes)(Badge)
+export default ThemeWrapper(themeName => `badge/badge_${themeName}.module.scss`)(Badge)

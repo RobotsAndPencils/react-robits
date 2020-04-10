@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 import { toNumber } from 'lodash'
 
@@ -123,4 +122,6 @@ ProgressBar.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
-export default ThemeWrapper(themes)(ProgressBar)
+export default ThemeWrapper(themeName => `progressBar/progressBar_${themeName}.module.scss`)(
+  ProgressBar
+)

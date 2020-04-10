@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 
 import { DropdownContext } from './DropdownContext'
 
@@ -115,4 +114,4 @@ DropdownItem.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 }
 
-export default ThemeWrapper(themes)(DropdownItem)
+export default ThemeWrapper(themeName => `dropdown/dropdown_${themeName}.module.scss`)(DropdownItem)

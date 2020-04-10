@@ -8,7 +8,7 @@ export default {
   component: AvatarComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     squared: boolean('Squared', false),
     bordered: boolean('Bordered', false),
@@ -24,21 +24,21 @@ export const Normal = ({ theme }) => {
         {...componentKnobs}
         size='sm'
         onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
-        theme={theme}>
+        themeName={themeName}>
         {text('Initials', 'RNP')}
       </Avatar>
       <Avatar
         {...componentKnobs}
         size='md'
         onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
-        theme={theme}>
+        themeName={themeName}>
         {text('Initials', 'RNP')}
       </Avatar>
       <Avatar
         {...componentKnobs}
         size='lg'
         onClick={componentKnobs.editable ? action('Clicked to edit') : undefined}
-        theme={theme}>
+        themeName={themeName}>
         {text('Initials', 'RNP')}
       </Avatar>
     </>

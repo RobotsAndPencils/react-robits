@@ -23,7 +23,7 @@ export default {
   component: FormRadioComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     label: text('Label', ''),
     hintContent: text('Hint Text', ''),
@@ -45,7 +45,7 @@ export const Normal = ({ theme }) => {
           { label: 'Radio 2', value: 'two' },
           { label: 'Radio 3', value: 'three' }
         ]}
-        theme={theme}
+        themeName={themeName}
       />
     </>
   )

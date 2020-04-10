@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -126,4 +125,6 @@ FormCheckbox.propTypes = {
   valid: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormCheckbox)
+export default ThemeWrapper(themeName => `formCheckbox/formCheckbox_${themeName}.module.scss`)(
+  FormCheckbox
+)

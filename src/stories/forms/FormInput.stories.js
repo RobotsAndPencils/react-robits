@@ -24,7 +24,7 @@ export default {
   component: FormInputComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -39,12 +39,12 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <FormInput {...componentKnobs} theme={theme} />
+      <FormInput {...componentKnobs} themeName={themeName} />
     </>
   )
 }
 
-export const Sizes = ({ theme }) => {
+export const Sizes = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -59,14 +59,14 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <FormInput {...componentKnobs} size='lg' theme={theme} placeholder='Large' />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Normal' />
-      <FormInput {...componentKnobs} size='sm' theme={theme} placeholder='Small' />
+      <FormInput {...componentKnobs} size='lg' themeName={themeName} placeholder='Large' />
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Normal' />
+      <FormInput {...componentKnobs} size='sm' themeName={themeName} placeholder='Small' />
     </>
   )
 }
 
-export const Addons = ({ theme }) => {
+export const Addons = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -81,29 +81,29 @@ export const Addons = ({ theme }) => {
 
   return (
     <>
-      <FormInput {...componentKnobs} theme={theme} placeholder='Prepender'>
-        <FormInputAddon type='prepend' theme={theme}>
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Prepender'>
+        <FormInputAddon type='prepend' themeName={themeName}>
           $
         </FormInputAddon>
       </FormInput>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Appender'>
-        <FormInputAddon type='append' theme={theme}>
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Appender'>
+        <FormInputAddon type='append' themeName={themeName}>
           $
         </FormInputAddon>
       </FormInput>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Both'>
-        <FormInputAddon type='prepend' theme={theme}>
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Both'>
+        <FormInputAddon type='prepend' themeName={themeName}>
           $
         </FormInputAddon>
-        <FormInputAddon type='append' theme={theme}>
+        <FormInputAddon type='append' themeName={themeName}>
           .00
         </FormInputAddon>
       </FormInput>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Leading'>
-        <FormInputAddon type='leading' theme={theme}>
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Leading'>
+        <FormInputAddon type='leading' themeName={themeName}>
           <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'
@@ -121,8 +121,8 @@ export const Addons = ({ theme }) => {
         </FormInputAddon>
       </FormInput>
       <br />
-      <FormInput {...componentKnobs} theme={theme} placeholder='Trailing'>
-        <FormInputAddon type='trailing' theme={theme}>
+      <FormInput {...componentKnobs} themeName={themeName} placeholder='Trailing'>
+        <FormInputAddon type='trailing' themeName={themeName}>
           <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 const ModalHeader = ({
@@ -61,4 +60,4 @@ ModalHeader.propTypes = {
   withCloseButton: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(ModalHeader)
+export default ThemeWrapper(themeName => `modal/modal_${themeName}.module.scss`)(ModalHeader)

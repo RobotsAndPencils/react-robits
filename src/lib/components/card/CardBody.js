@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -33,4 +32,4 @@ CardBody.propTypes = {
   innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string])
 }
 
-export default ThemeWrapper(themes)(CardBody)
+export default ThemeWrapper(themeName => `card/card_${themeName}.module.scss`)(CardBody)

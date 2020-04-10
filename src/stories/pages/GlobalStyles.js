@@ -1,9 +1,16 @@
-import React from 'react'
-import ThemeWrapper from '../../lib/utils/ThemeWrapper'
-import * as themes from './globalThemes'
+import React, { useState, useEffect } from 'react'
 
-export const GlobalStyles = ({ styling }) => {
+const GlobalStyles = props => {
+  const [isReady, setReady] = useState(false)
+
+  useEffect(() => {
+    import(`../../lib/styles/themes/${props.themeName}/global.module.scss`).then(styles => {
+      setReady(true)
+    })
+  }, [props.themeName])
+
+  if (!isReady) return false
   return <div />
 }
 
-export default ThemeWrapper(themes)(GlobalStyles)
+export default GlobalStyles

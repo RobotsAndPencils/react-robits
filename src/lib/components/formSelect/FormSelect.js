@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
-import * as themes from './themes'
 import classNames from 'classnames'
 
 /**
@@ -120,4 +119,6 @@ FormSelect.propTypes = {
   valid: PropTypes.bool
 }
 
-export default ThemeWrapper(themes)(FormSelect)
+export default ThemeWrapper(themeName => `formSelect/formSelect_${themeName}.module.scss`)(
+  FormSelect
+)

@@ -23,7 +23,7 @@ export default {
   component: CardComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     header: text('Header', 'Card Header'),
     footer: text('Footer', 'Card Footer')
@@ -31,8 +31,8 @@ export const Normal = ({ theme }) => {
   componentKnobs = reconcileCorners(componentKnobs)
 
   return (
-    <Card {...componentKnobs} theme={theme} onClick={action('clicked')}>
-      <CardBody theme={theme}>Card One</CardBody>
+    <Card {...componentKnobs} themeName={themeName} onClick={action('clicked')}>
+      <CardBody themeName={themeName}>Card One</CardBody>
     </Card>
   )
 }
