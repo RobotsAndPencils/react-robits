@@ -7,65 +7,67 @@ import { toNumber } from 'lodash'
 /**
  * You can use the `Progress Bar` component to display simple or complex progress bars.
  */
-export const ProgressBar = ({
-  animated,
-  barClassName,
-  barColor,
-  bar,
-  children,
-  className,
-  label,
-  max = 100,
-  multi,
-  striped,
-  styling,
-  size,
-  tag: Tag = 'div',
-  value = 0,
-  ...rest
-}) => {
-  const percent = (toNumber(value) / toNumber(max)) * 100
-  const progressClasses = classNames(
+export const ProgressBar = React.memo(
+  ({
+    animated,
+    barClassName,
+    barColor,
+    bar,
+    children,
     className,
-    size && styling[`progress-${size}`],
-    styling.progress
-  )
+    label,
+    max = 100,
+    multi,
+    striped,
+    styling,
+    size,
+    tag: Tag = 'div',
+    value = 0,
+    ...rest
+  }) => {
+    const percent = (toNumber(value) / toNumber(max)) * 100
+    const progressClasses = classNames(
+      className,
+      size && styling[`progress-${size}`],
+      styling.progress
+    )
 
-  const progressBarClasses = classNames(
-    styling['progress-bar'],
-    bar ? className || barClassName : barClassName,
-    animated && styling['progress-bar-animated'],
-    barColor && styling[`bg-${barColor}`],
-    (striped || animated) && styling['progress-bar-striped']
-  )
+    const progressBarClasses = classNames(
+      styling['progress-bar'],
+      bar ? className || barClassName : barClassName,
+      animated && styling['progress-bar-animated'],
+      barColor && styling[`bg-${barColor}`],
+      (striped || animated) && styling['progress-bar-striped']
+    )
 
-  const ProgressBar = multi ? (
-    children
-  ) : (
-    <div
-      className={progressBarClasses}
-      style={{ width: `${percent}%` }}
-      role='progressbar'
-      aria-valuenow={value}
-      aria-valuemin='0'
-      aria-valuemax={max}>
-      {children}
-    </div>
-  )
+    const ProgressBar = multi ? (
+      children
+    ) : (
+      <div
+        className={progressBarClasses}
+        style={{ width: `${percent}%` }}
+        role='progressbar'
+        aria-valuenow={value}
+        aria-valuemin='0'
+        aria-valuemax={max}>
+        {children}
+      </div>
+    )
 
-  if (bar) {
-    return ProgressBar
+    if (bar) {
+      return ProgressBar
+    }
+
+    return (
+      <>
+        {label ? <label>{label}</label> : []}
+        <Tag {...rest} className={progressClasses}>
+          {ProgressBar}
+        </Tag>
+      </>
+    )
   }
-
-  return (
-    <>
-      {label ? <label>{label}</label> : []}
-      <Tag {...rest} className={progressClasses}>
-        {ProgressBar}
-      </Tag>
-    </>
-  )
-}
+)
 
 ProgressBar.propTypes = {
   /**

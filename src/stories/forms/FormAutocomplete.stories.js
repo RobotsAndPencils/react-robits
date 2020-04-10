@@ -1,4 +1,5 @@
 import React from 'react'
+import { useCallback } from '@storybook/client-api'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormAutocomplete, {
   FormAutocomplete as FormAutocompleteComponent
@@ -26,9 +27,9 @@ export default {
 }
 
 export const Normal = ({ themeName }) => {
-  const handleSelection = selection => {
+  const handleSelection = useCallback(selection => {
     console.log('selection made', selection)
-  }
+  }, [])
 
   let componentKnobs = {
     disabled: boolean('Disabled', false),

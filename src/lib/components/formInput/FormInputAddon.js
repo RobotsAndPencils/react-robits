@@ -3,19 +3,21 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 
-const FormInputAddon = ({ styling, className, children, tag: Tag = 'div', type, ...rest }) => {
-  const classes = classNames(className, `input-group-${type}`)
+const FormInputAddon = React.memo(
+  ({ styling, className, children, tag: Tag = 'div', type, ...rest }) => {
+    const classes = classNames(className, `input-group-${type}`)
 
-  return (
-    <Tag {...rest} className={classes}>
-      {typeof children === 'string' ? (
-        <div class='input-group-text'>{children}</div>
-      ) : (
-        <>{children}</>
-      )}
-    </Tag>
-  )
-}
+    return (
+      <Tag {...rest} className={classes}>
+        {typeof children === 'string' ? (
+          <div class='input-group-text'>{children}</div>
+        ) : (
+          <>{children}</>
+        )}
+      </Tag>
+    )
+  }
+)
 
 FormInputAddon.propTypes = {
   /**

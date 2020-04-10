@@ -41,12 +41,7 @@ export const wrapper = (getStylesFilePathForTheme = theme => theme) => WrappedCo
 
     if (!styles.ready) return false
 
-    // Note: originally thought to omit the theme props, but that messes up composed components using custom tags that need them passed through
-    const componentProps = Object.assign({}, props, {
-      styling: styles.obj
-    })
-
-    return <WrappedComponent {...componentProps} />
+    return <WrappedComponent {...props} styling={styles.obj} />
   }
 
   return ThemeWrapper

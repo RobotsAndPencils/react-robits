@@ -6,69 +6,71 @@ import classNames from 'classnames'
 /**
  * Generic button
  */
-export const Button = ({
-  active,
-  block,
-  children,
-  className = '',
-  disabled = false,
-  ghost,
-  innerRef,
-  isLoading = false,
-  onClick,
-  outline,
-  pill,
-  styling,
-  styleType = 'primary',
-  size,
-  squared,
-  tag: Tag = 'button',
-  ...props
-}) => {
-  const classes = classNames(
-    className,
-    styling.btn,
-    isLoading && styling.loading,
-    disabled && styling.disabled,
-    styleType && styling[`btn-${outline ? 'outline-' : ''}${styleType}`],
-    size && styling[`btn-${size}`],
-    pill && styling['btn-pill'],
-    squared && styling['btn-squared'],
-    block && styling['btn-block'],
-    active && styling.active,
-    ghost && styling['btn-ghost']
-  )
+export const Button = React.memo(
+  ({
+    active,
+    block,
+    children,
+    className = '',
+    disabled = false,
+    ghost,
+    innerRef,
+    isLoading = false,
+    onClick,
+    outline,
+    pill,
+    styling,
+    styleType = 'primary',
+    size,
+    squared,
+    tag: Tag = 'button',
+    ...props
+  }) => {
+    const classes = classNames(
+      className,
+      styling.btn,
+      isLoading && styling.loading,
+      disabled && styling.disabled,
+      styleType && styling[`btn-${outline ? 'outline-' : ''}${styleType}`],
+      size && styling[`btn-${size}`],
+      pill && styling['btn-pill'],
+      squared && styling['btn-squared'],
+      block && styling['btn-block'],
+      active && styling.active,
+      ghost && styling['btn-ghost']
+    )
 
-  if (isLoading) {
-    disabled = true
-  }
-
-  const onClickHandler = e => {
-    if (disabled) {
-      e.preventDefault()
-      return
+    if (isLoading) {
+      disabled = true
     }
 
-    if (onClick) {
-      onClick(e)
+    const onClickHandler = e => {
+      if (disabled) {
+        e.preventDefault()
+        return
+      }
+
+      if (onClick) {
+        onClick(e)
+      }
     }
+
+    Tag = props.href && Tag === 'button' ? 'a' : Tag
+    const tagType = Tag === 'button' && props.onClick ? 'button' : undefined
+
+    return (
+      <Tag
+        ref={innerRef}
+        type={tagType}
+        disabled={disabled}
+        className={classes}
+        onClick={onClickHandler}
+        {...props}>
+        {children}
+      </Tag>
+    )
   }
-
-  Tag = props.href && Tag === 'button' ? 'a' : Tag
-  const tagType = Tag === 'button' && props.onClick ? 'button' : undefined
-
-  return (
-    <Tag
-      ref={innerRef}
-      type={tagType}
-      disabled={disabled}
-      className={classes}
-      onClick={onClickHandler}
-      {...props}>
-      {children}
-    </Tag>
-  )
-}
+)
 
 Button.propTypes = {
   /**

@@ -6,117 +6,119 @@ import classNames from 'classnames'
 /**
  * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
  */
-export const FormInput = ({
-  className,
-  children,
-  disabled = false,
-  errorText,
-  hintContent,
-  invalid = false,
-  innerRef,
-  label,
-  readonly = false,
-  required,
-  size,
-  styling,
-  valid = false,
-  ...rest
-}) => {
-  const inputClasses = classNames(
-    'form-control',
-    size && `form-control-${size}`,
-    valid && 'is-valid',
-    invalid && 'is-invalid',
-    disabled && 'disabled'
-  )
-
-  const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
-
-  const renderInputRow = () => {
-    if (children) {
-      const prependers = []
-      const leaders = []
-      const trailers = []
-      const appenders = []
-
-      React.Children.forEach(children, element => {
-        if (!React.isValidElement(element)) return
-
-        switch (element.props.type) {
-          case 'prepend':
-            prependers.push(element)
-            break
-          case 'leading':
-            leaders.push(element)
-            break
-          case 'trailing':
-            trailers.push(element)
-            break
-          case 'append':
-            appenders.push(element)
-            break
-          default:
-        }
-      })
-
-      const inputGroupClasses = classNames(
-        'input-group',
-        leaders.length + trailers.length > 0 && 'input-group-seamless',
-        size && `input-group-${size}`
-      )
-
-      return (
-        <div className={inputGroupClasses}>
-          {prependers}
-          {leaders}
-          {renderInput()}
-          {trailers}
-          {appenders}
-        </div>
-      )
-    } else {
-      return renderInput()
-    }
-  }
-
-  const renderInput = () => {
-    return (
-      <input
-        {...rest}
-        ref={innerRef}
-        disabled={disabled}
-        readOnly={readonly}
-        className={inputClasses}
-      />
+export const FormInput = React.memo(
+  ({
+    className,
+    children,
+    disabled = false,
+    errorText,
+    hintContent,
+    invalid = false,
+    innerRef,
+    label,
+    readonly = false,
+    required,
+    size,
+    styling,
+    valid = false,
+    ...rest
+  }) => {
+    const inputClasses = classNames(
+      'form-control',
+      size && `form-control-${size}`,
+      valid && 'is-valid',
+      invalid && 'is-invalid',
+      disabled && 'disabled'
     )
-  }
 
-  return (
-    <div className={containerClasses}>
-      {label ? (
-        <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-          {label}
-          {required && '*'}
-        </label>
-      ) : (
-        []
-      )}
-      {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
-      {renderInputRow()}
-      <div className='form-control-descenders'>
-        <div>
-          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
-          {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
-        </div>
-        {required && !label && !invalid ? (
-          <div className='form-control-required'>Required</div>
+    const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
+
+    const renderInputRow = () => {
+      if (children) {
+        const prependers = []
+        const leaders = []
+        const trailers = []
+        const appenders = []
+
+        React.Children.forEach(children, element => {
+          if (!React.isValidElement(element)) return
+
+          switch (element.props.type) {
+            case 'prepend':
+              prependers.push(element)
+              break
+            case 'leading':
+              leaders.push(element)
+              break
+            case 'trailing':
+              trailers.push(element)
+              break
+            case 'append':
+              appenders.push(element)
+              break
+            default:
+          }
+        })
+
+        const inputGroupClasses = classNames(
+          'input-group',
+          leaders.length + trailers.length > 0 && 'input-group-seamless',
+          size && `input-group-${size}`
+        )
+
+        return (
+          <div className={inputGroupClasses}>
+            {prependers}
+            {leaders}
+            {renderInput()}
+            {trailers}
+            {appenders}
+          </div>
+        )
+      } else {
+        return renderInput()
+      }
+    }
+
+    const renderInput = () => {
+      return (
+        <input
+          {...rest}
+          ref={innerRef}
+          disabled={disabled}
+          readOnly={readonly}
+          className={inputClasses}
+        />
+      )
+    }
+
+    return (
+      <div className={containerClasses}>
+        {label ? (
+          <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+            {label}
+            {required && '*'}
+          </label>
         ) : (
           []
         )}
+        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+        {renderInputRow()}
+        <div className='form-control-descenders'>
+          <div>
+            {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+            {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
+          </div>
+          {required && !label && !invalid ? (
+            <div className='form-control-required'>Required</div>
+          ) : (
+            []
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 FormInput.propTypes = {
   /**

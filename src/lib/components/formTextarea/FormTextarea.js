@@ -6,70 +6,72 @@ import classNames from 'classnames'
 /**
  * The textarea lets the user input multiple sentences of data (a text blob)
  */
-export const FormTextarea = ({
-  className,
-  disabled = false,
-  errorText,
-  hintContent,
-  invalid = false,
-  innerRef,
-  label,
-  readonly = false,
-  resizeable = true,
-  required,
-  size,
-  styling,
-  valid = false,
-  ...props
-}) => {
-  const textareaClasses = classNames(
-    'form-control',
-    size && `form-control-${size}`,
-    valid && 'is-valid',
-    invalid && 'is-invalid',
-    disabled && 'disabled',
-    !resizeable && 'noresize'
-  )
-
-  const containerClasses = classNames(
+export const FormTextarea = React.memo(
+  ({
     className,
-    disabled && 'disabled',
-    'form-control-container',
-    props.cols && 'inline'
-  )
+    disabled = false,
+    errorText,
+    hintContent,
+    invalid = false,
+    innerRef,
+    label,
+    readonly = false,
+    resizeable = true,
+    required,
+    size,
+    styling,
+    valid = false,
+    ...props
+  }) => {
+    const textareaClasses = classNames(
+      'form-control',
+      size && `form-control-${size}`,
+      valid && 'is-valid',
+      invalid && 'is-invalid',
+      disabled && 'disabled',
+      !resizeable && 'noresize'
+    )
 
-  return (
-    <div className={containerClasses}>
-      {label ? (
-        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-          {label}
-          {required && '*'}
-        </label>
-      ) : (
-        []
-      )}
-      {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
-      <textarea
-        {...props}
-        ref={innerRef}
-        disabled={disabled}
-        readOnly={readonly}
-        className={textareaClasses}
-      />
-      <div className='form-control-descenders'>
-        <div>
-          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
-          {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
-        </div>
-        {required && !label && !invalid ? (
-          <div className='form-control-required'>Required</div>
+    const containerClasses = classNames(
+      className,
+      disabled && 'disabled',
+      'form-control-container',
+      props.cols && 'inline'
+    )
+
+    return (
+      <div className={containerClasses}>
+        {label ? (
+          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+            {label}
+            {required && '*'}
+          </label>
         ) : (
           []
         )}
+        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+        <textarea
+          {...props}
+          ref={innerRef}
+          disabled={disabled}
+          readOnly={readonly}
+          className={textareaClasses}
+        />
+        <div className='form-control-descenders'>
+          <div>
+            {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+            {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
+          </div>
+          {required && !label && !invalid ? (
+            <div className='form-control-required'>Required</div>
+          ) : (
+            []
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 FormTextarea.propTypes = {
   /**

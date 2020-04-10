@@ -6,67 +6,69 @@ import classNames from 'classnames'
 /**
  * The select component allows the user to pick one item from a preset collection of options
  */
-export const FormSelect = ({
-  children,
-  className,
-  disabled = false,
-  errorText,
-  hintContent,
-  invalid = false,
-  innerRef,
-  label,
-  readonly = false,
-  required,
-  size,
-  styling,
-  valid = false,
-  ...props
-}) => {
-  const makeDisabled = disabled || readonly // readonly is not supported for select, so use disabled
-  const selectClasses = classNames(
-    'form-control',
-    styling['form-select'],
-    size && styling[`form-select-${size}`],
-    valid && 'is-valid',
-    invalid && 'is-invalid',
-    disabled && 'disabled'
-  )
+export const FormSelect = React.memo(
+  ({
+    children,
+    className,
+    disabled = false,
+    errorText,
+    hintContent,
+    invalid = false,
+    innerRef,
+    label,
+    readonly = false,
+    required,
+    size,
+    styling,
+    valid = false,
+    ...props
+  }) => {
+    const makeDisabled = disabled || readonly // readonly is not supported for select, so use disabled
+    const selectClasses = classNames(
+      'form-control',
+      styling['form-select'],
+      size && styling[`form-select-${size}`],
+      valid && 'is-valid',
+      invalid && 'is-invalid',
+      disabled && 'disabled'
+    )
 
-  const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
+    const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
-  return (
-    <div className={containerClasses}>
-      {label ? (
-        <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-          {label}
-          {required && '*'}
-        </label>
-      ) : (
-        []
-      )}
-      {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
-      <select
-        {...props}
-        ref={innerRef}
-        disabled={makeDisabled}
-        readOnly={readonly}
-        className={selectClasses}>
-        {children}
-      </select>
-      <div className='form-control-descenders'>
-        <div>
-          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
-          {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
-        </div>
-        {required && !label && !invalid ? (
-          <div className='form-control-required'>Required</div>
+    return (
+      <div className={containerClasses}>
+        {label ? (
+          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+            {label}
+            {required && '*'}
+          </label>
         ) : (
           []
         )}
+        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+        <select
+          {...props}
+          ref={innerRef}
+          disabled={makeDisabled}
+          readOnly={readonly}
+          className={selectClasses}>
+          {children}
+        </select>
+        <div className='form-control-descenders'>
+          <div>
+            {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+            {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
+          </div>
+          {required && !label && !invalid ? (
+            <div className='form-control-required'>Required</div>
+          ) : (
+            []
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 FormSelect.propTypes = {
   /**

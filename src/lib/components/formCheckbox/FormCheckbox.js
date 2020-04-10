@@ -6,69 +6,71 @@ import classNames from 'classnames'
 /**
  * The `FormCheckbox` component allows for a on/off selection in either a checkbox or toggle display
  */
-export const FormCheckbox = ({
-  className,
-  children,
-  errorText,
-  inline,
-  invalid,
-  innerRef,
-  id,
-  leftColor,
-  leftLabel,
-  required,
-  small,
-  styling,
-  toggle,
-  valid,
-  ...props
-}) => {
-  const containerClasses = classNames(
-    'form-control-container',
-    styling['checkbox-container'],
-    inline && 'inline',
-    props.disabled && 'disabled',
-    toggle && styling['as-toggle']
-  )
+export const FormCheckbox = React.memo(
+  ({
+    className,
+    children,
+    errorText,
+    inline,
+    invalid,
+    innerRef,
+    id,
+    leftColor,
+    leftLabel,
+    required,
+    small,
+    styling,
+    toggle,
+    valid,
+    ...props
+  }) => {
+    const containerClasses = classNames(
+      'form-control-container',
+      styling['checkbox-container'],
+      inline && 'inline',
+      props.disabled && 'disabled',
+      toggle && styling['as-toggle']
+    )
 
-  const labelClasses = classNames(
-    styling['form-checkbox'],
-    small && styling.smaller,
-    valid && styling['is-valid'],
-    invalid && styling['is-invalid'],
-    toggle && leftColor && styling[`left-${leftColor}`]
-  )
+    const labelClasses = classNames(
+      styling['form-checkbox'],
+      small && styling.smaller,
+      valid && styling['is-valid'],
+      invalid && styling['is-invalid'],
+      toggle && leftColor && styling[`left-${leftColor}`]
+    )
 
-  const inputClasses = classNames(valid && styling['is-valid'], invalid && styling['is-invalid'])
+    const inputClasses = classNames(valid && styling['is-valid'], invalid && styling['is-invalid'])
 
-  return (
-    <div className={containerClasses}>
-      {leftLabel && toggle ? (
-        <label htmlFor={id} className={`${styling.description} ${styling['left-label']}`}>
-          {leftLabel}
+    return (
+      <div className={containerClasses}>
+        {leftLabel && toggle ? (
+          <label htmlFor={id} className={`${styling.description} ${styling['left-label']}`}>
+            {leftLabel}
+          </label>
+        ) : (
+          []
+        )}
+        <label className={labelClasses}>
+          <input
+            {...props}
+            ref={innerRef}
+            id={id}
+            type='checkbox'
+            required='required'
+            className={inputClasses}
+          />
+          <label htmlFor={id} aria-hidden='true' />
+          <span className={styling.description}>{children}</span>
         </label>
-      ) : (
-        []
-      )}
-      <label className={labelClasses}>
-        <input
-          {...props}
-          ref={innerRef}
-          id={id}
-          type='checkbox'
-          required='required'
-          className={inputClasses}
-        />
-        <label htmlFor={id} aria-hidden='true' />
-        <span className={styling.description}>{children}</span>
-      </label>
-      <div className='form-control-descenders'>
-        {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
-        {required && !invalid ? <div className='form-control-required'>Required</div> : []}
+        <div className='form-control-descenders'>
+          {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
+          {required && !invalid ? <div className='form-control-required'>Required</div> : []}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 FormCheckbox.propTypes = {
   /**

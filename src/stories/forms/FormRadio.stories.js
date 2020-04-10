@@ -18,6 +18,12 @@ const reconcileValidity = componentKnobs => {
   return Object.assign({}, componentKnobs, validityStyles)
 }
 
+const radioOptions = [
+  { label: 'Radio 1', value: 'one' },
+  { label: 'Radio 2', value: 'two' },
+  { label: 'Radio 3', value: 'three' }
+]
+
 export default {
   title: 'Robits/Form/FormRadio',
   component: FormRadioComponent
@@ -40,11 +46,7 @@ export const Normal = ({ themeName }) => {
       <FormRadio
         {...componentKnobs}
         name='story-radio'
-        options={[
-          { label: 'Radio 1', value: 'one' },
-          { label: 'Radio 2', value: 'two' },
-          { label: 'Radio 3', value: 'three' }
-        ]}
+        options={radioOptions}
         themeName={themeName}
       />
     </>

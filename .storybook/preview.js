@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { addDecorator, addParameters } from '@storybook/react'
 import { withContexts } from '@storybook/addon-contexts/react'
@@ -58,12 +58,16 @@ const topLevelContexts = [
 ]
 
 const ContextDecorator = storyFn => {
+  const [count, setCount] = useState(0)
+
   return (
     <ThemeDefiner.Consumer>
       {({ themeName }) => (
         <>
+          <button onClick={() => setCount(count + 1)}>Rerender Parent</button>{' '}
+          <small>Count: {count}</small>
           <GlobalStyles themeName={themeName} />
-          <div style={{ padding: '30px' }}>{storyFn({ themeName })}</div>
+          <div style={{ padding: '30px' }}>{storyFn({ themeName, count })}</div>
         </>
       )}
     </ThemeDefiner.Consumer>

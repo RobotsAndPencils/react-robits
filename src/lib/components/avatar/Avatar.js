@@ -7,56 +7,58 @@ import imageUtils from '../../utils/imageUtils'
 /**
  * Generic user avatar, with textual fallbacks for when no image is available
  */
-export const Avatar = ({
-  bordered,
-  className,
-  children,
-  editable,
-  image,
-  innerRef,
-  squared,
-  styling,
-  size = 'md',
-  transparent,
-  withShadow,
-  ...props
-}) => {
-  const [hasImage, setHasImage] = useState(false)
-
-  useEffect(() => {
-    getImage(image)
-  }, [image])
-
-  const getImage = src => {
-    imageUtils
-      .imageExists(src)
-      .then(() => {
-        setHasImage(true)
-      })
-      .catch(() => {
-        setHasImage(false)
-      })
-  }
-
-  const classes = classNames(
+export const Avatar = React.memo(
+  ({
+    bordered,
     className,
-    styling.avatar,
-    size && styling[`avatar-${size}`],
-    editable && styling.editable,
-    squared && styling.squared,
-    bordered && styling.bordered,
-    transparent && styling.transparent,
-    withShadow && styling['with-shadow'],
-    hasImage && styling['with-image'],
-    props.onClick && 'clickable'
-  )
+    children,
+    editable,
+    image,
+    innerRef,
+    squared,
+    styling,
+    size = 'md',
+    transparent,
+    withShadow,
+    ...props
+  }) => {
+    const [hasImage, setHasImage] = useState(false)
 
-  return (
-    <div ref={innerRef} className={classes} {...props}>
-      {hasImage ? <img src={image} alt='Avatar' /> : children}
-    </div>
-  )
-}
+    useEffect(() => {
+      getImage(image)
+    }, [image])
+
+    const getImage = src => {
+      imageUtils
+        .imageExists(src)
+        .then(() => {
+          setHasImage(true)
+        })
+        .catch(() => {
+          setHasImage(false)
+        })
+    }
+
+    const classes = classNames(
+      className,
+      styling.avatar,
+      size && styling[`avatar-${size}`],
+      editable && styling.editable,
+      squared && styling.squared,
+      bordered && styling.bordered,
+      transparent && styling.transparent,
+      withShadow && styling['with-shadow'],
+      hasImage && styling['with-image'],
+      props.onClick && 'clickable'
+    )
+
+    return (
+      <div ref={innerRef} className={classes} {...props}>
+        {hasImage ? <img src={image} alt='Avatar' /> : children}
+      </div>
+    )
+  }
+)
 
 Avatar.propTypes = {
   /**
