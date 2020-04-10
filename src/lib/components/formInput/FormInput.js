@@ -150,7 +150,7 @@ FormInput.propTypes = {
   /**
    * Optional label to display above the input
    */
-  label: PropTypes.bool,
+  label: PropTypes.string,
   /**
    * Whether the field is required or not
    */

@@ -9,13 +9,14 @@ import React, { useState, useEffect } from 'react'
 // aimed to dynamically import a file in the `./src/lib/components` directory, and that file's default export will be provided as the `styling` prop
 export const wrapper = (getStylesFilePathForTheme = theme => theme) => WrappedComponent => {
   const ThemeWrapper = props => {
-    const [isReady, setReady] = useState(false)
-    const [styles, setStyles] = useState({})
+    const [styles, setStyles] = useState({ obj: null, ready: false })
 
     useEffect(() => {
       if (props.themeObj) {
-        setStyles(props.themeObj)
-        setReady(true)
+        setStyles({
+          obj: props.themeObj,
+          ready: true
+        })
       } else {
         import(
           `../components/${getStylesFilePathForTheme(
@@ -23,28 +24,29 @@ export const wrapper = (getStylesFilePathForTheme = theme => theme) => WrappedCo
           )}`
         ).then(
           styles => {
-            setStyles(styles)
-            setReady(true)
+            setStyles({
+              obj: styles,
+              ready: true
+            })
           },
           () => {
-            setReady(true)
+            setStyles({
+              ...styles,
+              ...{ ready: true }
+            })
           }
         )
       }
     }, [props.themeObj, props.themeName])
 
-    if (!isReady) return false
+    if (!styles.ready) return false
 
     // Note: originally thought to omit the theme props, but that messes up composed components using custom tags that need them passed through
     const componentProps = Object.assign({}, props, {
-      styling: styles
+      styling: styles.obj
     })
 
-    return (
-      <>
-        <WrappedComponent {...componentProps} />
-      </>
-    )
+    return <WrappedComponent {...componentProps} />
   }
 
   return ThemeWrapper
