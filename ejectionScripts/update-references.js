@@ -3,7 +3,7 @@ const args = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 
 function fromDir (startPath, filter, callback) {
-  const directory = path.resolve(__dirname, '../../' + startPath)
+  const directory = path.resolve(__dirname, '../../../' + startPath)
 
   if (!fs.existsSync(directory)) {
     console.log('Could not find directory:', directory)
@@ -26,28 +26,41 @@ function fromDir (startPath, filter, callback) {
   }
 }
 
-if (!args.sourceDir) {
-  throw new Error(
-    'Please provide the relative source directory path of your project to eject Robits into, as: npm run eject-robits -- --sourceDir=./folder/'
-  )
-} else {
-  console.log('\nUpdating project references to Robits components...\n--------------------\n')
-  fromDir(args.sourceDir, /\.js$/, filename => {
-    const lineReader = require('readline').createInterface({
-      input: fs.createReadStream(filename),
-      terminal: false
-    })
+console.log('\nUpdating project references to Robits components...\n--------------------\n')
+fromDir(args.sourceDir, /\.js$/, filename => {
+  const lineReader = require('readline').createInterface({
+    input: fs.createReadStream(filename),
+    terminal: false
+  })
 
-    lineReader.on('line', function (line) {
-      if (line.indexOf('react-robits') > -1) {
+  let importBlock = ''
+
+  lineReader.on('line', function (line) {
+    if (
+      (line.indexOf('import {') > -1 && line.indexOf('}') === -1) ||
+      (importBlock.length > 0 && line.indexOf('}') === -1)
+    ) {
+      // start/continue multi-line import block
+      importBlock = importBlock + line + '\n'
+    } else {
+      if (line.indexOf('react-robits') > -1 && line.indexOf('}') > -1) {
+        importBlock += line
+        const chunk = importBlock
+        importBlock = ''
+
         fs.readFile(filename, 'utf8', function (err, data) {
           if (err) {
             return console.log(err)
           }
 
-          var result = data.replace(new RegExp(line, 'g'), line => {
+          var result = data.replace(new RegExp(chunk, 'gm'), line => {
+            const trimmedLine = line.replace(/(\r\n|\n|\r)/gm, '')
+
             var retVal = ''
-            var componentsString = line.substring(line.lastIndexOf('{') + 1, line.lastIndexOf('}'))
+            var componentsString = trimmedLine.substring(
+              trimmedLine.lastIndexOf('{') + 1,
+              trimmedLine.lastIndexOf('}')
+            )
             var components = componentsString.split(',')
 
             var relativePath = path.relative(path.dirname(filename), args.sourceDir + '/robits')
@@ -68,6 +81,6 @@ if (!args.sourceDir) {
 
         lineReader.close()
       }
-    })
+    }
   })
-}
+})

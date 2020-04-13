@@ -6,7 +6,7 @@ const projectPackageJSON = path.resolve(__dirname, '../../package.json')
 
 if (!args.sourceDir) {
   throw new Error(
-    'Please provide the relative source directory path of your project to eject Robits into, as: npm run eject-robits -- --sourceDir=./folder/'
+    'Please provide the relative source directory path of your project to eject Robits into, as: node ./node_modules/react-robits/ejectionScripts/eject --sourceDir ./folder/'
   )
 } else {
   console.log('\nErasing the Robits footprint...\n--------------------\n')
