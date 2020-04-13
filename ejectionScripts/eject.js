@@ -30,12 +30,16 @@ const shouldPrune =
   ).toLowerCase() === 'y'
 
 execSync(
-  'node ./node_modules/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/react-robits/ejectionScripts/pluck-components --destinationDir ' +
+  'node ./node_modules/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/react-robits/ejectionScripts/update-references --sourceDir ' +
+    sourceDir +
+    ' --destinationDir ' +
     destinationDir +
     ' --robitsFolder ' +
     robitsFolder +
-    ' && node ./node_modules/react-robits/ejectionScripts/update-references --sourceDir ' +
-    sourceDir +
+    ' | node ./node_modules/react-robits/ejectionScripts/pluck-components --destinationDir ' +
+    destinationDir +
+    ' --robitsFolder ' +
+    robitsFolder +
     ' && node ./node_modules/react-robits/ejectionScripts/erase-footprint --sourceDir ' +
     sourceDir, // +
   // ' && npm uninstall react-robits -D -S && npm install',

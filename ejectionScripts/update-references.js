@@ -2,6 +2,8 @@ const path = require('path')
 const args = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 
+const usedRobits = []
+
 function fromDir (startPath, filter, callback) {
   const directory = path.resolve(__dirname, '../../../' + startPath)
 
@@ -63,12 +65,16 @@ fromDir(args.sourceDir, /\.js$/, filename => {
             )
             var components = componentsString.split(',')
 
-            var relativePath = path.relative(path.dirname(filename), args.sourceDir + '/robits')
+            var relativePath = path.relative(
+              path.dirname(filename),
+              args.destinationDir + args.robitsFolder
+            )
 
             for (var c = 0; c < components.length; c++) {
               var component = components[c].trim()
               console.log('-- updating reference for ' + component + ' in ' + filename)
               retVal += `import ${component} from '${relativePath}/${component}'\n`
+              usedRobits.push(components)
             }
 
             return retVal
@@ -84,3 +90,5 @@ fromDir(args.sourceDir, /\.js$/, filename => {
     }
   })
 })
+
+console.log(usedRobits.join(','))
