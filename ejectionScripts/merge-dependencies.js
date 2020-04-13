@@ -14,4 +14,4 @@ const pkgPaths = [
 ]
 
 // merge and save result to parent
-mergePackages.npm(template, pkgPaths, path.resolve(__dirname, '../../package.json'), true)
+mergePackages.npm(template, pkgPaths, path.resolve(__dirname, '../../../package.json'), true)
