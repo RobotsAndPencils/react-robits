@@ -6,6 +6,8 @@ const fs = require('fs')
 const readdirp = require('readdirp')
 const { createInterface } = require('readline')
 
+const robitsFolderName = args.robitsFolder || ''
+
 const pruneMap = []
 
 async function asyncForEach (array, callback) {
@@ -14,7 +16,7 @@ async function asyncForEach (array, callback) {
   }
 }
 
-function processFile ({ filename, componentName }) {
+function processFileImports ({ filename, componentName }) {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -53,7 +55,7 @@ function checkDependencyMap (componentName, usedRobits) {
 }
 
 updateReferences({
-  robitsFolder: args.robitsFolder,
+  robitsFolder: robitsFolderName,
   destinationDir: args.destinationDir,
   sourceDir: args.sourceDir
 }).then(async usedRobits => {
@@ -62,15 +64,12 @@ updateReferences({
   console.log(
     '\nCopying Robits from the NPM package and placing them at: "' +
       args.destinationDir +
-      args.robitsFolder +
+      robitsFolderName +
       '" ...\n--------------------\n'
   )
-  execSync(
-    'cp -r ./node_modules/react-robits/src/lib/ ' + args.destinationDir + args.robitsFolder,
-    {
-      stdio: [0, 1, 2]
-    }
-  )
+  execSync('cp -r ./node_modules/react-robits/src/lib/ ' + args.destinationDir + robitsFolderName, {
+    stdio: [0, 1, 2]
+  })
 
   console.log('Done.\n')
   console.log('Are we pruning? shouldPrune = ', args.shouldPrune === 'true')
@@ -82,7 +81,7 @@ updateReferences({
   const themeDirectories = await readdirp.promise(
     path.resolve(
       __dirname,
-      '../../../' + args.destinationDir + args.robitsFolder + '/styles/themes'
+      '../../../' + args.destinationDir + robitsFolderName + '/styles/themes'
     ),
     {
       type: 'directories',
@@ -101,8 +100,8 @@ updateReferences({
 
   // Delete non-applicable component files and theme stylesheets
   // ---------------------------------------------------
-  const componentDirectories = await readdirp.promise(
-    path.resolve(__dirname, '../../../' + args.destinationDir + args.robitsFolder + '/components'),
+  const robitsComponentDirectories = await readdirp.promise(
+    path.resolve(__dirname, '../src/lib/components'),
     {
       type: 'directories',
       depth: 1
@@ -111,73 +110,112 @@ updateReferences({
 
   if (args.shouldPrune === 'true') {
     console.log('---------- building interdependency map --------')
-    const jsToCheck = await readdirp.promise(
-      path.resolve(
-        __dirname,
-        '../../../' + args.destinationDir + args.robitsFolder + '/components'
-      ),
-      {
-        fileFilter: '*.js'
-      }
-    )
+    const jsToCheck = await readdirp.promise(path.resolve(__dirname, '../src/lib/components'), {
+      fileFilter: '*.js'
+    })
     await asyncForEach(jsToCheck, async ({ fullPath, basename }) => {
       console.log(`checking file ${fullPath} for robits dependencies`)
-      await processFile({ filename: fullPath, componentName: basename.split('.')[0] })
+      await processFileImports({ filename: fullPath, componentName: basename.split('.')[0] })
     })
     console.log('done building map :::: ', pruneMap)
   }
 
-  await asyncForEach(componentDirectories, async ({ fullPath }) => {
-    console.log('parsing component directory: ', fullPath)
+  await asyncForEach(
+    robitsComponentDirectories,
+    async ({ fullPath: fullRobitsComponentDir, path: relativeRobitsComponentDir, dirent }) => {
+      console.log('parsing component directory: ', fullRobitsComponentDir, dirent.name)
 
-    let jsDeletionTracker = []
+      let jsDeletionTracker = []
 
-    if (args.shouldPrune === 'true') {
-      const jsFiles = await readdirp.promise(fullPath, {
-        fileFilter: '*.js',
-        depth: 1
-      })
+      if (args.shouldPrune === 'true') {
+        const jsFiles = await readdirp.promise(fullRobitsComponentDir, {
+          fileFilter: '*.js',
+          depth: 1
+        })
 
-      jsDeletionTracker = jsFiles
+        jsDeletionTracker = jsFiles
 
-      // delete js files not used
-      await asyncForEach(jsFiles, async ({ fullPath, basename }) => {
-        console.log('parsing js file: ', fullPath)
-        const componentName = basename.split('.')[0]
-        if (!usedRobits.includes(componentName)) {
-          const canDelete = await checkDependencyMap(componentName, usedRobits)
-          if (canDelete) {
-            console.log(`deleting ${componentName}`)
-            fs.unlinkSync(fullPath)
-            jsDeletionTracker = jsDeletionTracker.filter(entry => entry.fullPath !== fullPath)
-          } else {
-            console.log(`!!!!!!!!!! DONT DELETE ${componentName} !!!!!!!!!!!!!`)
+        // delete js files not used
+        await asyncForEach(jsFiles, async ({ basename, path: relativeRobitsJsPath }) => {
+          console.log('parsing js file: ', relativeRobitsJsPath)
+          const componentName = basename.split('.')[0]
+          if (!usedRobits.includes(componentName)) {
+            const canDelete = await checkDependencyMap(componentName, usedRobits)
+            if (canDelete) {
+              console.log(
+                `deleting ${componentName} at: `,
+                path.resolve(
+                  __dirname,
+                  '../../../' +
+                    args.destinationDir +
+                    robitsFolderName +
+                    '/components/' +
+                    relativeRobitsJsPath
+                )
+              )
+              fs.unlinkSync(
+                path.resolve(
+                  __dirname,
+                  '../../../' +
+                    args.destinationDir +
+                    robitsFolderName +
+                    '/components/' +
+                    dirent.name +
+                    '/' +
+                    relativeRobitsJsPath
+                )
+              )
+              jsDeletionTracker = jsDeletionTracker.filter(
+                entry => entry.path !== relativeRobitsJsPath
+              )
+            } else {
+              console.log(`!!!!!!!!!! DONT DELETE ${componentName} !!!!!!!!!!!!!`)
+            }
           }
-        }
-      })
-    }
+        })
+      }
 
-    if (args.shouldPrune === 'true' && jsDeletionTracker.length === 0) {
-      // delete directory if no js files used
-      console.log(`removing ${fullPath} directory completely`)
-      execSync(`rm -rf '${fullPath}'`, {
-        stdio: [0, 1, 2]
-      })
-    } else {
-      // delete non-applicable stylesheets
-      const scssFiles = await readdirp.promise(fullPath, {
-        fileFilter: '*.scss',
-        depth: 1
-      })
+      if (args.shouldPrune === 'true' && jsDeletionTracker.length === 0) {
+        // delete directory if no js files used
+        const dirToDelete = path.resolve(
+          __dirname,
+          '../../../' +
+            args.destinationDir +
+            robitsFolderName +
+            '/components/' +
+            relativeRobitsComponentDir
+        )
+        console.log(`removing ${relativeRobitsComponentDir} directory completely at: `, dirToDelete)
+        execSync(`rm -rf '${dirToDelete}'`, {
+          stdio: [0, 1, 2]
+        })
+      } else {
+        // delete non-applicable stylesheets
+        const scssFiles = await readdirp.promise(fullRobitsComponentDir, {
+          fileFilter: '*.scss',
+          depth: 1
+        })
 
-      await asyncForEach(scssFiles, async ({ fullPath, basename }) => {
-        console.log('parsing scss file: ', fullPath)
-        if (!basename.includes(args.themeName)) {
-          fs.unlinkSync(fullPath)
-        }
-      })
+        await asyncForEach(scssFiles, async ({ basename, path: relativeRobitsScssPath }) => {
+          console.log('parsing scss file: ', relativeRobitsScssPath)
+          if (!basename.includes(args.themeName)) {
+            fs.unlinkSync(
+              path.resolve(
+                __dirname,
+                '../../../' +
+                  args.destinationDir +
+                  robitsFolderName +
+                  '/components/' +
+                  dirent.name +
+                  '/' +
+                  relativeRobitsScssPath
+              )
+            )
+          }
+        })
+      }
     }
-  })
+  )
 
   console.log('All plucked.\n')
 })

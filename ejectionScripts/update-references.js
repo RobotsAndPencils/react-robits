@@ -5,7 +5,7 @@ const { createInterface } = require('readline')
 
 const usedRobits = []
 
-function processFile ({ filename, robitsFolder, destinationDir }) {
+function processFile ({ filename, robitsFolder, destinationDir, robits }) {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -41,12 +41,16 @@ function processFile ({ filename, robitsFolder, destinationDir }) {
             )
             var components = componentsString.split(',')
 
-            var relativePath = path.relative(path.dirname(filename), destinationDir + robitsFolder)
+            var relativePathToSourceDir = path.relative(
+              path.dirname(filename),
+              destinationDir + robitsFolder
+            )
 
             for (var c = 0; c < components.length; c++) {
               var component = components[c].trim()
+              var relativePathFromLib = robits.find(obj => obj.basename === `${component}.js`).path
               console.log('-- updating reference for ' + component + ' in ' + filename)
-              retVal += `import ${component} from '${relativePath}/${component}'\n`
+              retVal += `import ${component} from '${relativePathToSourceDir}/${relativePathFromLib}'\n`
               componentArray.push(component)
             }
 
@@ -83,6 +87,12 @@ async function asyncForEach (array, callback) {
 async function updateReferences ({ robitsFolder, destinationDir, sourceDir }) {
   console.log('\nUpdating project references to Robits components...\n--------------------\n')
 
+  const robits = await readdirp.promise(path.resolve(__dirname, '../src/lib'), {
+    fileFilter: '*.js'
+  })
+
+  console.log('done mapping robits :: ', robits)
+
   const files = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
     fileFilter: '*.js'
   })
@@ -90,7 +100,12 @@ async function updateReferences ({ robitsFolder, destinationDir, sourceDir }) {
   console.log('done walking files :: ', files)
 
   await asyncForEach(files, async ({ fullPath }) => {
-    const newComponents = await processFile({ filename: fullPath, robitsFolder, destinationDir })
+    const newComponents = await processFile({
+      filename: fullPath,
+      robitsFolder,
+      destinationDir,
+      robits
+    })
     console.log(`done processing ${fullPath}`, newComponents)
     newComponents.forEach(c => {
       if (!usedRobits.includes(c)) {
