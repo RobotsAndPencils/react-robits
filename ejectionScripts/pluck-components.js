@@ -4,11 +4,52 @@ const { updateReferences } = require('./update-references')
 const path = require('path')
 const fs = require('fs')
 const readdirp = require('readdirp')
+const { createInterface } = require('readline')
+
+const pruneMap = []
 
 async function asyncForEach (array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
+}
+
+function processFile ({ filename, componentName }) {
+  return new Promise((resolve, reject) => {
+    const lineReader = createInterface({
+      input: fs.createReadStream(filename),
+      crlfDelay: Infinity,
+      terminal: false
+    })
+
+    lineReader.on('line', function (line) {
+      if (line.indexOf('import') > -1 && (line.match(/(\.\.\/)/g) || []).length === 1) {
+        pruneMap.push({ host: componentName, dep: line.match(/(?<=import\s+).*?(?=\s+from)/gs)[0] })
+      }
+    })
+
+    lineReader.on('close', function () {
+      resolve(pruneMap)
+    })
+
+    lineReader.on('error', function (err) {
+      reject(err)
+    })
+  })
+}
+
+function checkDependencyMap (componentName, usedRobits) {
+  const dependers = pruneMap.reduce((acc, { host, dep }) => {
+    if (dep === componentName) {
+      return acc.concat([host])
+    } else {
+      return acc
+    }
+  }, [])
+  console.log(`dependers of ${componentName} = `, dependers)
+  const intersection = dependers.filter(x => usedRobits.includes(x))
+  console.log('dependers-usedrobits intersection = ', intersection)
+  return intersection.length === 0
 }
 
 updateReferences({
@@ -68,6 +109,24 @@ updateReferences({
     }
   )
 
+  if (args.shouldPrune === 'true') {
+    console.log('---------- building interdependency map --------')
+    const jsToCheck = await readdirp.promise(
+      path.resolve(
+        __dirname,
+        '../../../' + args.destinationDir + args.robitsFolder + '/components'
+      ),
+      {
+        fileFilter: '*.js'
+      }
+    )
+    await asyncForEach(jsToCheck, async ({ fullPath, basename }) => {
+      console.log(`checking file ${fullPath} for robits dependencies`)
+      await processFile({ filename: fullPath, componentName: basename.split('.')[0] })
+    })
+    console.log('done building map :::: ', pruneMap)
+  }
+
   await asyncForEach(componentDirectories, async ({ fullPath }) => {
     console.log('parsing component directory: ', fullPath)
 
@@ -84,9 +143,16 @@ updateReferences({
       // delete js files not used
       await asyncForEach(jsFiles, async ({ fullPath, basename }) => {
         console.log('parsing js file: ', fullPath)
-        if (!usedRobits.includes(basename.split('.')[0])) {
-          fs.unlinkSync(fullPath)
-          jsDeletionTracker = jsDeletionTracker.filter(entry => entry.fullPath !== fullPath)
+        const componentName = basename.split('.')[0]
+        if (!usedRobits.includes(componentName)) {
+          const canDelete = await checkDependencyMap(componentName, usedRobits)
+          if (canDelete) {
+            console.log(`deleting ${componentName}`)
+            fs.unlinkSync(fullPath)
+            jsDeletionTracker = jsDeletionTracker.filter(entry => entry.fullPath !== fullPath)
+          } else {
+            console.log(`!!!!!!!!!! DONT DELETE ${componentName} !!!!!!!!!!!!!`)
+          }
         }
       })
     }
