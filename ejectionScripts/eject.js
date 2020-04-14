@@ -29,6 +29,8 @@ const shouldPrune =
     'Should we prune the export to only what’s used? (y = yes, prune away :: n = no, keep everything): '
   ).toLowerCase() === 'y'
 
+const themeName = prompt('Enter the name of the theme you wish to use (e.g. - talentPortal): ')
+
 execSync(
   'node ./node_modules/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/react-robits/ejectionScripts/pluck-components' +
     ' --destinationDir ' +
@@ -39,6 +41,8 @@ execSync(
     sourceDir +
     ' --shouldPrune ' +
     shouldPrune +
+    ' --themeName ' +
+    themeName +
     ' && node ./node_modules/react-robits/ejectionScripts/erase-footprint --sourceDir ' +
     sourceDir, // +
   // ' && npm uninstall react-robits -D -S && npm install',
