@@ -1,124 +1,37 @@
 const path = require('path')
-const args = require('minimist')(process.argv.slice(2))
 const fs = require('fs')
 const readdirp = require('readdirp')
+const { createInterface } = require('readline')
 
 const usedRobits = []
 
-// function fromDir (startPath, filter, callback) {
-//   const directory = path.resolve(__dirname, '../../../' + startPath)
+function processFile ({ filename, robitsFolder, destinationDir }) {
+  return new Promise((resolve, reject) => {
+    const lineReader = createInterface({
+      input: fs.createReadStream(filename),
+      crlfDelay: Infinity,
+      terminal: false
+    })
 
-//   if (!fs.existsSync(directory)) {
-//     console.log('Could not find directory:', directory)
-//     return
-//   }
+    let importBlock = ''
+    const componentArray = []
 
-//   var files = fs.readdirSync(directory)
+    lineReader.on('line', function (line) {
+      if (
+        (line.indexOf('import {') > -1 && line.indexOf('}') === -1) ||
+        (importBlock.length > 0 && line.indexOf('}') === -1)
+      ) {
+        // start/continue multi-line import block
+        importBlock = importBlock + line + '\n'
+      } else {
+        if (line.indexOf('react-robits') > -1 && line.indexOf('}') > -1) {
+          importBlock += line
+          const chunk = importBlock
+          importBlock = ''
 
-//   for (var i = 0; i < files.length; i++) {
-//     var filename = path.join(startPath, files[i])
-//     var stat = fs.lstatSync(filename)
-//     if (stat.isDirectory()) {
-//       if (filename.indexOf('robits') === -1) {
-//         // exclude our robits directory
-//         fromDir(filename, filter, callback) // recurse
-//       }
-//     } else if (filter.test(filename)) {
-//       callback(filename)
-//     }
-//   }
-// }
+          let data = fs.readFileSync(filename, 'utf8')
 
-console.log('\nUpdating project references to Robits components...\n--------------------\n')
-// fromDir(args.sourceDir, /\.js$/, filename => {
-//   const lineReader = require('readline').createInterface({
-//     input: fs.createReadStream(filename),
-//     terminal: false
-//   })
-
-//   let importBlock = ''
-
-//   lineReader.on('line', function (line) {
-//     if (
-//       (line.indexOf('import {') > -1 && line.indexOf('}') === -1) ||
-//       (importBlock.length > 0 && line.indexOf('}') === -1)
-//     ) {
-//       // start/continue multi-line import block
-//       importBlock = importBlock + line + '\n'
-//     } else {
-//       if (line.indexOf('react-robits') > -1 && line.indexOf('}') > -1) {
-//         importBlock += line
-//         const chunk = importBlock
-//         importBlock = ''
-
-//         fs.readFile(filename, 'utf8', function (err, data) {
-//           if (err) {
-//             return console.log(err)
-//           }
-
-//           var result = data.replace(new RegExp(chunk, 'gm'), line => {
-//             const trimmedLine = line.replace(/(\r\n|\n|\r)/gm, '')
-
-//             var retVal = ''
-//             var componentsString = trimmedLine.substring(
-//               trimmedLine.lastIndexOf('{') + 1,
-//               trimmedLine.lastIndexOf('}')
-//             )
-//             var components = componentsString.split(',')
-
-//             var relativePath = path.relative(
-//               path.dirname(filename),
-//               args.destinationDir + args.robitsFolder
-//             )
-
-//             for (var c = 0; c < components.length; c++) {
-//               var component = components[c].trim()
-//               console.log('-- updating reference for ' + component + ' in ' + filename)
-//               retVal += `import ${component} from '${relativePath}/${component}'\n`
-//               usedRobits.push(components)
-//             }
-
-//             return retVal
-//           })
-
-//           fs.writeFile(filename, result, 'utf8', err => {
-//             if (err) return console.log(err)
-//           })
-//         })
-
-//         lineReader.close()
-//       }
-//     }
-//   })
-// })
-
-function processFile (filename) {
-  const lineReader = require('readline').createInterface({
-    input: fs.createReadStream(filename),
-    terminal: false
-  })
-
-  let importBlock = ''
-
-  lineReader.on('line', function (line) {
-    if (
-      (line.indexOf('import {') > -1 && line.indexOf('}') === -1) ||
-      (importBlock.length > 0 && line.indexOf('}') === -1)
-    ) {
-      // start/continue multi-line import block
-      importBlock = importBlock + line + '\n'
-    } else {
-      if (line.indexOf('react-robits') > -1 && line.indexOf('}') > -1) {
-        importBlock += line
-        const chunk = importBlock
-        importBlock = ''
-
-        fs.readFile(filename, 'utf8', function (err, data) {
-          if (err) {
-            return console.log(err)
-          }
-
-          var result = data.replace(new RegExp(chunk, 'gm'), line => {
+          data = data.replace(new RegExp(chunk, 'gm'), line => {
             const trimmedLine = line.replace(/(\r\n|\n|\r)/gm, '')
 
             var retVal = ''
@@ -128,39 +41,68 @@ function processFile (filename) {
             )
             var components = componentsString.split(',')
 
-            var relativePath = path.relative(
-              path.dirname(filename),
-              args.destinationDir + args.robitsFolder
-            )
+            var relativePath = path.relative(path.dirname(filename), destinationDir + robitsFolder)
 
             for (var c = 0; c < components.length; c++) {
               var component = components[c].trim()
               console.log('-- updating reference for ' + component + ' in ' + filename)
               retVal += `import ${component} from '${relativePath}/${component}'\n`
-              usedRobits.push(components)
+              componentArray.push(component)
             }
+
+            console.log(`componentArray for ${filename} = `, componentArray)
 
             return retVal
           })
 
-          fs.writeFile(filename, result, 'utf8', err => {
-            if (err) return console.log(err)
-          })
-        })
+          fs.writeFileSync(filename, data, 'utf8')
 
-        lineReader.close()
+          console.log(`close ${filename}`)
+          lineReader.close()
+        }
       }
-    }
+    })
+
+    lineReader.on('close', function () {
+      console.log(`closing ${filename} :: `, componentArray)
+      resolve(componentArray)
+    })
+
+    lineReader.on('error', function (err) {
+      reject(err)
+    })
   })
 }
 
-readdirp('../../../' + args.sourceDir, { fileFilter: '*.js' })
-  .on('data', entry => {
-    const { fullPath } = entry
-    console.log(`${JSON.stringify({ fullPath })}`)
-    processFile(fullPath)
+async function asyncForEach (array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}
+
+async function updateReferences ({ robitsFolder, destinationDir, sourceDir }) {
+  console.log('\nUpdating project references to Robits components...\n--------------------\n')
+
+  const files = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
+    fileFilter: '*.js'
   })
-  // Optionally call stream.destroy() in `warn()` in order to abort and cause 'close' to be emitted
-  .on('warn', error => console.error('non-fatal error', error))
-  .on('error', error => console.error('fatal error', error))
-  .on('end', () => console.log('done walking files :: ', usedRobits))
+
+  console.log('done walking files :: ', files)
+
+  await asyncForEach(files, async ({ fullPath }) => {
+    const newComponents = await processFile({ filename: fullPath, robitsFolder, destinationDir })
+    console.log(`done processing ${fullPath}`, newComponents)
+    newComponents.forEach(c => {
+      if (!usedRobits.includes(c)) {
+        usedRobits.push(c)
+      }
+    })
+  })
+  console.log('DONE UPDATING :: ', usedRobits)
+
+  return usedRobits
+}
+
+module.exports = {
+  updateReferences
+}
