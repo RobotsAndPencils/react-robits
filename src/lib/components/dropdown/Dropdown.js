@@ -2,12 +2,9 @@ import React, { useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
-
 import { Manager } from 'react-popper'
-
 import { KEYCODES, EVENTS } from '../../constants/constants'
-
-import { DropdownContext } from './DropdownContext'
+import DropdownContext from '../../utils/DropdownContext'
 
 /**
  * You can use dropdowns to display accessible contextual overlays for displaying lists of links and more.

@@ -10,7 +10,7 @@ import layoutUtils from '../utils/layoutUtils'
 /**
  * The `Collapse` component allows you to easily toggle the visibility of your content.
  */
-class Collapse extends React.Component {
+export class Collapse extends React.Component {
   constructor (props) {
     super(props)
 

@@ -4,8 +4,7 @@ import { Reference } from 'react-popper'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
 import Button from '../button/Button'
-
-import { DropdownContext } from './DropdownContext'
+import DropdownContext from '../../utils/DropdownContext'
 
 export const DropdownToggle = ({
   caret,

@@ -1,5 +1,5 @@
 import React from 'react'
-import Collapse, { Collapse as CollapseComponent } from '../lib/components/Collapse'
+import Collapse, { Collapse as CollapseComponent } from '../lib/utils/Collapse'
 import Button from '../lib/components/button/Button'
 import { useState } from '@storybook/client-api'
 

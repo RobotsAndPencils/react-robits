@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
 
-import Fade from '../Fade'
+import Fade from '../../utils/Fade'
 import { TIMEOUT } from '../../constants/constants'
 
 /**

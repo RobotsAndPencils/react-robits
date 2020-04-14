@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
 import { Popper } from 'react-popper'
-
-import { DropdownContext } from './DropdownContext'
+import DropdownContext from '../../utils/DropdownContext'
 import { DROPDOWN_POSITION_MAP } from '../../constants/constants'
 
 export const DropdownMenu = ({
