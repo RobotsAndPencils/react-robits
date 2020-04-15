@@ -52,6 +52,34 @@ function processFileImports ({ filename, componentName }) {
   })
 }
 
+function removeThemeWrapper ({ filename, componentName, folderName }) {
+  return new Promise((resolve, reject) => {
+    try {
+      let data = fs.readFileSync(filename, 'utf8')
+
+      data = data.replace(new RegExp('styling(,|\\s)', 'g'), '')
+
+      const styling =
+        (data.match(/styling(\[|\.)/g) || []).length > 0
+          ? `import styling from './${folderName}_${args.themeName}.module.scss'`
+          : ''
+
+      data = data.replace(new RegExp("import ThemeWrapper from (.*)ThemeWrapper'", 'g'), styling)
+
+      data = data.replace(
+        new RegExp(`export default ThemeWrapper((.|\\s)*)${componentName}(\\s*)?\\)`, 'g'),
+        `export default ${componentName}`
+      )
+
+      fs.writeFileSync(filename, data, 'utf8')
+
+      resolve(true)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 function checkDependencyMap (componentName, usedRobits) {
   const dependers = pruneMap.reduce((acc, { host, dep }) => {
     if (dep === componentName) {
@@ -209,6 +237,30 @@ updateReferences({
       }
     }
   )
+
+  if (args.shouldRemoveThemeWrapper === 'true') {
+    console.log(
+      '\x1b[34m%s\x1b[0m',
+      '\nRemoving ThemeWrapper reliance...\n----------------------------------\n'
+    )
+
+    const groomedRobits = await readdirp.promise(
+      path.resolve(__dirname, '../../../' + args.destinationDir + '/components/'),
+      {
+        fileFilter: usedRobits.map(file => `${file}.js`)
+      }
+    )
+
+    await asyncForEach(groomedRobits, async ({ basename, fullPath, path: shortPath }) => {
+      await removeThemeWrapper({
+        filename: fullPath,
+        componentName: basename.split('.')[0],
+        folderName: shortPath.split('/')[0]
+      })
+    })
+
+    console.log('\x1b[32m%s\x1b[0m', 'Gone.\n')
+  }
 
   console.log('\x1b[32m%s\x1b[0m', `\nAll plucked${shouldPrune ? ' and pruned' : ''}!\n`)
 })
