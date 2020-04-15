@@ -46,26 +46,22 @@ function processFile ({ filename, destinationDir, robits }) {
             for (var c = 0; c < components.length; c++) {
               var component = components[c].trim()
               var relativePathFromLib = robits.find(obj => obj.basename === `${component}.js`).path
-              console.log('-- updating reference for ' + component + ' in ' + filename)
+              console.log('• Updating reference for: ' + component + ', in ' + filename)
               retVal += `import ${component} from '${relativePathToSourceDir}/${relativePathFromLib}'\n`
               componentArray.push(component)
             }
-
-            console.log(`componentArray for ${filename} = `, componentArray)
 
             return retVal
           })
 
           fs.writeFileSync(filename, data, 'utf8')
 
-          console.log(`close ${filename}`)
           lineReader.close()
         }
       }
     })
 
     lineReader.on('close', function () {
-      console.log(`closing ${filename} :: `, componentArray)
       resolve(componentArray)
     })
 
@@ -82,19 +78,18 @@ async function asyncForEach (array, callback) {
 }
 
 async function updateReferences ({ destinationDir, sourceDir }) {
-  console.log('\nUpdating project references to Robits components...\n--------------------\n')
+  console.log(
+    '\x1b[34m%s\x1b[0m',
+    '\nUpdating project references to Robits files...\n----------------------------------------------\n'
+  )
 
   const robits = await readdirp.promise(path.resolve(__dirname, '../src/lib'), {
     fileFilter: '*.js'
   })
 
-  console.log('done mapping robits :: ', robits)
-
   const files = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
     fileFilter: '*.js'
   })
-
-  console.log('done walking files :: ', files)
 
   await asyncForEach(files, async ({ fullPath }) => {
     const newComponents = await processFile({
@@ -102,15 +97,14 @@ async function updateReferences ({ destinationDir, sourceDir }) {
       destinationDir,
       robits
     })
-    console.log(`done processing ${fullPath}`, newComponents)
     newComponents.forEach(c => {
       if (!usedRobits.includes(c)) {
         usedRobits.push(c)
       }
     })
   })
-  console.log('DONE UPDATING :: ', usedRobits)
 
+  console.log('\x1b[32m%s\x1b[0m', '\nAll updated.\n')
   return usedRobits
 }
 

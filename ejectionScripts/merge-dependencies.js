@@ -2,7 +2,7 @@ const mergePackages = require('@userfrosting/merge-package-dependencies')
 const path = require('path')
 
 console.log(
-  'Merging the Robits NPM package.json with your project package.json...\n--------------------\n'
+  '\nMerging the Robits NPM package.json with your project package.json...\n------------------------------------------------------------\n'
 )
 // template has to be the parent project's package.json, so we don't wipe out anything there
 const template = require(path.resolve(__dirname, '../../../package.json'))

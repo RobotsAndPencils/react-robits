@@ -3,7 +3,10 @@ const fs = require('fs')
 
 const projectPackageJSON = path.resolve(__dirname, '../../../package.json')
 
-console.log('\nErasing the Robits footprint...\n--------------------\n')
+console.log(
+  '\x1b[34m%s\x1b[0m',
+  '\nErasing the Robits footprint...\n-------------------------------\n'
+)
 
 var newFileData = ''
 
@@ -38,8 +41,10 @@ fs.readFile(projectPackageJSON, 'utf8', function (err, data) {
     .on('close', function () {
       fs.writeFile(projectPackageJSON, newFileData, 'utf8', err => {
         if (err) return console.log(err)
+        console.log('\x1b[32m%s\x1b[0m', '\nRobits is now a ghost.\n')
         console.log(
-          'Robits is now a ghost.\n\nUninstalling/Reinstalling packages...\n--------------------\n'
+          '\x1b[34m%s\x1b[0m',
+          '\nUninstalling/Reinstalling packages...\n------------------------------------\n'
         )
       })
     })

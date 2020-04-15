@@ -8,6 +8,7 @@ const { createInterface } = require('readline')
 const jetpack = require('fs-jetpack')
 
 const pruneMap = []
+const shouldPrune = args.shouldPrune === 'true'
 
 async function asyncForEach (array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -21,7 +22,8 @@ const copyWithNewName = (source, target) => {
   const alternateName = targetNameArray.join('.')
   const alternateTarget = target.absolutePath.replace(target.name, alternateName)
   console.log(
-    `!! ------- !!\nNote: the file ${target.name} was renamed to ${alternateName} during ejection due to a collision with an existing file on your project. This might have broken the Robits integration. You will need to either manually merge the contents into the original-named file, or update dependent references to the newly named file.\n!! ------- !!`
+    '\x1b[31m%s\x1b[0m',
+    `!! ----------------------------------- !!\nNote: the file ${target.name} was renamed to ${alternateName} during ejection due to a collision with an existing file on your project. This might have broken the Robits integration. You will need to either manually merge the contents into the original-named file, or update dependent references to the newly named file.\n!! ----------------------------------- !!`
   )
   jetpack.copy(source.absolutePath, alternateTarget)
 }
@@ -58,9 +60,7 @@ function checkDependencyMap (componentName, usedRobits) {
       return acc
     }
   }, [])
-  console.log(`dependers of ${componentName} = `, dependers)
   const intersection = dependers.filter(x => usedRobits.includes(x))
-  console.log('dependers-usedrobits intersection = ', intersection)
   return intersection.length === 0
 }
 
@@ -68,12 +68,11 @@ updateReferences({
   destinationDir: args.destinationDir,
   sourceDir: args.sourceDir
 }).then(async usedRobits => {
-  console.log('used robits ====== ', usedRobits)
-
   console.log(
+    '\x1b[34m%s\x1b[0m',
     '\nCopying Robits from the NPM package and placing them at: "' +
       args.destinationDir +
-      '" ...\n--------------------\n'
+      '" ...\n-----------------------------------------------------------------------------\n'
   )
   jetpack.copy(
     path.resolve(__dirname, '../src/lib'),
@@ -89,10 +88,7 @@ updateReferences({
     }
   )
 
-  console.log('Done.\n')
-  console.log('Are we pruning? shouldPrune = ', args.shouldPrune === 'true')
-
-  console.log('\nTheming and/or pruning...\n--------------------\n')
+  console.log('\x1b[32m%s\x1b[0m', 'Done.\n')
 
   // Delete non-applicable theme directories
   // ---------------------------------------------------
@@ -105,7 +101,6 @@ updateReferences({
   )
 
   await asyncForEach(themeDirectories, async ({ fullPath }) => {
-    console.log('parsing theme directory: ', fullPath)
     if (!fullPath.includes(args.themeName)) {
       execSync(`rm -rf '${fullPath}'`, {
         stdio: [0, 1, 2]
@@ -123,26 +118,27 @@ updateReferences({
     }
   )
 
-  if (args.shouldPrune === 'true') {
-    console.log('---------- building interdependency map --------')
+  if (shouldPrune) {
+    console.log(
+      '\x1b[34m%s\x1b[0m',
+      '\nPruning Robits files to the following referenced in the project...\n------------------------------------------------------------------\n'
+    )
+    console.log(usedRobits)
     const jsToCheck = await readdirp.promise(path.resolve(__dirname, '../src/lib/components'), {
       fileFilter: '*.js'
     })
     await asyncForEach(jsToCheck, async ({ fullPath, basename }) => {
-      console.log(`checking file ${fullPath} for robits dependencies`)
       await processFileImports({ filename: fullPath, componentName: basename.split('.')[0] })
     })
-    console.log('done building map :::: ', pruneMap)
+    console.log('-- Built interdependency map:\n', pruneMap, '\n')
   }
 
   await asyncForEach(
     robitsComponentDirectories,
     async ({ fullPath: fullRobitsComponentDir, path: relativeRobitsComponentDir, dirent }) => {
-      console.log('parsing component directory: ', fullRobitsComponentDir, dirent.name)
-
       let jsDeletionTracker = []
 
-      if (args.shouldPrune === 'true') {
+      if (shouldPrune) {
         const jsFiles = await readdirp.promise(fullRobitsComponentDir, {
           fileFilter: '*.js',
           depth: 1
@@ -152,18 +148,11 @@ updateReferences({
 
         // delete js files not used
         await asyncForEach(jsFiles, async ({ basename, path: relativeRobitsJsPath }) => {
-          console.log('parsing js file: ', relativeRobitsJsPath)
           const componentName = basename.split('.')[0]
           if (!usedRobits.includes(componentName)) {
             const canDelete = await checkDependencyMap(componentName, usedRobits)
             if (canDelete) {
-              console.log(
-                `deleting ${componentName} at: `,
-                path.resolve(
-                  __dirname,
-                  '../../../' + args.destinationDir + '/components/' + relativeRobitsJsPath
-                )
-              )
+              console.log(`• Pruning: ${componentName}`)
               fs.unlinkSync(
                 path.resolve(
                   __dirname,
@@ -179,19 +168,19 @@ updateReferences({
                 entry => entry.path !== relativeRobitsJsPath
               )
             } else {
-              console.log(`!!!!!!!!!! DONT DELETE ${componentName} !!!!!!!!!!!!!`)
+              console.log(`** saving interdependent component: ${componentName}`)
             }
           }
         })
       }
 
-      if (args.shouldPrune === 'true' && jsDeletionTracker.length === 0) {
+      if (shouldPrune && jsDeletionTracker.length === 0) {
         // delete directory if no js files used
         const dirToDelete = path.resolve(
           __dirname,
           '../../../' + args.destinationDir + '/components/' + relativeRobitsComponentDir
         )
-        console.log(`removing ${relativeRobitsComponentDir} directory completely at: `, dirToDelete)
+        console.log(`• Pruning: /${relativeRobitsComponentDir} directory completely`)
         execSync(`rm -rf '${dirToDelete}'`, {
           stdio: [0, 1, 2]
         })
@@ -203,7 +192,6 @@ updateReferences({
         })
 
         await asyncForEach(scssFiles, async ({ basename, path: relativeRobitsScssPath }) => {
-          console.log('parsing scss file: ', relativeRobitsScssPath)
           if (!basename.includes(args.themeName)) {
             fs.unlinkSync(
               path.resolve(
@@ -222,5 +210,5 @@ updateReferences({
     }
   )
 
-  console.log('All plucked.\n')
+  console.log('\x1b[32m%s\x1b[0m', `\nAll plucked${shouldPrune ? ' and pruned' : ''}!\n`)
 })
