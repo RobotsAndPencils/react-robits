@@ -32,6 +32,7 @@
     "@userfrosting/merge-package-dependencies": "^1.2.1",
     "classnames": "^2.2.6",
     "express": "^4.17.1",
+    "fs-jetpack": "^2.2.3",
     "lodash": "^4.17.15",
     "prompt-sync": "^4.2.0",
     "react": "^16.12.0",
