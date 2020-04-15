@@ -5,8 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const readdirp = require('readdirp')
 const { createInterface } = require('readline')
-
-const robitsFolderName = args.robitsFolder || ''
+const jetpack = require('fs-jetpack')
 
 const pruneMap = []
 
@@ -14,6 +13,17 @@ async function asyncForEach (array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
+}
+
+const copyWithNewName = (source, target) => {
+  const targetNameArray = target.name.split('.')
+  targetNameArray[0] = targetNameArray[0] + '_fromRobits'
+  const alternateName = targetNameArray.join('.')
+  const alternateTarget = target.absolutePath.replace(target.name, alternateName)
+  console.log(
+    `!! ------- !!\nNote: the file ${target.name} was renamed to ${alternateName} during ejection due to a collision with an existing file on your project. This might have broken the Robits integration. You will need to either manually merge the contents into the original-named file, or update dependent references to the newly named file.\n!! ------- !!`
+  )
+  jetpack.copy(source.absolutePath, alternateTarget)
 }
 
 function processFileImports ({ filename, componentName }) {
@@ -55,7 +65,6 @@ function checkDependencyMap (componentName, usedRobits) {
 }
 
 updateReferences({
-  robitsFolder: robitsFolderName,
   destinationDir: args.destinationDir,
   sourceDir: args.sourceDir
 }).then(async usedRobits => {
@@ -64,12 +73,21 @@ updateReferences({
   console.log(
     '\nCopying Robits from the NPM package and placing them at: "' +
       args.destinationDir +
-      robitsFolderName +
       '" ...\n--------------------\n'
   )
-  execSync('cp -r ./node_modules/react-robits/src/lib/ ' + args.destinationDir + robitsFolderName, {
-    stdio: [0, 1, 2]
-  })
+  jetpack.copy(
+    path.resolve(__dirname, '../src/lib'),
+    path.resolve(__dirname, '../../../' + args.destinationDir),
+    {
+      overwrite: (source, target) => {
+        if (source.name === target.name) {
+          copyWithNewName(source, target)
+          return false
+        }
+        return true
+      }
+    }
+  )
 
   console.log('Done.\n')
   console.log('Are we pruning? shouldPrune = ', args.shouldPrune === 'true')
@@ -79,10 +97,7 @@ updateReferences({
   // Delete non-applicable theme directories
   // ---------------------------------------------------
   const themeDirectories = await readdirp.promise(
-    path.resolve(
-      __dirname,
-      '../../../' + args.destinationDir + robitsFolderName + '/styles/themes'
-    ),
+    path.resolve(__dirname, '../../../' + args.destinationDir + '/styles/themes'),
     {
       type: 'directories',
       depth: 1
@@ -146,11 +161,7 @@ updateReferences({
                 `deleting ${componentName} at: `,
                 path.resolve(
                   __dirname,
-                  '../../../' +
-                    args.destinationDir +
-                    robitsFolderName +
-                    '/components/' +
-                    relativeRobitsJsPath
+                  '../../../' + args.destinationDir + '/components/' + relativeRobitsJsPath
                 )
               )
               fs.unlinkSync(
@@ -158,7 +169,6 @@ updateReferences({
                   __dirname,
                   '../../../' +
                     args.destinationDir +
-                    robitsFolderName +
                     '/components/' +
                     dirent.name +
                     '/' +
@@ -179,11 +189,7 @@ updateReferences({
         // delete directory if no js files used
         const dirToDelete = path.resolve(
           __dirname,
-          '../../../' +
-            args.destinationDir +
-            robitsFolderName +
-            '/components/' +
-            relativeRobitsComponentDir
+          '../../../' + args.destinationDir + '/components/' + relativeRobitsComponentDir
         )
         console.log(`removing ${relativeRobitsComponentDir} directory completely at: `, dirToDelete)
         execSync(`rm -rf '${dirToDelete}'`, {
@@ -204,7 +210,6 @@ updateReferences({
                 __dirname,
                 '../../../' +
                   args.destinationDir +
-                  robitsFolderName +
                   '/components/' +
                   dirent.name +
                   '/' +

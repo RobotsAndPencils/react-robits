@@ -8,12 +8,8 @@ if (!sourceDir) {
   )
 }
 
-const folderName = prompt(
-  'By default, this process creates a "robits" folder into which it dumps the Robits. Optionally enter different folder name if desired: '
-)
-
 const destinationDir = prompt(
-  'Enter the project directory in which to place the above folder (e.g. - ./src/components/): '
+  'Enter the project directory in which to place the Robits (e.g. - ./src/robits/): '
 )
 
 if (!destinationDir) {
@@ -29,10 +25,14 @@ const shouldPrune =
 
 const themeName = prompt('Enter the name of the theme you wish to use (e.g. - talentPortal): ')
 
+const shouldRemoveThemeWrapper =
+  prompt(
+    'Should we remove the ThemeWrapper.js reliance? (y = yes, remove it :: n = no, keep it): '
+  ).toLowerCase() === 'y'
+
 execSync(
   'node ./node_modules/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/react-robits/ejectionScripts/pluck-components' +
     ` --destinationDir ${destinationDir}` +
-    (folderName ? ` --robitsFolder ${folderName}` : '') +
     ` --sourceDir ${sourceDir}` +
     ` --shouldPrune ${shouldPrune}` +
     ` --themeName ${themeName}` +

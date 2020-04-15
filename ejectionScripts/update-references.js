@@ -5,7 +5,7 @@ const { createInterface } = require('readline')
 
 const usedRobits = []
 
-function processFile ({ filename, robitsFolder, destinationDir, robits }) {
+function processFile ({ filename, destinationDir, robits }) {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -41,10 +41,7 @@ function processFile ({ filename, robitsFolder, destinationDir, robits }) {
             )
             var components = componentsString.split(',')
 
-            var relativePathToSourceDir = path.relative(
-              path.dirname(filename),
-              destinationDir + robitsFolder
-            )
+            var relativePathToSourceDir = path.relative(path.dirname(filename), destinationDir)
 
             for (var c = 0; c < components.length; c++) {
               var component = components[c].trim()
@@ -84,7 +81,7 @@ async function asyncForEach (array, callback) {
   }
 }
 
-async function updateReferences ({ robitsFolder, destinationDir, sourceDir }) {
+async function updateReferences ({ destinationDir, sourceDir }) {
   console.log('\nUpdating project references to Robits components...\n--------------------\n')
 
   const robits = await readdirp.promise(path.resolve(__dirname, '../src/lib'), {
@@ -102,7 +99,6 @@ async function updateReferences ({ robitsFolder, destinationDir, sourceDir }) {
   await asyncForEach(files, async ({ fullPath }) => {
     const newComponents = await processFile({
       filename: fullPath,
-      robitsFolder,
       destinationDir,
       robits
     })
