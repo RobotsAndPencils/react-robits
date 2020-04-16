@@ -3,9 +3,9 @@ import { useCallback } from '@storybook/client-api'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormAutocomplete, {
   FormAutocomplete as FormAutocompleteComponent
-} from '../../lib/components/formAutocomplete/FormAutocomplete'
+} from '../../core/components/formAutocomplete/FormAutocomplete'
 import { states } from '../pages/testData'
-import FormInputAddon from '../../lib/components/formInput/FormInputAddon'
+import FormInputAddon from '../../core/components/formInput/FormInputAddon'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {

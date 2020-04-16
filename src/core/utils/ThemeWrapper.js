@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 // Additionally, each component can be themed individually by passing either a `themeName` or a `themeObj` prop.
 // If `themeObj` is provided, it will take priority and be directly passed to the component as the `styling` prop for use.
 // If `themeName` is provided, the string will be used in the construction of the path location provided by the component that is
-// aimed to dynamically import a file in the `./src/lib/components` directory, and that file's default export will be provided as the `styling` prop
+// aimed to dynamically import a file in the `./src/core/components` directory, and that file's default export will be provided as the `styling` prop
 export const wrapper = (getStylesFilePathForTheme = theme => theme) => WrappedComponent => {
   const ThemeWrapper = props => {
     const [styles, setStyles] = useState({ obj: null, ready: false })

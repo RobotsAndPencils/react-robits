@@ -1,8 +1,8 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { boolean, select } from '@storybook/addon-knobs'
-import Button, { Button as ButtonComponent } from '../lib/components/button/Button'
-import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
+import Button, { Button as ButtonComponent } from '../core/components/button/Button'
+import ButtonGroup from '../core/components/buttonGroup/ButtonGroup'
 
 const reconcileCorners = componentKnobs => {
   const cornersStyle = {

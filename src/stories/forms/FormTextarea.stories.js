@@ -2,7 +2,7 @@ import React from 'react'
 import { boolean, select, text, number } from '@storybook/addon-knobs'
 import FormTextarea, {
   FormTextarea as FormTextareaComponent
-} from '../../lib/components/formTextarea/FormTextarea'
+} from '../../core/components/formTextarea/FormTextarea'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {

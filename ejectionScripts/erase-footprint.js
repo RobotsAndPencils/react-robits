@@ -8,15 +8,15 @@ console.log(
   '\nErasing the Robits footprint...\n-------------------------------\n'
 )
 
-var newFileData = ''
+let newFileData = ''
 
-fs.readFile(projectPackageJSON, 'utf8', function (err, data) {
+fs.readFile(projectPackageJSON, 'utf8', (err, data) => {
   if (err) {
     return console.log(err)
   }
 
-  var linecount = 0
-  var lastRemovalIndex = 0
+  let linecount = 0
+  let lastRemovalIndex = 0
 
   const lineReader = require('readline').createInterface({
     input: fs.createReadStream(projectPackageJSON),
@@ -24,7 +24,7 @@ fs.readFile(projectPackageJSON, 'utf8', function (err, data) {
   })
 
   lineReader
-    .on('line', function (line) {
+    .on('line', line => {
       linecount++
       if (line.indexOf('robits') > -1) {
         lastRemovalIndex = linecount
@@ -38,7 +38,7 @@ fs.readFile(projectPackageJSON, 'utf8', function (err, data) {
         newFileData += line + '\n'
       }
     })
-    .on('close', function () {
+    .on('close', () => {
       fs.writeFile(projectPackageJSON, newFileData, 'utf8', err => {
         if (err) return console.log(err)
         console.log('\x1b[32m%s\x1b[0m', '\nRobits is now a ghost.\n')

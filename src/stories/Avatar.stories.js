@@ -1,7 +1,7 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { boolean, text } from '@storybook/addon-knobs'
-import Avatar, { Avatar as AvatarComponent } from '../lib/components/avatar/Avatar'
+import Avatar, { Avatar as AvatarComponent } from '../core/components/avatar/Avatar'
 
 export default {
   title: 'Robits/Avatar',

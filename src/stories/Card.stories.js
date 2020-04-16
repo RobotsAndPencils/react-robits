@@ -1,8 +1,8 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { text } from '@storybook/addon-knobs'
-import Card, { Card as CardComponent } from '../lib/components/card/Card'
-import CardBody from '../lib/components/card/CardBody'
+import Card, { Card as CardComponent } from '../core/components/card/Card'
+import CardBody from '../core/components/card/CardBody'
 
 const reconcileCorners = componentKnobs => {
   const cornersStyle = {

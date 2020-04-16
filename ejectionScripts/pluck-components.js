@@ -10,7 +10,7 @@ const jetpack = require('fs-jetpack')
 const pruneMap = []
 const shouldPrune = args.shouldPrune === 'true'
 
-async function asyncForEach (array, callback) {
+const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
@@ -28,7 +28,7 @@ const copyWithNewName = (source, target) => {
   jetpack.copy(source.absolutePath, alternateTarget)
 }
 
-function processFileImports ({ filename, componentName }) {
+const processFileImports = ({ filename, componentName }) => {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -36,23 +36,23 @@ function processFileImports ({ filename, componentName }) {
       terminal: false
     })
 
-    lineReader.on('line', function (line) {
+    lineReader.on('line', line => {
       if (line.indexOf('import') > -1 && (line.match(/(\.\.\/)/g) || []).length === 1) {
         pruneMap.push({ host: componentName, dep: line.match(/(?<=import\s+).*?(?=\s+from)/gs)[0] })
       }
     })
 
-    lineReader.on('close', function () {
+    lineReader.on('close', () => {
       resolve(pruneMap)
     })
 
-    lineReader.on('error', function (err) {
+    lineReader.on('error', err => {
       reject(err)
     })
   })
 }
 
-function removeThemeWrapper ({ filename, componentName, folderName }) {
+const removeThemeWrapper = ({ filename, componentName, folderName }) => {
   return new Promise((resolve, reject) => {
     try {
       let data = fs.readFileSync(filename, 'utf8')
@@ -80,7 +80,7 @@ function removeThemeWrapper ({ filename, componentName, folderName }) {
   })
 }
 
-function checkDependencyMap (componentName, usedRobits) {
+const checkDependencyMap = (componentName, usedRobits) => {
   const dependers = pruneMap.reduce((acc, { host, dep }) => {
     if (dep === componentName) {
       return acc.concat([host])
@@ -103,7 +103,7 @@ updateReferences({
       '" ...\n-----------------------------------------------------------------------------\n'
   )
   jetpack.copy(
-    path.resolve(__dirname, '../src/lib'),
+    path.resolve(__dirname, '../src/core'),
     path.resolve(__dirname, '../../../' + args.destinationDir),
     {
       overwrite: (source, target) => {
@@ -139,7 +139,7 @@ updateReferences({
   // Delete non-applicable component files and theme stylesheets
   // ---------------------------------------------------
   const robitsComponentDirectories = await readdirp.promise(
-    path.resolve(__dirname, '../src/lib/components'),
+    path.resolve(__dirname, '../src/core/components'),
     {
       type: 'directories',
       depth: 1
@@ -152,7 +152,7 @@ updateReferences({
       '\nPruning Robits files to the following referenced in the project...\n------------------------------------------------------------------\n'
     )
     console.log(usedRobits)
-    const jsToCheck = await readdirp.promise(path.resolve(__dirname, '../src/lib/components'), {
+    const jsToCheck = await readdirp.promise(path.resolve(__dirname, '../src/core/components'), {
       fileFilter: '*.js'
     })
     await asyncForEach(jsToCheck, async ({ fullPath, basename }) => {

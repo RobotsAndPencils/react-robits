@@ -2,12 +2,12 @@ import React from 'react'
 import { useState } from '@storybook/client-api'
 import { action } from '@storybook/addon-actions'
 import { boolean, select } from '@storybook/addon-knobs'
-import Dropdown, { Dropdown as DropdownComponent } from '../lib/components/dropdown/Dropdown'
-import Button from '../lib/components/button/Button'
-import DropdownToggle from '../lib/components/dropdown/DropdownToggle'
-import DropdownMenu from '../lib/components/dropdown/DropdownMenu'
-import DropdownItem from '../lib/components/dropdown/DropdownItem'
-import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
+import Dropdown, { Dropdown as DropdownComponent } from '../core/components/dropdown/Dropdown'
+import Button from '../core/components/button/Button'
+import DropdownToggle from '../core/components/dropdown/DropdownToggle'
+import DropdownMenu from '../core/components/dropdown/DropdownMenu'
+import DropdownItem from '../core/components/dropdown/DropdownItem'
+import ButtonGroup from '../core/components/buttonGroup/ButtonGroup'
 
 export default {
   title: 'Robits/Dropdown',

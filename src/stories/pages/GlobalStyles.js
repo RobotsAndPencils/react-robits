@@ -4,7 +4,7 @@ const GlobalStyles = props => {
   const [isReady, setReady] = useState(false)
 
   useEffect(() => {
-    import(`../../lib/styles/themes/${props.themeName}/global.module.scss`).then(styles => {
+    import(`../../core/styles/themes/${props.themeName}/global.module.scss`).then(styles => {
       setReady(true)
     })
   }, [props.themeName])

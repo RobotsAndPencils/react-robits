@@ -2,7 +2,7 @@ import React from 'react'
 import { boolean, text, number, select } from '@storybook/addon-knobs'
 import ProgressBar, {
   ProgressBar as ProgressBarComponent
-} from '../lib/components/progressBar/ProgressBar'
+} from '../core/components/progressBar/ProgressBar'
 
 export default {
   title: 'Robits/ProgressBar',

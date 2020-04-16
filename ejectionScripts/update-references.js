@@ -5,7 +5,7 @@ const { createInterface } = require('readline')
 
 const usedRobits = []
 
-function processFile ({ filename, destinationDir, robits }) {
+const processFile = ({ filename, destinationDir, robits }) => {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -16,7 +16,7 @@ function processFile ({ filename, destinationDir, robits }) {
     let importBlock = ''
     const componentArray = []
 
-    lineReader.on('line', function (line) {
+    lineReader.on('line', line => {
       if (
         (line.indexOf('import {') > -1 && line.indexOf('}') === -1) ||
         (importBlock.length > 0 && line.indexOf('}') === -1)
@@ -34,20 +34,21 @@ function processFile ({ filename, destinationDir, robits }) {
           data = data.replace(new RegExp(chunk, 'gm'), line => {
             const trimmedLine = line.replace(/(\r\n|\n|\r)/gm, '')
 
-            var retVal = ''
-            var componentsString = trimmedLine.substring(
+            let retVal = ''
+            const componentsString = trimmedLine.substring(
               trimmedLine.lastIndexOf('{') + 1,
               trimmedLine.lastIndexOf('}')
             )
-            var components = componentsString.split(',')
+            const components = componentsString.split(',')
 
-            var relativePathToSourceDir = path.relative(path.dirname(filename), destinationDir)
+            const relativePathToSourceDir = path.relative(path.dirname(filename), destinationDir)
 
-            for (var c = 0; c < components.length; c++) {
-              var component = components[c].trim()
-              var relativePathFromLib = robits.find(obj => obj.basename === `${component}.js`).path
+            for (let c = 0; c < components.length; c++) {
+              const component = components[c].trim()
+              const relativePathFromCore = robits.find(obj => obj.basename === `${component}.js`)
+                .path
               console.log('• Updating reference for: ' + component + ', in ' + filename)
-              retVal += `import ${component} from '${relativePathToSourceDir}/${relativePathFromLib}'\n`
+              retVal += `import ${component} from '${relativePathToSourceDir}/${relativePathFromCore}'\n`
               componentArray.push(component)
             }
 
@@ -61,29 +62,29 @@ function processFile ({ filename, destinationDir, robits }) {
       }
     })
 
-    lineReader.on('close', function () {
+    lineReader.on('close', () => {
       resolve(componentArray)
     })
 
-    lineReader.on('error', function (err) {
+    lineReader.on('error', err => {
       reject(err)
     })
   })
 }
 
-async function asyncForEach (array, callback) {
+const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
 }
 
-async function updateReferences ({ destinationDir, sourceDir }) {
+const updateReferences = async ({ destinationDir, sourceDir }) => {
   console.log(
     '\x1b[34m%s\x1b[0m',
     '\nUpdating project references to Robits files...\n----------------------------------------------\n'
   )
 
-  const robits = await readdirp.promise(path.resolve(__dirname, '../src/lib'), {
+  const robits = await readdirp.promise(path.resolve(__dirname, '../src/core'), {
     fileFilter: '*.js'
   })
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from '@storybook/client-api'
 import { boolean } from '@storybook/addon-knobs'
-import Alert, { Alert as AlertComponent } from '../lib/components/alert/Alert'
-import Button from '../lib/components/button/Button'
+import Alert, { Alert as AlertComponent } from '../core/components/alert/Alert'
+import Button from '../core/components/button/Button'
 
 export default {
   title: 'Robits/Alert',

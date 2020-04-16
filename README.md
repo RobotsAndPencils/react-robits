@@ -1,12 +1,12 @@
 <h1>
   React Robits <img align="right" width="300" src="robits.png">
 </h1>
-A library of React components, by the Frontend Team at Robots & Pencils, to share amongst projects in an effort to challenge ourselves to think reusable/themeable so we can bootstrap development and save time.
+A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and save time.
 
 ###### Broken up into two main concepts:
 
-- Core: repo-connected, importable components that we believe to be common and "base" enough to standardize for R&P (attempted black box)
-- Periphery: components that we've made sharable, but might not be good candidates for Core, since they are likely to need deeper customizations (non black box). Therefore, these are independant and not importable, and developers are encouraged to preview and copy the code from Storybook for inclusion in their project.
+- Core: atomic level components in which a standardized setup can support a majority of the possible use cases
+- Periphery: components that are either harder to standarize or have stronger opinions baked in. These are things that may have external dependencies (plugins), or might require different layout structures, making it hard to mandate any one setup cross client or cross use case. So there may end up with multiple variations over time (e.g. - one Upload component built on Dropzone, one on Uppy). For these reasons, these components don't "ship" with the deployed package but are present in the Storybook and accessible directly for manual benefit
 
 ## Areas of Focus
 
@@ -15,28 +15,42 @@ Core:
 - Form components
 - Buttons
 - Generic Modals
-- Status indicators
+- Status indicators (progress bars, loaders)
 - UI Elements (badges, tags, pills)
+- Generic Cards
+- Incremental content (dropdowns, popovers, tooltips)
 
 Periphery:
 
 - Sliders/Carousels
-- Item Tile
+- Item Tiles
 - Video?
-- Modals?
 - Maps?
-- Grids?
-- Load More / Pagination?
 - Data Tables?
 - Masonry?
 
-Dependencies:
+## Directory Structure
 
-TBD
+```bash
+├── src
+│   ├── core                     # the library of files that will be importable into a project
+│       ├── components          # core shared components
+│       ├── constants           # core shared constants
+│       ├── utils               # core shared utility functions
+│       ├── styles              # core shared components
+│           ├── tokens          # core shared style tokens (sass variables and mixins)
+│           ├── themes          # the various themes that can be leveraged
+│               ├── unstyled    # the unstyled theme provides no CSS, to make it easier to customize
+│   ├── stories                 # Storybook story files
+│       ├── pages               # Supporting files for stories
+
+```
 
 ## New Project Setup
 
 Download this repo as an npm package into your project:
+
+TBD
 
 ## Integrating the Library into Your Project
 
@@ -88,23 +102,6 @@ or
   exclude: /node_modules\/(?!react-robits)/,
   use: 'babel-loader'
 }
-```
-
-## Directory Structure
-
-```bash
-├── src
-│   ├── lib                     # the library of assets that will be importable into a project
-│       ├── components          # core shared components
-│       ├── constants           # core shared constants
-│       ├── utils               # core shared utility functions
-│       ├── styles              # core shared components
-│           ├── tokens          # core shared style tokens (sass variables and mixins)
-│           ├── themes          # the various themes that can be leveraged
-│               ├── unstyled    # the unstyled theme provides no CSS, to make it easier to customize
-│   ├── stories                 # Storybook story files
-│       ├── pages               # Supporting files for stories
-
 ```
 
 ## Available Scripts

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState } from '@storybook/client-api'
 import { text, boolean, select } from '@storybook/addon-knobs'
-import Modal, { Modal as ModalComponent } from '../lib/components/modal/Modal'
-import ModalBody from '../lib/components/modal/ModalBody'
-import ModalHeader from '../lib/components/modal/ModalHeader'
-import ModalFooter from '../lib/components/modal/ModalFooter'
-import Button from '../lib/components/button/Button'
+import Modal, { Modal as ModalComponent } from '../core/components/modal/Modal'
+import ModalBody from '../core/components/modal/ModalBody'
+import ModalHeader from '../core/components/modal/ModalHeader'
+import ModalFooter from '../core/components/modal/ModalFooter'
+import Button from '../core/components/button/Button'
 
 export default {
   title: 'Robits/Modal',

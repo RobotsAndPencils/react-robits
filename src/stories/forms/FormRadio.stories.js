@@ -2,7 +2,7 @@ import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormRadio, {
   FormRadio as FormRadioComponent
-} from '../../lib/components/formRadio/FormRadio'
+} from '../../core/components/formRadio/FormRadio'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {

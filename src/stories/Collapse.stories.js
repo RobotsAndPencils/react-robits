@@ -1,6 +1,6 @@
 import React from 'react'
-import Collapse, { Collapse as CollapseComponent } from '../lib/utils/Collapse'
-import Button from '../lib/components/button/Button'
+import Collapse, { Collapse as CollapseComponent } from '../core/utils/Collapse'
+import Button from '../core/components/button/Button'
 import { useState } from '@storybook/client-api'
 
 export default {

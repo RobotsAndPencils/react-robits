@@ -2,7 +2,7 @@ import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormSelect, {
   FormSelect as FormSelectComponent
-} from '../../lib/components/formSelect/FormSelect'
+} from '../../core/components/formSelect/FormSelect'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {

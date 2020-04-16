@@ -2,8 +2,8 @@ import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormInput, {
   FormInput as FormInputComponent
-} from '../../lib/components/formInput/FormInput'
-import FormInputAddon from '../../lib/components/formInput/FormInputAddon'
+} from '../../core/components/formInput/FormInput'
+import FormInputAddon from '../../core/components/formInput/FormInputAddon'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {

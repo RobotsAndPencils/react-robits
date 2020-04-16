@@ -1,7 +1,7 @@
 import React from 'react'
 import { number } from '@storybook/addon-knobs'
 import styles from './pages/demoIcons.module.scss'
-import SvgIcon from '../lib/components/icon/SvgIcon'
+import SvgIcon from '../core/components/icon/SvgIcon'
 import demoIcons from './pages/demoIcons'
 
 export default {
