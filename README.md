@@ -59,9 +59,7 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 
 We'll lean on Github Issues and PR's for tracking and managing problems and enhancements, but the higher level branching/merging/publish strategy is still TBD. Reach out to David Fagan if you want to get involved.
 
-###### In order to properly maintain the library, there are a set of conventions that MUST be upheld
-
-Read the [Tech Doc](./TECH.md) to learn more
+###### In order to properly maintain the library, there are a set of conventions that MUST be upheld. Read the [Tech Doc](./TECH.md) to learn more
 
 #### Available Scripts
 
@@ -144,7 +142,7 @@ You can then either specify those props for each instance:
 <Button themeName='unstyled'>
 ```
 
-Or set up an environment variable in your project to use as the default. This allows you to not have to specify a `themenName` or `themeObj` property for each component. The library is set up to digest the following variable name:
+Or set up an environment variable in your project to use as the default. This allows you to not have to specify a `themeName` or `themeObj` property for each component. The library is set up to digest the following variable name:
 
 ```
 export REACT_APP_ROBITS_THEME=unstyled

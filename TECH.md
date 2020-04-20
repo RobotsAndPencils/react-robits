@@ -1,4 +1,6 @@
-# Architecture Documentation
+<h1>
+  Architecture Documentation <img align="right" width="300" src="blueprint.jpg">
+</h1>
 
 The following is technical documentation for key architectural decisions made in the library.
 
