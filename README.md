@@ -1,7 +1,7 @@
 <h1>
   React Robits <img align="right" width="300" src="robits.png">
 </h1>
-A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and save time.
+A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and build off each other.
 
 ###### Broken up into two main concepts:
 
@@ -10,7 +10,7 @@ A library of sharable React components, by the Frontend Team at Robots & Pencils
 
 ## Areas of Focus
 
-Core:
+Examples of "Core" components:
 
 - Form components
 - Buttons
@@ -20,7 +20,7 @@ Core:
 - Generic Cards
 - Incremental content (dropdowns, popovers, tooltips)
 
-Periphery:
+Examples of "Periphery" components:
 
 - Sliders/Carousels
 - Item Tiles
@@ -29,11 +29,19 @@ Periphery:
 - Data Tables?
 - Masonry?
 
+###### Component Aspirations
+
+Think reusable. Components should be built with as much abstraction as possible, leaning on optional component properties to govern the rendered output.
+
+Think cross-client/cross-use-case. Try to support as many permutations of the component as possible, which means thinking outside the box in which you're building it. How might others want to leverage this component?
+
+Think customizable. Every component should have an "unstyled" stylesheet that normalizes it and allows for full control. But even within your own theme stylesheet, it's helpful to put major aesthetic tokens as top level sass variables, so that if/when people eject-to-tweak, it quickens their ability to toggle things.
+
 ## Directory Structure
 
 ```bash
 ├── src
-│   ├── core                     # the library of files that will be importable into a project
+│   ├── core                    # the library of core files that will be importable into a project
 │       ├── components          # core shared components
 │       ├── constants           # core shared constants
 │       ├── utils               # core shared utility functions
@@ -41,18 +49,70 @@ Periphery:
 │           ├── tokens          # core shared style tokens (sass variables and mixins)
 │           ├── themes          # the various themes that can be leveraged
 │               ├── unstyled    # the unstyled theme provides no CSS, to make it easier to customize
+    ├── periphery               # components outside the core standardized set
 │   ├── stories                 # Storybook story files
 │       ├── pages               # Supporting files for stories
 
 ```
 
-## New Project Setup
+###### In order to properly maintain the library, the follow conventions must be upheld
 
-Download this repo as an npm package into your project:
+**File naming and folder structure:**
 
-TBD
+```bash
+├── componentFolderName                               # should exist at the root of /components
+│   ├── componentFolderName_{themeName}.module.scss   # theme stylesheets must follow this naming convention
+    ├── ComponentFolderName.js                        # the main component of the folder should share the same name
+    ├── ComponentFolderNameAddon.js                   # secondary components can exist, but are expected to share the same stylesheet as the main component
+```
 
-## Integrating the Library into Your Project
+_Note:_ further folder nesting has not been tested yet.
+
+**ThemeWrapper usage:**
+Every component needs to leverage the ThemeWrapper in the following way.
+See the [Tech Doc](./TECH.md) for more information.
+
+```js
+// in: ComponentName.js
+import ThemeWrapper from '../../utils/ThemeWrapper'
+
+export const ComponentName = ({ styling, ...rest }) => (
+  <div className={styling.container}>
+)
+
+export default ThemeWrapper(themeName => `[componentFolderName]/[componentFolderName]_${themeName}.module.scss`)(ComponentName)
+```
+
+**Utility function exports:**
+
+```js
+// in: stringUtils.js
+
+const manipulationMethod = str => {
+  // ...
+}
+
+export default {
+  manipulationMethod
+}
+
+// this is then used in projects via:
+// import { stringUtils } from 'react-robits'
+// stringUtils.manipulationMethod()
+```
+
+## Contributing
+
+We'll lean on Github Issues and PR's for tracking and managing problems and enhancements, but the higher level branching/merging/publish strategy is still TBD. Reach out to David Fagan if you want to get involved.
+
+### Available Scripts
+
+- `npm run storybook`: runs the Storybook for easy preview, play, and investigation of components
+- `npm run build-storybook`: builds a distributable version of Storybook for publishing
+- `npm run lint`: runs prettier-standard linting
+- `npm run format`: runs the prettier formatting
+
+## Using Robits in Your Project
 
 To pull the library into your project, run the following command line in the root of your project directory:
 
@@ -70,12 +130,22 @@ There are a few key pieces to include in your project's webpack config.
 
 - Point a Sass Resources Loader configuration to the files contained within the design system package's `./shared/styles` directory. Order matters here, so make sure to include the design system directory before the project directory, if it also relies on this tool
 
-```
+```js
 {
     loader: 'sass-resources-loader',
     options: {
-        resources: ['./node_modules/react-robits/src/lib/styles/tokens',
-        ...project directory as needed...] // project overrides design system on overlaps
+        resources: [
+          ...project tokens...
+          `${path.resolve(
+            __dirname,
+            'node_modules/react-robits/src/core/styles/tokens'
+          )}/**/*.scss`,
+          path.resolve(
+            __dirname,
+            'node_modules/react-robits/src/core/styles/themes/talentPortal/tokens.scss'
+          )
+          ...additional project overrides as needed...
+        ] // the ordering here is important, just like normal SCSS
     }
 }
 ```
@@ -104,15 +174,23 @@ or
 }
 ```
 
-## Available Scripts
+## Ejecting Robits
 
-- `npm run storybook`: runs the Storybook for easy preview, play, and investigation of components
-- `npm run build-storybook`: builds a distributable version of Storybook for publishing
-- `npm run lint`: runs the eslint
-- `npm run format`: runs the prettier formatting
-- "eject-robits": this should only be run via the parent project via `npm explore` in order to copy the components into the project and erase any footprint to this library
+Ejecting Robits is lever designed to either a) give you full control over the code for customizations, and/or b) decouple from the library to elimintate the dependency. This could be done at the very beginning of the project, as an initial bootstrap, or at the final stage of a project, after having been wired in for the entirety of development, to avoid giving the magic trick away to a client.
 
-## Deployment
+The net result is that the files from this library will be copied over to your project, effectively transferring ownership, and erase any notion of the `react-robit` as a dependent package.
+
+To do this, run:
+
+```
+node ./node_modules/react-robits/ejectionScripts/eject
+```
+
+from the root of your project, and it would cycle through a set of Node scripts to break the ball-and-chain.
+
+For more information, see the [Tech Doc](./TECH.md)
+
+## Storybook Deployment
 
 This is currently deployed to Heroku on a free tier. To deploy from your terminal, you'll need the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and logged in to your Heroku account.
 
@@ -146,3 +224,7 @@ $ heroku open --app react-robits
 ```
 
 Or visit https://react-robits.herokuapp.com
+
+## Media
+
+Check out the [Blog Post](https://robotsandpencils.blogin.co/show-category.php?id=26583) for a detailed article of the thought process and journey to this repo

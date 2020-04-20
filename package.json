@@ -48,7 +48,6 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 8002 -s public",
     "build-storybook": "build-storybook -s public",
-    "eject-robits": "node ejection-script",
     "lint": "prettier-standard --lint",
     "format": "prettier-standard --format"
   },
