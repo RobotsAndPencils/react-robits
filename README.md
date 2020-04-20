@@ -55,7 +55,7 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 
 ```
 
-###### In order to properly maintain the library, the follow conventions must be upheld
+### In order to properly maintain the library, the follow conventions must be upheld
 
 **File naming and folder structure:**
 
@@ -66,9 +66,10 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
     ├── ComponentFolderNameAddon.js                   # secondary components can exist, but are expected to share the same stylesheet as the main component
 ```
 
-_Note:_ further folder nesting has not been tested yet.
+_Note: further folder nesting has not been tested yet._
 
 **ThemeWrapper usage:**
+
 Every component needs to leverage the ThemeWrapper in the following way.
 See the [Tech Doc](./TECH.md) for more information.
 
