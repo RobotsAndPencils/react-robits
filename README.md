@@ -55,58 +55,15 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 
 ```
 
-### In order to properly maintain the library, the follow conventions must be upheld
-
-**File naming and folder structure:**
-
-```bash
-├── componentFolderName                               # should exist at the root of /components
-│   ├── componentFolderName_{themeName}.module.scss   # theme stylesheets must follow this naming convention
-    ├── ComponentFolderName.js                        # the main component of the folder should share the same name
-    ├── ComponentFolderNameAddon.js                   # secondary components can exist, but are expected to share the same stylesheet as the main component
-```
-
-_Note: further folder nesting has not been tested yet._
-
-**ThemeWrapper usage:**
-
-Every component needs to leverage the ThemeWrapper in the following way.
-See the [Tech Doc](./TECH.md) for more information.
-
-```js
-// in: ComponentName.js
-import ThemeWrapper from '../../utils/ThemeWrapper'
-
-export const ComponentName = ({ styling, ...rest }) => (
-  <div className={styling.container}>
-)
-
-export default ThemeWrapper(themeName => `[componentFolderName]/[componentFolderName]_${themeName}.module.scss`)(ComponentName)
-```
-
-**Utility function exports:**
-
-```js
-// in: stringUtils.js
-
-const manipulationMethod = str => {
-  // ...
-}
-
-export default {
-  manipulationMethod
-}
-
-// this is then used in projects via:
-// import { stringUtils } from 'react-robits'
-// stringUtils.manipulationMethod()
-```
-
 ## Contributing
 
 We'll lean on Github Issues and PR's for tracking and managing problems and enhancements, but the higher level branching/merging/publish strategy is still TBD. Reach out to David Fagan if you want to get involved.
 
-### Available Scripts
+###### In order to properly maintain the library, there are a set of conventions that MUST be upheld
+
+Read the [Tech Doc](./TECH.md) to learn more
+
+#### Available Scripts
 
 - `npm run storybook`: runs the Storybook for easy preview, play, and investigation of components
 - `npm run build-storybook`: builds a distributable version of Storybook for publishing
@@ -127,9 +84,11 @@ _Note_: this package will need reinstalled to grab updates. To do so, it's recom
   "install-robits": "npm i --save git+https://github.com/RobotsAndPencils/react-robits.git#[branch-name-of-desired-theme]"
 ```
 
+### Webpack Config
+
 There are a few key pieces to include in your project's webpack config.
 
-- Point a Sass Resources Loader configuration to the files contained within the design system package's `./shared/styles` directory. Order matters here, so make sure to include the design system directory before the project directory, if it also relies on this tool
+1. Point a Sass Resources Loader configuration to the files contained within the design system package's `./shared/styles` directory. Order matters here, so make sure to include the design system directory before the project directory, if it also relies on this tool
 
 ```js
 {
@@ -151,9 +110,9 @@ There are a few key pieces to include in your project's webpack config.
 }
 ```
 
-_Note_: project level mixins, if they have the exact same name, will override design system level mixins. This is both something to be careful about and a lever you can pull to create project level customizations
+_Note: project level mixins, if they have the exact same name, will override design system level mixins. This is both something to be careful about and a lever you can pull to create project level customizations_
 
-You will also then need to make sure your project level webpack properly tranpiles the components being pulled in. Many external libraries come pre-transpiled, but for this, the approach is to defer to project level babel configurations.
+2. You will also then need to make sure your project level webpack properly tranpiles the components being pulled in. Many external libraries come pre-transpiled, but for this, the approach is to defer to project level babel configurations.
 
 So to make sure `babel` runs against the components being imported from React Robits, you'll need to augment or add loader configurations to your webpack like either of the following:
 
@@ -175,6 +134,24 @@ or
 }
 ```
 
+### Theme Config
+
+Each component then accepts either a `themeName` string that designates which stylesheet to use, or a `themeObj` that is already precompiled per CSS Modules.
+
+You can then either specify those props for each instance:
+
+```
+<Button themeName='unstyled'>
+```
+
+Or set up an environment variable in your project to use as the default. This allows you to not have to specify a `themenName` or `themeObj` property for each component. The library is set up to digest the following variable name:
+
+```
+export REACT_APP_ROBITS_THEME=unstyled
+```
+
+_Note: you can use a combination of the 2, to set up a default and override it at the instance level_
+
 ## Ejecting Robits
 
 Ejecting Robits is lever designed to either a) give you full control over the code for customizations, and/or b) decouple from the library to elimintate the dependency. This could be done at the very beginning of the project, as an initial bootstrap, or at the final stage of a project, after having been wired in for the entirety of development, to avoid giving the magic trick away to a client.
@@ -187,7 +164,7 @@ To do this, run:
 node ./node_modules/react-robits/ejectionScripts/eject
 ```
 
-from the root of your project, and it would cycle through a set of Node scripts to break the ball-and-chain.
+from the root of your project, and follow the prompts. It will cycle through a set of Node scripts to break the ball-and-chain.
 
 For more information, see the [Tech Doc](./TECH.md)
 
