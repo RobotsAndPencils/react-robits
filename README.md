@@ -49,7 +49,7 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 │           ├── tokens          # style tokens that are shared across themes (sass variables and mixins)
 │           ├── themes          # the various themes that can be leveraged
 │               ├── unstyled    # the unstyled theme provides (virtually) no CSS, to make it easier to customize
-    ├── periphery               # components outside the core standardized set
+│   ├── periphery               # components outside the core standardized set
 │   ├── stories                 # Storybook story files
 │       ├── pages               # Supporting files for stories
 
