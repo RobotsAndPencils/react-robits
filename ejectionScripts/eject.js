@@ -43,8 +43,8 @@ execSync(
     ` --themeName ${themeName}` +
     ` --shouldPrune ${shouldPrune}` +
     ` --shouldRemoveThemeWrapper ${shouldRemoveThemeWrapper}` +
-    ` && node ./node_modules/react-robits/ejectionScripts/erase-footprint --sourceDir ${sourceDir}`,
-  // + ' && npm uninstall react-robits -D -S && npm install',
+    ` && node ./node_modules/react-robits/ejectionScripts/erase-footprint --sourceDir ${sourceDir}` +
+    ' && npm uninstall react-robits -D -S && npm install',
   { stdio: [0, 1, 2] }
 )
 console.log(
