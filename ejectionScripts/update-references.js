@@ -5,7 +5,7 @@ const { createInterface } = require('readline')
 
 const usedRobits = []
 
-const processFile = ({ filename, destinationDir, robits }) => {
+const processJsFile = ({ filename, destinationDir, robits }) => {
   return new Promise((resolve, reject) => {
     const lineReader = createInterface({
       input: fs.createReadStream(filename),
@@ -72,6 +72,30 @@ const processFile = ({ filename, destinationDir, robits }) => {
   })
 }
 
+const processScssFile = ({ filename, destinationDir, robits }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let data = fs.readFileSync(filename, 'utf8')
+
+      const relativePathToSourceDir = path.relative(path.dirname(filename), destinationDir)
+
+      data = data.replace(
+        new RegExp(
+          '@import (.*)node_modules\\/react-robits\\/src\\/core\\/styles\\/themes\\/',
+          'g'
+        ),
+        `@import '${relativePathToSourceDir}/styles/themes/`
+      )
+
+      fs.writeFileSync(filename, data, 'utf8')
+
+      resolve(true)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
@@ -88,12 +112,12 @@ const updateReferences = async ({ destinationDir, sourceDir }) => {
     fileFilter: '*.js'
   })
 
-  const files = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
+  const jsFiles = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
     fileFilter: '*.js'
   })
 
-  await asyncForEach(files, async ({ fullPath }) => {
-    const newComponents = await processFile({
+  await asyncForEach(jsFiles, async ({ fullPath }) => {
+    const newComponents = await processJsFile({
       filename: fullPath,
       destinationDir,
       robits
@@ -102,6 +126,17 @@ const updateReferences = async ({ destinationDir, sourceDir }) => {
       if (!usedRobits.includes(c)) {
         usedRobits.push(c)
       }
+    })
+  })
+
+  const scssFiles = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
+    fileFilter: '*.scss'
+  })
+
+  await asyncForEach(scssFiles, async ({ fullPath }) => {
+    await processScssFile({
+      filename: fullPath,
+      destinationDir
     })
   })
 
