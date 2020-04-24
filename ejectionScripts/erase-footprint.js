@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-const projectPackageJSON = path.resolve(__dirname, '../../../package.json')
+const projectPackageJSON = path.resolve(__dirname, '../../../../package.json')
 
 console.log(
   '\x1b[34m%s\x1b[0m',

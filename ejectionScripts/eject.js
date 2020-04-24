@@ -37,14 +37,14 @@ const shouldRemoveThemeWrapper =
   ).toLowerCase() === 'y'
 
 execSync(
-  'node ./node_modules/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/react-robits/ejectionScripts/pluck-components' +
+  'node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/pluck-components' +
     ` --destinationDir ${destinationDir}` +
     ` --sourceDir ${sourceDir}` +
     ` --themeName ${themeName}` +
     ` --shouldPrune ${shouldPrune}` +
     ` --shouldRemoveThemeWrapper ${shouldRemoveThemeWrapper}` +
-    ` && node ./node_modules/react-robits/ejectionScripts/erase-footprint --sourceDir ${sourceDir}` +
-    ' && npm uninstall react-robits -D -S && npm install',
+    ` && node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/erase-footprint --sourceDir ${sourceDir}` +
+    ' && npm uninstall @robotsandpencils/react-robits -D -S && npm install',
   { stdio: [0, 1, 2] }
 )
 console.log(

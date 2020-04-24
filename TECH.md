@@ -1,5 +1,5 @@
 <h1>
-  Architecture Documentation <img align="right" width="300" src="blueprint.jpg">
+  Architecture Documentation <img align="right" width="300" src="https://github.com/RobotsAndPencils/react-robits/raw/master/blueprint.jpg">
 </h1>
 
 The following is technical documentation for key architectural decisions made in the library.
@@ -49,7 +49,7 @@ export default {
 }
 
 // this is then used in projects via:
-// import { stringUtils } from 'react-robits'
+// import { stringUtils } from '@robotsandpencils/react-robits'
 // stringUtils.manipulationMethod()
 ```
 
@@ -74,7 +74,7 @@ _Nuances:_
 
 ## Sass Resources Loader and Themes setup
 
-This library is set up with [CSS Modules](https://github.com/css-modules/css-modules) and leverage [Sass Resources Loader](https://github.com/shakacode/sass-resources-loader), which is a nice little tool that automatically `@imports` each .scss file found at the targeted location into any SCSS file matching the Webpack rule (excluding the resource files themselves), which you can see configured in `./.storybook/main.js`. This just saves some typing and helps centralize shared tokens. These configurations should be mirrored at the project level, see "Using Robits in Your Project" on the [README](./README.md)
+This library is set up with [CSS Modules](https://github.com/css-modules/css-modules) and leverage [Sass Resources Loader](https://github.com/shakacode/sass-resources-loader), which is a nice little tool that automatically `@imports` each .scss file found at the targeted location into any SCSS file matching the Webpack rule (excluding the resource files themselves), which you can see configured in `./.storybook/main.js`. This just saves some typing and helps centralize shared tokens. These configurations should be mirrored at the project level, see "Using Robits in Your Project" on the [README](https://github.com/RobotsAndPencils/react-robits/raw/master/README.md)
 
 Couple things to note:
 
@@ -87,7 +87,7 @@ All theme SCSS is located in `./src/core/styles/...` with the following breakout
 
 - `/tokens/`: tokens that are shared across all themes, or are theme-agnostic
 - `/themes/[themeName]`: the theme specific styles. The name of the folder is the identifying string used as common thread across the implementation
-- `/themes/[themeName]/global.module.scss`: every theme should have a global file that sets up global rules like fonts, base HTML normalizations (body, anchors, headers, etc.), and imports shared rules. Everything in this file and what it imports should work from CSS Modules' `:global` mindset. It is recommended to then, at the project level, set up a global SCSS file that imports the theme globals via `@import '../../node_modules/react-robits/src/core/styles/themes/[themeName]/global.module.scss';` and then makes any addendums needed for the project.
+- `/themes/[themeName]/global.module.scss`: every theme should have a global file that sets up global rules like fonts, base HTML normalizations (body, anchors, headers, etc.), and imports shared rules. Everything in this file and what it imports should work from CSS Modules' `:global` mindset. It is recommended to then, at the project level, set up a global SCSS file that imports the theme globals via `@import '../../node_modules/@robotsandpencils/react-robits/src/core/styles/themes/[themeName]/global.module.scss';` and then makes any addendums needed for the project.
 - `/themes/[themeName]/tokens.module.scss`: it is recommended to break out theme-specific token as their own file, alongside (and imported into) the global file. This is the extension or overriders of the cross-theme tokens
 
 Beyond that, to date we've tried to bubble SASS variables to the top of files, and name partials with a `_` prefix. Each component is the expected to have 1 stylesheet file per theme, which imports the theme-specific tokens at the top like `@import '../../styles/themes/[themeName]/tokens';` (cross theme tokens will be automatically injected with Sass Resources Loader).
@@ -96,10 +96,10 @@ Beyond that, to date we've tried to bubble SASS variables to the top of files, a
 
 Below are the Node scripts and a summary of what they do:
 
-- `eject.js`: Provides a series of prompts for the developer to answer that guides the ejection process. It then runs each of the below scripts to carry it out. After each has been executed, it runs `npm uninstall react-robits -D -S && npm install`, which removes the package from node modules, and reinstalls fresh in order to pick up any changes resulting from the `merge-dependencies.js` script
+- `eject.js`: Provides a series of prompts for the developer to answer that guides the ejection process. It then runs each of the below scripts to carry it out. After each has been executed, it runs `npm uninstall @robotsandpencils/react-robits -D -S && npm install`, which removes the package from node modules, and reinstalls fresh in order to pick up any changes resulting from the `merge-dependencies.js` script
 - `merge-dependencies.js`: Merge the package.json files of the project and the `react-robits` library, so that all Robit dependencies are migrated to the project for the next `npm install`. We defer to the project here wherever possible, and any package version conflicts have to be manually resolved, so we don’t accidentally break something the project relies on.
 - `pluck-components.js`: Copy all the Robit files (components, utilities, styles, constants, etc.) out from the library and into a project directory defined by the developer
-- `update-references.js`: Update references in all project level Javascript files that point to the `react-robits` package, and redirect them to the new location of that file. So change `import { Button } from ‘react-robits'` to `import Button from ‘…[relative path to project file location]…'`
+- `update-references.js`: Update references in all project level Javascript files that point to the `react-robits` package, and redirect them to the new location of that file. So change `import { Button } from ‘@robotsandpencils/react-robits'` to `import Button from ‘…[relative path to project file location]…'`
   - It will optionally prune (based on the answer to the initial prompt) the copied over components to only what the project references in above step. So if the project doesn’t use the Avatar component, delete it. While you might not directly reference a component, some other Robit might rely on it, so it builds a Robits inter-dependent tree to map out which components to “save from the shredder"
   - Scopes the theme stylesheets to the theme name the developer specified in the initial prompt, which deletes out all other unneeded theme files
   - Optionally breaks reliance on the ThemeWrapper higher order component. Since this HOC was only needed to dynamically deliver a theme, and at this point the theme is static, it’s not technically needed. Breaking reliance here updates each exported Robit file to instead directly import the needed theme stylesheet, and changes the export from something like `export default ThemeWrapper(...)(Button)` to `export default Button`
@@ -110,7 +110,7 @@ _Nuances:_
 - The success of the reference updates within your project files depends on the format of the import statements:
 
 ```
-import { Button, Avatar, FormInput, Badge } from 'react-robits' // linear format works
+import { Button, Avatar, FormInput, Badge } from '@robotsandpencils/react-robits' // linear format works
 ```
 
 ```
@@ -119,12 +119,12 @@ import {
   Avatar,
   FormInput,
   Badge
-} from 'react-robits' // one-per-line format works
+} from '@robotsandpencils/react-robits' // one-per-line format works
 ```
 
 ```
 import {
   Button, Avatar,
   FormInput, Badge
-} from 'react-robits' // the combination is untested and might break
+} from '@robotsandpencils/react-robits' // the combination is untested and might break
 ```

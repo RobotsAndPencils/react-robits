@@ -104,7 +104,7 @@ updateReferences({
   )
   jetpack.copy(
     path.resolve(__dirname, '../src/core'),
-    path.resolve(__dirname, '../../../' + args.destinationDir),
+    path.resolve(__dirname, '../../../../' + args.destinationDir),
     {
       overwrite: (source, target) => {
         if (source.name === target.name) {
@@ -121,7 +121,7 @@ updateReferences({
   // Delete non-applicable theme directories
   // ---------------------------------------------------
   const themeDirectories = await readdirp.promise(
-    path.resolve(__dirname, '../../../' + args.destinationDir + '/styles/themes'),
+    path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles/themes'),
     {
       type: 'directories',
       depth: 1
@@ -184,7 +184,7 @@ updateReferences({
               fs.unlinkSync(
                 path.resolve(
                   __dirname,
-                  '../../../' +
+                  '../../../../' +
                     args.destinationDir +
                     '/components/' +
                     dirent.name +
@@ -206,7 +206,7 @@ updateReferences({
         // delete directory if no js files used
         const dirToDelete = path.resolve(
           __dirname,
-          '../../../' + args.destinationDir + '/components/' + relativeRobitsComponentDir
+          '../../../../' + args.destinationDir + '/components/' + relativeRobitsComponentDir
         )
         console.log(`• Pruning: /${relativeRobitsComponentDir} directory completely`)
         execSync(`rm -rf '${dirToDelete}'`, {
@@ -224,7 +224,7 @@ updateReferences({
             fs.unlinkSync(
               path.resolve(
                 __dirname,
-                '../../../' +
+                '../../../../' +
                   args.destinationDir +
                   '/components/' +
                   dirent.name +
@@ -245,7 +245,7 @@ updateReferences({
     )
 
     const groomedRobits = await readdirp.promise(
-      path.resolve(__dirname, '../../../' + args.destinationDir + '/components/'),
+      path.resolve(__dirname, '../../../../' + args.destinationDir + '/components/'),
       {
         fileFilter: usedRobits.map(file => `${file}.js`)
       }

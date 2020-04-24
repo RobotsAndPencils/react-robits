@@ -81,7 +81,7 @@ const processScssFile = ({ filename, destinationDir, robits }) => {
 
       data = data.replace(
         new RegExp(
-          '@import (.*)node_modules\\/react-robits\\/src\\/core\\/styles\\/themes\\/',
+          '@import (.*)node_modules\\/@robotsandpencils\\/react-robits\\/src\\/core\\/styles\\/themes\\/',
           'g'
         ),
         `@import '${relativePathToSourceDir}/styles/themes/`
@@ -112,7 +112,7 @@ const updateReferences = async ({ destinationDir, sourceDir }) => {
     fileFilter: '*.js'
   })
 
-  const jsFiles = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
+  const jsFiles = await readdirp.promise(path.resolve(__dirname, '../../../../' + sourceDir), {
     fileFilter: '*.js'
   })
 
@@ -129,7 +129,7 @@ const updateReferences = async ({ destinationDir, sourceDir }) => {
     })
   })
 
-  const scssFiles = await readdirp.promise(path.resolve(__dirname, '../../../' + sourceDir), {
+  const scssFiles = await readdirp.promise(path.resolve(__dirname, '../../../../' + sourceDir), {
     fileFilter: '*.scss'
   })
 

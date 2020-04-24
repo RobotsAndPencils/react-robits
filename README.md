@@ -1,5 +1,5 @@
 <h1>
-  React Robits <img align="right" width="300" src="robits.png">
+  React Robits <img align="right" width="300" src="https://github.com/RobotsAndPencils/react-robits/raw/master/robits.png">
 </h1>
 A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and build off each other.
 
@@ -59,7 +59,7 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 
 We'll lean on Github Issues and PR's for tracking and managing problems and enhancements, but the higher level branching/merging/publish strategy is still TBD. Reach out to David Fagan if you want to get involved.
 
-###### In order to properly maintain the library, there are a set of conventions that MUST be upheld. Read the [Tech Doc](./TECH.md) to learn more
+###### In order to properly maintain the library, there are a set of conventions that MUST be upheld. Read the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/raw/master/TECH.md) to learn more
 
 #### Available Scripts
 
@@ -96,11 +96,11 @@ There are a few key pieces to include in your project's webpack config.
           ...project tokens...
           `${path.resolve(
             __dirname,
-            'node_modules/react-robits/src/core/styles/tokens'
+            'node_modules/@robotsandpencils/react-robits/src/core/styles/tokens'
           )}/**/*.scss`,
           path.resolve(
             __dirname,
-            'node_modules/react-robits/src/core/styles/themes/talentPortal/tokens.scss'
+            'node_modules/@robotsandpencils/react-robits/src/core/styles/themes/talentPortal/tokens.scss'
           )
           ...additional project overrides as needed...
         ] // the ordering here is important, just like normal SCSS
@@ -117,7 +117,7 @@ So to make sure `babel` runs against the components being imported from React Ro
 ```
 {
   test: /\.(js|jsx)$/,
-  include: `${path.resolve(__dirname, 'node_modules/react-robits')}`,
+  include: `${path.resolve(__dirname, 'node_modules/@robotsandpencils/react-robits')}`,
   loader: 'babel-loader'
 }
 ```
@@ -127,7 +127,7 @@ or
 ```
 {
   test: /\.(js|jsx)$/,
-  exclude: /node_modules\/(?!react-robits)/,
+  exclude: /node_modules\/(?!@robotsandpencils/react-robits)/,
   use: 'babel-loader'
 }
 ```
@@ -159,12 +159,12 @@ The net result is that the files from this library will be copied over to your p
 To do this, run:
 
 ```
-node ./node_modules/react-robits/ejectionScripts/eject
+node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/eject
 ```
 
 from the root of your project, and follow the prompts. It will cycle through a set of Node scripts to break the ball-and-chain.
 
-For more information, see the [Tech Doc](./TECH.md)
+For more information, see the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/raw/master/TECH.md)
 
 ## Storybook Deployment
 
