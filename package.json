@@ -1,6 +1,6 @@
 {
   "name": "@robotsandpencils/react-robits",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "R&P's reuseable, themeable React components",
   "main": "index.js",
   "engines": {
