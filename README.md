@@ -59,7 +59,7 @@ Think customizable. Every component should have an "unstyled" stylesheet that no
 
 We'll lean on Github Issues and PR's for tracking and managing problems and enhancements, but the higher level branching/merging/publish strategy is still TBD. Reach out to David Fagan if you want to get involved.
 
-###### In order to properly maintain the library, there are a set of conventions that MUST be upheld. Read the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/raw/master/TECH.md) to learn more
+###### In order to properly maintain the library, there are a set of conventions that MUST be upheld. Read the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/blob/master/TECH.md) to learn more
 
 #### Available Scripts
 
@@ -164,7 +164,9 @@ node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/eject
 
 from the root of your project, and follow the prompts. It will cycle through a set of Node scripts to break the ball-and-chain.
 
-For more information, see the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/raw/master/TECH.md)
+_**Note:** after successfully ejecting, you will need to update your Sass Resources Loader configuration to point to the new location of the style tokens. Then restart the app._
+
+For more information, see the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/blob/master/TECH.md)
 
 ## Storybook Deployment
 

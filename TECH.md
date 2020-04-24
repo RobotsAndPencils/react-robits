@@ -74,7 +74,7 @@ _Nuances:_
 
 ## Sass Resources Loader and Themes setup
 
-This library is set up with [CSS Modules](https://github.com/css-modules/css-modules) and leverage [Sass Resources Loader](https://github.com/shakacode/sass-resources-loader), which is a nice little tool that automatically `@imports` each .scss file found at the targeted location into any SCSS file matching the Webpack rule (excluding the resource files themselves), which you can see configured in `./.storybook/main.js`. This just saves some typing and helps centralize shared tokens. These configurations should be mirrored at the project level, see "Using Robits in Your Project" on the [README](https://github.com/RobotsAndPencils/react-robits/raw/master/README.md)
+This library is set up with [CSS Modules](https://github.com/css-modules/css-modules) and leverage [Sass Resources Loader](https://github.com/shakacode/sass-resources-loader), which is a nice little tool that automatically `@imports` each .scss file found at the targeted location into any SCSS file matching the Webpack rule (excluding the resource files themselves), which you can see configured in `./.storybook/main.js`. This just saves some typing and helps centralize shared tokens. These configurations should be mirrored at the project level, see "Using Robits in Your Project" on the [README](https://github.com/RobotsAndPencils/react-robits/blob/master/README.md)
 
 Couple things to note:
 
@@ -107,6 +107,7 @@ Below are the Node scripts and a summary of what they do:
 
 _Nuances:_
 
+- After successfully ejecting, you will need to update your Sass Resources Loader configuration to point to the new location of the style tokens. Then restart the app.
 - The success of the reference updates within your project files depends on the format of the import statements:
 
 ```
