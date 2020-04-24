@@ -73,20 +73,20 @@ We'll lean on Github Issues and PR's for tracking and managing problems and enha
 To pull the library into your project, run the following command line in the root of your project directory:
 
 ```
-npm install --save git+https://github.com/RobotsAndPencils/react-robits.git#[branch-name-of-desired-theme]
+npm i --save @robotsandpencils/react-robits
 ```
 
 _Note_: this package will need reinstalled to grab updates. To do so, it's recommended to set up a shortcut script in your project's `package.json` for ease-of-use:
 
 ```
-  "install-robits": "npm i --save git+https://github.com/RobotsAndPencils/react-robits.git#[branch-name-of-desired-theme]"
+  "install-robits": "npm i --save @robotsandpencils/react-robits"
 ```
 
 ### Webpack Config
 
 There are a few key pieces to include in your project's webpack config.
 
-1. Point a Sass Resources Loader configuration to the files contained within the design system package's `./shared/styles` directory. Order matters here, so make sure to include the design system directory before the project directory, if it also relies on this tool
+1. Point a Sass Resources Loader configuration to the files contained within the package's `./src/core/styles/tokens` directory and `./src/core/styles/themes/[themeName]/tokens.scss` file. Order matters here, take care to be intentional with the ordering of the pointers in the array
 
 ```js
 {
