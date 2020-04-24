@@ -1,10 +1,11 @@
 import React from 'react'
+import { useCallback } from '@storybook/client-api'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormAutocomplete, {
   FormAutocomplete as FormAutocompleteComponent
-} from '../../lib/components/formAutocomplete/FormAutocomplete'
+} from '../../core/components/formAutocomplete/FormAutocomplete'
 import { states } from '../pages/testData'
-import FormInputAddon from '../../lib/components/formInput/FormInputAddon'
+import FormInputAddon from '../../core/components/formInput/FormInputAddon'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {
@@ -25,10 +26,10 @@ export default {
   component: FormAutocompleteComponent
 }
 
-export const Normal = ({ theme }) => {
-  const handleSelection = selection => {
+export const Normal = ({ themeName }) => {
+  const handleSelection = useCallback(selection => {
     console.log('selection made', selection)
-  }
+  }, [])
 
   let componentKnobs = {
     disabled: boolean('Disabled', false),
@@ -51,14 +52,14 @@ export const Normal = ({ theme }) => {
         {...componentKnobs}
         labelKey='name'
         onChange={handleSelection}
-        theme={theme}
+        themeName={themeName}
         options={states}
       />
     </>
   )
 }
 
-export const Addons = ({ theme }) => {
+export const Addons = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -78,9 +79,9 @@ export const Addons = ({ theme }) => {
       <FormAutocomplete
         id='autocomplete-example-1'
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         placeholder='Prepender'>
-        <FormInputAddon type='prepend' theme={theme}>
+        <FormInputAddon type='prepend' themeName={themeName}>
           $
         </FormInputAddon>
       </FormAutocomplete>
@@ -88,9 +89,9 @@ export const Addons = ({ theme }) => {
       <FormAutocomplete
         id='autocomplete-example-2'
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         placeholder='Appender'>
-        <FormInputAddon type='append' theme={theme}>
+        <FormInputAddon type='append' themeName={themeName}>
           $
         </FormInputAddon>
       </FormAutocomplete>
@@ -98,12 +99,12 @@ export const Addons = ({ theme }) => {
       <FormAutocomplete
         id='autocomplete-example-3'
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         placeholder='Both'>
-        <FormInputAddon type='prepend' theme={theme}>
+        <FormInputAddon type='prepend' themeName={themeName}>
           $
         </FormInputAddon>
-        <FormInputAddon type='append' theme={theme}>
+        <FormInputAddon type='append' themeName={themeName}>
           .00
         </FormInputAddon>
       </FormAutocomplete>
@@ -111,9 +112,9 @@ export const Addons = ({ theme }) => {
       <FormAutocomplete
         id='autocomplete-example-4'
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         placeholder='Leading'>
-        <FormInputAddon type='leading' theme={theme}>
+        <FormInputAddon type='leading' themeName={themeName}>
           <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'
@@ -134,9 +135,9 @@ export const Addons = ({ theme }) => {
       <FormAutocomplete
         id='autocomplete-example-5'
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         placeholder='Leading'>
-        <FormInputAddon type='trailing' theme={theme}>
+        <FormInputAddon type='trailing' themeName={themeName}>
           <svg
             version='1.1'
             xmlns='http://www.w3.org/2000/svg'

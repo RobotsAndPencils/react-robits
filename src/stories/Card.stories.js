@@ -1,8 +1,8 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { text } from '@storybook/addon-knobs'
-import Card, { Card as CardComponent } from '../lib/components/card/Card'
-import CardBody from '../lib/components/card/CardBody'
+import Card, { Card as CardComponent } from '../core/components/card/Card'
+import CardBody from '../core/components/card/CardBody'
 
 const reconcileCorners = componentKnobs => {
   const cornersStyle = {
@@ -23,7 +23,7 @@ export default {
   component: CardComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     header: text('Header', 'Card Header'),
     footer: text('Footer', 'Card Footer')
@@ -31,8 +31,8 @@ export const Normal = ({ theme }) => {
   componentKnobs = reconcileCorners(componentKnobs)
 
   return (
-    <Card {...componentKnobs} theme={theme} onClick={action('clicked')}>
-      <CardBody theme={theme}>Card One</CardBody>
+    <Card {...componentKnobs} themeName={themeName} onClick={action('clicked')}>
+      <CardBody themeName={themeName}>Card One</CardBody>
     </Card>
   )
 }

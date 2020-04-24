@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { addDecorator, addParameters } from '@storybook/react'
 import { withContexts } from '@storybook/addon-contexts/react'
@@ -28,7 +28,7 @@ const rnpTheme = create({
 })
 
 const ThemeDefiner = React.createContext({
-  theme: 'talentPortal'
+  themeName: 'talentPortal'
 })
 
 const topLevelContexts = [
@@ -40,13 +40,13 @@ const topLevelContexts = [
       {
         name: 'Unstyled',
         props: {
-          value: { theme: 'unstyled' }
+          value: { themeName: 'unstyled' }
         }
       },
       {
         name: 'Talent Portal',
         props: {
-          value: { theme: 'talentPortal' }
+          value: { themeName: 'talentPortal' }
         },
         default: true
       }
@@ -58,12 +58,16 @@ const topLevelContexts = [
 ]
 
 const ContextDecorator = storyFn => {
+  const [count, setCount] = useState(0)
+
   return (
     <ThemeDefiner.Consumer>
-      {({ theme }) => (
+      {({ themeName }) => (
         <>
-          <GlobalStyles theme={theme} />
-          <div style={{ padding: '30px' }}>{storyFn({ theme })}</div>
+          <button onClick={() => setCount(count + 1)}>Rerender Parent</button>{' '}
+          <small>Count: {count}</small>
+          <GlobalStyles themeName={themeName} />
+          <div style={{ padding: '30px' }}>{storyFn({ themeName, count })}</div>
         </>
       )}
     </ThemeDefiner.Consumer>

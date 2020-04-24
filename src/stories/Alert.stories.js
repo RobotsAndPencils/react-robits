@@ -1,9 +1,8 @@
 import React from 'react'
 import { useState } from '@storybook/client-api'
-import { action } from '@storybook/addon-actions'
 import { boolean } from '@storybook/addon-knobs'
-import Alert, { Alert as AlertComponent } from '../lib/components/alert/Alert'
-import Button from '../lib/components/button/Button'
+import Alert, { Alert as AlertComponent } from '../core/components/alert/Alert'
+import Button from '../core/components/button/Button'
 
 export default {
   title: 'Robits/Alert',
@@ -14,7 +13,7 @@ const remove = () => {
   console.log('removing / cleanup')
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     centered: boolean('Centered', true),
     dismissible: boolean('Dismissible', false),
@@ -23,14 +22,19 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Alert id='primary-example' removeHandler={remove} {...componentKnobs} styleType='primary'>
+      <Alert
+        themeName={themeName}
+        id='primary-example'
+        removeHandler={remove}
+        {...componentKnobs}
+        styleType='primary'>
         Hello Alert
       </Alert>
       <Alert
         id='secondary-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='secondary'>
         Hello Alert
       </Alert>
@@ -38,7 +42,7 @@ export const Normal = ({ theme }) => {
         id='success-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='success'>
         Hello Alert
       </Alert>
@@ -46,7 +50,7 @@ export const Normal = ({ theme }) => {
         id='info-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='info'>
         Hello Alert
       </Alert>
@@ -54,7 +58,7 @@ export const Normal = ({ theme }) => {
         id='warning-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='warning'>
         Hello Alert
       </Alert>
@@ -62,7 +66,7 @@ export const Normal = ({ theme }) => {
         id='danger-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='danger'>
         Hello Alert
       </Alert>
@@ -70,7 +74,7 @@ export const Normal = ({ theme }) => {
         id='light-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='light'>
         Hello Alert
       </Alert>
@@ -78,7 +82,7 @@ export const Normal = ({ theme }) => {
         id='dark-example'
         removeHandler={remove}
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         styleType='dark'>
         Hello Alert
       </Alert>
@@ -86,7 +90,7 @@ export const Normal = ({ theme }) => {
   )
 }
 
-export const SelfDismissing = ({ theme }) => {
+export const SelfDismissing = ({ themeName }) => {
   const [visible, setVisible] = useState(false)
 
   const showAlert = () => {
@@ -98,13 +102,15 @@ export const SelfDismissing = ({ theme }) => {
       <Alert
         id='auto-dismiss-example'
         open={visible}
-        theme={theme}
+        themeName={themeName}
         autoDismissDelay={4000}
         removeHandler={id => console.log('removing', id)}
         styleType='success'>
         Your request was successful! (4 seconds)
       </Alert>
-      <Button onClick={showAlert}>Submit</Button>
+      <Button themeName={themeName} onClick={showAlert}>
+        Submit
+      </Button>
     </>
   )
 }

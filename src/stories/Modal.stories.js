@@ -1,18 +1,18 @@
 import React from 'react'
 import { useState } from '@storybook/client-api'
 import { text, boolean, select } from '@storybook/addon-knobs'
-import Modal, { Modal as ModalComponent } from '../lib/components/modal/Modal'
-import ModalBody from '../lib/components/modal/ModalBody'
-import ModalHeader from '../lib/components/modal/ModalHeader'
-import ModalFooter from '../lib/components/modal/ModalFooter'
-import Button from '../lib/components/button/Button'
+import Modal, { Modal as ModalComponent } from '../core/components/modal/Modal'
+import ModalBody from '../core/components/modal/ModalBody'
+import ModalHeader from '../core/components/modal/ModalHeader'
+import ModalFooter from '../core/components/modal/ModalFooter'
+import Button from '../core/components/button/Button'
 
 export default {
   title: 'Robits/Modal',
   component: ModalComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const componentKnobs = {
     closeOnBackdropClick: boolean('Close on Backdrop Click', true),
     size: select('Size', ['sm', 'md', 'lg'], 'md'),
@@ -32,16 +32,17 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Button theme={theme} onClick={() => setModalOpen(true)}>
+      <Button themeName={themeName} onClick={() => setModalOpen(true)}>
         Open Modal
       </Button>
       <Modal
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
         open={modalOpen}
         toggleModal={() => setModalOpen(!modalOpen)}>
         {header ? (
           <ModalHeader
+            themeName={themeName}
             withBorder={withHeaderBorder}
             withCloseButton={withCloseButton}
             closeModal={() => setModalOpen(!modalOpen)}>
@@ -50,8 +51,8 @@ export const Normal = ({ theme }) => {
         ) : (
           []
         )}
-        <ModalBody theme={theme}>Hello World</ModalBody>
-        {footer ? <ModalFooter>{footer}</ModalFooter> : []}
+        <ModalBody themeName={themeName}>Hello World</ModalBody>
+        {footer ? <ModalFooter themeName={themeName}>{footer}</ModalFooter> : []}
       </Modal>
     </>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
-import Collapse, { Collapse as CollapseComponent } from '../lib/components/Collapse'
-import Button from '../lib/components/button/Button'
+import Collapse, { Collapse as CollapseComponent } from '../core/utils/Collapse'
+import Button from '../core/components/button/Button'
 import { useState } from '@storybook/client-api'
 
 export default {
@@ -8,11 +8,13 @@ export default {
   component: CollapseComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
-      <Button onClick={() => setIsOpen(!isOpen)}>Toggle</Button>
+      <Button themeName={themeName} onClick={() => setIsOpen(!isOpen)}>
+        Toggle
+      </Button>
       <Collapse open={isOpen}>
         <div
           style={{

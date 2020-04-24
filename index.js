@@ -3,17 +3,13 @@ function _interopRequireDefault (obj) {
   return obj && obj.__esModule ? obj : { default: obj }
 }
 
-// var _PrimaryButton1 = require('./lib/atoms/buttons/primaryButton/PrimaryButton')
-// var _PrimaryButton2 = _interopRequireDefault(_PrimaryButton1)
+// var _Button = require('./src/core/button/Button')
+// var _Button2 = _interopRequireDefault(_Button)
 
-// var _SecondaryButton1 = require('./lib/atoms/buttons/secondaryButton/SecondaryButton')
-// var _SecondaryButton2 = _interopRequireDefault(_SecondaryButton1)
-
-// exports.PrimaryButton = _PrimaryButton2['default']
-// exports.SecondaryButton = _SecondaryButton2['default']
+// exports.Button = _Button2['default']
 
 // find components
-const req = require.context('./src/lib', true, /.js$/)
+const req = require.context('./src/core', true, /.js$/)
 
 var regex = /[^\\\\\/]+(?=\.[\w]+$)|[^\\\\\/]+$/ // eslint-disable-line
 

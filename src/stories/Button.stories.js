@@ -1,8 +1,8 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { boolean, select } from '@storybook/addon-knobs'
-import Button, { Button as ButtonComponent } from '../lib/components/button/Button'
-import ButtonGroup from '../lib/components/buttonGroup/ButtonGroup'
+import Button, { Button as ButtonComponent } from '../core/components/button/Button'
+import ButtonGroup from '../core/components/buttonGroup/ButtonGroup'
 
 const reconcileCorners = componentKnobs => {
   const cornersStyle = {
@@ -10,7 +10,7 @@ const reconcileCorners = componentKnobs => {
     pill: false
   }
 
-  if (componentKnobs.corners !== 'Normal') {
+  if (componentKnobs.corners !== 'normal') {
     cornersStyle[componentKnobs.corners] = true
   }
 
@@ -23,7 +23,7 @@ export default {
   component: ButtonComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     isLoading: boolean('Loading', false),
     disabled: boolean('Disabled', false),
@@ -36,87 +36,119 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <Button {...componentKnobs} theme={theme} styleType='primary' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='secondary' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='success' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='info' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='warning' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='danger' onClick={action('clicked')}>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='primary'
+        onClick={action('clicked')}>
         Hello Button
       </Button>
       <Button
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
+        styleType='secondary'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='success'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='info'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='warning'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='danger'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
         styleType='primary'
         ghost
         onClick={action('clicked')}>
         Hello Button
       </Button>
-      <Button {...componentKnobs} theme={theme} styleType='light' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} styleType='dark' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-    </>
-  )
-}
-
-export const Sizes = ({ theme }) => {
-  let componentKnobs = {
-    isLoading: boolean('Loading', false),
-    disabled: boolean('Disabled', false),
-    corners: select('Corners Style', ['normal', 'pill', 'squared'], 'normal'),
-    outline: boolean('Outlined', false),
-    active: boolean('Active', false),
-    tag: select('Tag', ['button', 'a'], 'button')
-  }
-  componentKnobs = reconcileCorners(componentKnobs)
-
-  return (
-    <>
-      <Button {...componentKnobs} theme={theme} size='lg' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} onClick={action('clicked')}>
-        Hello Button
-      </Button>
-      <Button {...componentKnobs} theme={theme} size='sm' onClick={action('clicked')}>
-        Hello Button
-      </Button>
-    </>
-  )
-}
-
-export const Block = ({ theme }) => {
-  let componentKnobs = {
-    isLoading: boolean('Loading', false),
-    disabled: boolean('Disabled', false),
-    corners: select('Corners Style', ['normal', 'pill', 'squared'], 'normal'),
-    outline: boolean('Outlined', false),
-    active: boolean('Active', false),
-    tag: select('Tag', ['button', 'a'], 'button')
-  }
-  componentKnobs = reconcileCorners(componentKnobs)
-
-  return (
-    <>
-      <Button {...componentKnobs} theme={theme} block onClick={action('clicked')}>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
+        styleType='light'
+        onClick={action('clicked')}>
         Hello Button
       </Button>
       <Button
         {...componentKnobs}
-        theme={theme}
+        themeName={themeName}
+        styleType='dark'
+        onClick={action('clicked')}>
+        Hello Button
+      </Button>
+    </>
+  )
+}
+
+export const Sizes = ({ themeName }) => {
+  let componentKnobs = {
+    isLoading: boolean('Loading', false),
+    disabled: boolean('Disabled', false),
+    corners: select('Corners Style', ['normal', 'pill', 'squared'], 'normal'),
+    outline: boolean('Outlined', false),
+    active: boolean('Active', false),
+    tag: select('Tag', ['button', 'a'], 'button')
+  }
+  componentKnobs = reconcileCorners(componentKnobs)
+
+  return (
+    <>
+      <Button {...componentKnobs} themeName={themeName} size='lg' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} themeName={themeName} onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button {...componentKnobs} themeName={themeName} size='sm' onClick={action('clicked')}>
+        Hello Button
+      </Button>
+    </>
+  )
+}
+
+export const Block = ({ themeName }) => {
+  let componentKnobs = {
+    isLoading: boolean('Loading', false),
+    disabled: boolean('Disabled', false),
+    corners: select('Corners Style', ['normal', 'pill', 'squared'], 'normal'),
+    outline: boolean('Outlined', false),
+    active: boolean('Active', false),
+    tag: select('Tag', ['button', 'a'], 'button')
+  }
+  componentKnobs = reconcileCorners(componentKnobs)
+
+  return (
+    <>
+      <Button {...componentKnobs} themeName={themeName} block onClick={action('clicked')}>
+        Hello Button
+      </Button>
+      <Button
+        {...componentKnobs}
+        themeName={themeName}
         block
         styleType='secondary'
         onClick={action('clicked')}>
@@ -126,19 +158,19 @@ export const Block = ({ theme }) => {
   )
 }
 
-export const Groups = ({ theme }) => {
+export const Groups = ({ themeName }) => {
   const vertical = boolean('Vertical', false)
   const size = select('Size', ['sm', 'md', 'lg'], 'md')
 
   return (
-    <ButtonGroup vertical={vertical} theme={theme}>
-      <Button theme={theme} size={size} styleType='success' onClick={action('Positive')}>
+    <ButtonGroup vertical={vertical} themeName={themeName}>
+      <Button themeName={themeName} size={size} styleType='success' onClick={action('Positive')}>
         Positive
       </Button>
-      <Button theme={theme} size={size} styleType='secondary' onClick={action('Neutral')}>
+      <Button themeName={themeName} size={size} styleType='secondary' onClick={action('Neutral')}>
         Neutral
       </Button>
-      <Button theme={theme} size={size} styleType='danger' onClick={action('Negative')}>
+      <Button themeName={themeName} size={size} styleType='danger' onClick={action('Negative')}>
         Negative
       </Button>
     </ButtonGroup>

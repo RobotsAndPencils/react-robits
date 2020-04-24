@@ -2,7 +2,7 @@ import React from 'react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import FormSelect, {
   FormSelect as FormSelectComponent
-} from '../../lib/components/formSelect/FormSelect'
+} from '../../core/components/formSelect/FormSelect'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {
@@ -23,7 +23,7 @@ export default {
   component: FormSelectComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -38,7 +38,7 @@ export const Normal = ({ theme }) => {
 
   return (
     <>
-      <FormSelect {...componentKnobs} theme={theme}>
+      <FormSelect {...componentKnobs} themeName={themeName}>
         <option value='one'>One</option>
         <option value='two'>Two</option>
         <option value='three'>Three</option>
@@ -47,7 +47,7 @@ export const Normal = ({ theme }) => {
   )
 }
 
-export const Sizes = ({ theme }) => {
+export const Sizes = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -62,17 +62,17 @@ export const Sizes = ({ theme }) => {
 
   return (
     <>
-      <FormSelect {...componentKnobs} size='lg' theme={theme}>
+      <FormSelect {...componentKnobs} size='lg' themeName={themeName}>
         <option value='one'>One</option>
         <option value='two'>Two</option>
         <option value='three'>Three</option>
       </FormSelect>
-      <FormSelect {...componentKnobs} theme={theme}>
+      <FormSelect {...componentKnobs} themeName={themeName}>
         <option value='one'>One</option>
         <option value='two'>Two</option>
         <option value='three'>Three</option>
       </FormSelect>
-      <FormSelect {...componentKnobs} size='sm' theme={theme}>
+      <FormSelect {...componentKnobs} size='sm' themeName={themeName}>
         <option value='one'>One</option>
         <option value='two'>Two</option>
         <option value='three'>Three</option>

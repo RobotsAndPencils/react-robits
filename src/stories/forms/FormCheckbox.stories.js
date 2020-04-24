@@ -1,9 +1,9 @@
 import React from 'react'
-import { boolean, select, text, color } from '@storybook/addon-knobs'
+import { boolean, select, text } from '@storybook/addon-knobs'
 import FormCheckbox, {
   FormCheckbox as FormCheckboxComponent
-} from '../../lib/components/formCheckbox/FormCheckbox'
-import colors from '../../lib/styles/themes/talentPortal/themeColors.module.scss'
+} from '../../core/components/formCheckbox/FormCheckbox'
+import colors from '../../core/styles/themes/talentPortal/themeColors.module.scss'
 
 const reconcileValidity = componentKnobs => {
   const validityStyles = {
@@ -24,7 +24,7 @@ export default {
   component: FormCheckboxComponent
 }
 
-export const Normal = ({ theme }) => {
+export const Normal = ({ themeName }) => {
   let componentKnobs = {
     toggle: boolean('As Toggle', false),
     disabled: boolean('Disabled', false),
@@ -39,13 +39,13 @@ export const Normal = ({ theme }) => {
   return (
     <>
       <label>Options:</label>
-      <FormCheckbox id='story_check_1' {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_1' {...componentKnobs} themeName={themeName}>
         Checkbox 1
       </FormCheckbox>
-      <FormCheckbox id='story_check_2' {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_2' {...componentKnobs} themeName={themeName}>
         Checkbox 2
       </FormCheckbox>
-      <FormCheckbox id='story_check_3' {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_3' {...componentKnobs} themeName={themeName}>
         Checkbox 3
       </FormCheckbox>
     </>
@@ -54,7 +54,7 @@ export const Normal = ({ theme }) => {
 
 const colorKeys = Object.keys(colors).map(key => key.replace('x_', ''))
 colorKeys.unshift('none')
-export const Toggles = ({ theme }) => {
+export const Toggles = ({ themeName }) => {
   let componentKnobs = {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
@@ -74,13 +74,13 @@ export const Toggles = ({ theme }) => {
   return (
     <>
       <label>Options:</label>
-      <FormCheckbox id='story_check_1' toggle {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_1' toggle {...componentKnobs} themeName={themeName}>
         Checkbox 1
       </FormCheckbox>
-      <FormCheckbox id='story_check_2' toggle {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_2' toggle {...componentKnobs} themeName={themeName}>
         Checkbox 2
       </FormCheckbox>
-      <FormCheckbox id='story_check_3' toggle {...componentKnobs} theme={theme}>
+      <FormCheckbox id='story_check_3' toggle {...componentKnobs} themeName={themeName}>
         Checkbox 3
       </FormCheckbox>
     </>
