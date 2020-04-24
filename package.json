@@ -1,8 +1,8 @@
 {
-  "name": "react-robits",
+  "name": "@rnp/react-robits",
   "version": "1.0.0",
   "private": true,
-  "description": "R&P common React ui components",
+  "description": "R&P's reuseable, themeable React components",
   "main": "index.js",
   "engines": {
     "node": "11.x"
