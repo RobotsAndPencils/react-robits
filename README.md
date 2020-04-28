@@ -154,7 +154,7 @@ _Note: you can use a combination of the 2, to set up a default and override it a
 
 Ejecting Robits is lever designed to either a) give you full control over the code for customizations, and/or b) decouple from the library to elimintate the dependency. This could be done at the very beginning of the project, as an initial bootstrap, or at the final stage of a project, after having been wired in for the entirety of development, to avoid giving the magic trick away to a client.
 
-The net result is that the files from this library will be copied over to your project, effectively transferring ownership, and erase any notion of the `react-robit` as a dependent package.
+The net result is that the files from this library will be copied over to your project, effectively transferring ownership, and erase any notion of the `react-robits` as a dependent package.
 
 To do this, run:
 
@@ -205,4 +205,4 @@ Or visit https://react-robits.herokuapp.com
 
 ## Media
 
-Check out the [Blog Post](https://robotsandpencils.blogin.co/show-category.php?id=26583) for a detailed article of the thought process and journey to this repo
+Check out the [Blog Post](https://robotsandpencils.blogin.co/single-post.php?id=95857) for a detailed article of the thought process and journey to this repo
