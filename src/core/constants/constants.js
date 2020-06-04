@@ -75,3 +75,21 @@ export const TRANSITION_CLASS_MAP = {
   [TRANSITION_STATUS.EXITING]: 'collapsing',
   [TRANSITION_STATUS.EXITED]: 'collapse'
 }
+
+export const POPPER_PLACEMENTS = [
+  'top-start',
+  'top',
+  'top-end',
+  'right-start',
+  'right',
+  'right-end',
+  'bottom-end',
+  'bottom',
+  'bottom-start',
+  'left-end',
+  'left',
+  'left-start',
+  'auto-start',
+  'auto',
+  'auto-end'
+]
