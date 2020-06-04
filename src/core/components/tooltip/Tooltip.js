@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { omit } from 'lodash'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 
 import { TIMEOUT, EVENTS, POPPER_PLACEMENTS } from '../../constants/constants'
@@ -8,101 +9,81 @@ import PopperManager from '../../utils/PopperManager'
 import domUtils from '../../utils/domUtils'
 
 /**
- * Tooltips offer streamlined incremental content, are powered behind the scenes by Popper.js, and can be attached to any element.
+ * Tooltips are powerful components powered behind the scenes by Popper.js that can be attached to any element.
  */
+export class Tooltip extends React.Component {
+  constructor (props) {
+    super(props)
 
-export const Tooltip = ({
-  arrowClassName,
-  autohide = true,
-  boundariesElement,
-  className,
-  container,
-  delay = {
-    show: 0,
-    hide: 0
-  },
-  disabled = false,
-  innerClassName,
-  modifiers,
-  noArrow = false,
-  offset,
-  open = false,
-  placement = 'top',
-  placementPrefix = 'bs-tooltip',
-  styling,
-  target,
-  toggle = () => {},
-  trigger = 'hover',
-  ...rest
-}) => {
-  let _target = null
-  let _hideTimeout = null
-  let _showTimeout = null
+    this._target = null
+    this._hideTimeout = null
+    this._showTimeout = null
+  }
 
-  useEffect(() => {
-    _target = domUtils.getTarget(target)
-    addListeners()
+  componentDidMount () {
+    this._target = domUtils.getTarget(this.props.target)
+    this.addListeners()
+  }
 
-    return () => {
-      clearTimeout(_hideTimeout)
-      clearTimeout(_showTimeout)
-      removeListeners()
-    }
-  }, [])
+  componentWillUnmount () {
+    clearTimeout(this._hideTimeout)
+    clearTimeout(this._showTimeout)
+    this.removeListeners()
+  }
 
-  const addListeners = () => {
-    const triggers = trigger.trim().split(/\s+/)
+  addListeners = () => {
+    const triggers = this.props.trigger.trim().split(/\s+/)
 
     triggers.forEach(trigger => {
       switch (trigger) {
         case 'click':
-          EVENTS.CLICK.forEach(e => document.addEventListener(e, handleEvent))
+          EVENTS.CLICK.forEach(e => document.addEventListener(e, this))
           break
 
         case 'hover':
-          EVENTS.MOUSE.forEach(e => _target.addEventListener(e, handleEvent))
+          EVENTS.MOUSE.forEach(e => this._target.addEventListener(e, this))
           break
 
         case 'focus':
-          EVENTS.FOCUS.forEach(e => _target.addEventListener(e, handleEvent))
+          EVENTS.FOCUS.forEach(e => this._target.addEventListener(e, this))
           break
 
         default:
           break
       }
-    })
+    }, this)
   }
 
-  const removeListeners = () => {
+  removeListeners = () => {
     EVENTS.CLICK.forEach(e => document.removeEventListener(e, this), this)
-    EVENTS.MOUSE.concat(EVENTS.FOCUS).forEach(e => _target.removeEventListener(e, this), this)
+    EVENTS.MOUSE.concat(EVENTS.FOCUS).forEach(e => this._target.removeEventListener(e, this), this)
   }
 
-  const handleEvent = e => {
-    if (disabled || _target === null) {
+  handleEvent = e => {
+    if (this.props.disabled || this._target === null) {
       return
     }
 
     switch (e.type) {
       case 'click':
       case 'touchstart':
-        handleClick(e)
+        this.handleClick(e)
         break
 
       case 'mouseenter':
-        handleMouseEnter(e)
+        this.handleMouseEnter(e)
         break
 
       case 'mouseleave':
-        handleMouseLeave(e)
+        this.handleMouseLeave(e)
         break
 
       case 'focusin':
-        show(e)
+        this.show(e)
         break
 
       case 'focusout':
-        hide(e)
+        this.hide(e)
         break
 
       default:
@@ -110,132 +91,160 @@ export const Tooltip = ({
     }
   }
 
-  const handleClick = e => {
-    if (_target !== null && (e.target === _target || _target.contains(e.target))) {
-      if (_hideTimeout) {
-        clearTimeout(_hideTimeout)
+  handleClick = e => {
+    if (this._target !== null && (e.target === this._target || this._target.contains(e.target))) {
+      if (this._hideTimeout) {
+        clearTimeout(this._hideTimeout)
       }
 
-      if (!open) {
-        handleToggle(e)
+      if (!this.props.open) {
+        this.toggle(e)
       }
 
       return
     }
 
-    if (open && e.target.getAttribute('role') !== 'tooltip') {
-      if (_showTimeout) {
-        clearTimeout(_showTimeout)
+    if (this.props.open && e.target.getAttribute('role') !== 'tooltip') {
+      if (this._showTimeout) {
+        clearTimeout(this._showTimeout)
       }
 
-      _hideTimeout = setTimeout(hide, getDelay('hide'))
+      this._hideTimeout = setTimeout(this.hide.bind(this, e), this.getDelay('hide'))
     }
   }
 
-  const handleMouseEnter = e => {
-    if (_hideTimeout) {
-      clearTimeout(_hideTimeout)
+  handleMouseEnter = e => {
+    if (this._hideTimeout) {
+      clearTimeout(this._hideTimeout)
     }
 
-    _showTimeout = setTimeout(show, getDelay('show'))
+    this._showTimeout = setTimeout(this.show.bind(this, e), this.getDelay('show'))
   }
 
-  const handleMouseLeave = e => {
-    console.log('handleMouseLeave')
-    if (_showTimeout) {
-      clearTimeout(_showTimeout)
+  handleMouseLeave = e => {
+    if (this._showTimeout) {
+      clearTimeout(this._showTimeout)
     }
 
-    _hideTimeout = setTimeout(hide, getDelay('hide'))
+    this._hideTimeout = setTimeout(this.hide.bind(this, e), this.getDelay('hide'))
   }
 
-  const handleMouseOverContent = () => {
-    if (autohide) {
+  handleMouseOverContent = () => {
+    if (this.props.autohide) {
       return
     }
 
-    if (_hideTimeout) {
-      clearTimeout(_hideTimeout)
+    if (this._hideTimeout) {
+      clearTimeout(this._hideTimeout)
     }
   }
 
-  const handleMouseLeaveContent = e => {
-    if (autohide) {
+  handleMouseLeaveContent = e => {
+    if (this.props.autohide) {
       return
     }
 
-    if (_showTimeout) {
-      clearTimeout(_showTimeout)
+    if (this._showTimeout) {
+      clearTimeout(this._showTimeout)
     }
 
     e.persist()
-    _hideTimeout = setTimeout(hide, getDelay('hide'))
+    this._hideTimeout = setTimeout(this.hide.bind(this, e), this.getDelay('hide'))
   }
 
-  const getDelay = key => {
+  getDelay = key => {
     key = key.toUpperCase()
-    if (typeof delay === 'object') {
-      return isNaN(delay[key]) ? TIMEOUT[key] : delay[key]
+    if (typeof this.props.delay === 'object') {
+      return isNaN(this.props.delay[key]) ? TIMEOUT[key] : this.props.delay[key]
     }
 
-    return delay
+    return this.props.delay
   }
 
-  const show = e => {
-    // if (!open) {
-    clearTimeout(_showTimeout)
-    handleToggle(e)
-    // }
+  show = e => {
+    if (!this.props.open) {
+      clearTimeout(this._showTimeout)
+      this.toggle(e)
+    }
   }
 
-  const hide = e => {
-    console.log('hide', open)
-    // if (open) {
-    clearTimeout(_hideTimeout)
-    handleToggle(e)
-    // }
+  hide = e => {
+    if (this.props.open) {
+      clearTimeout(this._hideTimeout)
+      this.toggle(e)
+    }
   }
 
-  const handleToggle = e => {
-    if (disabled) {
+  toggle = e => {
+    if (this.props.disabled) {
       return e && e.preventDefault()
     }
 
-    return toggle(e)
+    return this.props.toggle(e)
   }
 
-  if (!open) {
-    return null
+  render () {
+    const _props = omit(this.props, [
+      'trigger',
+      'disabled',
+      'delay',
+      'toggle',
+      'autohide',
+      'themeName',
+      'styling'
+    ])
+    const {
+      target,
+      container,
+      open,
+      className,
+      arrowClassName,
+      innerClassName,
+      boundariesElement,
+      placement,
+      placementPrefix,
+      modifiers,
+      offset,
+      noArrow,
+      children,
+      ...attrs
+    } = _props
+
+    if (!open) {
+      return null
+    }
+
+    const classes = classNames(this.props.styling['tooltip-inner'], innerClassName)
+
+    const popperClasses = classNames(this.props.styling.tooltip, this.props.styling.show, className)
+
+    console.log(attrs)
+
+    return (
+      <PopperManager
+        styling={this.props.styling}
+        container={container}
+        className={popperClasses}
+        arrowClassName={arrowClassName || this.props.styling.arrow}
+        target={target}
+        open={open}
+        noArrow={noArrow}
+        boundariesElement={boundariesElement}
+        placement={placement}
+        placementPrefix={placementPrefix}
+        modifiers={modifiers}
+        offset={offset}>
+        <div
+          className={classes}
+          role='tooltip'
+          aria-hidden={open}
+          onMouseOver={this.handleMouseOverContent}
+          onMouseLeave={this.handleMouseLeaveContent}>
+          {children}
+        </div>
+      </PopperManager>
+    )
   }
-
-  const classes = classNames(styling['tooltip-inner'], innerClassName)
-
-  const popperClasses = classNames(styling.tooltip, styling.show, className)
-
-  return (
-    <PopperManager
-      styling={styling}
-      container={container}
-      className={popperClasses}
-      arrowClassName={arrowClassName || styling.arrow}
-      target={target}
-      open={open}
-      noArrow={noArrow}
-      boundariesElement={boundariesElement}
-      placement={placement}
-      placementPrefix={placementPrefix}
-      modifiers={modifiers}
-      offset={offset}>
-      <div
-        {...rest}
-        className={classes}
-        role='tooltip'
-        aria-hidden={open}
-        onMouseOver={handleMouseOverContent}
-        onMouseLeave={handleMouseLeaveContent}
-      />
-    </PopperManager>
-  )
 }
 
 Tooltip.propTypes = {
@@ -300,8 +309,8 @@ Tooltip.propTypes = {
   delay: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.shape({
-      show: PropTypes.number,
-      hide: PropTypes.number
+      SHOW: PropTypes.number,
+      HIDE: PropTypes.number
     })
   ]),
 
@@ -339,6 +348,21 @@ Tooltip.propTypes = {
    * Whether the tooltip should auto-hide, or not.
    */
   autohide: PropTypes.bool
+}
+
+Tooltip.defaultProps = {
+  trigger: 'hover',
+  open: false,
+  disabled: false,
+  noArrow: false,
+  placement: 'top',
+  placementPrefix: 'bs-tooltip',
+  autohide: true,
+  delay: {
+    SHOW: 0,
+    HIDE: 0
+  },
+  toggle: function () {}
 }
 
 export default ThemeWrapper(themeName => `tooltip/tooltip_${themeName}.module.scss`)(Tooltip)

@@ -1,7 +1,6 @@
 import React from 'react'
-import { useState, useRef, useEffect } from '@storybook/client-api'
-import { action } from '@storybook/addon-actions'
-import { boolean, select } from '@storybook/addon-knobs'
+import { useState, useRef } from '@storybook/client-api'
+import { boolean, select, object } from '@storybook/addon-knobs'
 import Button from '../core/components/button/Button'
 import Tooltip, { Tooltip as TooltipComponent } from '../core/components/tooltip/Tooltip'
 
@@ -13,7 +12,10 @@ export default {
 export const Normal = ({ themeName, count }) => {
   const componentKnobs = {
     disabled: boolean('Disabled', false),
-    trigger: select('Trigger', ['hover', 'click', 'focus'], 'hover')
+    trigger: select('Trigger', ['hover', 'click', 'focus'], 'hover'),
+    autohide: boolean('Autohide (ignore on-tooltip-over)', true),
+    noArrow: boolean('No Arrow', false),
+    delay: object('Delay', { SHOW: 0, HIDE: 0 })
   }
 
   const topRef = useRef(null)
@@ -29,7 +31,6 @@ export const Normal = ({ themeName, count }) => {
   })
 
   const toggle = pos => {
-    console.log('toggling')
     const newState = Object.assign({}, tooltipsState)
     newState[pos] = !newState[pos]
     setTooltipsState(newState)
