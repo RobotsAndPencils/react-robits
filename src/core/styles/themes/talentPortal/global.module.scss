@@ -25,6 +25,26 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  // override elements that don't inherit body styles in Chrome and Safari
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+
+  // hack for transparent background when autofilled in Chrome or Safari
+  // https://css-tricks.com/snippets/css/change-autocomplete-styles-webkit-browsers/
+  input {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: $white;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }

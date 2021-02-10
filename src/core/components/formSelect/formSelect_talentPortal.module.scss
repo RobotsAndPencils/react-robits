@@ -12,10 +12,12 @@ $form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
 .form-select {
   appearance: none;
   height: $form-control-height;
-  padding: $form-control-padding-y ($form-control-padding-x + $form-select-indicator-padding)
+  padding: $form-control-padding-y ($form-control-padding-x + ($form-select-indicator-padding * 2))
     $form-control-padding-y $form-control-padding-x;
-  background: $form-control-bg $form-select-indicator no-repeat right $form-control-padding-x center;
+  background: $form-control-bg $form-select-indicator no-repeat right $form-select-indicator-padding
+    center;
   background-size: $form-select-bg-size;
+  width: 100%;
 
   &:focus {
     &::-ms-value {
@@ -28,11 +30,6 @@ $form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
       // background-color: $input-bg;
     }
   }
-
-  // &[multiple],
-  // &[size]:not([size="1"]) {
-  //   padding-right: $form-select-padding-x;
-  // }
 }
 
 .form-select-sm {
@@ -41,4 +38,18 @@ $form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
 
 .form-select-lg {
   @include large-form-control;
+}
+
+.fieldset {
+  padding: 0;
+
+  legend {
+    margin-left: 1.2rem;
+  }
+
+  select {
+    border: 0;
+    height: calc(#{$form-control-height} - (#{$form-control-border-width} * 2));
+    background-color: transparent !important;
+  }
 }

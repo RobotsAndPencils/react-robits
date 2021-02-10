@@ -14,6 +14,7 @@ export const FormTextarea = React.memo(
     hintContent,
     invalid = false,
     innerRef,
+    isLabelInset = false,
     label,
     readonly = false,
     resizeable = true,
@@ -39,17 +40,16 @@ export const FormTextarea = React.memo(
       props.cols && 'inline'
     )
 
-    return (
-      <div className={containerClasses}>
-        {label ? (
-          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-            {label}
-            {required && '*'}
-          </label>
-        ) : (
-          []
-        )}
-        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+    const fieldsetClasses = classNames(
+      'form-control',
+      styling.fieldset,
+      valid && 'is-valid',
+      invalid && 'is-invalid',
+      disabled && 'disabled'
+    )
+
+    const renderTextarea = () => {
+      return (
         <textarea
           {...props}
           ref={innerRef}
@@ -57,16 +57,35 @@ export const FormTextarea = React.memo(
           readOnly={readonly}
           className={textareaClasses}
         />
+      )
+    }
+
+    return (
+      <div className={containerClasses}>
+        {label && !isLabelInset && (
+          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+            {label}
+            {required && '*'}
+          </label>
+        )}
+        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+        {isLabelInset ? (
+          <fieldset className={fieldsetClasses} tabIndex={-1}>
+            <legend>
+              {label}
+              {required && '*'}
+            </legend>
+            {renderTextarea()}
+          </fieldset>
+        ) : (
+          renderTextarea()
+        )}
         <div className='form-control-descenders'>
           <div>
             {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
             {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
           </div>
-          {required && !label && !invalid ? (
-            <div className='form-control-required'>Required</div>
-          ) : (
-            []
-          )}
+          {required && !label && !invalid && <div className='form-control-required'>Required</div>}
         </div>
       </div>
     )
@@ -121,7 +140,11 @@ FormTextarea.propTypes = {
   /**
    * Whether it is valid, or not.
    */
-  valid: PropTypes.bool
+  valid: PropTypes.bool,
+  /**
+   * If the Label should appear inside the input's border.
+   */
+  isLabelInset: PropTypes.bool
 }
 
 export default ThemeWrapper(themeName => `formTextarea/formTextarea_${themeName}.module.scss`)(

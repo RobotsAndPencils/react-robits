@@ -70,6 +70,7 @@ $custom-control-indicator-active-bg: lighten($primary, 35%) !default;
 // Form control focus state
 @mixin form-control-focus() {
   &:focus,
+  &:focus-within,
   &.focus {
     color: $form-control-focus-color;
     background-color: $form-control-focus-bg;

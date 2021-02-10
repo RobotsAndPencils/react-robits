@@ -53,6 +53,60 @@
     @include form-control-hint;
   }
 
+  fieldset.form-control {
+    font-size: 1.2rem;
+    line-height: 0;
+
+    &.is-rbt {
+      padding: 0;
+
+      legend {
+        margin-left: $form-control-padding-x;
+      }
+
+      &.form-control-sm {
+        legend {
+          margin-left: $form-control-padding-x-sm;
+        }
+      }
+
+      &.form-control-lg {
+        legend {
+          margin-left: $form-control-padding-x-lg;
+        }
+      }
+    }
+
+    legend {
+      color: $form-control-border-color;
+    }
+
+    input,
+    &.is-rbt .form-control {
+      background-color: transparent !important;
+      border: none;
+      height: 100%;
+      width: 100%;
+      font-size: $form-control-font-size;
+      line-height: $form-control-line-height;
+      color: $form-control-color;
+      box-shadow: none !important;
+
+      &:not(.rbt-input) {
+        padding: 0;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .rbt {
+      height: 100%;
+      line-height: normal;
+    }
+  }
+
   .form-control-container {
     label + [class*='form-control-hint'] {
       margin: 0 0 1rem 0;
@@ -196,8 +250,8 @@
         border-radius: $form-control-border-radius;
       }
 
-      > .input-group-leading,
-      > .input-group-trailing {
+      .input-group-leading,
+      .input-group-trailing {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -210,11 +264,11 @@
         }
       }
 
-      > .input-group-trailing {
+      .input-group-trailing {
         right: 0;
       }
 
-      > .input-group-leading {
+      .input-group-leading {
         left: 0;
       }
 
@@ -263,6 +317,7 @@
     button {
       position: relative;
       z-index: 2;
+      height: 100%;
     }
 
     button + button,

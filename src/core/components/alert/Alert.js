@@ -40,6 +40,22 @@ export const Alert = ({
     }, TIMEOUT.FADE + 100)
   }
 
+  // the below helps to solve a memory leak at the project level
+  // but breaks within Storybook :(
+  // const dismissTimeout = useRef(null)
+  // useEffect(() => {
+  //   return () => {
+  //     if (dismissTimeout.current !== null) {
+  //       clearTimeout(dismissTimeout.current)
+  //     }
+  //   }
+  // })
+  // ...
+  // dismissTimeout.current = setTimeout(() => {
+  //   dismiss()
+  //   dismissTimeout.current = null
+  // }, autoDismissDelay)
+
   useEffect(() => {
     if (autoDismissDelay && open) {
       if (open && !isOpen) {
@@ -142,7 +158,7 @@ Alert.propTypes = {
   /**
    * A unique ID for the alert
    */
-  id: PropTypes.string.isRequired
+  id: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired])
 }
 
 export default ThemeWrapper(themeName => `alert/alert_${themeName}.module.scss`)(Alert)

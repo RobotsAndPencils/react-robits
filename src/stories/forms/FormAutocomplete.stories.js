@@ -35,11 +35,12 @@ export const Normal = ({ themeName }) => {
     disabled: boolean('Disabled', false),
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
     label: text('Label', ''),
+    isLabelInset: boolean('Is Label Inset?', false),
     hintContent: text('Hint Text', ''),
     errorText: text('Error Text', 'There is an error'),
     placeholder: text('Placeholder', ''),
     required: boolean('Required', false),
-    multiple: boolean('Multiple', true),
+    multiple: boolean('Multiple', false),
     forceMatch: boolean('Force a match', false),
     allowNew: boolean('Allow new tokens', true),
     size: select('Size', ['sm', 'md', 'lg'], 'md')

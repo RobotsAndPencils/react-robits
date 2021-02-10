@@ -18,6 +18,20 @@ const reconcileValidity = componentKnobs => {
   return Object.assign({}, componentKnobs, validityStyles)
 }
 
+const reconcileCorners = componentKnobs => {
+  const cornersStyle = {
+    squared: false,
+    pill: false
+  }
+
+  if (componentKnobs.corners !== 'normal') {
+    cornersStyle[componentKnobs.corners] = true
+  }
+
+  delete componentKnobs.corners
+  return Object.assign({}, componentKnobs, cornersStyle)
+}
+
 const radioOptions = [
   { label: 'Radio 1', value: 'one' },
   { label: 'Radio 2', value: 'two' },
@@ -37,9 +51,13 @@ export const Normal = ({ themeName }) => {
     validity: select('Validity', ['neutral', 'valid', 'invalid'], 'neutral'),
     errorText: text('Error Text', 'There is an error'),
     required: boolean('Required', false),
-    inline: boolean('Inline', false)
+    inline: boolean('Inline', false),
+    asButtonGroup: boolean('As Button Group', false),
+    corners: select('Button Group Corners Style', ['normal', 'pill', 'squared'], 'normal'),
+    size: select('Button Group Size', ['sm', 'md', 'lg'], 'md')
   }
   componentKnobs = reconcileValidity(componentKnobs)
+  componentKnobs = reconcileCorners(componentKnobs)
 
   return (
     <>

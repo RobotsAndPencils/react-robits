@@ -15,6 +15,7 @@ export const FormSelect = React.memo(
     hintContent,
     invalid = false,
     innerRef,
+    isLabelInset = false,
     label,
     readonly = false,
     required,
@@ -33,19 +34,18 @@ export const FormSelect = React.memo(
       disabled && 'disabled'
     )
 
+    const fieldsetClasses = classNames(
+      'form-control',
+      styling.fieldset,
+      valid && 'is-valid',
+      invalid && 'is-invalid',
+      disabled && 'disabled'
+    )
+
     const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
-    return (
-      <div className={containerClasses}>
-        {label ? (
-          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
-            {label}
-            {required && '*'}
-          </label>
-        ) : (
-          []
-        )}
-        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+    const renderSelect = () => {
+      return (
         <select
           {...props}
           ref={innerRef}
@@ -54,16 +54,37 @@ export const FormSelect = React.memo(
           className={selectClasses}>
           {children}
         </select>
+      )
+    }
+
+    return (
+      <div className={containerClasses}>
+        {label && !isLabelInset && (
+          <label htmlFor={props.id} className={`${size ? `form-control-label-${size}` : ''}`}>
+            {label}
+            {required && '*'}
+          </label>
+        )}
+        {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
+
+        {isLabelInset ? (
+          <fieldset className={fieldsetClasses} tabIndex={-1}>
+            <legend>
+              {label}
+              {required && '*'}
+            </legend>
+            {renderSelect()}
+          </fieldset>
+        ) : (
+          renderSelect()
+        )}
+
         <div className='form-control-descenders'>
           <div>
             {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
             {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
           </div>
-          {required && !label && !invalid ? (
-            <div className='form-control-required'>Required</div>
-          ) : (
-            []
-          )}
+          {required && !label && !invalid && <div className='form-control-required'>Required</div>}
         </div>
       </div>
     )
@@ -118,7 +139,11 @@ FormSelect.propTypes = {
   /**
    * Whether it is valid, or not.
    */
-  valid: PropTypes.bool
+  valid: PropTypes.bool,
+  /**
+   * If the Label should appear inside the input's border.
+   */
+  isLabelInset: PropTypes.bool
 }
 
 export default ThemeWrapper(themeName => `formSelect/formSelect_${themeName}.module.scss`)(

@@ -18,6 +18,7 @@ export const FormAutocomplete = React.memo(
     hintContent,
     invalid = false,
     innerRef,
+    isLabelInset = false,
     label,
     labelKey = 'label',
     multiple = false,
@@ -79,7 +80,7 @@ export const FormAutocomplete = React.memo(
     const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
     const renderInputRow = () => {
-      if (children) {
+      if (children || valid) {
         const prependers = []
         const leaders = []
         const trailers = []
@@ -107,7 +108,7 @@ export const FormAutocomplete = React.memo(
 
         const inputGroupClasses = classNames(
           'input-group',
-          leaders.length + trailers.length > 0 && 'input-group-seamless',
+          (leaders.length + trailers.length > 0 || valid) && 'input-group-seamless',
           size && `input-group-${size}`
         )
 
@@ -125,7 +126,7 @@ export const FormAutocomplete = React.memo(
       }
     }
 
-    const renderInput = () => {
+    const renderTypeaheadField = () => {
       return (
         <Tag
           {...rest}
@@ -150,15 +151,41 @@ export const FormAutocomplete = React.memo(
       )
     }
 
+    const renderInput = () => {
+      // required to prevent compile error (?)
+      const insetLabel = label
+
+      if (isLabelInset) {
+        const inputClasses = classNames(
+          'form-control',
+          'is-rbt',
+          size && `form-control-${size}`,
+          valid && 'is-valid',
+          invalid && 'is-invalid',
+          disabled && 'disabled'
+        )
+
+        return (
+          <fieldset className={inputClasses} tabIndex={-1}>
+            <legend>
+              {insetLabel}
+              {required && '*'}
+            </legend>
+            {renderTypeaheadField()}
+          </fieldset>
+        )
+      } else {
+        return renderTypeaheadField()
+      }
+    }
+
     return (
       <div className={containerClasses}>
-        {label ? (
+        {label && !isLabelInset && (
           <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
             {label}
             {required && '*'}
           </label>
-        ) : (
-          []
         )}
         {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
         {renderInputRow()}
@@ -167,11 +194,7 @@ export const FormAutocomplete = React.memo(
             {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
             {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
           </div>
-          {required && !label && !invalid ? (
-            <div className='form-control-required'>Required</div>
-          ) : (
-            []
-          )}
+          {required && !label && !invalid && <div className='form-control-required'>Required</div>}
         </div>
       </div>
     )
@@ -250,7 +273,11 @@ FormAutocomplete.propTypes = {
   /**
    * Whether it is valid, or not.
    */
-  valid: PropTypes.bool
+  valid: PropTypes.bool,
+  /**
+   * If the Label should appear inside the input's border.
+   */
+  isLabelInset: PropTypes.bool
 }
 
 export default ThemeWrapper(

@@ -1,1 +1,16 @@
 @import '../../styles/themes/talentPortal/tokens';
+
+.fieldset {
+  height: auto;
+  padding: 0;
+
+  legend {
+    margin-left: 1.2rem;
+  }
+
+  textarea {
+    height: 100%;
+    border: 0;
+    background-color: transparent !important;
+  }
+}

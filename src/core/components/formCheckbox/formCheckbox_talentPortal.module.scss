@@ -14,10 +14,11 @@ $custom-checkbox-indicator-icon-indeterminate: str-replace(
 $custom-checkbox-indicator-indeterminate-box-shadow: none !default;
 
 // Custom toggle
+$custom-toggle-border-color: $form-control-border-color !default;
 $custom-toggle-width: 5rem !default;
 $custom-toggle-height: 2.8rem !default;
 $custom-toggle-border-width: 0.1rem !default;
-$custom-toggle-border: $custom-toggle-border-width solid $form-control-border-color !default;
+$custom-toggle-border: $custom-toggle-border-width solid $custom-toggle-border-color !default;
 $custom-toggle-border-radius: 100px !default;
 
 $custom-toggle-focus-box-shadow: 0 0.5008rem 1.1504rem rgba($success, 0.1),
@@ -60,6 +61,18 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
     .form-control-required,
     .form-control-error {
       margin: 0 0.8rem 0.8rem $custom-control-gutter;
+    }
+  }
+
+  .description,
+  .left-label {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &:global(.disabled) {
+    .left-label {
+      cursor: not-allowed;
     }
   }
 }
@@ -151,7 +164,7 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
         width: 10px;
         height: 2px;
         top: 11px;
-        left: 4px;
+        left: 5px;
         opacity: 1;
         transition: none;
       }
@@ -203,6 +216,21 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
       transition-delay: 100ms;
     }
   }
+
+  &.secondary {
+    input {
+      &:checked ~ label {
+        &::before {
+          background-color: $secondary;
+        }
+
+        &::after {
+          border-right: 2px solid darken($secondary, 50%);
+          border-bottom: 2px solid darken($secondary, 50%);
+        }
+      }
+    }
+  }
 }
 
 .inline {
@@ -232,6 +260,11 @@ $custom-toggle-knob-height-sm: 1.2rem !default;
     position: relative;
     padding-left: ($custom-toggle-width + 1rem);
     min-height: $custom-toggle-height;
+
+    &.left-label {
+      padding-left: 0;
+      cursor: pointer;
+    }
 
     &.smaller {
       padding-left: 4.2rem;
