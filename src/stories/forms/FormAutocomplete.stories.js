@@ -40,7 +40,7 @@ export const Normal = ({ themeName }) => {
     errorText: text('Error Text', 'There is an error'),
     placeholder: text('Placeholder', ''),
     required: boolean('Required', false),
-    multiple: boolean('Multiple', false),
+    multiple: boolean('Multiple', true),
     forceMatch: boolean('Force a match', false),
     allowNew: boolean('Allow new tokens', true),
     size: select('Size', ['sm', 'md', 'lg'], 'md')
