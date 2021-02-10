@@ -64,13 +64,15 @@
         margin-left: $form-control-padding-x;
       }
 
-      &.form-control-sm {
+      &.form-control-sm,
+      &.form-select-sm {
         legend {
           margin-left: $form-control-padding-x-sm;
         }
       }
 
-      &.form-control-lg {
+      &.form-control-lg,
+      &.form-select-lg {
         legend {
           margin-left: $form-control-padding-x-lg;
         }
@@ -82,6 +84,7 @@
     }
 
     input,
+    select,
     &.is-rbt .form-control {
       background-color: transparent !important;
       border: none;
@@ -121,6 +124,7 @@
 
       &[cols] {
         width: auto;
+        display: block;
       }
 
       &.noresize {

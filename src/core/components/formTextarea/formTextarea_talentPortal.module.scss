@@ -4,6 +4,11 @@
   height: auto;
   padding: 0;
 
+  &.has-cols {
+    width: auto;
+    display: inline-block;
+  }
+
   legend {
     margin-left: 1.2rem;
   }

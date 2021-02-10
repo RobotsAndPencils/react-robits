@@ -33,16 +33,12 @@ export const FormTextarea = React.memo(
       !resizeable && 'noresize'
     )
 
-    const containerClasses = classNames(
-      className,
-      disabled && 'disabled',
-      'form-control-container',
-      props.cols && 'inline'
-    )
+    const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
     const fieldsetClasses = classNames(
       'form-control',
       styling.fieldset,
+      props.cols && styling['has-cols'],
       valid && 'is-valid',
       invalid && 'is-invalid',
       disabled && 'disabled'

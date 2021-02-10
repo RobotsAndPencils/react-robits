@@ -39,17 +39,3 @@ $form-select-bg-size: 8px 10px !default; // In pixels because image dimensions
 .form-select-lg {
   @include large-form-control;
 }
-
-.fieldset {
-  padding: 0;
-
-  legend {
-    margin-left: 1.2rem;
-  }
-
-  select {
-    border: 0;
-    height: calc(#{$form-control-height} - (#{$form-control-border-width} * 2));
-    background-color: transparent !important;
-  }
-}

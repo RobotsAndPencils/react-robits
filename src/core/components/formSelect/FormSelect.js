@@ -36,7 +36,7 @@ export const FormSelect = React.memo(
 
     const fieldsetClasses = classNames(
       'form-control',
-      styling.fieldset,
+      size && styling[`form-select-${size}`],
       valid && 'is-valid',
       invalid && 'is-invalid',
       disabled && 'disabled'
