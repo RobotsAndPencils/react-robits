@@ -206,6 +206,9 @@ $btn-transition: $transition-base !default;
   font-family: $btn-font-family;
   border: $border-width solid transparent;
   display: inline-block;
+  text-decoration: none;
+  user-select: none;
+  margin: 0;
 
   @include button-size(
     $btn-padding-y,

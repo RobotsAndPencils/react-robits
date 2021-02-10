@@ -108,7 +108,7 @@ export const SelfDismissing = ({ themeName }) => {
         styleType='success'>
         Your request was successful! (4 seconds)
       </Alert>
-      <Button themeName={themeName} onClick={showAlert}>
+      <Button type='button' themeName={themeName} onClick={showAlert}>
         Submit
       </Button>
     </>

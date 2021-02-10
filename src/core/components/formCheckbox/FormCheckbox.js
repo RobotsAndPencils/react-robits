@@ -19,12 +19,14 @@ export const FormCheckbox = React.memo(
     leftLabel,
     required,
     small,
+    styleType = 'primary',
     styling,
     toggle,
     valid,
     ...props
   }) => {
     const containerClasses = classNames(
+      className,
       'form-control-container',
       styling['checkbox-container'],
       inline && 'inline',
@@ -37,7 +39,8 @@ export const FormCheckbox = React.memo(
       small && styling.smaller,
       valid && styling['is-valid'],
       invalid && styling['is-invalid'],
-      toggle && leftColor && styling[`left-${leftColor}`]
+      toggle && leftColor && styling[`left-${leftColor}`],
+      styleType && styling[styleType]
     )
 
     const inputClasses = classNames(valid && styling['is-valid'], invalid && styling['is-invalid'])
@@ -57,7 +60,7 @@ export const FormCheckbox = React.memo(
             ref={innerRef}
             id={id}
             type='checkbox'
-            required='required'
+            required={required}
             className={inputClasses}
           />
           <label htmlFor={id} aria-hidden='true' />
@@ -124,7 +127,11 @@ FormCheckbox.propTypes = {
   /**
    * Whether it is valid, or not.
    */
-  valid: PropTypes.bool
+  valid: PropTypes.bool,
+  /**
+   * The type of checkbox to render. 'primary' is default; can also choose 'secondary'.
+   */
+  styleType: PropTypes.string
 }
 
 export default ThemeWrapper(themeName => `formCheckbox/formCheckbox_${themeName}.module.scss`)(

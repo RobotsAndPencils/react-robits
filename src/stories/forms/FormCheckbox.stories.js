@@ -32,7 +32,8 @@ export const Normal = ({ themeName }) => {
     errorText: text('Error Text', 'There is an error'),
     required: boolean('Required', false),
     inline: boolean('Inline', false),
-    small: boolean('Small', false)
+    small: boolean('Small', false),
+    styleType: select('Style Type', ['primary', 'secondary'], 'primary')
   }
   componentKnobs = reconcileValidity(componentKnobs)
 

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
+import FormInputAddon from '../formInput/FormInputAddon'
 
 /**
  * The form input allows you to create various text style inputs such as `text`, `password`, `email`, `number`, `url`, `search` and more.
@@ -15,12 +16,15 @@ export const FormInput = React.memo(
     hintContent,
     invalid = false,
     innerRef,
+    isLabelInset = false,
     label,
     readonly = false,
     required,
     size,
     styling,
     valid = false,
+    type = 'text',
+    defaultValue,
     ...rest
   }) => {
     const inputClasses = classNames(
@@ -34,7 +38,7 @@ export const FormInput = React.memo(
     const containerClasses = classNames(className, disabled && 'disabled', 'form-control-container')
 
     const renderInputRow = () => {
-      if (children) {
+      if (children || valid) {
         const prependers = []
         const leaders = []
         const trailers = []
@@ -62,7 +66,7 @@ export const FormInput = React.memo(
 
         const inputGroupClasses = classNames(
           'input-group',
-          leaders.length + trailers.length > 0 && 'input-group-seamless',
+          (leaders.length + trailers.length > 0 || valid) && 'input-group-seamless',
           size && `input-group-${size}`
         )
 
@@ -80,27 +84,67 @@ export const FormInput = React.memo(
       }
     }
 
+    const validAddon = () => (
+      <FormInputAddon className={styling['is-valid-icon']} type='trailing'>
+        ✓
+      </FormInputAddon>
+    )
+
+    const defaultInputVal = () => {
+      if (defaultValue || defaultValue === 0) {
+        return defaultValue
+      } else if (rest.value) {
+        return rest.value
+      }
+      return undefined
+    }
+
     const renderInput = () => {
-      return (
-        <input
-          {...rest}
-          ref={innerRef}
-          disabled={disabled}
-          readOnly={readonly}
-          className={inputClasses}
-        />
-      )
+      if (rest.value && defaultValue) {
+        delete rest.value
+      }
+      const inputProps = {
+        ref: innerRef,
+        disabled,
+        readOnly: readonly,
+        defaultValue: defaultInputVal(),
+        type,
+        ...rest
+      }
+
+      // required to prevent compile error (?)
+      const insetLabel = label
+
+      if (isLabelInset) {
+        return (
+          <fieldset className={inputClasses} tabIndex={-1}>
+            <legend>
+              {insetLabel}
+              {required && '*'}
+            </legend>
+            <input {...inputProps} />
+            {valid && validAddon()}
+          </fieldset>
+        )
+      } else {
+        inputProps.className = inputClasses
+
+        return (
+          <>
+            <input {...inputProps} />
+            {valid && validAddon()}
+          </>
+        )
+      }
     }
 
     return (
       <div className={containerClasses}>
-        {label ? (
+        {label && !isLabelInset && (
           <label htmlFor={rest.id} className={`${size ? `form-control-label-${size}` : ''}`}>
             {label}
             {required && '*'}
           </label>
-        ) : (
-          []
         )}
         {hintContent && label ? <div className='form-control-hint'>{hintContent}</div> : []}
         {renderInputRow()}
@@ -109,11 +153,7 @@ export const FormInput = React.memo(
             {invalid && errorText ? <div className='form-control-error'>{errorText}</div> : []}
             {hintContent && !label ? <div className='form-control-hint'>{hintContent}</div> : []}
           </div>
-          {required && !label && !invalid ? (
-            <div className='form-control-required'>Required</div>
-          ) : (
-            []
-          )}
+          {required && !label && !invalid && <div className='form-control-required'>Required</div>}
         </div>
       </div>
     )
@@ -168,7 +208,15 @@ FormInput.propTypes = {
   /**
    * Whether it is valid, or not.
    */
-  valid: PropTypes.bool
+  valid: PropTypes.bool,
+  /**
+   * If the Label should appear inside the input's border.
+   */
+  isLabelInset: PropTypes.bool,
+  /**
+   * The default value of the input field. Must be a number for 'number' type.
+   */
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default ThemeWrapper(themeName => `formInput/formInput_${themeName}.module.scss`)(FormInput)

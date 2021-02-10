@@ -96,6 +96,7 @@
 .dropdown-toggle-split {
   padding-right: $btn-padding-x * 0.75;
   padding-left: $btn-padding-x * 0.75;
+  transition: none;
 
   &::after,
   .dropup &::after,

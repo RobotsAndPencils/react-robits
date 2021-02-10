@@ -10,6 +10,7 @@ $btn-border-width: 1px !default;
   position: relative;
   display: inline-flex;
   vertical-align: middle; // match .btn alignment given font-size hack above
+  border-radius: $border-radius;
 
   > button {
     position: relative;
@@ -29,15 +30,19 @@ $btn-border-width: 1px !default;
 
   // Prevent double borders when buttons are next to each other
   button + button,
+  button + input + button,
   button + .btn-group,
+  button + input + .btn-group,
   .btn-group + button,
-  .btn-group + .btn-group {
+  .btn-group + input + button,
+  .btn-group + .btn-group,
+  .btn-group + input + .btn-group {
     margin-left: -$btn-border-width;
   }
 }
 
 .btn-group {
-  > button:first-child {
+  > button:first-of-type {
     margin-left: 0;
   }
 
@@ -47,8 +52,8 @@ $btn-border-width: 1px !default;
     @include border-right-radius(0);
   }
 
-  > button:not(:first-child),
-  > .btn-group:not(:first-child) > button {
+  > button:not(:first-of-type),
+  > .btn-group:not(:first-of-type) > button {
     @include border-left-radius(0);
   }
 }
@@ -64,9 +69,13 @@ $btn-border-width: 1px !default;
   }
 
   > button + button,
+  > button + input + button,
   > button + .btn-group,
+  > button + input + .btn-group,
   > .btn-group + button,
-  > .btn-group + .btn-group {
+  > .btn-group + input + button,
+  > .btn-group + .btn-group,
+  > .btn-group + input + .btn-group {
     margin-top: -$btn-border-width;
     margin-left: 0;
   }
@@ -77,34 +86,8 @@ $btn-border-width: 1px !default;
     @include border-bottom-radius(0);
   }
 
-  > button:not(:first-child),
-  > .btn-group:not(:first-child) > button {
+  > button:not(:first-of-type),
+  > .btn-group:not(:first-of-type) > button {
     @include border-top-radius(0);
-  }
-}
-
-// Checkbox and radio options
-//
-// In order to support the browser's form validation feedback, powered by the
-// `required` attribute, we have to "hide" the inputs via `clip`. We cannot use
-// `display: none;` or `visibility: hidden;` as that also hides the popover.
-// Simply visually hiding the inputs via `opacity` would leave them clickable in
-// certain cases which is prevented by using `clip` and `pointer-events`.
-// This way, we ensure a DOM element is visible to position the popover from.
-//
-// See https://github.com/twbs/bootstrap/pull/12794 and
-// https://github.com/twbs/bootstrap/pull/14559 for more information.
-
-.btn-group-toggle {
-  > button,
-  > .btn-group > button {
-    margin-bottom: 0; // Override default `<label>` value
-
-    input[type='radio'],
-    input[type='checkbox'] {
-      position: absolute;
-      clip: rect(0, 0, 0, 0);
-      pointer-events: none;
-    }
   }
 }

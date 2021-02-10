@@ -48,6 +48,11 @@ $form-radio-indicator-icon-checked: str-replace(
     cursor: pointer;
   }
 
+  .description {
+    display: inline-flex;
+    align-items: center;
+  }
+
   label {
     margin-bottom: 0;
     position: static;
@@ -154,6 +159,12 @@ $form-radio-indicator-icon-checked: str-replace(
         }
       }
     }
+  }
+}
+
+.as-button-group {
+  input {
+    display: none;
   }
 }
 

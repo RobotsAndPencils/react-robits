@@ -23,7 +23,7 @@ export const Dropdown = ({
   setActiveFromChild,
   size,
   styling,
-  toggle,
+  toggle = () => {},
   ...rest
 }) => {
   const containerRef = useRef(null)
