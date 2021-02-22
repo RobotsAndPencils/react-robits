@@ -1,4 +1,4 @@
-const merge = require('webpack-merge')
+const { mergeWithCustomize, customizeArray } = require('webpack-merge')
 const path = require('path')
 
 module.exports = {
@@ -37,8 +37,10 @@ module.exports = {
       }
     }
 
-    const combinedConfig = merge.smartStrategy({
-      'module.rules.use.oneOf': 'append'
+    const combinedConfig = mergeWithCustomize({
+      customizeArray: customizeArray({
+        'module.rules.use.oneOf': 'append'
+      })
     })(config, newLoaders)
 
     // console.dir(combinedConfig.module.rules, {depth: 10, colors: true});
