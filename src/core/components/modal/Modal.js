@@ -32,7 +32,6 @@ export const Modal = ({
   withCloseButton,
   ...rest
 }) => {
-  console.log(styling)
   const [isOpen, setOpenStatus] = useState(open || false)
   const modalContent = useRef(null)
 
