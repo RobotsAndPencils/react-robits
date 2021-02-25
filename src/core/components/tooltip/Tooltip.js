@@ -82,8 +82,8 @@ export const Tooltip = ({
   }
 
   const removeListeners = () => {
-    EVENTS.CLICK.forEach(e => document.removeEventListener(e, handleEvent))
-    EVENTS.MOUSE.concat(EVENTS.FOCUS).forEach(e => _target.removeEventListener(e, handleEvent))
+    EVENTS.CLICK?.forEach(e => document?.removeEventListener(e, handleEvent))
+    EVENTS.MOUSE?.concat(EVENTS.FOCUS).forEach(e => _target?.removeEventListener(e, handleEvent))
   }
 
   const handleEvent = e => {
@@ -214,7 +214,7 @@ export const Tooltip = ({
     return null
   }
 
-  const classes = classNames(styling['tooltip-inner'], innerClassName)
+  const innerContentClasses = classNames(styling['tooltip-inner'], innerClassName)
 
   const popperClasses = classNames(styling.tooltip, styling.show, className)
 
@@ -233,7 +233,7 @@ export const Tooltip = ({
       modifiers={modifiers}
       offset={offset}>
       <div
-        className={classes}
+        className={innerContentClasses}
         role='tooltip'
         aria-hidden={open}
         onMouseOver={handleMouseOverContent}

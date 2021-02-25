@@ -37,7 +37,6 @@ export const Popover = ({
   let _hideTimeout = null
   let _showTimeout = null
 
-  const classes = classNames(innerClassName)
   const popperClasses = classNames(styling.popover, styling.show, className)
 
   useEffect(() => {
@@ -142,7 +141,7 @@ export const Popover = ({
       placement={placement}
       placementPrefix={placementPrefix}
       boundariesElement={boundariesElement}>
-      <div ref={innerRef} {...popoverContentAttrs} className={classes}>
+      <div ref={innerRef} {...popoverContentAttrs} className={innerClassName}>
         {children}
       </div>
     </PopperManager>

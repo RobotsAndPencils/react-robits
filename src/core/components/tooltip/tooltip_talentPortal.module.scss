@@ -20,8 +20,6 @@ $tooltip-arrow-color: $tooltip-bg !default;
 .tooltip {
   position: absolute;
   display: block;
-  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
-  // So reset our font and text properties to avoid inheriting weird values.
   // Allow breaking very long words so they don't overflow the tooltip's bounds
   word-wrap: break-word;
   opacity: 0;
