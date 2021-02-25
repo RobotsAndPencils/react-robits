@@ -1,6 +1,6 @@
 {
   "name": "@robotsandpencils/react-robits",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "R&P's reuseable, themeable React components",
   "bundleDependencies": [],
   "main": "index.js",
@@ -42,7 +42,7 @@
     "react-bootstrap-typeahead": "^4.1.0",
     "react-dom": "^17.0.1",
     "react-popper": "^1.3.7",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "react-transition-group": "^4.3.0",
     "readdirp": "^3.4.0",
     "sass-resources-loader": "^2.1.1"
