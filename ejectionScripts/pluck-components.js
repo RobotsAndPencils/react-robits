@@ -244,10 +244,16 @@ updateReferences({
       '\nRemoving ThemeWrapper reliance...\n----------------------------------\n'
     )
 
+    // if we're pruning, then filter to only the robit files used by the project,
+    // otherwise, process the removal for all JS files.
+    // note: the use case for not pruning is likely to be for an initial project bootstrap,
+    // in which case there probably aren't any other JS files in the destination directory to parse,
+    // but if used outside that use case, this will unneccessarily parse and touch files unnecessarily,
+    // which introduces some potential risk
     const groomedRobits = await readdirp.promise(
       path.resolve(__dirname, '../../../../' + args.destinationDir + '/components/'),
       {
-        fileFilter: usedRobits.map(file => `${file}.js`)
+        fileFilter: shouldPrune ? usedRobits.map(file => `${file}.js`) : '*.js'
       }
     )
 
