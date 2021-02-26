@@ -1,9 +1,6 @@
 import React from 'react'
 import { useState } from '@storybook/client-api'
-import { array } from '@storybook/addon-knobs'
 import Tabs, { Tabs as TabsComponent } from '../core/components/tabs/Tabs'
-import Button from '../core/components/button/Button'
-import { POPPER_PLACEMENTS } from '../core/constants/constants'
 
 export default {
   title: 'Robits/Tabs',
