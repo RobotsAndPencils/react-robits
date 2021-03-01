@@ -1,0 +1,73 @@
+@import '../../styles/themes/talentPortal/tokens';
+
+.container {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid $black;
+  padding-bottom: 0;
+  // to hide the horizontal scrollbar on small viewports
+  overflow-y: hidden;
+
+  .tab-list {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+    display: flex;
+    overflow-x: auto;
+    justify-content: center;
+    user-select: none;
+
+    .tab {
+      font-size: 1.2rem;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      color: $gray-300;
+      display: inline-block;
+      margin: 0 15px;
+      padding: 15px 5px;
+      outline: 0;
+      letter-spacing: 1px;
+      position: relative;
+
+      &.disabled {
+        opacity: 0.4;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:after {
+        content: '';
+        background: transparent;
+        height: 3px;
+        border-radius: 2px;
+        width: 100%;
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        @include transition(background);
+      }
+
+      &:not(.disabled):not(.active) {
+        cursor: pointer;
+      }
+
+      @include hover {
+        &:not(.disabled):not(.active) {
+          &:after {
+            background: rgba($white, 0.2);
+          }
+        }
+      }
+
+      &.active {
+        color: var(--base-font-color);
+        &:after {
+          background: $gray-600;
+        }
+      }
+    }
+  }
+}

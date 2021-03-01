@@ -37,6 +37,7 @@ export const wrapper = (getStylesFilePathForTheme = theme => theme) => WrappedCo
           }
         )
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.themeObj, props.themeName])
 
     if (!styles.ready) return false

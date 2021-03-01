@@ -67,6 +67,7 @@ export const Alert = ({
     } else {
       setIsOpen(open)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoDismissDelay, open, removeHandler, id])
 
   const classes = classNames(
