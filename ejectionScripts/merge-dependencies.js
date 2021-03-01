@@ -10,6 +10,7 @@ console.log(
 )
 // template has to be the parent project's package.json, so we don't wipe out anything there
 const template = require(projectPackageFilename)
+const originalDevDependencies = template.devDependencies
 console.log('template before:')
 console.log(template)
 
@@ -59,9 +60,10 @@ delete mergedFile.dependencies['prompt-sync']
 delete mergedFile.dependencies.path
 delete mergedFile.dependencies['fs-jetpack']
 delete mergedFile.dependencies['@userfrosting/merge-package-dependencies']
+delete mergedFile.dependencies.readdirp
 
 // reinstitute the original devDependencies (to bypass pulling those over)
-mergedFile.devDependencies = template.devDependencies
+mergedFile.devDependencies = originalDevDependencies
 
 // write updates
 const data = JSON.stringify(mergedFile, null, 2)
