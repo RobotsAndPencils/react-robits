@@ -182,7 +182,10 @@ updateReferences({
         // move to tokens directory
         jetpack.move(
           filepath,
-          path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles/tokens'),
+          path.resolve(
+            __dirname,
+            '../../../../' + args.destinationDir + '/styles/tokens/' + filename
+          ),
           {
             overwrite: (source, target) => {
               if (source.name === target.name) {
@@ -204,7 +207,7 @@ updateReferences({
           // move all other files to the root styles directory
           jetpack.move(
             filepath,
-            path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles'),
+            path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles/' + filename),
             {
               overwrite: (source, target) => {
                 if (source.name === target.name) {
