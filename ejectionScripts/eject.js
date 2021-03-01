@@ -36,12 +36,18 @@ const shouldRemoveThemeWrapper =
     'Should we remove the ThemeWrapper.js reliance? (y = yes, remove it :: n = no, keep it): '
   ).toLowerCase() === 'y'
 
+const magicTokens =
+  prompt(
+    'Does your project use "magic tokens" like with sass-resources-loader to avoid manual stylesheet imports? (y = yes, remove manual token imports :: n = no, leave manual imports): '
+  ).toLowerCase() === 'y'
+
 execSync(
   'node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/pluck-components' +
     ` --destinationDir ${destinationDir}` +
     ` --sourceDir ${sourceDir}` +
     ` --themeName ${themeName}` +
     ` --shouldPrune ${shouldPrune}` +
+    ` --magicTokens ${magicTokens}` +
     ` --shouldRemoveThemeWrapper ${shouldRemoveThemeWrapper}` +
     ` && node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/erase-footprint --sourceDir ${sourceDir}` +
     ' && npm uninstall @robotsandpencils/react-robits -D -S && npm install',
