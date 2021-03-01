@@ -81,7 +81,7 @@ const removeThemeWrapper = ({ filename, componentName, folderName }) => {
   })
 }
 
-const updateTokenImports = ({ filepath, projectUsesMagicTokens }) => {
+const updateComponentTokenImports = ({ filepath, projectUsesMagicTokens }) => {
   return new Promise((resolve, reject) => {
     try {
       let data = fs.readFileSync(filepath, 'utf8')
@@ -205,19 +205,28 @@ updateReferences({
           jetpack.remove(filepath)
         } else {
           // move all other files to the root styles directory
-          jetpack.move(
-            filepath,
-            path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles/' + filename),
-            {
-              overwrite: (source, target) => {
-                if (source.name === target.name) {
-                  copyWithNewName(source, target)
-                  return false
-                }
-                return true
-              }
-            }
+          const newpath = path.resolve(
+            __dirname,
+            '../../../../' + args.destinationDir + '/styles/' + filename
           )
+          jetpack.move(filepath, newpath, {
+            overwrite: (source, target) => {
+              if (source.name === target.name) {
+                copyWithNewName(source, target)
+                return false
+              }
+              return true
+            }
+          })
+
+          if (filename === 'tokens.scss') {
+            // update manual token import paths after move
+            let data = fs.readFileSync(newpath, 'utf8')
+
+            data = data.replace(new RegExp("@import '", 'g'), "@import 'tokens/")
+
+            fs.writeFileSync(newpath, data, 'utf8')
+          }
         }
       }
     })
@@ -233,7 +242,7 @@ updateReferences({
     }
   )
   await asyncForEach(scssFiles, async filepath => {
-    await updateTokenImports({
+    await updateComponentTokenImports({
       filepath,
       projectUsesMagicTokens
     })
