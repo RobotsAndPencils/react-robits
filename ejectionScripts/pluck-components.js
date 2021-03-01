@@ -265,6 +265,10 @@ updateReferences({
       })
     })
 
+    fs.unlinkSync(
+      path.resolve(__dirname, '../../../../' + args.destinationDir + '/utils/ThemeWrapper.js')
+    )
+
     console.log('\x1b[32m%s\x1b[0m', 'Gone.\n')
   }
 
