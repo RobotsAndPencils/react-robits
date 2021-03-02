@@ -5,6 +5,7 @@ const fs = require('fs')
 const projectPackageFilename = path.resolve(__dirname, '../../../../package.json')
 
 console.log(
+  '\x1b[34m%s\x1b[0m',
   '\nMerging the Robits NPM package.json with your project package.json...\n------------------------------------------------------------\n'
 )
 // template has to be the parent project's package.json, so we don't wipe out anything there

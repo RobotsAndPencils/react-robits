@@ -1,16 +1,22 @@
 const { execSync } = require('child_process')
 const prompt = require('prompt-sync')({ sigint: true })
 
-const sourceDir = prompt('Enter your project source directory path (e.g. - ./src/): ')
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nEnter your project source directory path (e.g. - ./src/).\nThis is expected to be one level below your client project’s root directory at which the package.json lives.'
+)
+const sourceDir = prompt('> ')
 if (!sourceDir) {
   throw new Error(
     'Whoops, we need that. Please try again and provide your project source directory'
   )
 }
 
-const destinationDir = prompt(
-  'Enter the project directory in which to place the Robits (e.g. - ./src/robits/): '
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nEnter the project directory in which to place the Robits (e.g. - ./src/robits/).\nThis can be a new or existing folder, and will result in\neverything contained within Robit’s "core" directory.'
 )
+const destinationDir = prompt('> ')
 
 if (!destinationDir) {
   throw new Error(
@@ -18,7 +24,11 @@ if (!destinationDir) {
   )
 }
 
-const themeName = prompt('Enter the name of the theme you wish to use (e.g. - talentPortal): ')
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nEnter the name of the theme you wish to use (e.g. - talentPortal).'
+)
+const themeName = prompt('> ')
 
 if (!themeName) {
   throw new Error(
@@ -26,20 +36,23 @@ if (!themeName) {
   )
 }
 
-const shouldPrune =
-  prompt(
-    'Should we prune the export to only what’s used? (y = yes, prune away :: n = no, keep everything): '
-  ).toLowerCase() === 'y'
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nShould we prune the export to only what’s used?\nThis will omit any components not currently referenced within your project code.\n(y = yes, prune away :: n = no, keep everything)'
+)
+const shouldPrune = prompt('> ').toLowerCase() === 'y'
 
-const shouldRemoveThemeWrapper =
-  prompt(
-    'Should we remove the ThemeWrapper.js reliance? (y = yes, remove it :: n = no, keep it): '
-  ).toLowerCase() === 'y'
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nShould we remove the ThemeWrapper.js reliance?\nThis is recommended if your project does not require multiple themes.\n(y = yes, remove it :: n = no, keep it)'
+)
+const shouldRemoveThemeWrapper = prompt('> ').toLowerCase() === 'y'
 
-const magicTokens =
-  prompt(
-    'Does your project use "magic tokens" like with sass-resources-loader to avoid manual stylesheet imports? (y = yes, remove manual token imports :: n = no, leave manual imports): '
-  ).toLowerCase() === 'y'
+console.log(
+  '\x1b[1m%s\x1b[0m',
+  '\nDoes your project use "magic tokens" like with sass-resources-loader to avoid manual stylesheet imports?\n(y = yes, remove manual token imports :: n = no, leave manual imports)'
+)
+const magicTokens = prompt('> ').toLowerCase() === 'y'
 
 execSync(
   'node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/merge-dependencies && node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/pluck-components' +
