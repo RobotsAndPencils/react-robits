@@ -156,17 +156,36 @@ Ejecting Robits is lever designed to either a) give you full control over the co
 
 The net result is that the files from this library will be copied over to your project, effectively transferring ownership, and erase any notion of the `react-robits` as a dependent package.
 
-To do this, run:
+To do this...
+
+1. First, you need to manually bypass the package schema bug [logged here](https://github.com/RobotsAndPencils/react-robits/issues/26)
+
+2. Second, run the following script from the root of your project, and follow the prompts. It will cycle through a set of Node scripts to break the ball-and-chain:
 
 ```
 node ./node_modules/@robotsandpencils/react-robits/ejectionScripts/eject
 ```
 
-from the root of your project, and follow the prompts. It will cycle through a set of Node scripts to break the ball-and-chain.
+For more information on what's happening under the hood with those scripts, see the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/blob/master/TECH.md)
 
-_**Note:** after successfully ejecting, you will need to update your Sass Resources Loader configuration to point to the new location of the style tokens. Then restart the app._
+#### Dependency Collisions
 
-For more information, see the [Tech Doc](https://github.com/RobotsAndPencils/react-robits/blob/master/TECH.md)
+The ejection might fail due to an unmanageable semver collision of dependencies between Robits and your project. Because we don't want to break anything within your current project, but at the same time might require a certain dependency version for the Robit in question to work, we therefore don't attempt to automate the decision on who wins. Also, at the moment, there is not a great way for us to interrupt and prompt you for a resolution in real time - nor would a split time decision be advisable.
+
+In light of this, what is recommended is to try each of the conflicting versions offline, within your project and Robits to align on a version that works for both. Once a version is identified, you will need to manually update the appropriate `package.json` file (either within your project of the `react-robits` project within `node_modules`) and rerun the export script.
+
+Hopefully, once NPM supports the new `overrides` spec (equivalent of yarn's `resolutions`) there will be a more graceful way to address this.
+
+**Note:** if a version upgrade works within Robits, please consider opening a PR for it.
+
+#### After Ejection
+
+After successfully ejecting, you may need to manually massage the integration:
+
+- If a filename collision was detected, the ejection process will add a `_fromRobits` suffix to the file copied in. This should be refactored away
+- Depending on the existing file structure of the parent project, and the destination into which you ejected, you may need to relocate some files
+- If using `sass-resources-loader`, you may have to update the referenced webpack pointer to include the new inbound Robits tokens (if not already aligned), especially if using robits prior to ejecting.
+- If you already had existing styles set up, you may still need to groom the inbound CSS from Robits to dedupe rules, side step collisions, and consolidate files
 
 ## Storybook Deployment
 
