@@ -9,6 +9,7 @@ const jetpack = require('fs-jetpack')
 
 const pruneMap = []
 const shouldPrune = args.shouldPrune === 'true'
+const projectUsesMagicTokens = args.magicTokens === 'true'
 
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
@@ -80,6 +81,34 @@ const removeThemeWrapper = ({ filename, componentName, folderName }) => {
   })
 }
 
+const updateComponentTokenImports = ({ filepath, projectUsesMagicTokens }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let data = fs.readFileSync(filepath, 'utf8')
+
+      if (projectUsesMagicTokens) {
+        // remove manual token imports within components
+        data = data.replace(
+          new RegExp(`@import '../../styles/themes/${args.themeName}/tokens';`, 'g'),
+          ''
+        )
+      } else {
+        // update manual token imports to new location
+        data = data.replace(
+          new RegExp(`@import '../../styles/themes/${args.themeName}/tokens';`, 'g'),
+          "@import '../../styles/tokens';"
+        )
+      }
+
+      fs.writeFileSync(filepath, data, 'utf8')
+
+      resolve(true)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 const checkDependencyMap = (componentName, usedRobits) => {
   const dependers = pruneMap.reduce((acc, { host, dep }) => {
     if (dep === componentName) {
@@ -116,8 +145,6 @@ updateReferences({
     }
   )
 
-  console.log('\x1b[32m%s\x1b[0m', 'Done.\n')
-
   // Delete non-applicable theme directories
   // ---------------------------------------------------
   const themeDirectories = await readdirp.promise(
@@ -135,6 +162,93 @@ updateReferences({
       })
     }
   })
+
+  // Flatten chosen theme
+  // ---------------------------------------------------
+
+  jetpack
+    .find(
+      path.resolve(
+        __dirname,
+        '../../../../' + args.destinationDir + '/styles/themes/' + args.themeName
+      ),
+      {
+        matching: '*.scss'
+      }
+    )
+    .forEach(filepath => {
+      const filename = /[^\/]*$/.exec(filepath)[0]
+      if (filename.charAt(0) === '_') {
+        // move to tokens directory
+        jetpack.move(
+          filepath,
+          path.resolve(
+            __dirname,
+            '../../../../' + args.destinationDir + '/styles/tokens/' + filename
+          ),
+          {
+            overwrite: (source, target) => {
+              if (source.name === target.name) {
+                copyWithNewName(source, target)
+                return false
+              }
+              return true
+            }
+          }
+        )
+      } else {
+        if (filename === 'themeColors.module.scss') {
+          // delete storybook-centric file
+          jetpack.remove(filepath)
+        } else if (filename === 'tokens.scss' && projectUsesMagicTokens) {
+          // delete token importer if the project uses "magic tokens" (sass-resources-loader)
+          jetpack.remove(filepath)
+        } else {
+          // move all other files to the root styles directory
+          const newpath = path.resolve(
+            __dirname,
+            '../../../../' + args.destinationDir + '/styles/' + filename
+          )
+          jetpack.move(filepath, newpath, {
+            overwrite: (source, target) => {
+              if (source.name === target.name) {
+                copyWithNewName(source, target)
+                return false
+              }
+              return true
+            }
+          })
+
+          if (filename === 'tokens.scss') {
+            // update manual token import paths after move
+            let data = fs.readFileSync(newpath, 'utf8')
+
+            data = data.replace(new RegExp("@import '", 'g'), "@import 'tokens/")
+
+            fs.writeFileSync(newpath, data, 'utf8')
+          }
+        }
+      }
+    })
+
+  // remove the now empty themes folder
+  jetpack.remove(path.resolve(__dirname, '../../../../' + args.destinationDir + '/styles/themes'))
+
+  // get and update the component scss files to account for flattened theme
+  const scssFiles = jetpack.find(
+    path.resolve(__dirname, '../../../../' + args.destinationDir + '/components'),
+    {
+      matching: '*.scss'
+    }
+  )
+  await asyncForEach(scssFiles, async filepath => {
+    await updateComponentTokenImports({
+      filepath,
+      projectUsesMagicTokens
+    })
+  })
+
+  console.log('\x1b[32m%s\x1b[0m', 'Done.\n')
 
   // Delete non-applicable component files and theme stylesheets
   // ---------------------------------------------------
@@ -244,10 +358,16 @@ updateReferences({
       '\nRemoving ThemeWrapper reliance...\n----------------------------------\n'
     )
 
+    // if we're pruning, then filter to only the robit files used by the project,
+    // otherwise, process the removal for all JS files.
+    // note: the use case for not pruning is likely to be for an initial project bootstrap,
+    // in which case there probably aren't any other JS files in the destination directory to parse,
+    // but if used outside that use case, this will unneccessarily parse and touch files unnecessarily,
+    // which introduces some potential risk
     const groomedRobits = await readdirp.promise(
       path.resolve(__dirname, '../../../../' + args.destinationDir + '/components/'),
       {
-        fileFilter: usedRobits.map(file => `${file}.js`)
+        fileFilter: shouldPrune ? usedRobits.map(file => `${file}.js`) : '*.js'
       }
     )
 
@@ -258,6 +378,10 @@ updateReferences({
         folderName: shortPath.split('/')[0]
       })
     })
+
+    fs.unlinkSync(
+      path.resolve(__dirname, '../../../../' + args.destinationDir + '/utils/ThemeWrapper.js')
+    )
 
     console.log('\x1b[32m%s\x1b[0m', 'Gone.\n')
   }
