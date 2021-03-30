@@ -62,7 +62,7 @@ const removeThemeWrapper = ({ filename, componentName, folderName }) => {
 
       const styling =
         (data.match(/styling(\[|\.)/g) || []).length > 0
-          ? `import styling from './${folderName}_${args.themeName}.module.scss'`
+          ? `import styling from './${folderName}.module.scss'`
           : ''
 
       data = data.replace(new RegExp("import ThemeWrapper from (.*)ThemeWrapper'", 'g'), styling)
@@ -246,6 +246,12 @@ updateReferences({
       filepath,
       projectUsesMagicTokens
     })
+    if (args.shouldRemoveThemeWrapper === 'true') {
+      const filename = path.basename(filepath)
+      if (filename.includes(`_${args.themeName}`)) {
+        jetpack.rename(filepath, filename.replace(new RegExp(`_${args.themeName}`, 'g'), ''))
+      }
+    }
   })
 
   console.log('\x1b[32m%s\x1b[0m', 'Done.\n')
