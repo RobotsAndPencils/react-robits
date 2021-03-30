@@ -58,7 +58,7 @@ const removeThemeWrapper = ({ filename, componentName, folderName }) => {
     try {
       let data = fs.readFileSync(filename, 'utf8')
 
-      data = data.replace(new RegExp('styling(,|\\s)', 'g'), '')
+      data = data.replace(new RegExp('styling(,|\\s)(?!from)', 'g'), '')
 
       const styling =
         (data.match(/styling(\[|\.)/g) || []).length > 0
