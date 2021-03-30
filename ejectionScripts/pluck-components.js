@@ -247,11 +247,9 @@ updateReferences({
       projectUsesMagicTokens
     })
     if (args.shouldRemoveThemeWrapper === 'true') {
-      if (filepath.basename.includes(`_${args.themeName}`)) {
-        jetpack.rename(
-          filepath,
-          filepath.basename.replace(new RegExp(`_${args.themeName}`, 'g'), '')
-        )
+      const filename = path.basename(filepath)
+      if (filename.includes(`_${args.themeName}`)) {
+        jetpack.rename(filepath, filename.replace(new RegExp(`_${args.themeName}`, 'g'), ''))
       }
     }
   })
