@@ -4,9 +4,6 @@ import classNames from 'classnames'
 import { KEYCODES } from '../../constants/constants'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 
-const getOptionByLabel = ({ options = [], label } = {}) =>
-  options.find(option => option.label === label)
-
 const Tab = ({ styling, isActive, item, onTabChange, ...rest }) => {
   const tabStyle = classNames(
     styling.tab,
@@ -49,18 +46,15 @@ export const Tabs = ({
   styling,
   ...rest
 }) => {
-  const activeTabOption = getOptionByLabel({ options, label: activeTab })
-  const defaultActiveTabOption = getOptionByLabel({ options, label: defaultActiveTab })
-
   // The initial selected tab is either `activeTab`, `defaultActiveTab`, or undefined (unset), evaluated in that order
-  const [selectedTab, setSelectedTab] = useState(activeTabOption || defaultActiveTabOption)
+  const [selectedTab, setSelectedTab] = useState(activeTab || defaultActiveTab)
 
   /* When `activeTab` prop changes, update the selected tab */
   useEffect(() => {
-    if (activeTabOption) {
-      setSelectedTab(activeTabOption)
+    if (activeTab) {
+      setSelectedTab(activeTab)
     }
-  }, [activeTabOption])
+  }, [activeTab])
 
   const containerStyle = classNames(className, styling.container)
 
@@ -69,8 +63,8 @@ export const Tabs = ({
       if (item.enabled) {
         /* When `activeTab` prop is provided, it is a controlled component; let the parent
            component handle the change. Otherwise, update the active tab internally */
-        if (!activeTabOption) {
-          setSelectedTab(item)
+        if (!activeTab) {
+          setSelectedTab(item?.label)
         }
 
         if (onChangeCallback) {
@@ -78,7 +72,7 @@ export const Tabs = ({
         }
       }
     },
-    [activeTabOption, onChangeCallback]
+    [activeTab, onChangeCallback]
   )
 
   return (
@@ -87,7 +81,7 @@ export const Tabs = ({
         {options.map((item, index) => (
           <Tab
             styling={styling}
-            isActive={selectedTab?.label === item.label}
+            isActive={selectedTab === item.label}
             key={index}
             item={item}
             onTabChange={() => handleTabChange(item)}
