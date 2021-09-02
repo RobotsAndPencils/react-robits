@@ -1,8 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { KEYCODES } from '../../constants/constants'
 import ThemeWrapper from '../../utils/ThemeWrapper'
+
+const Tab = ({ styling, isActive, item, onTabChange, ...rest }) => {
+  const tabStyle = classNames(
+    styling.tab,
+    isActive && styling.active,
+    !item.enabled && styling.disabled
+  )
+
+  const handleClick = useCallback(() => {
+    onTabChange(item)
+  }, [onTabChange])
+
+  const handleKeyPress = useCallback(
+    event => {
+      if ([KEYCODES.SPACE, KEYCODES.ENTER].includes(event.charCode)) {
+        event.preventDefault()
+        onTabChange(item)
+      }
+    },
+    [onTabChange]
+  )
+
+  return (
+    <li
+      tabIndex={0}
+      className={tabStyle}
+      onClick={handleClick}
+      onKeyPress={handleKeyPress}
+      {...rest}>
+      {item.label}
+    </li>
+  )
+}
 
 export const Tabs = ({
   activeTab,
@@ -13,55 +46,47 @@ export const Tabs = ({
   styling,
   ...rest
 }) => {
+  // The initial selected tab is either `activeTab`, `defaultActiveTab`, or undefined (unset), evaluated in that order
   const [selectedTab, setSelectedTab] = useState(activeTab || defaultActiveTab)
 
+  /* When `activeTab` prop changes, update the selected tab */
   useEffect(() => {
-    const selectedTab = options.find(i => i.label === (activeTab || defaultActiveTab))
-    if (selectedTab) {
-      setSelectedTab(selectedTab.label)
+    if (activeTab) {
+      setSelectedTab(activeTab)
     }
-  }, [activeTab, defaultActiveTab, options])
+  }, [activeTab])
 
   const containerStyle = classNames(className, styling.container)
 
-  const handleKeyPress = (e, item) => {
-    if ([KEYCODES.SPACE, KEYCODES.ENTER].includes(e.charCode)) {
-      e.preventDefault()
-      setSelectedTab(item)
-    }
-  }
+  const handleTabChange = useCallback(
+    item => {
+      if (item.enabled) {
+        /* When `activeTab` prop is provided, it is a controlled component; let the parent
+           component handle the change. Otherwise, update the active tab internally */
+        if (!activeTab) {
+          setSelectedTab(item?.label)
+        }
 
-  const Tab = ({ item }) => {
-    const tabStyle = classNames(
-      styling.tab,
-      selectedTab === item.label && styling.active,
-      !item.enabled && styling.disabled
-    )
-
-    return (
-      <li
-        tabIndex={0}
-        className={tabStyle}
-        onClick={() => {
-          if (item.enabled) {
-            setSelectedTab(activeTab || item.label)
-            if (onChangeCallback) {
-              onChangeCallback(activeTab || item.label)
-            }
-          }
-        }}
-        onKeyPress={e => handleKeyPress(e, item.label)}
-        {...rest}>
-        {item.label}
-      </li>
-    )
-  }
+        if (onChangeCallback) {
+          onChangeCallback(item?.label)
+        }
+      }
+    },
+    [activeTab, onChangeCallback]
+  )
 
   return (
     <div className={containerStyle}>
       <ul className={styling['tab-list']}>
         {options.map((item, index) => (
-          <Tab key={index} item={item} />
+          <Tab
+            styling={styling}
+            isActive={selectedTab === item.label}
+            key={index}
+            item={item}
+            onTabChange={() => handleTabChange(item)}
+            {...rest}
+          />
         ))}
       </ul>
     </div>
@@ -70,7 +95,7 @@ export const Tabs = ({
 
 Tabs.propTypes = {
   /**
-   * Optional property that makes this a controlled component
+   * Optional tab option label property that makes this a controlled component
    */
   activeTab: PropTypes.string,
 
@@ -80,7 +105,7 @@ Tabs.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Optional property that sets the initial default value, but leaves the component uncontrolled
+   * Optional tab option label property that sets the initial default value, but leaves the component uncontrolled
    */
   defaultActiveTab: PropTypes.string,
 
