@@ -55,23 +55,23 @@ export const Tabs = ({
   // The initial selected tab is either `activeTab`, `defaultActiveTab`, or undefined (unset), evaluated in that order
   const [selectedTab, setSelectedTab] = useState(activeTabOption || defaultActiveTabOption)
 
-  /* When the component first renders or when `activeTab` or `defaultActiveTab` props
-     change, update the selected tab */
+  /* When `activeTab` prop changes, update the selected tab */
   useEffect(() => {
-    const selectedTab = options.find(option => option.label === (activeTab || defaultActiveTab))
-
-    if (selectedTab) {
-      setSelectedTab(selectedTab)
+    if (activeTabOption) {
+      setSelectedTab(activeTabOption)
     }
-  }, [activeTab, defaultActiveTab, options])
+  }, [activeTabOption])
 
   const containerStyle = classNames(className, styling.container)
 
   const handleTabChange = useCallback(
     item => {
       if (item.enabled) {
-        // When `activeTab` prop is provided, it is a controlled component
-        setSelectedTab(activeTabOption || item)
+        /* When `activeTab` prop is provided, it is a controlled component; let the parent
+           component handle the change. Otherwise, update the active tab internally */
+        if (!activeTabOption) {
+          setSelectedTab(item)
+        }
 
         if (onChangeCallback) {
           onChangeCallback(item?.label)

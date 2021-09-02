@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useMemo } from '@storybook/client-api'
+import { useState, useEffect } from '@storybook/client-api'
 import Tabs, { Tabs as TabsComponent } from '../core/components/tabs/Tabs'
 import FormCheckbox from '../core/components/formCheckbox/FormCheckbox'
 
@@ -8,22 +8,19 @@ export default {
   component: TabsComponent
 }
 
-export const Normal = ({ themeName }) => {
-  const tabOptions = useMemo(
-    () => [
-      { label: 'Tab 1', enabled: true },
-      { label: 'Tab 2', enabled: true }
-    ],
-    []
-  )
+const tabOptions = [
+  { label: 'Tab 1', enabled: true },
+  { label: 'Tab 2', enabled: true }
+]
 
+export const Normal = ({ themeName }) => {
   const [activeTab, setActiveTab] = useState(tabOptions[0].label)
   const [isControlled, setIsControlled] = useState(false)
 
   // Reinitialize tab state
   useEffect(() => {
     setActiveTab(tabOptions[0].label)
-  }, [isControlled, tabOptions])
+  }, [isControlled])
 
   const handleTabChange = tab => {
     if (tab) {
@@ -43,13 +40,23 @@ export const Normal = ({ themeName }) => {
         checked={isControlled}>
         Is Controlled
       </FormCheckbox>
-      <Tabs
-        themeName={themeName}
-        defaultActiveTab={activeTab}
-        activeTab={isControlled ? activeTab : undefined}
-        options={tabOptions}
-        onChangeCallback={handleTabChange}
-      />
+      {isControlled ? (
+        <Tabs
+          key='controlled-tabs'
+          themeName={themeName}
+          activeTab={activeTab}
+          options={tabOptions}
+          onChangeCallback={handleTabChange}
+        />
+      ) : (
+        <Tabs
+          key='uncontrolled-tabs'
+          themeName={themeName}
+          defaultActiveTab={activeTab}
+          options={tabOptions}
+          onChangeCallback={handleTabChange}
+        />
+      )}
       {activeTab === tabOptions[0].label ? (
         <p>{tabOptions[0].label} Content</p>
       ) : (
