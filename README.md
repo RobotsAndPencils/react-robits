@@ -1,12 +1,15 @@
 <h1>
   React Robits <img align="right" width="300" src="https://github.com/RobotsAndPencils/react-robits/raw/master/robits.png">
 </h1>
-A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and build off each other.
+A library of sharable React components, by the Frontend Team at Robots & Pencils in an effort to challenge ourselves to think reusable/themeable across client projects, so we can bootstrap development and build off each other.  
 
 ###### Broken up into two main concepts:
 
 - Core: atomic level components in which a standardized setup can support a majority of the possible use cases
 - Periphery: components that are either harder to standarize or have stronger opinions baked in. These are things that may have external dependencies (plugins), or might require different layout structures, making it hard to mandate any one setup cross client or cross use case. So there may end up with multiple variations over time (e.g. - one Upload component built on Dropzone, one on Uppy). For these reasons, these components don't "ship" with the deployed package but are present in the Storybook and accessible directly for manual benefit
+
+###### Storybook
+[https://react-robits.herokuapp.com](https://react-robits.herokuapp.com)
 
 ## Areas of Focus
 
