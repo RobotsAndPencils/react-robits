@@ -29,7 +29,7 @@ export const Tooltip = ({
   toggle,
   modifiers,
   autohide,
-  styling,
+  styling = {},
   children
 }) => {
   const [_target, _setTarget] = useState(null)
@@ -82,8 +82,20 @@ export const Tooltip = ({
   }
 
   const removeListeners = () => {
-    EVENTS.CLICK?.forEach(e => document?.removeEventListener(e, handleEvent))
-    EVENTS.MOUSE?.concat(EVENTS.FOCUS).forEach(e => _target?.removeEventListener(e, handleEvent))
+    if (EVENTS && EVENTS.CLICK && EVENTS.CLICK.length && document) {
+      for (const e of EVENTS.CLICK) {
+        document.removeEventListener(e, handleEvent)
+      }
+    }
+
+    if (EVENTS && EVENTS.MOUSE && EVENTS.MOUSE.length && _target) {
+      const allEvents =
+        EVENTS.FOCUS && EVENTS.FOCUS.length ? EVENTS.MOUSE.concat(EVENTS.FOCUS) : EVENTS.MOUSE
+
+      for (const e of allEvents) {
+        _target.removeEventListener(e, handleEvent)
+      }
+    }
   }
 
   const handleEvent = e => {

@@ -14,7 +14,7 @@ export const DropdownMenu = ({
   modifiers,
   persist,
   size,
-  styling,
+  styling = {},
   tag: Tag = 'div',
   ...rest
 }) => {

@@ -16,7 +16,7 @@ export const Avatar = React.memo(
     image,
     innerRef,
     squared,
-    styling,
+    styling = {},
     size = 'md',
     transparent,
     withShadow,

@@ -20,7 +20,7 @@ export const FormTextarea = React.memo(
     resizeable = true,
     required,
     size,
-    styling,
+    styling = {},
     valid = false,
     ...props
   }) => {

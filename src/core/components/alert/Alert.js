@@ -22,7 +22,7 @@ export const Alert = ({
   id,
   open = false,
   removeHandler,
-  styling,
+  styling = {},
   styleType = 'primary',
   tag: Tag = 'div',
   transition = {

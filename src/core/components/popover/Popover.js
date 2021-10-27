@@ -29,7 +29,7 @@ export const Popover = ({
   children,
   innerRef,
   toggle,
-  styling,
+  styling = {},
   ...attrs
 }) => {
   const popoverContentAttrs = omit(attrs, ['disabled', 'delay', 'toggle'])

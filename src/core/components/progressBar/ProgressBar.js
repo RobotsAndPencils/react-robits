@@ -19,7 +19,7 @@ export const ProgressBar = React.memo(
     max = 100,
     multi,
     striped,
-    styling,
+    styling = {},
     size,
     tag: Tag = 'div',
     value = 0,

@@ -22,7 +22,7 @@ export const Dropdown = ({
   nav = false,
   setActiveFromChild,
   size,
-  styling,
+  styling = {},
   toggle = () => {},
   ...rest
 }) => {

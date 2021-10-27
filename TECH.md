@@ -28,7 +28,7 @@ See the "ThemeWrapper and Dynamic Imports" section below for more info.
 // in: ComponentName.js
 import ThemeWrapper from '../../utils/ThemeWrapper'
 
-export const ComponentName = ({ styling, ...rest }) => (
+export const ComponentName = ({ styling = {}, ...rest }) => (
   <div className={styling.container}>
 )
 

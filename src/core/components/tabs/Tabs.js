@@ -10,7 +10,7 @@ export const Tabs = ({
   defaultActiveTab,
   onChangeCallback = () => {},
   options = [],
-  styling,
+  styling = {},
   ...rest
 }) => {
   const [selectedTab, setSelectedTab] = useState(activeTab || defaultActiveTab)

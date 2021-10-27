@@ -16,8 +16,8 @@ export const Badge = React.memo(
     removable = false,
     styleType = 'primary',
     squared = false,
-    styling,
-    tag: Tag = 'span',
+    styling = {},
+    tag = 'span',
     ...props
   }) => {
     const classes = classNames(
@@ -30,7 +30,7 @@ export const Badge = React.memo(
       removable && styling.removable
     )
 
-    Tag = props.href && Tag === 'span' ? 'a' : Tag
+    const Tag = props.href && tag === 'span' ? 'a' : tag
 
     return (
       <Tag className={classes} {...props}>

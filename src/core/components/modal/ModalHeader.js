@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 import classNames from 'classnames'
 
-const ModalHeader = ({
+export const ModalHeader = ({
   children,
   closeModal,
   className,
-  styling,
+  styling = {},
   withBorder = false,
   withCloseButton,
   ...rest

@@ -19,7 +19,7 @@ export const Button = React.memo(
     onClick,
     outline,
     pill,
-    styling,
+    styling = {},
     styleType = 'primary',
     size,
     squared,
