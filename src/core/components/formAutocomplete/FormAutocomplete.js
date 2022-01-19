@@ -27,7 +27,7 @@ export const FormAutocomplete = React.memo(
     onChange = () => {},
     required,
     size,
-    styling,
+    styling = {},
     valid = false,
     ...rest
   }) => {

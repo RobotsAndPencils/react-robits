@@ -6,7 +6,7 @@ import classNames from 'classnames'
 /**
  * Modal body, with baked in padding
  */
-export const ModalBody = ({ styling, children, className = '', innerRef, ...props }) => {
+export const ModalBody = ({ styling = {}, children, className = '', innerRef, ...props }) => {
   const classes = classNames(className, styling['modal-body'])
 
   return (

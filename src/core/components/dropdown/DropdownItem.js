@@ -11,7 +11,7 @@ export const DropdownItem = ({
   divider,
   header,
   onClick,
-  styling,
+  styling = {},
   tag: Tag = 'button',
   toggle = true,
   ...rest

@@ -6,7 +6,7 @@ import classNames from 'classnames'
 /**
  * Button groups allow you to group buttons together on a single line, joining their edges
  */
-export const ButtonGroup = ({ styling, children, className, vertical, size, ...rest }) => {
+export const ButtonGroup = ({ styling = {}, children, className, vertical, size, ...rest }) => {
   const classes = classNames(
     className,
     size && styling[`btn-group-${size}`],

@@ -21,7 +21,7 @@ export const FormInput = React.memo(
     readonly = false,
     required,
     size,
-    styling,
+    styling = {},
     valid = false,
     type = 'text',
     defaultValue,

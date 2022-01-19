@@ -18,7 +18,7 @@ export const PopperManager = ({
   open = false,
   offset = 0,
   placementPrefix,
-  styling,
+  styling = {},
   tag,
   target,
   ...rest

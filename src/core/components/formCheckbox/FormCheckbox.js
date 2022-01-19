@@ -20,7 +20,7 @@ export const FormCheckbox = React.memo(
     required,
     small,
     styleType = 'primary',
-    styling,
+    styling = {},
     toggle,
     valid,
     ...props

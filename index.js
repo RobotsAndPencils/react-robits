@@ -1,24 +1,20 @@
-//
-function _interopRequireDefault (obj) {
-  return obj && obj.__esModule ? obj : { default: obj }
-}
-
-// var _Button = require('./src/core/button/Button')
-// var _Button2 = _interopRequireDefault(_Button)
-
-// exports.Button = _Button2['default']
-
-// find components
-const req = require.context('./src/core', true, /.js$/)
-
-var regex = /[^\\\\\/]+(?=\.[\w]+$)|[^\\\\\/]+$/ // eslint-disable-line
-
-// dynamically load and export them
-req.keys().forEach(filename => {
-  const first = req(filename)
-  const second = _interopRequireDefault(first)
-
-  var name = filename.match(regex)[0]
-
-  exports[name] = second.default
-})
+// Components
+export * from './src/core/components/alert/Alert'
+export * from './src/core/components/avatar/Avatar'
+export * from './src/core/components/badge/Badge'
+export * from './src/core/components/button/Button'
+export * from './src/core/components/buttonGroup/ButtonGroup'
+export * from './src/core/components/card/'
+export * from './src/core/components/dropdown/'
+export * from './src/core/components/formAutocomplete/FormAutocomplete'
+export * from './src/core/components/formCheckbox/FormCheckbox'
+export * from './src/core/components/formInput/'
+export * from './src/core/components/formRadio/FormRadio'
+export * from './src/core/components/formSelect/FormSelect'
+export * from './src/core/components/formTextarea/FormTextarea'
+export * from './src/core/components/icon/SvgIcon'
+export * from './src/core/components/modal/'
+export * from './src/core/components/popover/Popover'
+export * from './src/core/components/progressBar/ProgressBar'
+export * from './src/core/components/tabs/Tabs'
+export * from './src/core/components/tooltip/Tooltip'

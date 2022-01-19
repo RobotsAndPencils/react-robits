@@ -13,7 +13,7 @@ export const DropdownToggle = ({
   nav,
   onClick,
   split,
-  styling,
+  styling = {},
   styleType = 'primary',
   tag,
   useANormalRef = false,

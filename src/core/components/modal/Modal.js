@@ -26,7 +26,7 @@ export const Modal = ({
   position,
   role = 'dialog',
   size,
-  styling,
+  styling = {},
   toggleModal,
   tabIndex,
   withCloseButton,

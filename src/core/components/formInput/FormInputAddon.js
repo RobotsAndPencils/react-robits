@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ThemeWrapper from '../../utils/ThemeWrapper'
 
-const FormInputAddon = React.memo(
-  ({ styling, className, children, tag: Tag = 'div', type, ...rest }) => {
+export const FormInputAddon = React.memo(
+  ({ styling = {}, className, children, tag: Tag = 'div', type, ...rest }) => {
     const classes = classNames(className, `input-group-${type}`)
 
     return (

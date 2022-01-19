@@ -6,7 +6,7 @@ import classNames from 'classnames'
 /**
  * Card body, with baked in padding
  */
-export const CardBody = ({ styling, children, className = '', innerRef, ...props }) => {
+export const CardBody = ({ styling = {}, children, className = '', innerRef, ...props }) => {
   const classes = classNames(className, styling['card-body'])
 
   return (

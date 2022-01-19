@@ -20,7 +20,7 @@ export const FormSelect = React.memo(
     readonly = false,
     required,
     size,
-    styling,
+    styling = {},
     valid = false,
     ...props
   }) => {

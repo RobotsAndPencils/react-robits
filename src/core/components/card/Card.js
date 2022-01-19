@@ -15,7 +15,10 @@ export const Card = ({
   innerRef,
   onClick,
   size,
-  styling,
+  styling = {},
+  tag: Tag = 'div',
+  headerTag: HeaderTag = 'div',
+  footerTag: FooterTag = 'div',
   ...props
 }) => {
   const classes = classNames(className, styling.card, size && styling[`card-${size}`])
@@ -32,11 +35,11 @@ export const Card = ({
   }
 
   return (
-    <div ref={innerRef} disabled={disabled} className={classes} onClick={onClickHandler} {...props}>
-      {header ? <div className={styling['card-header']}>{header}</div> : []}
+    <Tag ref={innerRef} disabled={disabled} className={classes} onClick={onClickHandler} {...props}>
+      {header ? <HeaderTag className={styling['card-header']}>{header}</HeaderTag> : []}
       {children}
-      {footer ? <div className={styling['card-footer']}>{footer}</div> : []}
-    </div>
+      {footer ? <FooterTag className={styling['card-footer']}>{footer}</FooterTag> : []}
+    </Tag>
   )
 }
 

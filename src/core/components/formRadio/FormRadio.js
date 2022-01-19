@@ -19,7 +19,7 @@ export const FormRadio = React.memo(
     name,
     options,
     required,
-    styling,
+    styling = {},
     valid,
     defaultSelected,
     setFieldValue = () => {},
